@@ -1,0 +1,16 @@
+{
+  "newDependencyInstall": true,
+  "database": "xingxu_phase10_fresh_9a1a2b2242",
+  "alembicRevision": "f620261120",
+  "catalogCount": 3,
+  "ready": {
+    "ok": true,
+    "database": "ready",
+    "cache": "ready"
+  },
+  "frontendPort": 5184,
+  "apiPort": 8101,
+  "workerStarted": true,
+  "redisIndex": 13,
+  "passed": true
+}

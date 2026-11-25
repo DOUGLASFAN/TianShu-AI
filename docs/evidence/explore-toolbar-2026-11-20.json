@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-20",
+  "viewports": [
+    {
+      "width": 1910,
+      "height": 947,
+      "rowHeight": 154,
+      "zoneLabelHeight": 18
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "rowHeight": 154,
+      "zoneLabelHeight": 18
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "rowHeight": 154.5,
+      "zoneLabelHeight": 18
+    },
+    {
+      "width": 800,
+      "height": 844,
+      "rowHeight": 275.296875,
+      "zoneLabelHeight": 18
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "rowHeight": 309.296875,
+      "zoneLabelHeight": 18
+    },
+    {
+      "width": 320,
+      "height": 700,
+      "rowHeight": 338.09375,
+      "zoneLabelHeight": 18
+    }
+  ],
+  "pageErrors": [],
+  "allPassed": true
+}

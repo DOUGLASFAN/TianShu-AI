@@ -1,0 +1,190 @@
+{
+  "date": "2026-11-15",
+  "checks": [
+    {
+      "name": "live_weather_sources_trends_and_semantics",
+      "passed": true
+    },
+    {
+      "name": "weather_filter_pagination_detail_and_raw_download",
+      "passed": true
+    },
+    {
+      "name": "weather_sources_history_and_read_failure_fallback",
+      "passed": true
+    },
+    {
+      "name": "weather_responsive_layout_and_stable_navigation",
+      "passed": true
+    },
+    {
+      "name": "real_worker_notification_during_future_replay_and_ws_without_focus_theft",
+      "passed": true
+    },
+    {
+      "name": "notification_center_read_all_link_and_cancellation_revoke",
+      "passed": true
+    },
+    {
+      "name": "restart_marks_overdue_and_restores_future_reminders",
+      "passed": true
+    },
+    {
+      "name": "notification_mobile_layout_and_session_persistence",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "phase7-environment-1920.png",
+    "phase7-environment-1440.png",
+    "phase7-environment-390.png",
+    "phase7-notifications-1920.png",
+    "phase7-notifications-1440.png",
+    "phase7-notifications-390.png"
+  ],
+  "sources": [
+    {
+      "id": "noaa-kp",
+      "name": "NOAA SWPC · Kp 观测",
+      "url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json",
+      "kind": "observation",
+      "freshHours": 6,
+      "state": "available",
+      "lastAttemptStatus": "success",
+      "lastAttemptAt": "2026-11-15T11:25:51.632090+00:00",
+      "errorCode": null,
+      "fetchedAt": "2026-11-15T11:25:51.632090+00:00",
+      "publishedAt": null,
+      "sourceTime": "2026-11-15T06:00:00+00:00",
+      "runId": "f2792a00-c3ac-4851-840c-27bc68612f36",
+      "usingLastGood": false,
+      "license": null
+    },
+    {
+      "id": "gfz-kp",
+      "name": "GFZ · Kp 暂定观测",
+      "url": "https://www-app3.gfz-potsdam.de/kp_index/Kp_ap_Ap_SN_F107_nowcast.txt",
+      "kind": "observation",
+      "freshHours": 6,
+      "state": "available",
+      "lastAttemptStatus": "success",
+      "lastAttemptAt": "2026-11-15T11:25:51.634091+00:00",
+      "errorCode": null,
+      "fetchedAt": "2026-11-15T11:25:51.634091+00:00",
+      "publishedAt": "2026-11-15T11:08:04+00:00",
+      "sourceTime": "2026-11-15T09:00:00+00:00",
+      "runId": "1caa743f-7598-4235-93b6-3f2095ff0f16",
+      "usingLastGood": false,
+      "license": "Kp: CC BY 4.0 · GFZ / Matzka et al., 2021, doi:10.5880/Kp.0001; 原始文件中黑子数字段为 CC BY-NC 4.0"
+    },
+    {
+      "id": "noaa-forecast",
+      "name": "NOAA SWPC · Kp 预测",
+      "url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index-forecast.json",
+      "kind": "forecast",
+      "freshHours": 12,
+      "state": "available",
+      "lastAttemptStatus": "failed",
+      "lastAttemptAt": "2026-11-15T11:25:51.634091+00:00",
+      "errorCode": "WEATHER_FETCH_OR_SCHEMA_FAILED",
+      "fetchedAt": "2026-11-15T11:15:51.028548+00:00",
+      "publishedAt": "2026-11-15T11:15:24+00:00",
+      "sourceTime": "2026-11-15T09:00:00+00:00",
+      "runId": "c1e098c6-fb6c-4416-8790-9ab4b860c7ca",
+      "usingLastGood": true,
+      "license": null
+    },
+    {
+      "id": "noaa-alerts",
+      "name": "NOAA SWPC · 官方通报",
+      "url": "https://services.swpc.noaa.gov/products/alerts.json",
+      "kind": "warning",
+      "freshHours": 1,
+      "state": "available",
+      "lastAttemptStatus": "success",
+      "lastAttemptAt": "2026-11-15T11:25:51.635091+00:00",
+      "errorCode": null,
+      "fetchedAt": "2026-11-15T11:25:51.635091+00:00",
+      "publishedAt": "2026-11-15T11:25:20+00:00",
+      "sourceTime": "2026-11-14T21:32:00+00:00",
+      "runId": "71d8756f-e4b7-4d41-bac2-499dd0f535ea",
+      "usingLastGood": false,
+      "license": null
+    },
+    {
+      "id": "donki-flr",
+      "name": "NASA DONKI · 耀斑",
+      "url": "https://kauai.ccmc.gsfc.nasa.gov/DONKI/WS/get/FLR",
+      "kind": "observation",
+      "freshHours": 1,
+      "state": "unknown",
+      "lastAttemptStatus": "failed",
+      "lastAttemptAt": "2026-11-15T11:25:51.637092+00:00",
+      "errorCode": "WEATHER_FETCH_OR_SCHEMA_FAILED",
+      "fetchedAt": null,
+      "publishedAt": null,
+      "sourceTime": null,
+      "runId": null,
+      "usingLastGood": false,
+      "license": null
+    },
+    {
+      "id": "donki-cme",
+      "name": "NASA DONKI · 日冕物质抛射",
+      "url": "https://kauai.ccmc.gsfc.nasa.gov/DONKI/WS/get/CME",
+      "kind": "observation",
+      "freshHours": 1,
+      "state": "unknown",
+      "lastAttemptStatus": "failed",
+      "lastAttemptAt": "2026-11-15T11:25:51.638092+00:00",
+      "errorCode": "WEATHER_FETCH_OR_SCHEMA_FAILED",
+      "fetchedAt": null,
+      "publishedAt": null,
+      "sourceTime": null,
+      "runId": null,
+      "usingLastGood": false,
+      "license": null
+    }
+  ],
+  "latest": {
+    "sourceId": "noaa-kp",
+    "state": "available",
+    "latest": {
+      "time": "2026-11-15T06:00:00+00:00",
+      "kp": 0.67,
+      "kind": "observation",
+      "quality": "estimated_observation",
+      "officialScale": null
+    },
+    "label": "未达地磁暴阈值"
+  },
+  "notification": {
+    "id": "f9ad860a-4f5c-40d7-91c9-31ba1a7e0734",
+    "planId": "3ae2b6fd-fdb3-4ff4-a342-5a5f177012a8",
+    "data": {
+      "satellite": {
+        "noradId": 25544,
+        "name": "调度验收（验收夹具）"
+      },
+      "station": "验收站",
+      "start": "2026-11-15T11:41:36.048062+00:00",
+      "end": "2026-11-15T11:47:36.048062+00:00",
+      "version": 1,
+      "threshold": 10,
+      "dueAt": "2026-11-15T11:31:36.048062+00:00",
+      "deliveredAt": "2026-11-15T11:31:36.810956+00:00"
+    },
+    "createdAt": "2026-11-15T11:31:36.810956+00:00",
+    "readAt": null,
+    "revokedAt": null,
+    "acceptanceFixture": true
+  },
+  "restart": {
+    "missed": "4b700eb4-ec55-4b87-8c67-8d6f905cce54",
+    "future": "8446392d-a54a-44ed-849d-27ca8c9f6de3",
+    "futureDeliveredAt": "2026-11-15T11:32:32.488977+00:00",
+    "initialFutureState": "sent"
+  },
+  "allPassed": true
+}

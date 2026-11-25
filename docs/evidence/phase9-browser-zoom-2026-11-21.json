@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-21",
+  "routes": [
+    {
+      "route": "/explore?mode=replay",
+      "zoom": 2,
+      "width": 960,
+      "height": 540,
+      "scrollWidth": 952,
+      "scrollHeight": 1656,
+      "dpr": 2
+    },
+    {
+      "route": "/observations",
+      "zoom": 2,
+      "width": 960,
+      "height": 540,
+      "scrollWidth": 952,
+      "scrollHeight": 1017,
+      "dpr": 2
+    },
+    {
+      "route": "/sampling",
+      "zoom": 2,
+      "width": 960,
+      "height": 540,
+      "scrollWidth": 952,
+      "scrollHeight": 708,
+      "dpr": 2
+    },
+    {
+      "route": "/dashboard",
+      "zoom": 2,
+      "width": 960,
+      "height": 540,
+      "scrollWidth": 960,
+      "scrollHeight": 540,
+      "dpr": 2
+    }
+  ],
+  "errors": [],
+  "allPassed": true
+}

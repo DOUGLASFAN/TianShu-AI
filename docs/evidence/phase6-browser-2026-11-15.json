@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-15",
+  "checks": [
+    {
+      "name": "batch_preview_exact_submission_and_group_result",
+      "passed": true
+    },
+    {
+      "name": "replay_clock_satellite_projection_and_chart_sync",
+      "passed": true
+    },
+    {
+      "name": "save_plan_snapshot_and_workspace_context",
+      "passed": true
+    },
+    {
+      "name": "saved_plan_replay_and_recalculation_confirmation",
+      "passed": true
+    },
+    {
+      "name": "responsive_replay_and_plan_layout",
+      "passed": true
+    },
+    {
+      "name": "restart_persistence_cancel_and_reminder_version",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "phase6-group-1920.png",
+    "phase6-replay-1920.png",
+    "phase6-workspace-1920.png",
+    "phase6-plan-diff-1920.png",
+    "phase6-replay-1440.png",
+    "phase6-replay-390.png"
+  ],
+  "group": {
+    "id": "3fb4f6b9-5db9-44c1-a02e-5e2c5d60cd3a",
+    "count": 17,
+    "range": [
+      25544,
+      101031
+    ]
+  },
+  "replaySync": {
+    "clock": {
+      "active": true,
+      "time": 1794741888692,
+      "playing": false,
+      "rate": 10,
+      "start": "2026-11-15T11:24:44.861244+00:00",
+      "end": "2026-11-15T11:30:47.487071+00:00"
+    },
+    "map": {
+      "time": 1794741888692,
+      "position": [
+        -634020.5550761386,
+        4772519.666736079,
+        4782904.39645451
+      ]
+    },
+    "chart": 1794741888692
+  },
+  "planId": "619d2aff-1400-4672-91c6-cb2d9c76d5d3",
+  "allPassed": true
+}

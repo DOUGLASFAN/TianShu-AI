@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-20",
+  "counts": {
+    "gnss": 172,
+    "beidou": 56,
+    "gps": 40,
+    "galileo": 32,
+    "glonass": 29,
+    "qzss": 6,
+    "navic": 9,
+    "stations": 17,
+    "earth-observation": 14,
+    "starlink": 11221
+  },
+  "checks": [
+    "10 个本地目录预设有真实对象，GNSS 总数等于六组去重合计，参数限制正常",
+    "Edge 实测跨批键盘选北斗、跨组混选 GLONASS 和 ISS，三颗各 21 点，保存刷新后可恢复",
+    "替换本批、12 颗上限、移除后继续添加与 390px 无横向溢出通过"
+  ],
+  "pageErrors": [],
+  "allPassed": true
+}

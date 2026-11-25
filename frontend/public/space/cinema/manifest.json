@@ -1,0 +1,21 @@
+{
+  "title": "Flying Through Galaxies",
+  "source": "https://svs.gsfc.nasa.gov/14950/",
+  "download": "https://svs.gsfc.nasa.gov/vis/a010000/a014900/a014950/14950_Galaxies_FlyThrough_4k.mp4",
+  "file": "nasa-galaxies-4k.mp4",
+  "bytes": 148685673,
+  "sha256": "f9d7a9e9b487afe5a14e08e269a787a5b6bd411515f7a2b319aa2734ef52acd8",
+  "credit": "NASA's Goddard Space Flight Center/Conceptual Image Lab",
+  "producer": "Scott Wiessinger (eMITS)",
+  "animator": "Adriana Manrique Gutierrez (eMITS)",
+  "artisticDirector": "Walt Feimer (eMITS)",
+  "usagePolicy": "https://svs.gsfc.nasa.gov/help/",
+  "tracks": [
+    {
+      "handler": "vide",
+      "width": 3840,
+      "height": 2160
+    }
+  ],
+  "modifications": "None. Original downloaded MP4; muted by default in the browser. Artist concept animation, not a live or interactive galaxy."
+}

@@ -1,0 +1,54 @@
+{
+  "browser": "158.0.4370.33",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 680,
+      "workspaceGaps": 12,
+      "chartFont": "12px",
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "workspaceGaps": 12,
+      "chartFont": "12px",
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "workspaceGaps": null,
+      "chartFont": "12px",
+      "overflow": false
+    }
+  ],
+  "checks": [
+    "空采样方案模拟与真实已有方案、新建和编辑、选星返回与焦点恢复",
+    "空计划与关注样例、观测链接、站点表单展开及收起",
+    "真实空间天气观测和预测时刻、趋势范围、数值表、官方通报详情、来源切换"
+  ],
+  "pageErrors": [],
+  "textContrast": [
+    {
+      "text": "b7ccdc",
+      "background": "0d1927",
+      "ratio": 10.7
+    },
+    {
+      "text": "d4e2ef",
+      "background": "0d1927",
+      "ratio": 13.43
+    },
+    {
+      "text": "bdcfdf",
+      "background": "0d1927",
+      "ratio": 11.1
+    },
+    {
+      "text": "a6ddff",
+      "background": "193045",
+      "ratio": 9.3
+    }
+  ]
+}

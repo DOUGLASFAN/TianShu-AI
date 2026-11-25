@@ -1,0 +1,36 @@
+# Project-local tools, caches, runtime data and container disks
+/.local/
+
+# Python and JavaScript environments/dependencies
+**/.venv/
+**/__pycache__/
+*.py[cod]
+**/node_modules/
+
+# Local secrets (keep configuration examples)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Generated builds and test caches
+**/dist/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/playwright-report/
+**/test-results/
+
+# Reproducibly copied Cesium runtime assets for feasibility prototype
+/prototypes/phase1/public/cesium/
+/frontend/public/branding/*
+!/frontend/public/branding/xingxun-mark.svg
+/frontend/public/cesium/
+/frontend/public/earth/
+/frontend/public/models/
+/frontend/public/draco/
+*.tsbuildinfo
+
+# Generated delivery archives and optional legacy cinema download
+/release/*.zip
+/frontend/public/space/cinema/nasa-galaxies-4k.mp4

@@ -1,0 +1,70 @@
+name: star-nexus
+services:
+  postgres:
+    image: postgres:17.11-alpine
+    environment:
+      POSTGRES_USER: xingxu_admin
+      POSTGRES_PASSWORD: ${STAR_DB_ADMIN_PASSWORD:?Prepare private .env first}
+      POSTGRES_DB: xingxu
+      APP_DB_PASSWORD: ${STAR_DB_PASSWORD:?Prepare private .env first}
+    ports: ["127.0.0.1:15432:5432"]
+    volumes:
+      - ./.local/data/compose/postgres:/var/lib/postgresql/data
+      - ./infra/postgres/init-app.sh:/docker-entrypoint-initdb.d/01-app.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xingxu_admin -d xingxu"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  redis:
+    image: redis:8-alpine
+    environment:
+      REDIS_PASSWORD: ${STAR_REDIS_PASSWORD:?Prepare private .env first}
+      REDISCLI_AUTH: ${STAR_REDIS_PASSWORD:?Prepare private .env first}
+    command: ["sh", "-c", "exec redis-server --bind 0.0.0.0 --protected-mode yes --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    ports: ["127.0.0.1:16379:6379"]
+    volumes: ["./.local/data/compose/redis:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  api:
+    build:
+      context: .
+      dockerfile: infra/backend.Dockerfile
+    environment:
+      STAR_DATABASE_URL: postgresql+psycopg://xingxu_app:${STAR_DB_PASSWORD}@postgres:5432/xingxu
+      STAR_REDIS_URL: redis://:${STAR_REDIS_PASSWORD}@redis:6379/0
+      STAR_JWT_SECRET: ${STAR_JWT_SECRET:?Prepare private .env first}
+      STAR_ALLOWED_ORIGINS: http://127.0.0.1:8080,http://localhost:8080
+      STAR_SECURE_COOKIES: "false"
+    command: ["sh", "-c", "python -m backend.app.bootstrap && exec uvicorn backend.app.main:app --host 0.0.0.0 --port 8001 --ws-max-size 4096"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    volumes: ["./.local/data/compose/app:/workspace/.local"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/api/health/ready')"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  web:
+    build:
+      context: .
+      dockerfile: infra/frontend.Dockerfile
+    ports: ["127.0.0.1:8080:80"]
+    depends_on:
+      api: { condition: service_healthy }
+  worker:
+    build:
+      context: .
+      dockerfile: infra/backend.Dockerfile
+    environment:
+      STAR_DATABASE_URL: postgresql+psycopg://xingxu_app:${STAR_DB_PASSWORD}@postgres:5432/xingxu
+      STAR_REDIS_URL: redis://:${STAR_REDIS_PASSWORD}@redis:6379/0
+      STAR_JWT_SECRET: ${STAR_JWT_SECRET:?Prepare private .env first}
+    command: ["python", "-m", "backend.worker", "--serve"]
+    depends_on:
+      api: { condition: service_healthy }
+    volumes: ["./.local/data/compose/app:/workspace/.local"]

@@ -1,0 +1,33 @@
+{
+  "passes": 40,
+  "sevenDaySeconds": 0.9563306000000011,
+  "maxEndpointElevationErrorDeg": 0.0007032063277812028,
+  "visualWindows": 9,
+  "reference": "Independent GMST1982 TEME\u2192ECEF and WGS84 ENU; shared SGP4 theory, not independent real observations",
+  "firstPass": {
+    "start": "2026-11-12T10:33:37.761229+00:00",
+    "peak": "2026-11-12T10:36:57.399120+00:00",
+    "end": "2026-11-12T10:40:18.702530+00:00",
+    "max_elevation": 87.11435024270155,
+    "duration_s": 400.941301,
+    "partial_start": false,
+    "partial_end": false,
+    "continuous": false,
+    "visible_windows": [
+      {
+        "start": "2026-11-12T10:33:37.761229+00:00",
+        "end": "2026-11-12T10:37:22.439947+00:00"
+      }
+    ],
+    "peak_conditions": {
+      "elevation": 87.11435024270155,
+      "azimuth": 141.7986314770877,
+      "range_km": 418.57389698444246,
+      "sun_altitude": -18.515554571372355,
+      "sunlit": true
+    },
+    "start_azimuth": 230.49384504005857,
+    "end_azimuth": 53.177366467111426,
+    "id": "1"
+  }
+}

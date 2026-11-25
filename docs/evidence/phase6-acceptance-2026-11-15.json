@@ -1,0 +1,281 @@
+{
+  "stage": 6,
+  "checkedAt": "2026-11-15T10:49:42.312450+00:00",
+  "allPassed": true,
+  "backendTests": {
+    "5": 17,
+    "6": 15
+  },
+  "browserChecks": 6,
+  "multiReplay": {
+    "date": "2026-11-15",
+    "checks": [
+      {
+        "name": "entire_submitted_batch_not_only_event_page",
+        "passed": true
+      },
+      {
+        "name": "changing_satellite_keeps_clock_and_curve_synchronized",
+        "passed": true
+      },
+      {
+        "name": "geometric_filter_counts_and_map_click_selection",
+        "passed": true
+      },
+      {
+        "name": "seeking_across_windows_and_exact_query_endpoints",
+        "passed": true
+      },
+      {
+        "name": "failed_window_hides_old_points_without_extrapolation_and_retries",
+        "passed": true
+      },
+      {
+        "name": "responsive_layout_and_exit_resource_cleanup",
+        "passed": true
+      },
+      {
+        "name": "actual_500_target_task_and_simultaneous_map_batch",
+        "passed": true
+      },
+      {
+        "name": "zero_pass_batch_still_renders_all_satellites_and_curve",
+        "passed": true
+      }
+    ],
+    "errors": [],
+    "screenshots": [
+      "phase6-multi-1920.png",
+      "phase6-multi-1440.png",
+      "phase6-multi-390.png",
+      "phase6-multi-500.png"
+    ],
+    "batch": {
+      "total": 54,
+      "loaded": 54
+    },
+    "synchronization": {
+      "clock": {
+        "active": true,
+        "time": 1794739683175,
+        "playing": false,
+        "rate": 10,
+        "start": "2026-11-15T10:47:47.797000+00:00",
+        "end": "2026-11-16T10:47:47.797000+00:00"
+      },
+      "map": {
+        "time": 1794739683175,
+        "loadedCount": 54,
+        "totalCount": 54,
+        "aboveCount": 26,
+        "shownCount": 54,
+        "selectedNorad": 36828,
+        "selected": {
+          "noradId": 36828,
+          "name": "BEIDOU-2 IGSO-1",
+          "elevation": 59.82603853421665,
+          "azimuth": 183.9695692434799,
+          "rangeKm": 36396.23953637263,
+          "altitudeKm": 35656.99484790209,
+          "above": true,
+          "position": [
+            -16982242.547448,
+            37058714.864569,
+            10251854.731519999
+          ]
+        },
+        "pickCandidates": [
+          {
+            "noradId": 36828,
+            "x": 603.6521924155415,
+            "y": 358.69656141745844
+          },
+          {
+            "noradId": 37210,
+            "x": 776.8807206864578,
+            "y": 365.81003614122324
+          },
+          {
+            "noradId": 37256,
+            "x": 534.310948757048,
+            "y": 254.4072343267851
+          },
+          {
+            "noradId": 37384,
+            "x": 626.1922207710589,
+            "y": 450.1667249857981
+          },
+          {
+            "noradId": 37763,
+            "x": 559.5796226880902,
+            "y": 286.5794979987895
+          },
+          {
+            "noradId": 37948,
+            "x": 489.77985933572745,
+            "y": 270.64275052754283
+          },
+          {
+            "noradId": 38091,
+            "x": 415.4482863091307,
+            "y": 330.41757781130946
+          },
+          {
+            "noradId": 38250,
+            "x": 576.295575861525,
+            "y": 276.61779821450233
+          },
+          {
+            "noradId": 38251,
+            "x": 520.8611303464928,
+            "y": 329.64979941190336
+          },
+          {
+            "noradId": 38775,
+            "x": 520.2574767365031,
+            "y": 136.1565083766036
+          },
+          {
+            "noradId": 38953,
+            "x": 480.81349645562034,
+            "y": 388.8015328390462
+          },
+          {
+            "noradId": 40549,
+            "x": 503.1056876211695,
+            "y": 337.9665004282738
+          }
+        ],
+        "loading": false
+      },
+      "chart": 1794739683175
+    },
+    "mapPick": {
+      "from": 37210,
+      "to": 36828
+    },
+    "largeBatch": {
+      "taskId": "2df66754-4b91-4680-802a-16c9532c61b0",
+      "loaded": 500,
+      "above": 93,
+      "execution": {
+        "totalSatellites": 500,
+        "completedSatellites": 500,
+        "failures": [],
+        "cacheHits": 0,
+        "eventCount": 1259
+      }
+    },
+    "zeroPass": {
+      "taskId": "032cb50a-8f1e-436f-a4ce-3078280d2cf7",
+      "rendered": 54,
+      "events": 0
+    },
+    "allPassed": true,
+    "taskId": "b244f0ea-baf1-4249-8d26-56abf04487a9"
+  },
+  "multiReplayPerformance": {
+    "passed": true,
+    "targetCount": 500,
+    "renderedCount": 500,
+    "failedCount": 0,
+    "windowSeconds": 0.03113669999947888,
+    "sampleCount": 46,
+    "payloadBytes": 1262473,
+    "cacheMaxWindows": 4,
+    "fixture": "500 saved real catalog roots; window generation only, forecast throughput measured separately"
+  },
+  "replaySynchronization": {
+    "clock": {
+      "active": true,
+      "time": 1794741888692,
+      "playing": false,
+      "rate": 10,
+      "start": "2026-11-15T11:24:44.861244+00:00",
+      "end": "2026-11-15T11:30:47.487071+00:00"
+    },
+    "map": {
+      "time": 1794741888692,
+      "position": [
+        -634020.5550761386,
+        4772519.666736079,
+        4782904.39645451
+      ]
+    },
+    "chart": 1794741888692
+  },
+  "workerRecovery": {
+    "date": "2026-11-15",
+    "taskId": "249ead0f-59af-4cc6-89cd-b9a5fd3ce0a8",
+    "mathChildren": [
+      {
+        "ProcessId": 45712,
+        "CreationDate": "2026-11-15T17:21:55.580553+08:00"
+      },
+      {
+        "ProcessId": 49932,
+        "CreationDate": "2026-11-15T17:21:55.583332+08:00"
+      },
+      {
+        "ProcessId": 38184,
+        "CreationDate": "2026-11-15T17:21:55.585323+08:00"
+      },
+      {
+        "ProcessId": 38556,
+        "CreationDate": "2026-11-15T17:21:55.58736+08:00"
+      }
+    ],
+    "recoveredStatus": "failed",
+    "errorCode": "WORKER_INTERRUPTED",
+    "noOrphanMathProcesses": true,
+    "allPassed": true
+  },
+  "performance": {
+    "date": "2026-11-15",
+    "isolatedDatabase": true,
+    "targetCount": 500,
+    "days": 1,
+    "workers": 4,
+    "runs": [
+      {
+        "mode": "cold",
+        "seconds": 36.75058299999728,
+        "execution": {
+          "totalSatellites": 500,
+          "completedSatellites": 500,
+          "failures": [],
+          "cacheHits": 0,
+          "eventCount": 1263
+        },
+        "listResponseMs": 14.14909999948577,
+        "listBytes": 5077
+      },
+      {
+        "mode": "warm",
+        "seconds": 6.0479436999994505,
+        "execution": {
+          "totalSatellites": 500,
+          "completedSatellites": 500,
+          "failures": [],
+          "cacheHits": 500,
+          "eventCount": 1263
+        },
+        "listResponseMs": 11.733399998774985,
+        "listBytes": 5077
+      }
+    ],
+    "coldTarget60SecondsMet": true,
+    "allPassed": true
+  },
+  "migrationCheckPassed": true,
+  "knownSecretScanPassed": true,
+  "requiredCompleted": 55,
+  "requiredTotal": 85,
+  "limits": [
+    "Reminder intents persist; notification delivery is stage 7",
+    "Cold/warm performance is one 500-star 24h measurement, not P95",
+    "Single replay max 2001 samples; group max 61 samples/star per 20-minute window, 4 cached windows; bounded linear interpolation, no extrapolation",
+    "Potential optical windows do not guarantee naked-eye visibility",
+    "Browser screenshots use software WebGL; hardware FPS and long-running acceptance remain stage 9"
+  ]
+}

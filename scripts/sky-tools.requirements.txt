@@ -1,0 +1,4 @@
+# Optional offline asset conversion only; not needed to run the application.
+OpenEXR==3.5.4
+Pillow==13.0.0
+numpy==2.5.5

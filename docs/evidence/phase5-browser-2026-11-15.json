@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-15",
+  "checks": [
+    {
+      "name": "explore_to_observation_navigation",
+      "passed": true
+    },
+    {
+      "name": "coordinate_station_creation_default_and_validation",
+      "passed": true
+    },
+    {
+      "name": "globe_pick_cancel_and_edit",
+      "passed": true
+    },
+    {
+      "name": "real_worker_seven_day_prediction_curve_and_sorting",
+      "passed": true
+    },
+    {
+      "name": "changed_conditions_timezone_visual_filter_and_provenance",
+      "passed": true
+    },
+    {
+      "name": "responsive_layout_and_keyboard_editor",
+      "passed": true
+    },
+    {
+      "name": "default_station_switch_delete_retains_prediction",
+      "passed": true
+    },
+    {
+      "name": "queued_cancellation_and_history_restore",
+      "passed": true
+    },
+    {
+      "name": "application_restart_persistence_and_scene_cleanup",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "phase5-observations-1920x1080.png",
+    "phase5-observations-1440x900.png",
+    "phase5-observations-390x844.png"
+  ],
+  "errors": [],
+  "renderer": "Edge headless / SwiftShader",
+  "realTask": {
+    "id": "5046b2eb-ca83-49e9-878c-8c81a630224f",
+    "total": 42,
+    "elapsedSeconds": 1.218
+  },
+  "mapLifecycle": {
+    "created": 1,
+    "destroyed": 1,
+    "active": 0,
+    "picks": 0
+  },
+  "allPassed": true
+}

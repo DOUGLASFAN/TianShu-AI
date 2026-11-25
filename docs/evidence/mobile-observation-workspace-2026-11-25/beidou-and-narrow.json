@@ -1,0 +1,15 @@
+{
+  "cycles": 5,
+  "errors": [],
+  "norad": 43002,
+  "earthPixels": 175,
+  "narrow": {
+    "width": 320,
+    "scrollWidth": 320,
+    "scrollHeight": 568,
+    "viewportHeight": 568,
+    "deckBottom": 560
+  },
+  "observation320": true,
+  "passed": true
+}

@@ -1,0 +1,1 @@
+{"database": "xingxu_restore_33a89a512705", "sha256": "c5383ae4d4eca3031ce76db12aff84dc7da2dd7eedb2b970198b9cfbf8eb42c3", "tables": {"users": 64, "satellites": 16946, "favorites": 18, "observation_stations": 42, "observation_plans": 19, "sampling_profiles": 1}, "alembicRevision": "f620261120", "verified": true}

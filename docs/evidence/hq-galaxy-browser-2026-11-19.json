@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-19",
+  "checks": [
+    {
+      "name": "NASA 8K 源星图和六面 2048px 贴图正常渲染",
+      "scene": {
+        "fe50f983-ae7c-44d4-9db2-65c533d45d4b": {
+          "mode": "earth",
+          "enabled": true,
+          "skyLoaded": true,
+          "galaxyLoaded": true,
+          "skyDimensions": [
+            2048,
+            2048
+          ],
+          "sourceResolution": [
+            8192,
+            4096
+          ],
+          "sourceAttached": true,
+          "planets": 0,
+          "moon": true,
+          "height": 11999999.999999998
+        }
+      }
+    },
+    {
+      "name": "本地 NASA 原创成片为 3840×2160，减少动态效果时不自动播放",
+      "width": 3840,
+      "height": 2160,
+      "duration": 39.966667,
+      "paused": true,
+      "ready": 4,
+      "desktopBox": {
+        "x": 232.5,
+        "y": 65.265625,
+        "width": 1440,
+        "height": 949.46875
+      }
+    },
+    {
+      "name": "原始动画可解码、跳转与连续播放，后台三维暂停",
+      "frameHashes": [
+        3357315953,
+        2612227055
+      ],
+      "playback": {
+        "time": 19.5068,
+        "paused": false,
+        "quality": {
+          "frames": 54
+        }
+      }
+    },
+    {
+      "name": "Escape 关闭电影并恢复三维渲染与页面交互"
+    },
+    {
+      "name": "电影弹窗在手机尺寸可完整关闭",
+      "box": {
+        "x": 2.5,
+        "y": 245.40625,
+        "width": 370,
+        "height": 353.1875
+      }
+    }
+  ],
+  "errors": [],
+  "desktopBox": {
+    "x": 232.5,
+    "y": 65.265625,
+    "width": 1440,
+    "height": 949.46875
+  },
+  "allPassed": true
+}

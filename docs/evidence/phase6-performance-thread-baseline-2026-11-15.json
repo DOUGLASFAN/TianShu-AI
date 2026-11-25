@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-15",
+  "isolatedDatabase": true,
+  "targetCount": 500,
+  "days": 1,
+  "workers": 4,
+  "runs": [
+    {
+      "mode": "cold",
+      "seconds": 105.76819780000005,
+      "execution": {
+        "totalSatellites": 500,
+        "completedSatellites": 500,
+        "failures": [],
+        "cacheHits": 0,
+        "eventCount": 1264
+      },
+      "listResponseMs": 18.71000000028289,
+      "listBytes": 5065
+    },
+    {
+      "mode": "warm",
+      "seconds": 8.457285299999057,
+      "execution": {
+        "totalSatellites": 500,
+        "completedSatellites": 500,
+        "failures": [],
+        "cacheHits": 500,
+        "eventCount": 1264
+      },
+      "listResponseMs": 20.159900002909126,
+      "listBytes": 5065
+    }
+  ],
+  "coldTarget60SecondsMet": false,
+  "allPassed": true
+}

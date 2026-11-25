@@ -1,0 +1,111 @@
+{
+  "$description": "星枢 A 写实航天设计基线 v1.0，需在实际应用中验证；不代表已实现或通过全部对比度检查。",
+  "color": {
+    "bg": {
+      "canvas": "#050B14",
+      "shell": "#09121E"
+    },
+    "surface": {
+      "base": "#0E1927",
+      "raised": "#152335",
+      "glass": "rgba(14,25,39,0.94)",
+      "selected": "#17354C"
+    },
+    "border": {
+      "subtle": "#293B4C",
+      "control": "#71869C"
+    },
+    "text": {
+      "primary": "#F2F6FA",
+      "secondary": "#B4C3D2",
+      "muted": "#91A4B8"
+    },
+    "action": {
+      "primary": "#69C5FF",
+      "hover": "#91D5FF",
+      "pressed": "#49AFE9",
+      "on-primary": "#06101C"
+    },
+    "status": {
+      "success": "#60D6AC",
+      "warning": "#FFC56B",
+      "danger": "#FF919A"
+    },
+    "orbit": {
+      "default": "#78B8E8",
+      "selected": "#FFC56B"
+    }
+  },
+  "space": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    32,
+    48
+  ],
+  "radius": {
+    "badge": 4,
+    "control": 8,
+    "panel": 12,
+    "dialog": 16
+  },
+  "font": {
+    "family": {
+      "sans": [
+        "Noto Sans SC",
+        "Microsoft YaHei",
+        "sans-serif"
+      ],
+      "mono": [
+        "JetBrains Mono",
+        "monospace"
+      ]
+    },
+    "size": {
+      "metric": 32,
+      "page": 24,
+      "panel": 18,
+      "item": 16,
+      "body": 14,
+      "caption": 12
+    }
+  },
+  "motion": {
+    "feedbackMs": 120,
+    "controlMs": 160,
+    "panelEnterMs": 280,
+    "panelExitMs": 180,
+    "layoutMs": 320,
+    "cameraRangeMs": [
+      800,
+      2000
+    ],
+    "introMaxMs": 2400,
+    "enterEase": [
+      0.22,
+      1,
+      0.36,
+      1
+    ]
+  },
+  "layout": {
+    "headerHeight": 64,
+    "gutter": 24,
+    "gap": 16,
+    "exploreLeft": 304,
+    "exploreRight": 360,
+    "controlHeight": 44
+  },
+  "zIndex": {
+    "globe": 0,
+    "labels": 10,
+    "panels": 20,
+    "menus": 40,
+    "scrim": 60,
+    "dialog": 70,
+    "notifications": 80
+  }
+}

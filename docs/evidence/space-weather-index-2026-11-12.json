@@ -1,0 +1,7 @@
+{
+  "url": "https://celestrak.org/SpaceData/",
+  "links": [
+    "https://celestrak.org/SpaceData/SW-All.csv",
+    "https://celestrak.org/SpaceData/SW-Last5Years.csv"
+  ]
+}

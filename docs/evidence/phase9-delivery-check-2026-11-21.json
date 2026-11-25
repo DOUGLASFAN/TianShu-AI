@@ -1,0 +1,35 @@
+{
+  "filesScanned": 122,
+  "knownPrivateValuesLeaked": false,
+  "tables": {
+    "users": {
+      "foreign_keys": 0,
+      "indexes": 1
+    },
+    "auth_sessions": {
+      "foreign_keys": 1,
+      "indexes": 2
+    },
+    "satellites": {
+      "foreign_keys": 0,
+      "indexes": 3
+    },
+    "favorites": {
+      "foreign_keys": 2,
+      "indexes": 0
+    },
+    "observation_stations": {
+      "foreign_keys": 1,
+      "indexes": 2
+    },
+    "observation_plans": {
+      "foreign_keys": 1,
+      "indexes": 3
+    },
+    "sampling_profiles": {
+      "foreign_keys": 1,
+      "indexes": 1
+    }
+  },
+  "allPassed": true
+}

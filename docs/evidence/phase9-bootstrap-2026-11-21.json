@@ -1,0 +1,17 @@
+{
+  "database": "xingxu_phase9_test_bootstrap_bba41d",
+  "representativeCount": 3,
+  "collectionAttempts": [
+    [
+      "snapshot_seed",
+      "failed",
+      "SNAPSHOT_HASH_MISMATCH"
+    ],
+    [
+      "bundled_seed",
+      "success",
+      null
+    ]
+  ],
+  "allPassed": true
+}

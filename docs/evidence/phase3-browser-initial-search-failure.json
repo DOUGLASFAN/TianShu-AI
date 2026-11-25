@@ -1,0 +1,27 @@
+{
+  "stage": 3,
+  "checkedAt": "2026-11-12T05:53:52.670Z",
+  "checks": [
+    {
+      "name": "register_and_authenticated_explorer",
+      "passed": true
+    },
+    {
+      "name": "three_desktop_sizes_and_local_8k_globe",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "phase3-explore-1440x900.png",
+    "phase3-explore-1920x1080.png",
+    "phase3-explore-2560x1440.png"
+  ],
+  "errors": [
+    "Cannot read properties of undefined (reading 'scene')"
+  ],
+  "externalRequests": [],
+  "api5xx": [],
+  "testUsername": "phase3_77808192",
+  "allPassed": false,
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '选择 ISS (ZARYA)', exact: true })\u001b[22m\n"
+}

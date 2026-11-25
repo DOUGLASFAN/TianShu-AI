@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "models": 5,
+  "errors": [],
+  "externalRequests": [],
+  "diagnostics": {
+    "created": 6,
+    "destroyed": 6,
+    "active": 0,
+    "renders": 23,
+    "loaded": true,
+    "modelId": "cygnss"
+  },
+  "checks": [
+    "five local models and textures",
+    "model switching",
+    "auto rotation and stop",
+    "idle render stop",
+    "unmount disposal"
+  ]
+}

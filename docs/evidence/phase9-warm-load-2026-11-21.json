@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-21",
+  "label": "phase9-warm",
+  "viewport": [
+    1440,
+    900
+  ],
+  "rendering": "Headless Edge, ANGLE D3D11, local Vite; same-context reload after full texture load",
+  "runs": [
+    {
+      "shellMs": 1364,
+      "readyMs": 1376,
+      "replayMs": 71,
+      "early": [
+        {
+          "name": "day-preview.webp",
+          "bytes": 0
+        },
+        {
+          "name": "night-preview.webp",
+          "bytes": 0
+        },
+        {
+          "name": "clouds-preview.webp",
+          "bytes": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "shellMs": 1385,
+      "readyMs": 1402,
+      "replayMs": 129,
+      "early": [
+        {
+          "name": "day-preview.webp",
+          "bytes": 0
+        },
+        {
+          "name": "night-preview.webp",
+          "bytes": 0
+        },
+        {
+          "name": "clouds-preview.webp",
+          "bytes": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "shellMs": 1356,
+      "readyMs": 1367,
+      "replayMs": 69,
+      "early": [
+        {
+          "name": "day-preview.webp",
+          "bytes": 0
+        },
+        {
+          "name": "night-preview.webp",
+          "bytes": 0
+        },
+        {
+          "name": "clouds-preview.webp",
+          "bytes": 0
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

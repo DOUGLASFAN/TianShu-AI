@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "checks": [
+    "default rotation",
+    "pause available",
+    "system reduced motion respected"
+  ]
+}

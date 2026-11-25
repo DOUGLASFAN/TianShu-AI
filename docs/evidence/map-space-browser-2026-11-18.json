@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-18",
+  "checks": [
+    {
+      "name": "本地银河摄影、地球与太阳月球初始化",
+      "scene": {
+        "e4344a01-14a4-462a-b491-45c6aff59fbc": {
+          "mode": "earth",
+          "enabled": true,
+          "skyLoaded": true,
+          "galaxyLoaded": true,
+          "sourceAttached": true,
+          "planets": 0,
+          "moon": true,
+          "height": 11999999.999999998
+        }
+      },
+      "active": 1
+    },
+    {
+      "name": "官方图块直连与原站缓存实测",
+      "runs": [
+        {
+          "milliseconds": 1612.5,
+          "bytes": 17039,
+          "cacheControl": "max-age=86400"
+        },
+        {
+          "milliseconds": 1.199999988079071,
+          "bytes": 17039,
+          "cacheControl": "max-age=86400"
+        },
+        {
+          "milliseconds": 0.800000011920929,
+          "bytes": 17039,
+          "cacheControl": "max-age=86400"
+        }
+      ]
+    },
+    {
+      "name": "后端长连接回退可用",
+      "runs": [
+        {
+          "milliseconds": 4523.5818,
+          "bytes": 17039
+        },
+        {
+          "milliseconds": 606.9664999999986,
+          "bytes": 17039
+        }
+      ]
+    },
+    {
+      "name": "地月真实位置全景"
+    },
+    {
+      "name": "月球近景与本地月面纹理"
+    },
+    {
+      "name": "太阳、八大行星、土星环与尺度说明"
+    },
+    {
+      "name": "星空开关、返回地球与原卫星数据保留"
+    },
+    {
+      "name": "近地高清直连、交互细化与WGS84选点",
+      "firstLevel16Milliseconds": 6270.434300000001,
+      "picked": {
+        "lat": 39.908654,
+        "lng": 116.3975
+      },
+      "diagnostics": {
+        "f2b6c86a-7d4d-4119-909b-49d08b038cf4": {
+          "mode": "imagery",
+          "labels": true,
+          "status": "在线地图",
+          "level": 4,
+          "source": "Esri",
+          "credit": "Esri, Vantor, Earthstar Geographics, HERE, Garmin, OpenStreetMap contributors and GIS User Community",
+          "sourceUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+          "height": 9500000,
+          "success": 50,
+          "failed": 0,
+          "levels": {
+            "imagery": 4
+          },
+          "directCount": 50,
+          "relayCount": 0,
+          "spaceOpacity": null
+        },
+        "11b85481-d4a8-4d65-9983-f9d146876893": {
+          "mode": "imagery",
+          "labels": true,
+          "status": "在线地图",
+          "level": 19,
+          "source": "Esri",
+          "credit": "Esri, Vantor, Earthstar Geographics, HERE, Garmin, OpenStreetMap contributors and GIS User Community",
+          "sourceUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+          "height": 161.6298170519469,
+          "success": 98,
+          "failed": 0,
+          "levels": {
+            "imagery": 19,
+            "labels": 18
+          }
+        }
+      }
+    },
+    {
+      "name": "直连失败自动回退到鉴权长连接接口"
+    },
+    {
+      "name": "双链路均断开时保留本地地球"
+    },
+    {
+      "name": "故障演示阻止新直连请求"
+    },
+    {
+      "name": "切页与弹窗关闭后无残留场景"
+    }
+  ],
+  "errors": [],
+  "tiles": {
+    "direct": 171,
+    "relay": 10
+  },
+  "allPassed": true
+}

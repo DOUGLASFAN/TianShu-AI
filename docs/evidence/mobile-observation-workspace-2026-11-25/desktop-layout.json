@@ -1,0 +1,1670 @@
+{
+  "browser": "158.0.4370.33",
+  "routeChecks": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "explore",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".orbital-stage": [
+          344,
+          84,
+          1185,
+          814
+        ],
+        ".orbit-directory": [
+          24,
+          84,
+          304,
+          814
+        ],
+        ".orbit-detail": [
+          1545,
+          84,
+          336,
+          814
+        ],
+        ".orbit-timebar": [
+          24,
+          914,
+          1857,
+          154
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".orbital-stage": [
+          344,
+          84,
+          1185,
+          814
+        ],
+        ".orbit-directory": [
+          24,
+          84,
+          304,
+          814
+        ],
+        ".orbit-detail": [
+          1545,
+          84,
+          336,
+          814
+        ],
+        ".orbit-timebar": [
+          24,
+          914,
+          1857,
+          154
+        ]
+      },
+      "variableHeight": []
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "catalog",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".catalog-toolbar": [
+          268,
+          225,
+          1370,
+          48
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".catalog-toolbar": [
+          268,
+          225,
+          1370,
+          48
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap"
+      ]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "observations",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1905,
+          1016
+        ],
+        ".observations": [
+          28,
+          88,
+          1849,
+          914
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1905,
+          1016
+        ],
+        ".observations": [
+          28,
+          88,
+          1849,
+          914
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".observations"
+      ]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "sampling",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".sampling-page": [
+          393,
+          106,
+          1120,
+          585
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".sampling-page": [
+          393,
+          106,
+          1120,
+          585
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".sampling-page"
+      ]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "environment",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          2339
+        ],
+        ".environment-page": [
+          243,
+          106,
+          1420,
+          2213
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          2446
+        ],
+        ".environment-page": [
+          243,
+          106,
+          1420,
+          2320
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".environment-page"
+      ]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "workspace",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".plans-panel": [
+          243,
+          200,
+          1420,
+          116
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".plans-panel": [
+          243,
+          200,
+          1420,
+          116
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".plans-panel"
+      ]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "notifications",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".notifications-page": [
+          383,
+          106,
+          1140,
+          411
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1905,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1684,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          203,
+          64,
+          1500,
+          1016
+        ],
+        ".notifications-page": [
+          383,
+          106,
+          1140,
+          411
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".notifications-page"
+      ]
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "route": "dashboard",
+      "before": {
+        ".dashboard-canvas": [
+          0,
+          0,
+          1920,
+          1080
+        ]
+      },
+      "after": {
+        ".dashboard-canvas": [
+          0,
+          0,
+          1920,
+          1080
+        ]
+      },
+      "variableHeight": []
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "explore",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".orbital-stage": [
+          292,
+          80,
+          805,
+          642
+        ],
+        ".orbit-directory": [
+          16,
+          80,
+          264,
+          642
+        ],
+        ".orbit-detail": [
+          1109,
+          80,
+          300,
+          642
+        ],
+        ".orbit-timebar": [
+          16,
+          734,
+          1393,
+          154
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".orbital-stage": [
+          292,
+          80,
+          805,
+          642
+        ],
+        ".orbit-directory": [
+          16,
+          80,
+          264,
+          642
+        ],
+        ".orbit-detail": [
+          1109,
+          80,
+          300,
+          642
+        ],
+        ".orbit-timebar": [
+          16,
+          734,
+          1393,
+          154
+        ]
+      },
+      "variableHeight": []
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "catalog",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          836
+        ],
+        ".catalog-toolbar": [
+          65,
+          225,
+          1295,
+          48
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          836
+        ],
+        ".catalog-toolbar": [
+          65,
+          225,
+          1295,
+          48
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "observations",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          978
+        ],
+        ".observations": [
+          28,
+          88,
+          1369,
+          914
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          978
+        ],
+        ".observations": [
+          28,
+          88,
+          1369,
+          914
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".observations"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "sampling",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          836
+        ],
+        ".sampling-page": [
+          153,
+          106,
+          1120,
+          585
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          836
+        ],
+        ".sampling-page": [
+          153,
+          106,
+          1120,
+          585
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".sampling-page"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "environment",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          2327
+        ],
+        ".environment-page": [
+          40,
+          106,
+          1345,
+          2201
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          2446
+        ],
+        ".environment-page": [
+          40,
+          106,
+          1345,
+          2320
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".environment-page"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "workspace",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          836
+        ],
+        ".plans-panel": [
+          40,
+          200,
+          1345,
+          116
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          920
+        ],
+        ".plans-panel": [
+          40,
+          200,
+          1345,
+          116
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".plans-panel"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "notifications",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          836
+        ],
+        ".notifications-page": [
+          143,
+          106,
+          1140,
+          295
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1425,
+          64
+        ],
+        ".app-header nav": [
+          184,
+          0,
+          584,
+          63
+        ],
+        ".account": [
+          1204,
+          11,
+          193,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1425,
+          836
+        ],
+        ".notifications-page": [
+          143,
+          106,
+          1140,
+          295
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".notifications-page"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "route": "dashboard",
+      "before": {
+        ".dashboard-canvas": [
+          0,
+          45,
+          1440,
+          810
+        ]
+      },
+      "after": {
+        ".dashboard-canvas": [
+          0,
+          45,
+          1440,
+          810
+        ]
+      },
+      "variableHeight": []
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "explore",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".orbital-stage": [
+          268,
+          80,
+          725,
+          680
+        ],
+        ".orbit-directory": [
+          16,
+          80,
+          240,
+          680
+        ],
+        ".orbit-detail": [
+          16,
+          938,
+          977,
+          725
+        ],
+        ".orbit-timebar": [
+          16,
+          772,
+          977,
+          154
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".orbital-stage": [
+          268,
+          80,
+          725,
+          680
+        ],
+        ".orbit-directory": [
+          16,
+          80,
+          240,
+          680
+        ],
+        ".orbit-detail": [
+          16,
+          938,
+          977,
+          706
+        ],
+        ".orbit-timebar": [
+          16,
+          772,
+          977,
+          154
+        ]
+      },
+      "variableHeight": [
+        ".orbit-detail"
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "catalog",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".catalog-toolbar": [
+          47,
+          213,
+          915,
+          48
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".catalog-toolbar": [
+          47,
+          213,
+          915,
+          48
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap"
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "observations",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          954
+        ],
+        ".observations": [
+          20,
+          84,
+          969,
+          914
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          954
+        ],
+        ".observations": [
+          20,
+          84,
+          969,
+          914
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".observations"
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "sampling",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".sampling-page": [
+          22,
+          94,
+          965,
+          585
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".sampling-page": [
+          22,
+          94,
+          965,
+          585
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".sampling-page"
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "environment",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          2691
+        ],
+        ".environment-page": [
+          22,
+          94,
+          965,
+          2607
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          2868
+        ],
+        ".environment-page": [
+          22,
+          94,
+          965,
+          2784
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".environment-page"
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "workspace",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".plans-panel": [
+          22,
+          188,
+          965,
+          116
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".plans-panel": [
+          22,
+          188,
+          965,
+          116
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".plans-panel"
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "notifications",
+      "before": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".notifications-page": [
+          22,
+          94,
+          965,
+          411
+        ]
+      },
+      "after": {
+        ".app-header": [
+          0,
+          0,
+          1009,
+          64
+        ],
+        ".app-header nav": [
+          158,
+          0,
+          536,
+          63
+        ],
+        ".account": [
+          810,
+          11,
+          177,
+          42
+        ],
+        ".page-wrap": [
+          0,
+          64,
+          1009,
+          704
+        ],
+        ".notifications-page": [
+          22,
+          94,
+          965,
+          295
+        ]
+      },
+      "variableHeight": [
+        ".page-wrap",
+        ".notifications-page"
+      ]
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "route": "dashboard",
+      "before": {
+        ".dashboard-canvas": [
+          0,
+          96,
+          1024,
+          576
+        ]
+      },
+      "after": {
+        ".dashboard-canvas": [
+          0,
+          96,
+          1024,
+          576
+        ]
+      },
+      "variableHeight": []
+    }
+  ],
+  "visuals": {
+    "dashboardColoredPixelCount": 520
+  },
+  "passed": true
+}

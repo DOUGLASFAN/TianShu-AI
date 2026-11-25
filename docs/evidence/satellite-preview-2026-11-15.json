@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-15",
+  "passed": true,
+  "errors": [],
+  "externalRequests": [],
+  "diagnostics": {
+    "created": 2,
+    "destroyed": 1,
+    "active": 1,
+    "renders": 16,
+    "loaded": true
+  },
+  "checks": [
+    "local GLB and Draco load",
+    "1920 and 1440 layout",
+    "drag and reset",
+    "keyboard rotation",
+    "dispose and remount",
+    "GLB failure and retry after lazy loading"
+  ]
+}

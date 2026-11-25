@@ -1,0 +1,26 @@
+{
+  "url": "https://www-app3.gfz-potsdam.de/kp_index/Kp_ap_Ap_SN_F107_nowcast.txt",
+  "attempted_at": "2026-11-12T04:01:09.058158+00:00",
+  "ttl_seconds": 10800,
+  "delivery": "network",
+  "transport": "urllib",
+  "accept": "text/plain",
+  "redirects_followed": false,
+  "automatic_retries": 0,
+  "manual_network_review": "Certificate issuer failure reviewed: augment system trust with certifi while verifying certificates; request documented plaintext format.",
+  "trust_store": "system + certifi 2026.10.23",
+  "http_status": 200,
+  "response_headers": {
+    "Content-Type": "text/plain",
+    "Content-Length": "8362",
+    "Date": "Thu, 12 Nov 2026 04:01:15 GMT",
+    "Last-Modified": "Thu, 12 Nov 2026 03:54:22 GMT",
+    "ETag": "\"20aa-6600c4457a38d\"",
+    "Retry-After": null
+  },
+  "status": "http_200",
+  "size_bytes": 8362,
+  "sha256": "c62eccc98055ea36a340e0f94d616bbce8cfab73266a9094f2b38d1a2946aa0a",
+  "body_path": ".local/data/source-validation/environment/gfz_kp_nowcast.json",
+  "elapsed_ms": 4141.0
+}

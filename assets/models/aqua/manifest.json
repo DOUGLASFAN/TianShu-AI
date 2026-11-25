@@ -1,0 +1,18 @@
+{
+  "id": "aqua",
+  "name": "Aqua (B)",
+  "sourcePage": "https://science.nasa.gov/3d-resources/aqua-b/",
+  "downloadUrl": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Aqua%20(B)/Aqua%20(B).glb",
+  "downloaded": "2026-11-15",
+  "bytes": 1104016,
+  "sha256": "f0761181a1d378b6b3e270e8eee8bf20c241b7d577933630369b0cffd4b521e1",
+  "gitBlobSha": "3ecd7ac34388a2a53076bc5fa53c4f8b9d12b246",
+  "textures": 4,
+  "materials": 5,
+  "extensionsRequired": [
+    "KHR_draco_mesh_compression"
+  ],
+  "externalDependencies": [],
+  "modified": false,
+  "credit": "NASA/Brian E. Kumanchik; NASA/Christian A. Lopez "
+}

@@ -1,0 +1,98 @@
+{
+  "stage": 5,
+  "checkedAt": "2026-11-15T08:41:46.682558+00:00",
+  "allPassed": true,
+  "backendTests": {
+    "2": 20,
+    "4": 13,
+    "5": 17
+  },
+  "browserChecks": 9,
+  "realTask": {
+    "id": "5046b2eb-ca83-49e9-878c-8c81a630224f",
+    "total": 42,
+    "elapsedSeconds": 1.218
+  },
+  "numerical": {
+    "passes": 40,
+    "sevenDaySeconds": 0.970810500002699,
+    "maxEndpointElevationErrorDeg": 0.0007032063277812028,
+    "visualWindows": 9,
+    "reference": "Independent GMST1982 TEME→ECEF and WGS84 ENU; shared SGP4 theory, not independent real observations",
+    "firstPass": {
+      "start": "2026-11-12T10:33:37.761229+00:00",
+      "peak": "2026-11-12T10:36:57.399120+00:00",
+      "end": "2026-11-12T10:40:18.702530+00:00",
+      "max_elevation": 87.11435024270155,
+      "duration_s": 400.941301,
+      "partial_start": false,
+      "partial_end": false,
+      "continuous": false,
+      "visible_windows": [
+        {
+          "start": "2026-11-12T10:33:37.761229+00:00",
+          "end": "2026-11-12T10:37:22.439947+00:00"
+        }
+      ],
+      "peak_conditions": {
+        "elevation": 87.11435024270155,
+        "azimuth": 141.7986314770877,
+        "range_km": 418.57389698444246,
+        "sun_altitude": -18.515554571372355,
+        "sunlit": true
+      },
+      "start_azimuth": 230.49384504005857,
+      "end_azimuth": 53.177366467111426,
+      "id": "1"
+    }
+  },
+  "migrationCheckPassed": true,
+  "knownSecretScanPassed": true,
+  "mapCleanup": {
+    "created": 1,
+    "destroyed": 1,
+    "active": 0,
+    "picks": 0
+  },
+  "chartResponsive": {
+    "date": "2026-11-15",
+    "checks": [
+      {
+        "width": 1920,
+        "height": 1080,
+        "viewBox": "0 0 1000 265",
+        "renderedFontPixels": 14.327830188679245,
+        "hover": true,
+        "passed": true
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "viewBox": "0 0 774 265",
+        "renderedFontPixels": 12,
+        "hover": true,
+        "passed": true
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "viewBox": "0 0 320 265",
+        "renderedFontPixels": 12,
+        "hover": true,
+        "passed": true
+      }
+    ],
+    "taskId": "de88ee8a-2271-4ccd-b132-19f58ef59b89",
+    "allPassed": true,
+    "errors": []
+  },
+  "uiReviewChecks": 7,
+  "stableHeaderComparisons": 15,
+  "limits": [
+    "Potential optical windows do not guarantee naked-eye visibility",
+    "Five-second sampling can miss shorter optical intervals",
+    "Same SGP4 theory in independent coordinate reference; no independent observation truth",
+    "Software WebGL only; no new hardware FPS acceptance",
+    "Group prediction, replay and saved plans remain stage 6"
+  ]
+}

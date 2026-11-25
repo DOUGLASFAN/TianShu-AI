@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-21",
+  "checks": [
+    "实际登录表单 → 地球 → NORAD 搜索 → 关注后在我的空间可见",
+    "站点编辑面板键盘打开和 Escape 收起；地图实例释放；演示历史整组回放可用",
+    "从通知中心进入观测计划，空间天气卡片与大屏统计正常",
+    "管理员界面和数据源状态可读"
+  ],
+  "layout": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "zoomEquivalent": 1,
+      "dashboard": {
+        "x": 1920,
+        "y": 1080,
+        "width": 1920,
+        "height": 1080
+      },
+      "toolbarContained": true
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "zoomEquivalent": 1,
+      "dashboard": {
+        "x": 1440,
+        "y": 900,
+        "width": 1440,
+        "height": 900
+      },
+      "toolbarContained": true
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "zoomEquivalent": 1,
+      "dashboard": {
+        "x": 1280,
+        "y": 800,
+        "width": 1280,
+        "height": 800
+      },
+      "toolbarContained": true
+    },
+    {
+      "width": 960,
+      "height": 540,
+      "zoomEquivalent": 2,
+      "dashboard": {
+        "x": 960,
+        "y": 540,
+        "width": 960,
+        "height": 540
+      },
+      "toolbarContained": true
+    }
+  ],
+  "errors": [],
+  "allPassed": true
+}

@@ -1,0 +1,645 @@
+{
+  "stage": 4,
+  "checkedAt": "2026-11-12T09:02:48.711511+00:00",
+  "backendTests": {
+    "2": 20,
+    "3": 8,
+    "4": 13
+  },
+  "browserChecks": 7,
+  "jobs": {
+    "orbit": {
+      "status": "success",
+      "attemptedAt": "2026-11-12T08:46:53.374360+00:00",
+      "nextAt": "2026-11-12T10:46:53.374360+00:00",
+      "intervalSeconds": 7200,
+      "lastSuccessAt": "2026-11-12T08:47:54.492608+00:00",
+      "result": {
+        "runId": "152d6da6-b9ef-4b28-87e7-8e78acc949fc",
+        "records": 16899
+      },
+      "errorCode": null,
+      "consecutiveFailures": 0,
+      "finishedAt": "2026-11-12T08:47:54.492608+00:00"
+    },
+    "iss": {
+      "status": "running",
+      "attemptedAt": "2026-11-12T09:02:47.210118+00:00",
+      "nextAt": "2026-11-12T09:02:57.210118+00:00",
+      "intervalSeconds": 10,
+      "errorCode": "JOB_FAILED",
+      "consecutiveFailures": 2,
+      "finishedAt": "2026-11-12T09:00:43.677573+00:00",
+      "lastSuccessAt": "2026-11-12T08:59:22.246034+00:00",
+      "result": {
+        "sourceTime": "2026-11-12T08:59:24+00:00"
+      },
+      "recoveredFromInterrupted": false
+    },
+    "statistics": {
+      "status": "success",
+      "attemptedAt": "2026-11-12T09:01:54.455946+00:00",
+      "nextAt": "2026-11-12T09:06:54.455946+00:00",
+      "intervalSeconds": 300,
+      "lastSuccessAt": "2026-11-12T09:01:54.478783+00:00",
+      "result": {
+        "catalogCount": 16899,
+        "ownerKnownCount": 16899,
+        "ownerUnknownCount": 0,
+        "generatedAt": "2026-11-12T09:01:54.476782+00:00",
+        "scope": "imported active catalog; unique NORAD IDs"
+      },
+      "errorCode": null,
+      "consecutiveFailures": 0,
+      "finishedAt": "2026-11-12T09:01:54.478783+00:00"
+    }
+  },
+  "recentJobHistory": {
+    "orbit": null,
+    "iss": {
+      "list": [
+        {
+          "attemptedAt": "2026-11-12T08:53:03.025522+00:00",
+          "finishedAt": "2026-11-12T08:53:07.092359+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T08:53:13.457880+00:00",
+          "finishedAt": "2026-11-12T08:53:15.439702+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T08:53:23.463837+00:00",
+          "finishedAt": "2026-11-12T08:53:27.441222+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T08:53:33.466717+00:00",
+          "finishedAt": "2026-11-12T08:53:39.537521+00:00",
+          "status": "failed",
+          "errorCode": "JOB_FAILED"
+        },
+        {
+          "attemptedAt": "2026-11-12T08:54:39.572009+00:00",
+          "finishedAt": "2026-11-12T08:54:45.960556+00:00",
+          "status": "failed",
+          "errorCode": "JOB_FAILED"
+        },
+        {
+          "attemptedAt": "2026-11-12T08:56:46.629671+00:00",
+          "finishedAt": "2026-11-12T08:56:48.549869+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T08:56:56.633235+00:00",
+          "finishedAt": "2026-11-12T08:57:02.886178+00:00",
+          "status": "failed",
+          "errorCode": "JOB_FAILED"
+        },
+        {
+          "attemptedAt": "2026-11-12T08:58:03.326563+00:00",
+          "finishedAt": "2026-11-12T08:58:09.000282+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T08:58:13.331567+00:00",
+          "finishedAt": "2026-11-12T08:58:19.577083+00:00",
+          "status": "failed",
+          "errorCode": "JOB_FAILED"
+        },
+        {
+          "attemptedAt": "2026-11-12T08:59:20.378220+00:00",
+          "finishedAt": "2026-11-12T08:59:22.246034+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T08:59:30.384464+00:00",
+          "finishedAt": "2026-11-12T08:59:36.696914+00:00",
+          "status": "failed",
+          "errorCode": "JOB_FAILED"
+        },
+        {
+          "attemptedAt": "2026-11-12T09:00:37.417694+00:00",
+          "finishedAt": "2026-11-12T09:00:43.677573+00:00",
+          "status": "failed",
+          "errorCode": "JOB_FAILED"
+        }
+      ]
+    },
+    "statistics": {
+      "list": [
+        {
+          "attemptedAt": "2026-11-12T08:51:53.423566+00:00",
+          "finishedAt": "2026-11-12T08:51:53.445766+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T08:56:53.632771+00:00",
+          "finishedAt": "2026-11-12T08:56:53.641974+00:00",
+          "status": "success",
+          "errorCode": null
+        },
+        {
+          "attemptedAt": "2026-11-12T09:01:54.455946+00:00",
+          "finishedAt": "2026-11-12T09:01:54.478783+00:00",
+          "status": "success",
+          "errorCode": null
+        }
+      ]
+    }
+  },
+  "facets": {
+    "data": {
+      "countries": [
+        {
+          "value": "AB",
+          "count": 9
+        },
+        {
+          "value": "ABS",
+          "count": 5
+        },
+        {
+          "value": "AC",
+          "count": 6
+        },
+        {
+          "value": "ALG",
+          "count": 6
+        },
+        {
+          "value": "ANG",
+          "count": 1
+        },
+        {
+          "value": "ARGN",
+          "count": 30
+        },
+        {
+          "value": "ASRA",
+          "count": 3
+        },
+        {
+          "value": "AUS",
+          "count": 32
+        },
+        {
+          "value": "AZER",
+          "count": 4
+        },
+        {
+          "value": "BEL",
+          "count": 10
+        },
+        {
+          "value": "BELA",
+          "count": 4
+        },
+        {
+          "value": "BGD",
+          "count": 1
+        },
+        {
+          "value": "BHR",
+          "count": 1
+        },
+        {
+          "value": "BOL",
+          "count": 1
+        },
+        {
+          "value": "BRAZ",
+          "count": 14
+        },
+        {
+          "value": "BUL",
+          "count": 6
+        },
+        {
+          "value": "BWA",
+          "count": 1
+        },
+        {
+          "value": "CA",
+          "count": 56
+        },
+        {
+          "value": "CHBZ",
+          "count": 2
+        },
+        {
+          "value": "CHLE",
+          "count": 3
+        },
+        {
+          "value": "CIS",
+          "count": 377
+        },
+        {
+          "value": "CZCH",
+          "count": 3
+        },
+        {
+          "value": "DEN",
+          "count": 6
+        },
+        {
+          "value": "DJI",
+          "count": 1
+        },
+        {
+          "value": "ECU",
+          "count": 2
+        },
+        {
+          "value": "EGYP",
+          "count": 9
+        },
+        {
+          "value": "ESA",
+          "count": 68
+        },
+        {
+          "value": "ETH",
+          "count": 1
+        },
+        {
+          "value": "EUME",
+          "count": 8
+        },
+        {
+          "value": "EUTE",
+          "count": 28
+        },
+        {
+          "value": "FIN",
+          "count": 29
+        },
+        {
+          "value": "FR",
+          "count": 72
+        },
+        {
+          "value": "FRIT",
+          "count": 1
+        },
+        {
+          "value": "GER",
+          "count": 72
+        },
+        {
+          "value": "GLOB",
+          "count": 27
+        },
+        {
+          "value": "GREC",
+          "count": 24
+        },
+        {
+          "value": "GRSA",
+          "count": 1
+        },
+        {
+          "value": "HRV",
+          "count": 1
+        },
+        {
+          "value": "HUN",
+          "count": 4
+        },
+        {
+          "value": "IM",
+          "count": 14
+        },
+        {
+          "value": "IND",
+          "count": 77
+        },
+        {
+          "value": "INDO",
+          "count": 9
+        },
+        {
+          "value": "IRAN",
+          "count": 11
+        },
+        {
+          "value": "IRAQ",
+          "count": 1
+        },
+        {
+          "value": "ISRA",
+          "count": 16
+        },
+        {
+          "value": "ISS",
+          "count": 5
+        },
+        {
+          "value": "IT",
+          "count": 86
+        },
+        {
+          "value": "ITSO",
+          "count": 36
+        },
+        {
+          "value": "JOR",
+          "count": 1
+        },
+        {
+          "value": "JPN",
+          "count": 134
+        },
+        {
+          "value": "KAZ",
+          "count": 6
+        },
+        {
+          "value": "KWT",
+          "count": 2
+        },
+        {
+          "value": "LAOS",
+          "count": 1
+        },
+        {
+          "value": "LTU",
+          "count": 2
+        },
+        {
+          "value": "LUXE",
+          "count": 11
+        },
+        {
+          "value": "MA",
+          "count": 4
+        },
+        {
+          "value": "MALA",
+          "count": 6
+        },
+        {
+          "value": "MEX",
+          "count": 5
+        },
+        {
+          "value": "MNE",
+          "count": 1
+        },
+        {
+          "value": "NETH",
+          "count": 9
+        },
+        {
+          "value": "NICO",
+          "count": 1
+        },
+        {
+          "value": "NIG",
+          "count": 3
+        },
+        {
+          "value": "NKOR",
+          "count": 1
+        },
+        {
+          "value": "NOR",
+          "count": 20
+        },
+        {
+          "value": "NZ",
+          "count": 1
+        },
+        {
+          "value": "O3B",
+          "count": 33
+        },
+        {
+          "value": "ORB",
+          "count": 14
+        },
+        {
+          "value": "PAKI",
+          "count": 7
+        },
+        {
+          "value": "PERU",
+          "count": 1
+        },
+        {
+          "value": "POL",
+          "count": 15
+        },
+        {
+          "value": "POR",
+          "count": 13
+        },
+        {
+          "value": "PRC",
+          "count": 1610
+        },
+        {
+          "value": "RASC",
+          "count": 1
+        },
+        {
+          "value": "ROC",
+          "count": 29
+        },
+        {
+          "value": "ROM",
+          "count": 1
+        },
+        {
+          "value": "RP",
+          "count": 2
+        },
+        {
+          "value": "RWA",
+          "count": 7
+        },
+        {
+          "value": "SAFR",
+          "count": 2
+        },
+        {
+          "value": "SAUD",
+          "count": 15
+        },
+        {
+          "value": "SES",
+          "count": 36
+        },
+        {
+          "value": "SING",
+          "count": 15
+        },
+        {
+          "value": "SKOR",
+          "count": 77
+        },
+        {
+          "value": "SLB",
+          "count": 1
+        },
+        {
+          "value": "SPN",
+          "count": 59
+        },
+        {
+          "value": "STCT",
+          "count": 1
+        },
+        {
+          "value": "SVK",
+          "count": 2
+        },
+        {
+          "value": "SVN",
+          "count": 2
+        },
+        {
+          "value": "SWED",
+          "count": 3
+        },
+        {
+          "value": "SWTZ",
+          "count": 8
+        },
+        {
+          "value": "TBD",
+          "count": 120
+        },
+        {
+          "value": "THAI",
+          "count": 6
+        },
+        {
+          "value": "TMMC",
+          "count": 1
+        },
+        {
+          "value": "TURK",
+          "count": 40
+        },
+        {
+          "value": "UAE",
+          "count": 23
+        },
+        {
+          "value": "UK",
+          "count": 699
+        },
+        {
+          "value": "UKR",
+          "count": 2
+        },
+        {
+          "value": "US",
+          "count": 12656
+        },
+        {
+          "value": "VENZ",
+          "count": 2
+        },
+        {
+          "value": "VTNM",
+          "count": 4
+        }
+      ],
+      "purposes": [
+        {
+          "value": "unknown",
+          "count": 16899
+        }
+      ],
+      "orbits": [
+        {
+          "value": "GEO",
+          "count": 587
+        },
+        {
+          "value": "HEO",
+          "count": 48
+        },
+        {
+          "value": "LEO",
+          "count": 16082
+        },
+        {
+          "value": "MEO",
+          "count": 182
+        }
+      ]
+    },
+    "meta": {
+      "scope": "unique imported NORAD objects",
+      "purposeRule": "source PURPOSE only; missing remains unknown",
+      "orbitRule": "LEO apogee<2000km; GEO period 1436±30min and e<0.1; MEO apogee<35786km and e<0.25; remainder HEO"
+    }
+  },
+  "performance": {
+    "pointCount": 16899,
+    "catalogCount": 16899,
+    "computeMs": 1057.78,
+    "loadMs": 2028,
+    "payloadBytes": 1275838,
+    "renderFrames": 19,
+    "elapsedMs": 8001.5,
+    "observedFps": 2.374554770980441,
+    "browser": {
+      "frames": 22,
+      "time": 9265.29999999702,
+      "dpr": 1,
+      "hardwareConcurrency": 32,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    "renderer": "Edge headless / SwiftShader software WebGL; not hardware acceptance"
+  },
+  "resourceCleanup": {
+    "created": 1,
+    "destroyed": 1,
+    "active": 0,
+    "frames": 186,
+    "selected": 25544,
+    "tracking": false,
+    "errors": [],
+    "sampleCount": 4820,
+    "textureDimensions": [
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ]
+    ],
+    "entityCount": 22,
+    "globalPointCount": 0,
+    "globalVisible": false
+  },
+  "businessTables": 11,
+  "knownSecretScanPassed": true,
+  "allPassed": true,
+  "limits": [
+    "Software WebGL only; RTX 4060 hardware FPS not measured",
+    "Purpose uses source PURPOSE only; missing remains unknown",
+    "Global overview limited to 20000 candidates; truncation explicit",
+    "No anonymous access during authentication database outage",
+    "Docker/Compose runtime unverified",
+    "Job history retains latest 100 records per job"
+  ]
+}

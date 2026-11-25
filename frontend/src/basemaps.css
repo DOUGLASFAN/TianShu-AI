@@ -1,0 +1,40 @@
+.basemap-control{position:absolute;left:16px;top:16px;z-index:5;color:var(--text,#e6edf5);font-size:13px}.basemap-control>summary{list-style:none;padding:10px 15px;border:1px solid #375269;border-radius:8px;background:#0d1b29ed;cursor:pointer}.basemap-control>summary:focus-visible{outline:2px solid #67c6ff;outline-offset:3px}.basemap-panel{margin-top:8px;width:230px;padding:16px;border:1px solid #375269;border-radius:10px;background:#0d1b29f5;box-shadow:0 12px 30px #0005}.basemap-modes{display:flex;gap:8px;margin-bottom:16px}.basemap-modes button{flex:1;min-height:40px;border:1px solid #375269;border-radius:6px;background:transparent;color:inherit;cursor:pointer}.basemap-modes button[aria-pressed=true]{background:#23485f;border-color:#67c6ff}.basemap-panel label{display:flex;gap:10px;align-items:center;min-height:32px}.basemap-panel p{font-size:12px;color:#b8cddd;margin:14px 0 8px}.basemap-panel small{color:#9cb1c4;font-size:11px}.basemap-panel>button{margin-bottom:10px}.basemap-panel input{accent-color:#67c6ff}
+.system-status-banner~* .orbital-stage .basemap-control,body:has(.system-status-banner) .orbital-stage .basemap-control{top:58px}
+.basemap-control>summary{width:max-content}.basemap-panel input[type=checkbox]{width:16px;height:16px;min-height:0;margin:0;flex:0 0 16px}.map-online-credit{position:absolute;bottom:3px;left:10px;right:10px;z-index:3;width:fit-content;max-width:calc(100% - 20px);padding:2px 5px;background:#0b1724df;color:#bfd0de;font-size:9px;line-height:1.4}.map-online-credit a{color:inherit}.observation-map:has(.map-online-credit) .map-source{bottom:34px}
+.observation-map .map-caption{left:90px;top:18px;right:auto;max-width:calc(100% - 200px)}.observation-map .map-online-credit{bottom:24px}.observation-map:has(.map-online-credit) .map-source{bottom:46px}
+.space-control{position:absolute;left:16px;top:16px;z-index:5;font-size:13px;color:#e6edf5}.space-control>summary{width:max-content;list-style:none;padding:10px 15px;border:1px solid #375269;border-radius:8px;background:#0d1b29ed;cursor:pointer}.space-control .basemap-panel>button{width:100%;margin-bottom:10px}.space-control .basemap-panel label{margin:0 0 12px}.space-control small{display:block;line-height:1.7}.space-control:focus-within{z-index:6}body:has(.system-status-banner) .orbital-stage .space-control{top:58px}
+.space-scale-note{position:absolute;top:22px;left:50%;transform:translateX(-50%);z-index:2;padding:6px 10px;background:#0d1b29d9;color:#bbcede;border:1px solid #375269;border-radius:6px;font-size:11px;white-space:nowrap}
+.orbital-stage:has(.space-control[data-space-sky]):before{opacity:0}
+.orbital-stage:has(.space-scale-note) .stage-legend{display:none}@media(max-width:800px), (max-width: 1000px) and (max-height: 500px) and (pointer: coarse){.space-scale-note{top:66px;left:16px;transform:none;max-width:calc(100% - 32px);white-space:normal}}
+
+@media (max-width: 800px), (max-width: 1000px) and (max-height: 500px) and (pointer: coarse) {
+  body .app-shell :is(.orbital-stage, .observation-map) :is(.basemap-control, .space-control) > summary {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  :is(.basemap-control, .space-control) > summary span {
+    padding: 5px 8px;
+    border: 1px solid #3a546a;
+    border-radius: 6px;
+    background: #0d1b29f5;
+    font-size: 12px;
+  }
+  :is(.basemap-control, .space-control)[open] > summary span { color: #acddfa; border-color: #6ba5c5; }
+  .basemap-control .basemap-panel {
+    width: min(174px, calc(100vw - 46px));
+    margin-top: 2px;
+    padding: 6px 10px 8px;
+    border-radius: 8px;
+    background: #101f30fa;
+  }
+  .basemap-control .basemap-modes { margin: 0; gap: 4px; }
+  .basemap-control .basemap-modes button { min-height: 44px; padding: 5px 6px; font-size: 13px; }
+  .basemap-control .basemap-panel label { margin: 0; font-size: 13px; }
+  .basemap-control .basemap-panel p { margin: 2px 0 4px; }
+  .basemap-control .basemap-panel small { display: block; line-height: 1.4; }
+}

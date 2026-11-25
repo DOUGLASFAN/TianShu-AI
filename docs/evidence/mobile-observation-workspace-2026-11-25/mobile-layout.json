@@ -1,0 +1,431 @@
+{
+  "browser": "158.0.4370.33",
+  "pages": [
+    {
+      "route": "login",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "route": "explore",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320,
+      "mapViewport": {
+        "mapHeight": 272,
+        "scroll": {
+          "document": 0,
+          "shell": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "route": "catalog",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "route": "observations",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "route": "sampling",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "route": "environment",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "route": "workspace",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "route": "notifications",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "route": "dashboard",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320,
+      "dashboardWidth": 320,
+      "dashboardScrollWidth": 320
+    },
+    {
+      "route": "explore",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390,
+      "mapViewport": {
+        "mapHeight": 548,
+        "scroll": {
+          "document": 0,
+          "shell": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "route": "catalog",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "route": "observations",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "route": "sampling",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "route": "environment",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "route": "workspace",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "route": "notifications",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "route": "dashboard",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "scrollWidth": 390,
+      "dashboardWidth": 390,
+      "dashboardScrollWidth": 390
+    },
+    {
+      "route": "explore",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430,
+      "mapViewport": {
+        "mapHeight": 636,
+        "scroll": {
+          "document": 0,
+          "shell": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "route": "catalog",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430
+    },
+    {
+      "route": "observations",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430
+    },
+    {
+      "route": "sampling",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430
+    },
+    {
+      "route": "environment",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430
+    },
+    {
+      "route": "workspace",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430
+    },
+    {
+      "route": "notifications",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430
+    },
+    {
+      "route": "dashboard",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "width": 430,
+      "scrollWidth": 430,
+      "dashboardWidth": 430,
+      "dashboardScrollWidth": 430
+    },
+    {
+      "route": "explore",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844,
+      "mapViewport": {
+        "mapHeight": 188,
+        "scroll": {
+          "document": 0,
+          "shell": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "route": "catalog",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844
+    },
+    {
+      "route": "observations",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844
+    },
+    {
+      "route": "sampling",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844
+    },
+    {
+      "route": "environment",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844
+    },
+    {
+      "route": "workspace",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844
+    },
+    {
+      "route": "notifications",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844
+    },
+    {
+      "route": "dashboard",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "width": 844,
+      "scrollWidth": 844,
+      "dashboardWidth": 844,
+      "dashboardScrollWidth": 844
+    },
+    {
+      "route": "admin",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "route": "admin users",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "width": 320,
+      "scrollWidth": 320
+    }
+  ],
+  "interactions": [
+    "登录、密码显隐、更多导航、Escape 和外部点按关闭",
+    "首页时钟、独立设置页和时区持久化",
+    "一屏地图、原位定位与跟踪、搜索与详情往返、关闭恢复焦点、纯净视图、回放与设置",
+    "目录一键观测实际提交并完成，使用默认站与预设条件，刷新不重复提交",
+    "观测站编辑弹窗、目录档案面板、采样方案折叠和选星草稿",
+    "空间环境各视图、通报快捷入口、响应式图表及采集记录",
+    "移动端态势大屏滚动、读取统计口径、返回探索"
+  ],
+  "pageErrors": [],
+  "firstScreen": {
+    "mapHeight": 548,
+    "scroll": {
+      "document": 0,
+      "shell": 0,
+      "y": 0
+    }
+  },
+  "stationDialog": {
+    "x": 12,
+    "y": 12,
+    "width": 366,
+    "height": 820
+  },
+  "quickObservation": {
+    "status": 202,
+    "noradId": 25544,
+    "days": 1,
+    "minimumElevation": 10,
+    "preferredStation": true,
+    "completedBeforeReload": true,
+    "submissions": 1,
+    "missingStationHandled": true
+  },
+  "samplingPicker": {
+    "x": 10,
+    "y": 61,
+    "width": 370,
+    "height": 722
+  },
+  "desktop": {
+    "exploration": [
+      {
+        "x": 24,
+        "y": 84,
+        "width": 304
+      },
+      {
+        "x": 344,
+        "y": 84,
+        "width": 1185
+      },
+      {
+        "x": 1545,
+        "y": 84,
+        "width": 336
+      },
+      {
+        "x": 24,
+        "y": 914,
+        "width": 1857
+      }
+    ],
+    "presentation": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "passed": true
+}

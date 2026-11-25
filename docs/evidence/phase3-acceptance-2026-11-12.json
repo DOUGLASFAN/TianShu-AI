@@ -1,0 +1,61 @@
+{
+  "stage": 3,
+  "checkedAt": "2026-11-12T08:20:16.687463+00:00",
+  "backendTests": {
+    "2": 20,
+    "3": 8
+  },
+  "browserChecks": 11,
+  "browserAllPassed": true,
+  "externalRequestsBlocked": true,
+  "externalRequestsAttempted": [],
+  "resourceDiagnostics": {
+    "created": 4,
+    "destroyed": 3,
+    "active": 1,
+    "frames": 115,
+    "selected": 20580,
+    "tracking": false,
+    "errors": [],
+    "sampleCount": 4820,
+    "textureDimensions": [
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ]
+    ],
+    "entityCount": 22
+  },
+  "textureHashesVerified": true,
+  "buildKnownSecretScan": {
+    "passed": true,
+    "files": 101
+  },
+  "readiness": {
+    "ok": true,
+    "database": "ready",
+    "cache": "ready"
+  },
+  "screenshots": [
+    "phase3-explore-1440x900.png",
+    "phase3-explore-1920x1080.png",
+    "phase3-explore-2560x1440.png",
+    "phase3-earth-rotated-night.png"
+  ],
+  "limitations": [
+    "Representative satellite scene, not full global point rendering",
+    "Software WebGL validation; hardware performance not accepted",
+    "Historical composite textures, not real-time clouds",
+    "Manual sample refresh, no indefinite extrapolation",
+    "Docker container execution not verified"
+  ],
+  "allPassed": true
+}

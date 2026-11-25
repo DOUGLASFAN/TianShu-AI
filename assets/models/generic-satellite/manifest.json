@@ -1,0 +1,26 @@
+{
+  "downloaded": "2026-11-15",
+  "originalName": "Geostationary Operational Environmental Satellites",
+  "credit": "NASA/Christopher R. Meaney",
+  "sourcePage": "https://science.nasa.gov/3d-resources/geostationary-operational-environmental-satellites/",
+  "downloadUrl": "https://assets.science.nasa.gov/content/dam/science/cds/3d/resources/model/geostationary-operational-environmental-satellites/Geostationary%20Operational%20Environmental%20Satellites.glb",
+  "usageGuidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+  "bytes": 335620,
+  "sha256": "e2f690d3d59e101d6a75a8b0bdcbe1cf9f58a058d01eaceede8557460a6e9101",
+  "gltfVersion": "2.0",
+  "assetMetadata": {
+    "generator": "Khronos glTF Blender I/O v4.2.57",
+    "version": "2.0"
+  },
+  "meshes": 1,
+  "materials": 24,
+  "textures": 0,
+  "triangles": 40935,
+  "externalDependencies": [],
+  "extensionsRequired": [
+    "KHR_draco_mesh_compression"
+  ],
+  "modified": false,
+  "validation": "GLB 2 header and size, JSON chunk, scenes and meshes, self-contained resources; not yet integrated into app",
+  "intendedUse": "Generic illustrative preview only, not actual structure or attitude of selected satellite"
+}

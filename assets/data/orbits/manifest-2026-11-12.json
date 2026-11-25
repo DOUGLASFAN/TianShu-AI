@@ -1,0 +1,74 @@
+{
+  "prepared_at": "2026-11-12T03:55:38.386544+00:00",
+  "gp": {
+    "file": "assets/data/orbits/representative-2026-11-12.json",
+    "sha256": "9de6d60199bfc77d9eb35ff9288042302c1b9cf2565028d20fe634fe0f47be69",
+    "source": {
+      "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=ACTIVE&FORMAT=JSON",
+      "attempted_at": "2026-11-12T03:45:36.701830+00:00",
+      "ttl_seconds": 7200,
+      "delivery": "network",
+      "transport": "urllib",
+      "redirects_followed": false,
+      "automatic_retries": 0,
+      "manual_network_review": "User confirmed the same ISS JSON endpoint works in their local browser; recheck current script connectivity.",
+      "http_status": 200,
+      "response_headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Content-Length": null,
+        "Date": "Thu, 12 Nov 2026 03:45:43 GMT",
+        "Last-Modified": null,
+        "ETag": null,
+        "Retry-After": null
+      },
+      "status": "http_200",
+      "size_bytes": 7103170,
+      "sha256": "fd9ada9f7ef9c28c38adf57244c058b60800ceae21b8ba272b86c8b4463808d2",
+      "body_path": ".local/data/source-validation/celestrak/gp_active.json",
+      "elapsed_ms": 37437.0
+    },
+    "ids": [
+      25544,
+      43001,
+      41866
+    ],
+    "selection": "ISS LEO, BEIDOU-3 M1 navigation MEO, GOES 16 GEO"
+  },
+  "tle": {
+    "file": "assets/data/orbits/iss-2026-11-12.tle",
+    "sha256": "825de7860364813adb6e1fd22035a93f14b88c08f18b6c995c40a2900e672085",
+    "source": {
+      "url": "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE",
+      "attempted_at": "2026-11-12T03:53:35.480619+00:00",
+      "ttl_seconds": 7200,
+      "delivery": "network",
+      "transport": "urllib",
+      "redirects_followed": false,
+      "automatic_retries": 0,
+      "http_status": 200,
+      "response_headers": {
+        "Content-Type": "text/plain; charset=UTF-8",
+        "Content-Length": "168",
+        "Date": "Thu, 12 Nov 2026 03:53:38 GMT",
+        "Last-Modified": null,
+        "ETag": null,
+        "Retry-After": null
+      },
+      "status": "http_200",
+      "size_bytes": 168,
+      "sha256": "825de7860364813adb6e1fd22035a93f14b88c08f18b6c995c40a2900e672085",
+      "body_path": ".local/data/source-validation/celestrak/gp_iss_tle.json",
+      "elapsed_ms": 1610.0
+    }
+  },
+  "ephemeris": {
+    "file": ".local/assets/astronomy/de421.bsp",
+    "sha256": "a20a7139da04cbc462454634918e9a9ca69127044e2cc9d4f9c16e238d2deedc",
+    "size_bytes": 16788480,
+    "distribution": "skyfield-data",
+    "version": "7.0.0",
+    "source": "https://pypi.org/project/skyfield-data/",
+    "origin": "NASA/JPL DE421",
+    "note": "Direct JPL download failed TLS; obtained packaged kernel. Expired bundled IERS file NOT used; timescale builtin=True."
+  }
+}

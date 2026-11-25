@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-19",
+  "allPassed": true,
+  "browserChecks": 5,
+  "flightAndDashboardChecks": 3,
+  "skySourceSize": [
+    8192,
+    4096
+  ],
+  "cubemapFaceSize": 2048,
+  "skyExportBytes": 23093194,
+  "videoSize": [
+    3840,
+    2160
+  ],
+  "videoBytes": 148685673,
+  "nativeMediaPlaybackVerified": true,
+  "sourceAndExportHashesVerified": true,
+  "knownSecretScanPassed": true,
+  "requiredCompleted": 69,
+  "requiredTotal": 85,
+  "limits": [
+    "Visual preference remains subject to user feedback",
+    "Background is static catalog imagery; animation is a separate authored film",
+    "EXR is tone-mapped to browser sRGB, not preserved as half-float runtime HDR",
+    "No Gaia Sky desktop engine is embedded",
+    "Downloaded fragments remain in the D-drive cache after automatic cleanup approval was rejected"
+  ]
+}

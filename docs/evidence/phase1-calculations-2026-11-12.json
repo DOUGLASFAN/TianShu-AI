@@ -1,0 +1,710 @@
+{
+  "checked_at": "2026-11-12T04:05:51.790490+00:00",
+  "checks": [
+    {
+      "name": "authoritative_vallado_teme",
+      "passed": true,
+      "position_error_km": 6.819206706052019e-09,
+      "velocity_error_km_s": 6.380353533117041e-10,
+      "reference": "Vallado et al. Revisiting Spacetrack Report #3, case 00005 t=0; https://celestrak.org/publications/AIAA/2006-6753/"
+    },
+    {
+      "name": "three_regimes_cpp_python_and_wgs84",
+      "passed": true,
+      "samples": [
+        {
+          "noradId": 25544,
+          "time": "2026-11-12T00:00:00+00:00",
+          "state": {
+            "noradId": 25544,
+            "time": "2026-11-12T00:00:00+00:00",
+            "lat": 49.160289822974626,
+            "lng": -8.123723990753412,
+            "alt": 424.1553516247637,
+            "velocity": 7.663018929914164,
+            "ecef_m": [
+              4411621.092454006,
+              -629730.4529651391,
+              5123126.187349348
+            ]
+          },
+          "cpp_python_position_error_km": 3.6662903532026344e-12,
+          "wgs84_roundtrip_error_m": 0.00041536957434961465,
+          "independent_teme_gmst_ecef_error_m": 0.0063994699606133515
+        },
+        {
+          "noradId": 25544,
+          "time": "2026-11-12T01:00:00+00:00",
+          "state": {
+            "noradId": 25544,
+            "time": "2026-11-12T01:00:00+00:00",
+            "lat": -17.160839712269265,
+            "lng": -151.82802950359965,
+            "alt": 419.257583491239,
+            "velocity": 7.662163427072396,
+            "ecef_m": [
+              -5726935.630576756,
+              -3067149.7387433145,
+              -1993552.5298019303
+            ]
+          },
+          "cpp_python_position_error_km": 1.2466735028886722e-12,
+          "wgs84_roundtrip_error_m": 0.0022636555333556616,
+          "independent_teme_gmst_ecef_error_m": 0.007017626328484072
+        },
+        {
+          "noradId": 25544,
+          "time": "2026-11-13T00:00:00+00:00",
+          "state": {
+            "noradId": 25544,
+            "time": "2026-11-13T00:00:00+00:00",
+            "lat": -48.803651738195924,
+            "lng": 167.47087451977617,
+            "alt": 435.45023641746667,
+            "velocity": 7.650178304315126,
+            "ecef_m": [
+              -4388634.260565614,
+              975277.5999421544,
+              -5103862.715166921
+            ]
+          },
+          "cpp_python_position_error_km": 1.016845989170083e-12,
+          "wgs84_roundtrip_error_m": 0.0004320872446181476,
+          "independent_teme_gmst_ecef_error_m": 0.0007199404210417223
+        },
+        {
+          "noradId": 43001,
+          "time": "2026-11-12T00:00:00+00:00",
+          "state": {
+            "noradId": 43001,
+            "time": "2026-11-12T00:00:00+00:00",
+            "lat": 34.945375560555405,
+            "lng": 159.96780153920236,
+            "alt": 21553.181872981,
+            "velocity": 3.776911651452833,
+            "ecef_m": [
+              -21515506.295102272,
+              7844699.474101356,
+              15978460.618207227
+            ]
+          },
+          "cpp_python_position_error_km": 1.0289757937229989e-11,
+          "wgs84_roundtrip_error_m": 2.1943002807706876e-05,
+          "independent_teme_gmst_ecef_error_m": 0.03288698435604785
+        },
+        {
+          "noradId": 43001,
+          "time": "2026-11-12T01:00:00+00:00",
+          "state": {
+            "noradId": 43001,
+            "time": "2026-11-12T01:00:00+00:00",
+            "lat": 12.712132415400959,
+            "lng": 163.57980737734476,
+            "alt": 21546.019809825484,
+            "velocity": 3.7771626300456336,
+            "ecef_m": [
+              -26129660.191088475,
+              7700384.749196779,
+              6135618.3173514465
+            ]
+          },
+          "cpp_python_position_error_km": 2.508952861559687e-11,
+          "wgs84_roundtrip_error_m": 2.823706416403989e-05,
+          "independent_teme_gmst_ecef_error_m": 0.02942497302094719
+        },
+        {
+          "noradId": 43001,
+          "time": "2026-11-13T00:00:00+00:00",
+          "state": {
+            "noradId": 43001,
+            "time": "2026-11-13T00:00:00+00:00",
+            "lat": 56.794718325010216,
+            "lng": 91.2846373906875,
+            "alt": 21553.37409189558,
+            "velocity": 3.7778432633819112,
+            "ecef_m": [
+              -343118.83757587185,
+              15300789.940325681,
+              23347421.736206092
+            ]
+          },
+          "cpp_python_position_error_km": 3.683172823242164e-11,
+          "wgs84_roundtrip_error_m": 1.931376348565607e-06,
+          "independent_teme_gmst_ecef_error_m": 0.002450701141565448
+        },
+        {
+          "noradId": 41866,
+          "time": "2026-11-12T00:00:00+00:00",
+          "state": {
+            "noradId": 41866,
+            "time": "2026-11-12T00:00:00+00:00",
+            "lat": -0.4729846724457574,
+            "lng": -104.679071865019,
+            "alt": 35780.57558787021,
+            "velocity": 3.075120749236145,
+            "ecef_m": [
+              -10682848.844504617,
+              -40781279.90756118,
+              -347669.6559710311
+            ]
+          },
+          "cpp_python_position_error_km": 0.0,
+          "wgs84_roundtrip_error_m": 3.6616088800180866e-07,
+          "independent_teme_gmst_ecef_error_m": 0.060539665644817456
+        },
+        {
+          "noradId": 41866,
+          "time": "2026-11-12T01:00:00+00:00",
+          "state": {
+            "noradId": 41866,
+            "time": "2026-11-12T01:00:00+00:00",
+            "lat": -0.5851893190267136,
+            "lng": -104.67569083039845,
+            "alt": 35782.90688880636,
+            "velocity": 3.074950787127913,
+            "ecef_m": [
+              -10680839.961011412,
+              -40783428.594227575,
+              -430167.44573355676
+            ]
+          },
+          "cpp_python_position_error_km": 3.638422869199817e-12,
+          "wgs84_roundtrip_error_m": 4.525227681973953e-07,
+          "independent_teme_gmst_ecef_error_m": 0.045539322861917794
+        },
+        {
+          "noradId": 41866,
+          "time": "2026-11-13T00:00:00+00:00",
+          "state": {
+            "noradId": 41866,
+            "time": "2026-11-13T00:00:00+00:00",
+            "lat": -0.4849167440738689,
+            "lng": -104.67911271399335,
+            "alt": 35780.71415661757,
+            "velocity": 3.0751106709857887,
+            "ecef_m": [
+              -10682894.453403931,
+              -40781335.40853254,
+              -356441.3490851632
+            ]
+          },
+          "cpp_python_position_error_km": 2.9332305728135133e-11,
+          "wgs84_roundtrip_error_m": 3.7486196394397733e-07,
+          "independent_teme_gmst_ecef_error_m": 0.006750838839495453
+        }
+      ],
+      "limits": "C++ and pure-Python share SGP4 theory. Independent GMST1982 rotation checks TEME/ECEF with zero polar motion; builtin UT1, not precision EOP."
+    },
+    {
+      "name": "real_tle_and_omm",
+      "passed": true,
+      "samples": [
+        {
+          "time": "2026-11-12T00:00:00+00:00",
+          "position_difference_m": 0.9636298474461286
+        },
+        {
+          "time": "2026-11-12T01:00:00+00:00",
+          "position_difference_m": 0.6815215817321644
+        },
+        {
+          "time": "2026-11-13T00:00:00+00:00",
+          "position_difference_m": 0.8761646697800991
+        }
+      ],
+      "tolerance_m": 50
+    },
+    {
+      "name": "validation_atomic_replace_and_failure",
+      "passed": true,
+      "rejected_cases": 5,
+      "sgp4_failure_code": 6
+    },
+    {
+      "name": "beijing_passes_sunlight_and_boundaries",
+      "passed": true,
+      "station": {
+        "lat": 39.9,
+        "lng": 116.4,
+        "elevation_m": 0
+      },
+      "interval": [
+        "2026-11-12T00:00:00+00:00",
+        "2026-11-15T00:00:00+00:00"
+      ],
+      "min_elevation": 10,
+      "events": [
+        {
+          "start": "2026-11-12T10:33:37.854234+00:00",
+          "peak": "2026-11-12T10:36:57.307105+00:00",
+          "end": "2026-11-12T10:40:18.715467+00:00",
+          "max_elevation": 87.11286681777881,
+          "duration_s": 400.861233,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [
+            {
+              "start": "2026-11-12T10:33:37.854234+00:00",
+              "end": "2026-11-12T10:37:22.385484+00:00"
+            }
+          ],
+          "peak_conditions": {
+            "elevation": 87.11286681777881,
+            "azimuth": 143.6403878011624,
+            "range_km": 418.5733487096434,
+            "sun_altitude": -18.51526316396199,
+            "sunlit": true
+          }
+        },
+        {
+          "start": "2026-11-12T12:11:41.192912+00:00",
+          "peak": "2026-11-12T12:14:07.176348+00:00",
+          "end": "2026-11-12T12:16:33.876378+00:00",
+          "max_elevation": 18.399518909360506,
+          "duration_s": 292.683466,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 18.399518909360506,
+            "azimuth": 339.9013419903197,
+            "range_km": 1084.808727563021,
+            "sun_altitude": -37.10146597637898,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-12T13:50:50.886530+00:00",
+          "peak": "2026-11-12T13:51:57.625175+00:00",
+          "end": "2026-11-12T13:53:04.556093+00:00",
+          "max_elevation": 11.220665761896687,
+          "duration_s": 133.669563,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 11.220665761896687,
+            "azimuth": 0.3626883222570296,
+            "range_km": 1426.2311415884926,
+            "sun_altitude": -54.870874855665264,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-12T15:27:16.970174+00:00",
+          "peak": "2026-11-12T15:29:47.446525+00:00",
+          "end": "2026-11-12T15:32:17.772083+00:00",
+          "max_elevation": 19.031642008564816,
+          "duration_s": 300.801909,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 19.031642008564816,
+            "azimuth": 20.79785153755139,
+            "range_km": 1068.446673196487,
+            "sun_altitude": -67.05094808504704,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-12T17:03:33.152281+00:00",
+          "peak": "2026-11-12T17:06:55.642352+00:00",
+          "end": "2026-11-12T17:10:18.066118+00:00",
+          "max_elevation": 82.37565252348934,
+          "duration_s": 404.913837,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 82.37565252348934,
+            "azimuth": 219.1084110595224,
+            "range_km": 427.0278097617448,
+            "sun_altitude": -63.44099018996656,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-13T09:46:01.976142+00:00",
+          "peak": "2026-11-13T09:49:14.432189+00:00",
+          "end": "2026-11-13T09:52:28.696756+00:00",
+          "max_elevation": 47.66871044905981,
+          "duration_s": 386.720614,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [
+            {
+              "start": "2026-11-13T09:46:01.976142+00:00",
+              "end": "2026-11-13T09:51:46.819892+00:00"
+            }
+          ],
+          "peak_conditions": {
+            "elevation": 47.66871044905981,
+            "azimuth": 137.8204747938914,
+            "range_km": 550.6666261819952,
+            "sun_altitude": -9.695422668930929,
+            "sunlit": true
+          }
+        },
+        {
+          "start": "2026-11-13T11:23:22.494090+00:00",
+          "peak": "2026-11-13T11:26:10.705207+00:00",
+          "end": "2026-11-13T11:28:59.648327+00:00",
+          "max_elevation": 24.219259883707743,
+          "duration_s": 337.154237,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [
+            {
+              "start": "2026-11-13T11:23:22.494090+00:00",
+              "end": "2026-11-13T11:24:44.212840+00:00"
+            }
+          ],
+          "peak_conditions": {
+            "elevation": 24.219259883707743,
+            "azimuth": 335.1219151871979,
+            "range_km": 901.7014989163303,
+            "sun_altitude": -28.05967950297067,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-13T13:02:39.303502+00:00",
+          "peak": "2026-11-13T13:03:53.832971+00:00",
+          "end": "2026-11-13T13:05:08.303458+00:00",
+          "max_elevation": 11.5482155016757,
+          "duration_s": 148.999956,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 11.5482155016757,
+            "azimuth": 355.13252226732504,
+            "range_km": 1405.320329187798,
+            "sun_altitude": -46.5632087649872,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-13T14:39:43.321761+00:00",
+          "peak": "2026-11-13T14:41:48.046935+00:00",
+          "end": "2026-11-13T14:43:53.038371+00:00",
+          "max_elevation": 15.22889986344268,
+          "duration_s": 249.71661,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 15.22889986344268,
+            "azimuth": 15.76064595442162,
+            "range_km": 1220.6182626069024,
+            "sun_altitude": -62.57512535776995,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-13T16:15:49.349106+00:00",
+          "peak": "2026-11-13T16:19:09.211551+00:00",
+          "end": "2026-11-13T16:22:28.643621+00:00",
+          "max_elevation": 57.49578525552124,
+          "duration_s": 399.294515,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 57.49578525552124,
+            "azimuth": 34.52319511612255,
+            "range_km": 495.7148257390677,
+            "sun_altitude": -67.74281484687879,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-13T17:53:33.769118+00:00",
+          "peak": "2026-11-13T17:55:36.827795+00:00",
+          "end": "2026-11-13T17:57:39.727912+00:00",
+          "max_elevation": 15.249157557476321,
+          "duration_s": 245.958794,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 15.249157557476321,
+            "azimuth": 229.9679280729419,
+            "range_km": 1217.9310329204766,
+            "sun_altitude": -56.68832786173885,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-14T08:58:43.094175+00:00",
+          "peak": "2026-11-14T09:01:34.276630+00:00",
+          "end": "2026-11-14T09:04:26.459241+00:00",
+          "max_elevation": 26.67122189420602,
+          "duration_s": 343.365066,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 26.67122189420602,
+            "azimuth": 133.7852302752127,
+            "range_km": 835.9949393082746,
+            "sun_altitude": -1.2059636881456592,
+            "sunlit": true
+          }
+        },
+        {
+          "start": "2026-11-14T10:35:10.717500+00:00",
+          "peak": "2026-11-14T10:38:16.116615+00:00",
+          "end": "2026-11-14T10:41:22.768550+00:00",
+          "max_elevation": 34.508517204460965,
+          "duration_s": 372.05105,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [
+            {
+              "start": "2026-11-14T10:35:10.717500+00:00",
+              "end": "2026-11-14T10:39:02.748750+00:00"
+            }
+          ],
+          "peak_conditions": {
+            "elevation": 34.508517204460965,
+            "azimuth": 330.3941603801028,
+            "range_km": 696.5549909649179,
+            "sun_altitude": -19.02920196994709,
+            "sunlit": true
+          }
+        },
+        {
+          "start": "2026-11-14T12:14:14.069854+00:00",
+          "peak": "2026-11-14T12:15:49.622423+00:00",
+          "end": "2026-11-14T12:17:25.265517+00:00",
+          "max_elevation": 12.718134913314007,
+          "duration_s": 191.195663,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 12.718134913314007,
+            "azimuth": 349.89345711931384,
+            "range_km": 1338.8364574730908,
+            "sun_altitude": -37.68894944136364,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-14T13:52:07.194505+00:00",
+          "peak": "2026-11-14T13:53:45.509764+00:00",
+          "end": "2026-11-14T13:55:24.104441+00:00",
+          "max_elevation": 12.896391748191002,
+          "duration_s": 196.909936,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 12.896391748191002,
+            "azimuth": 10.647328940387679,
+            "range_km": 1333.1391852244028,
+            "sun_altitude": -55.49890616689708,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-14T15:28:09.261702+00:00",
+          "peak": "2026-11-14T15:31:17.969752+00:00",
+          "end": "2026-11-14T15:34:26.708579+00:00",
+          "max_elevation": 35.78080096468042,
+          "duration_s": 377.446877,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 35.78080096468042,
+            "azimuth": 29.938696412092366,
+            "range_km": 684.6548106042868,
+            "sun_altitude": -67.63288247469531,
+            "sunlit": false
+          }
+        },
+        {
+          "start": "2026-11-14T17:05:07.196309+00:00",
+          "peak": "2026-11-14T17:07:59.391392+00:00",
+          "end": "2026-11-14T17:10:51.375895+00:00",
+          "max_elevation": 26.005069809159775,
+          "duration_s": 344.179586,
+          "partial_start": false,
+          "partial_end": false,
+          "continuous": false,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 26.005069809159775,
+            "azimuth": 226.33905205026846,
+            "range_km": 862.4104908050157,
+            "sun_altitude": -63.8003285448031,
+            "sunlit": false
+          }
+        }
+      ],
+      "max_independent_crossing_error_s": 0.20794,
+      "partial_interval": [
+        {
+          "start": "2026-11-12T10:36:52.307105+00:00",
+          "peak": "2026-11-12T10:36:57.307105+00:00",
+          "end": "2026-11-12T10:37:02.307105+00:00",
+          "max_elevation": 87.11286681777881,
+          "duration_s": 10.0,
+          "partial_start": true,
+          "partial_end": true,
+          "continuous": true,
+          "visible_windows": [
+            {
+              "start": "2026-11-12T10:36:52.307105+00:00",
+              "end": "2026-11-12T10:37:02.307105+00:00"
+            }
+          ],
+          "peak_conditions": {
+            "elevation": 87.11286681777881,
+            "azimuth": 143.6403878011624,
+            "range_km": 418.5733487096434,
+            "sun_altitude": -18.51526316396199,
+            "sunlit": true
+          }
+        }
+      ],
+      "no_pass_at_90_deg": true,
+      "continuous_geo": [
+        {
+          "start": "2026-11-12T00:00:00+00:00",
+          "peak": "2026-11-12T00:00:00+00:00",
+          "end": "2026-11-12T01:00:00+00:00",
+          "max_elevation": 89.44326843186239,
+          "duration_s": 3600.0,
+          "partial_start": true,
+          "partial_end": true,
+          "continuous": true,
+          "visible_windows": [],
+          "peak_conditions": {
+            "elevation": 89.44326843186239,
+            "azimuth": 179.99999999999636,
+            "range_km": 35780.82968023892,
+            "sun_altitude": 10.188193112606005,
+            "sunlit": true
+          }
+        }
+      ],
+      "resolution_note": "Subsecond numeric boundary resolution is not observational accuracy."
+    },
+    {
+      "name": "independent_earth_shadow_ray_check",
+      "passed": true,
+      "samples": [
+        {
+          "minute": 0,
+          "sunlit": false
+        },
+        {
+          "minute": 5,
+          "sunlit": false
+        },
+        {
+          "minute": 10,
+          "sunlit": false
+        },
+        {
+          "minute": 15,
+          "sunlit": false
+        },
+        {
+          "minute": 20,
+          "sunlit": false
+        },
+        {
+          "minute": 25,
+          "sunlit": true
+        },
+        {
+          "minute": 30,
+          "sunlit": true
+        },
+        {
+          "minute": 35,
+          "sunlit": true
+        },
+        {
+          "minute": 40,
+          "sunlit": true
+        },
+        {
+          "minute": 45,
+          "sunlit": true
+        },
+        {
+          "minute": 50,
+          "sunlit": true
+        },
+        {
+          "minute": 55,
+          "sunlit": true
+        },
+        {
+          "minute": 60,
+          "sunlit": true
+        },
+        {
+          "minute": 65,
+          "sunlit": true
+        },
+        {
+          "minute": 70,
+          "sunlit": true
+        },
+        {
+          "minute": 75,
+          "sunlit": true
+        },
+        {
+          "minute": 80,
+          "sunlit": false
+        },
+        {
+          "minute": 85,
+          "sunlit": false
+        },
+        {
+          "minute": 90,
+          "sunlit": false
+        },
+        {
+          "minute": 95,
+          "sunlit": false
+        }
+      ],
+      "note": "Spherical Earth and point-Sun geometric shadow; not penumbra or brightness modelling."
+    },
+    {
+      "name": "external_iss_same_time_diagnostic",
+      "passed": true,
+      "time": "2026-11-12T03:51:55+00:00",
+      "great_circle_difference_km": 0.8110482857896915,
+      "altitude_difference_km": 0.010803227444341701,
+      "note": "Different models/element sets; no real-world accuracy claim."
+    }
+  ],
+  "all_passed": true
+}

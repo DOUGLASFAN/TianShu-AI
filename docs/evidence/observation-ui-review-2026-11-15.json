@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-15",
+  "checks": [
+    {
+      "name": "empty_layout_and_actionable_station_creation",
+      "passed": true
+    },
+    {
+      "name": "centered_dialog_scroll_lock_and_focus",
+      "passed": true
+    },
+    {
+      "name": "custom_menu_keyboard_escape_and_outside_click",
+      "passed": true
+    },
+    {
+      "name": "range_selection_and_live_start_submission",
+      "passed": true
+    },
+    {
+      "name": "responsive_dialog_and_menus_1440_390",
+      "passed": true
+    },
+    {
+      "name": "visual_filter_preserves_snapshot_and_curve_hover",
+      "passed": true
+    },
+    {
+      "name": "explore_action_alignment_and_scene_cleanup",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "observation-ui-empty-1920.png",
+    "observation-ui-dialog-1920.png",
+    "observation-ui-menu-1920.png",
+    "observation-ui-result-1920.png",
+    "observation-ui-dialog-1440.png",
+    "observation-ui-result-1440.png",
+    "observation-ui-dialog-390.png",
+    "observation-ui-result-390.png",
+    "observation-ui-explore-actions.png"
+  ],
+  "errors": [],
+  "allPassed": true
+}

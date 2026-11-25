@@ -1,0 +1,1023 @@
+{
+  "date": "2026-11-25",
+  "headers": [
+    {
+      "width": 1920,
+      "route": "卫星探索",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1920,
+      "route": "卫星目录",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1920,
+      "route": "观测规划",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1920,
+      "route": "我的空间",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1920,
+      "route": "卫星探索",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1905,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1440,
+      "route": "卫星探索",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1440,
+      "route": "卫星目录",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1440,
+      "route": "观测规划",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1440,
+      "route": "我的空间",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 1440,
+      "route": "卫星探索",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1425,
+        "height": 64
+      },
+      "brand": {
+        "x": 28,
+        "y": 11.25,
+        "width": 108,
+        "height": 40.5
+      },
+      "nav": [
+        {
+          "x": 184,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 272,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 360,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 448,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 536,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 624,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        },
+        {
+          "x": 712,
+          "y": 0,
+          "width": 56,
+          "height": 63
+        }
+      ],
+      "brandFont": "27px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 390,
+      "route": "卫星探索",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 116
+      },
+      "brand": {
+        "x": 12,
+        "y": 6,
+        "width": 84,
+        "height": 48
+      },
+      "nav": [
+        {
+          "x": 12,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 105,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 198,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      ],
+      "brandFont": "22px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 390,
+      "route": "卫星目录",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 116
+      },
+      "brand": {
+        "x": 12,
+        "y": 6,
+        "width": 84,
+        "height": 48
+      },
+      "nav": [
+        {
+          "x": 12,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 105,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 198,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      ],
+      "brandFont": "22px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 390,
+      "route": "观测规划",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 116
+      },
+      "brand": {
+        "x": 12,
+        "y": 6,
+        "width": 84,
+        "height": 48
+      },
+      "nav": [
+        {
+          "x": 12,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 105,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 198,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      ],
+      "brandFont": "22px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 390,
+      "route": "我的空间",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 116
+      },
+      "brand": {
+        "x": 12,
+        "y": 6,
+        "width": 84,
+        "height": 48
+      },
+      "nav": [
+        {
+          "x": 12,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 105,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 198,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      ],
+      "brandFont": "22px",
+      "accountFont": "13px"
+    },
+    {
+      "width": 390,
+      "route": "卫星探索",
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 116
+      },
+      "brand": {
+        "x": 12,
+        "y": 6,
+        "width": 84,
+        "height": 48
+      },
+      "nav": [
+        {
+          "x": 12,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 105,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 198,
+          "y": 58,
+          "width": 87,
+          "height": 51
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      ],
+      "brandFont": "22px",
+      "accountFont": "13px"
+    }
+  ],
+  "dialogs": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "dialog": {
+        "x": 360,
+        "y": 192,
+        "width": 1200,
+        "height": 696
+      },
+      "map": {
+        "x": 769,
+        "y": 348,
+        "width": 758,
+        "height": 420
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "dialog": {
+        "x": 160,
+        "y": 139,
+        "width": 1120,
+        "height": 622
+      },
+      "map": {
+        "x": 541,
+        "y": 289,
+        "width": 710,
+        "height": 360
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dialog": {
+        "x": 12,
+        "y": 12,
+        "width": 366,
+        "height": 820
+      },
+      "map": {
+        "x": 31,
+        "y": 490,
+        "width": 328,
+        "height": 240
+      }
+    }
+  ],
+  "errors": [],
+  "actions": [
+    {
+      "text": "定位",
+      "x": 1566,
+      "y": 542.5,
+      "width": 122.59375,
+      "height": 42
+    },
+    {
+      "text": "持续跟踪",
+      "x": 1700.59375,
+      "y": 542.5,
+      "width": 159.40625,
+      "height": 42
+    },
+    {
+      "text": "预测过境",
+      "x": 1566,
+      "y": 617.5,
+      "width": 122.59375,
+      "height": 40
+    },
+    {
+      "text": "已加入关注",
+      "x": 1700.59375,
+      "y": 617.5,
+      "width": 159.40625,
+      "height": 40
+    }
+  ],
+  "allPassed": true
+}

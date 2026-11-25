@@ -1,0 +1,94 @@
+{
+  "stage": 4,
+  "checkedAt": "2026-11-12T08:58:40.638Z",
+  "checks": [
+    {
+      "name": "ticket_handshake_and_initial_snapshot",
+      "passed": true
+    },
+    {
+      "name": "out_of_order_frame_ignored",
+      "passed": true
+    },
+    {
+      "name": "metadata_filters_and_unknown_purpose",
+      "passed": true
+    },
+    {
+      "name": "full_catalog_overview_and_first_performance",
+      "passed": true
+    },
+    {
+      "name": "api_restart_reconnect_and_new_snapshot",
+      "passed": true
+    },
+    {
+      "name": "historic_snapshot_does_not_extrapolate",
+      "passed": true
+    },
+    {
+      "name": "independent_status_and_resource_cleanup",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "wsConnections": 3,
+  "initialLive": {
+    "connections": 1,
+    "ignoredFrames": 0,
+    "seq": 2,
+    "streamId": "8c90dee7ffe14e0dbe6080ebf02edf0c"
+  },
+  "performance": {
+    "pointCount": 16899,
+    "catalogCount": 16899,
+    "computeMs": 1057.78,
+    "loadMs": 2028,
+    "payloadBytes": 1275838,
+    "renderFrames": 19,
+    "elapsedMs": 8001.5,
+    "observedFps": 2.374554770980441,
+    "browser": {
+      "frames": 22,
+      "time": 9265.29999999702,
+      "dpr": 1,
+      "hardwareConcurrency": 32,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0"
+    },
+    "renderer": "Edge headless / SwiftShader software WebGL; not hardware acceptance"
+  },
+  "reconnectedLive": {
+    "connections": 2,
+    "ignoredFrames": 1,
+    "seq": 9,
+    "streamId": "44d679bc96984d75a84d89864f2072e6"
+  },
+  "finalDiagnostics": {
+    "created": 1,
+    "destroyed": 1,
+    "active": 0,
+    "frames": 186,
+    "selected": 25544,
+    "tracking": false,
+    "errors": [],
+    "sampleCount": 4820,
+    "textureDimensions": [
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ]
+    ],
+    "entityCount": 22,
+    "globalPointCount": 0,
+    "globalVisible": false
+  },
+  "allPassed": true
+}

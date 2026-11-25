@@ -1,0 +1,30 @@
+[
+  {
+    "width": 320,
+    "height": 568,
+    "headerHeight": 103,
+    "mobileNavigation": true,
+    "passed": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "headerHeight": 103,
+    "mobileNavigation": true,
+    "passed": true
+  },
+  {
+    "width": 844,
+    "height": 390,
+    "headerHeight": 64,
+    "mobileNavigation": true,
+    "passed": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "headerHeight": 64,
+    "mobileNavigation": false,
+    "passed": true
+  }
+]

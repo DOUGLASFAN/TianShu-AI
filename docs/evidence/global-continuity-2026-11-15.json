@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-15",
+  "checks": [
+    {
+      "name": "real_catalog_drag_and_zoom_remains_visible",
+      "passed": true
+    },
+    {
+      "name": "automatic_refresh_preserves_covering_previous_window",
+      "passed": true
+    },
+    {
+      "name": "switch_window_without_rebuild_and_no_extrapolation",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "renderer": "Edge headless / software WebGL",
+  "actual": {
+    "catalogCount": 16914,
+    "renderedCount": 16909,
+    "start": "2026-11-15T08:39:19.177858+00:00",
+    "end": "2026-11-15T08:40:19.177858+00:00",
+    "generatedAt": "2026-11-15T08:39:34.177858+00:00"
+  },
+  "syntheticTimeWindowInjection": {
+    "before": {
+      "created": 1,
+      "destroyed": 0,
+      "active": 1,
+      "frames": 38,
+      "selected": 25544,
+      "tracking": false,
+      "errors": [],
+      "sampleCount": 4820,
+      "textureDimensions": [
+        [
+          8192,
+          4096
+        ],
+        [
+          8192,
+          4096
+        ],
+        [
+          8192,
+          4096
+        ]
+      ],
+      "entityCount": 22,
+      "globalPointCount": 16909,
+      "globalVisible": true,
+      "globalStatus": "ready",
+      "globalWindowCount": 1,
+      "globalCollectionBuilds": 1,
+      "globalActiveStart": "2026-11-15T08:39:19.177858+00:00",
+      "globalActiveEnd": "2026-11-15T08:40:19.177858+00:00"
+    },
+    "after": {
+      "created": 1,
+      "destroyed": 0,
+      "active": 1,
+      "frames": 49,
+      "selected": 25544,
+      "tracking": false,
+      "errors": [],
+      "sampleCount": 4820,
+      "textureDimensions": [
+        [
+          8192,
+          4096
+        ],
+        [
+          8192,
+          4096
+        ],
+        [
+          8192,
+          4096
+        ]
+      ],
+      "entityCount": 22,
+      "globalPointCount": 16909,
+      "globalVisible": true,
+      "globalStatus": "ready",
+      "globalWindowCount": 2,
+      "globalCollectionBuilds": 1,
+      "globalActiveStart": "2026-11-15T08:39:19.177858+00:00",
+      "globalActiveEnd": "2026-11-15T08:40:19.177858+00:00"
+    }
+  },
+  "allPassed": true
+}

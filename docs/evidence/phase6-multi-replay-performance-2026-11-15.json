@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "targetCount": 500,
+  "renderedCount": 500,
+  "failedCount": 0,
+  "windowSeconds": 0.07583540000086941,
+  "sampleCount": 46,
+  "payloadBytes": 1262036,
+  "cacheMaxWindows": 4,
+  "fixture": "500 saved real catalog roots; window generation only, forecast throughput measured separately"
+}

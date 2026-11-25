@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-21",
+  "requests": {
+    "/api/satellites?page=1&size=20": {
+      "count": 100,
+      "p95Ms": 5.52,
+      "minMs": 4.16,
+      "maxMs": 6.32,
+      "targetMet": true
+    },
+    "/api/satellites/25544": {
+      "count": 100,
+      "p95Ms": 3.63,
+      "minMs": 2.78,
+      "maxMs": 4.08,
+      "targetMet": true
+    },
+    "/api/dashboard/statistics": {
+      "count": 100,
+      "p95Ms": 6.39,
+      "minMs": 5.2,
+      "maxMs": 7.19,
+      "targetMet": true
+    }
+  },
+  "predictions": [
+    {
+      "days": 7,
+      "group": false,
+      "admissionMs": 11.26,
+      "wallSeconds": 2.07,
+      "workerSeconds": 1.01935,
+      "execution": {
+        "totalSatellites": 1,
+        "completedSatellites": 1,
+        "cacheHits": 0,
+        "eventCount": 43,
+        "failures": []
+      }
+    },
+    {
+      "days": 1,
+      "group": true,
+      "admissionMs": 124.69,
+      "wallSeconds": 30.5,
+      "workerSeconds": 28.866313,
+      "execution": {
+        "totalSatellites": 500,
+        "completedSatellites": 500,
+        "failures": [],
+        "cacheHits": 0,
+        "eventCount": 1294
+      }
+    },
+    {
+      "days": 7,
+      "group": true,
+      "admissionMs": 76.93,
+      "wallSeconds": 183.44,
+      "workerSeconds": 182.333294,
+      "execution": {
+        "totalSatellites": 500,
+        "completedSatellites": 500,
+        "failures": [],
+        "cacheHits": 1,
+        "eventCount": 8288
+      }
+    }
+  ],
+  "checks": [
+    "匿名 401、普通用户后台 403、跨账号站点 404、关注重复提交去重",
+    "单星预测结果保存计划，重复请求返回同一 ID，跨账号计划 404，保存后可回放",
+    "项目服务重启后登录、关注、站点和计划均可回查，保存的计划回放仍可用"
+  ],
+  "restartVerified": {
+    "application": true,
+    "postgresql": true,
+    "redis": true,
+    "readinessAfter": {
+      "database": "ready",
+      "cache": "ready"
+    },
+    "persistentResources": [
+      "session login",
+      "favorite",
+      "observation station",
+      "plan and replay"
+    ]
+  }
+}

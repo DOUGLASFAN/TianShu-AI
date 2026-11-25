@@ -1,0 +1,1 @@
+"""Star Nexus application package."""

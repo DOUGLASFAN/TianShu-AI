@@ -1,0 +1,29 @@
+[
+  {
+    "width": 390,
+    "height": 844,
+    "reducedMotion": "no-preference",
+    "segmentTransition": "0.22s",
+    "segmentWidth": 129,
+    "replayKeptCanvas": true,
+    "observationsOpened": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "reducedMotion": "no-preference",
+    "segmentTransition": "0.22s",
+    "segmentWidth": 76,
+    "replayKeptCanvas": true,
+    "observationsOpened": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "reducedMotion": "reduce",
+    "segmentTransition": "0s",
+    "segmentWidth": 129,
+    "replayKeptCanvas": true,
+    "observationsOpened": true
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "browser": "158.0.4370.33",
+  "checks": [
+    {
+      "width": 320,
+      "height": 680,
+      "emptyAndUnread": true,
+      "realNotificationVisible": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "emptyAndUnread": true,
+      "realNotificationVisible": true
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "emptyAndUnread": true,
+      "realNotificationVisible": true
+    }
+  ],
+  "pageErrors": []
+}

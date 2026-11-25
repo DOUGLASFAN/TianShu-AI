@@ -1,0 +1,12 @@
+{
+  "url": "https://www-app3.gfz-potsdam.de/kp_index/Kp_ap_Ap_SN_F107_nowcast.txt",
+  "attempted_at": "2026-11-12T03:58:08.658267+00:00",
+  "ttl_seconds": 10800,
+  "delivery": "network",
+  "transport": "urllib",
+  "redirects_followed": false,
+  "automatic_retries": 0,
+  "status": "transport_error",
+  "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>",
+  "elapsed_ms": 1453.0
+}

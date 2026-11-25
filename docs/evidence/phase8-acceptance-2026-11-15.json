@@ -1,0 +1,734 @@
+{
+  "stage": 8,
+  "checkedAt": "2026-11-15T13:36:19.986465+00:00",
+  "allPassed": true,
+  "backendTests": {
+    "4": 13,
+    "7": 14,
+    "8": 15
+  },
+  "browserChecks": 7,
+  "finalPreviewChecks": 2,
+  "statistics": {
+    "version": 2,
+    "catalogCount": 16914,
+    "activeCount": 16894,
+    "outsideActiveCount": 20,
+    "payloadCount": 16890,
+    "payloadTypeUnknown": 0,
+    "groupCount": 3,
+    "groups": [
+      {
+        "slug": "active",
+        "name": "活跃目录",
+        "count": 16894
+      },
+      {
+        "slug": "beidou",
+        "name": "北斗",
+        "count": 54
+      },
+      {
+        "slug": "stations",
+        "name": "空间站",
+        "count": 17
+      }
+    ],
+    "orbits": [
+      {
+        "key": "LEO",
+        "count": 16083,
+        "percent": 95.199
+      },
+      {
+        "key": "MEO",
+        "count": 183,
+        "percent": 1.083
+      },
+      {
+        "key": "GEO",
+        "count": 582,
+        "percent": 3.445
+      },
+      {
+        "key": "HEO",
+        "count": 46,
+        "percent": 0.272
+      },
+      {
+        "key": "unknown",
+        "count": 0,
+        "percent": 0.0
+      }
+    ],
+    "owners": [
+      {
+        "key": "US",
+        "count": 12651,
+        "percent": 74.885
+      },
+      {
+        "key": "PRC",
+        "count": 1602,
+        "percent": 9.483
+      },
+      {
+        "key": "UK",
+        "count": 699,
+        "percent": 4.138
+      },
+      {
+        "key": "CIS",
+        "count": 387,
+        "percent": 2.291
+      },
+      {
+        "key": "JPN",
+        "count": 134,
+        "percent": 0.793
+      },
+      {
+        "key": "TBD",
+        "count": 118,
+        "percent": 0.698
+      },
+      {
+        "key": "IT",
+        "count": 86,
+        "percent": 0.509
+      },
+      {
+        "key": "IND",
+        "count": 77,
+        "percent": 0.456
+      },
+      {
+        "key": "SKOR",
+        "count": 77,
+        "percent": 0.456
+      },
+      {
+        "key": "FR",
+        "count": 72,
+        "percent": 0.426
+      },
+      {
+        "key": "GER",
+        "count": 72,
+        "percent": 0.426
+      },
+      {
+        "key": "ESA",
+        "count": 68,
+        "percent": 0.403
+      },
+      {
+        "key": "SPN",
+        "count": 59,
+        "percent": 0.349
+      },
+      {
+        "key": "CA",
+        "count": 55,
+        "percent": 0.326
+      },
+      {
+        "key": "TURK",
+        "count": 40,
+        "percent": 0.237
+      },
+      {
+        "key": "ITSO",
+        "count": 36,
+        "percent": 0.213
+      },
+      {
+        "key": "SES",
+        "count": 36,
+        "percent": 0.213
+      },
+      {
+        "key": "O3B",
+        "count": 33,
+        "percent": 0.195
+      },
+      {
+        "key": "AUS",
+        "count": 32,
+        "percent": 0.189
+      },
+      {
+        "key": "ARGN",
+        "count": 30,
+        "percent": 0.178
+      },
+      {
+        "key": "FIN",
+        "count": 29,
+        "percent": 0.172
+      },
+      {
+        "key": "ROC",
+        "count": 29,
+        "percent": 0.172
+      },
+      {
+        "key": "EUTE",
+        "count": 28,
+        "percent": 0.166
+      },
+      {
+        "key": "GLOB",
+        "count": 27,
+        "percent": 0.16
+      },
+      {
+        "key": "GREC",
+        "count": 24,
+        "percent": 0.142
+      },
+      {
+        "key": "UAE",
+        "count": 23,
+        "percent": 0.136
+      },
+      {
+        "key": "NOR",
+        "count": 20,
+        "percent": 0.118
+      },
+      {
+        "key": "ISRA",
+        "count": 16,
+        "percent": 0.095
+      },
+      {
+        "key": "POL",
+        "count": 15,
+        "percent": 0.089
+      },
+      {
+        "key": "SAUD",
+        "count": 15,
+        "percent": 0.089
+      },
+      {
+        "key": "SING",
+        "count": 15,
+        "percent": 0.089
+      },
+      {
+        "key": "BRAZ",
+        "count": 14,
+        "percent": 0.083
+      },
+      {
+        "key": "IM",
+        "count": 14,
+        "percent": 0.083
+      },
+      {
+        "key": "ORB",
+        "count": 14,
+        "percent": 0.083
+      },
+      {
+        "key": "POR",
+        "count": 13,
+        "percent": 0.077
+      },
+      {
+        "key": "IRAN",
+        "count": 11,
+        "percent": 0.065
+      },
+      {
+        "key": "LUXE",
+        "count": 11,
+        "percent": 0.065
+      },
+      {
+        "key": "BEL",
+        "count": 10,
+        "percent": 0.059
+      },
+      {
+        "key": "AB",
+        "count": 9,
+        "percent": 0.053
+      },
+      {
+        "key": "EGYP",
+        "count": 9,
+        "percent": 0.053
+      },
+      {
+        "key": "INDO",
+        "count": 9,
+        "percent": 0.053
+      },
+      {
+        "key": "NETH",
+        "count": 9,
+        "percent": 0.053
+      },
+      {
+        "key": "EUME",
+        "count": 8,
+        "percent": 0.047
+      },
+      {
+        "key": "SWTZ",
+        "count": 8,
+        "percent": 0.047
+      },
+      {
+        "key": "MALA",
+        "count": 7,
+        "percent": 0.041
+      },
+      {
+        "key": "PAKI",
+        "count": 7,
+        "percent": 0.041
+      },
+      {
+        "key": "RWA",
+        "count": 7,
+        "percent": 0.041
+      },
+      {
+        "key": "AC",
+        "count": 6,
+        "percent": 0.036
+      },
+      {
+        "key": "ALG",
+        "count": 6,
+        "percent": 0.036
+      },
+      {
+        "key": "BUL",
+        "count": 6,
+        "percent": 0.036
+      },
+      {
+        "key": "DEN",
+        "count": 6,
+        "percent": 0.036
+      },
+      {
+        "key": "KAZ",
+        "count": 6,
+        "percent": 0.036
+      },
+      {
+        "key": "THAI",
+        "count": 6,
+        "percent": 0.036
+      },
+      {
+        "key": "ABS",
+        "count": 5,
+        "percent": 0.03
+      },
+      {
+        "key": "ISS",
+        "count": 5,
+        "percent": 0.03
+      },
+      {
+        "key": "MEX",
+        "count": 5,
+        "percent": 0.03
+      },
+      {
+        "key": "AZER",
+        "count": 4,
+        "percent": 0.024
+      },
+      {
+        "key": "BELA",
+        "count": 4,
+        "percent": 0.024
+      },
+      {
+        "key": "HUN",
+        "count": 4,
+        "percent": 0.024
+      },
+      {
+        "key": "MA",
+        "count": 4,
+        "percent": 0.024
+      },
+      {
+        "key": "VTNM",
+        "count": 4,
+        "percent": 0.024
+      },
+      {
+        "key": "ASRA",
+        "count": 3,
+        "percent": 0.018
+      },
+      {
+        "key": "CHLE",
+        "count": 3,
+        "percent": 0.018
+      },
+      {
+        "key": "CZCH",
+        "count": 3,
+        "percent": 0.018
+      },
+      {
+        "key": "NIG",
+        "count": 3,
+        "percent": 0.018
+      },
+      {
+        "key": "SWED",
+        "count": 3,
+        "percent": 0.018
+      },
+      {
+        "key": "CHBZ",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "ECU",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "KWT",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "LTU",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "RP",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "SAFR",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "SVK",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "SVN",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "UKR",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "VENZ",
+        "count": 2,
+        "percent": 0.012
+      },
+      {
+        "key": "ANG",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "BGD",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "BHR",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "BOL",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "BWA",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "DJI",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "ETH",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "FRIT",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "GRSA",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "HRV",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "IRAQ",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "JOR",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "LAOS",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "MNE",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "NICO",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "NKOR",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "NZ",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "PERU",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "RASC",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "ROM",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "SLB",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "STCT",
+        "count": 1,
+        "percent": 0.006
+      },
+      {
+        "key": "TMMC",
+        "count": 1,
+        "percent": 0.006
+      }
+    ],
+    "purposes": [
+      {
+        "key": "unknown",
+        "count": 16894,
+        "percent": 100.0
+      }
+    ],
+    "ownerKnownCount": 16914,
+    "ownerUnknownCount": 0,
+    "coverage": {
+      "total": 16894,
+      "ownerKnown": 16894,
+      "purposeKnown": 0,
+      "launchDateKnown": 16894,
+      "launchDateUnknown": 0
+    },
+    "launches": [
+      {
+        "month": "2025-12",
+        "count": 478
+      },
+      {
+        "month": "2026-01",
+        "count": 318
+      },
+      {
+        "month": "2026-02",
+        "count": 342
+      },
+      {
+        "month": "2026-03",
+        "count": 502
+      },
+      {
+        "month": "2026-04",
+        "count": 391
+      },
+      {
+        "month": "2026-05",
+        "count": 337
+      },
+      {
+        "month": "2026-06",
+        "count": 367
+      },
+      {
+        "month": "2026-07",
+        "count": 419
+      },
+      {
+        "month": "2026-08",
+        "count": 306
+      },
+      {
+        "month": "2026-09",
+        "count": 187
+      },
+      {
+        "month": "2026-10",
+        "count": 316
+      },
+      {
+        "month": "2026-11",
+        "count": 50
+      }
+    ],
+    "epochRange": [
+      "2026-10-21T19:29:14.202816+00:00",
+      "2026-11-16T22:29:56.971680+00:00"
+    ],
+    "lastSourceFetchedAt": "2026-11-15T13:02:11.505277+00:00",
+    "generatedAt": "2026-11-15T13:36:18.071683+00:00",
+    "scope": "当前已导入活跃目录，按 NORAD 编号去重；不代表全球全部实际在轨物体",
+    "rules": {
+      "version": "active-directory-v1",
+      "scope": "当前已导入活跃目录，按 NORAD 编号去重；不代表全球全部实际在轨物体",
+      "orbits": "根数无效或近地点低于地表归为未知；LEO 远地点 <2000km；GEO 周期距1436分钟<30分钟且e<0.1（含倾斜同步）；MEO 远地点<35786km且e<0.25；其余为高轨／高偏心 HEO。按上述顺序互斥归类。",
+      "launches": "按卫星目录的发射日期逐颗计数，不是火箭发射次数；近12个日历月，含当前未结束月。缺失、无效或未来日期不编造。",
+      "groups": "同一卫星可属于多个分组，分组数量不能相加作为目录总数。",
+      "purpose": "仅使用来源明确提供的 PURPOSE 字段，不根据名称或星座推断用途。"
+    }
+  },
+  "aggregationSeconds": 0.2774818000034429,
+  "manualTaskId": "23c8fbb0-4b86-4bb7-b3fa-613545afb8aa",
+  "demoFailureRecords": 2,
+  "adminAuditCount": 24,
+  "finalDemoState": {
+    "phase": "degraded",
+    "startedAt": "2026-11-15T13:24:44.346325+00:00",
+    "checks": [
+      {
+        "source": "orbit",
+        "status": "failed",
+        "errorCode": "RECOVERY_CHECK_FAILED",
+        "checkedAt": "2026-11-15T13:25:03.700818+00:00"
+      },
+      {
+        "source": "metadata",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:05.082920+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "iss",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:10.672666+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "noaa-kp",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:04.164999+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "gfz-kp",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:05.375566+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      }
+    ],
+    "restoreRequestedAt": "2026-11-15T13:24:46.040336+00:00",
+    "checkedAt": "2026-11-15T13:25:10.673664+00:00"
+  },
+  "browserRecovery": {
+    "phase": "degraded",
+    "checks": [
+      {
+        "source": "orbit",
+        "status": "failed",
+        "errorCode": "RECOVERY_CHECK_FAILED",
+        "checkedAt": "2026-11-15T13:25:03.700818+00:00"
+      },
+      {
+        "source": "metadata",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:05.082920+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "iss",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:10.672666+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "noaa-kp",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:04.164999+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "gfz-kp",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:05.375566+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      }
+    ],
+    "taskId": "564f3917-b2c8-450d-9d94-392a6310207a"
+  },
+  "migrationCheckPassed": true,
+  "knownSecretScanPassed": true,
+  "productionBuildPresent": true,
+  "requiredCompleted": 69,
+  "requiredTotal": 85,
+  "limits": [
+    "Active-directory statistics are not the entire real-world satellite population",
+    "Unknown purpose is retained, never inferred from name",
+    "Launch trends count current catalog satellites with known dates, not rocket launches",
+    "Selected-station ranking uses saved owned predictions, not invented live events",
+    "Recovery probes validate named endpoints and formats, not successful full-catalog re-collection",
+    "Software WebGL screenshots and one aggregation timing do not establish hardware FPS or P95"
+  ]
+}

@@ -1,0 +1,988 @@
+{
+  "checks": [
+    {
+      "name": "far-earth",
+      "diagnostic": {
+        "e26351a1-9f7d-41d3-b24d-adf1bd068343": {
+          "mode": "imagery",
+          "labels": true,
+          "status": "本地地球",
+          "level": 0,
+          "source": "Esri",
+          "credit": "",
+          "sourceUrl": "",
+          "height": 11999999.999999998,
+          "success": 0,
+          "failed": 0,
+          "levels": {},
+          "spaceOpacity": 1
+        }
+      }
+    },
+    {
+      "name": "zoomed-earth",
+      "diagnostic": {
+        "e26351a1-9f7d-41d3-b24d-adf1bd068343": {
+          "mode": "imagery",
+          "labels": true,
+          "status": "部分图块未加载 · 保留已有画面",
+          "level": 11,
+          "source": "Esri",
+          "credit": "Esri, Vantor, Earthstar Geographics, HERE, Garmin, OpenStreetMap contributors and GIS User Community",
+          "sourceUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+          "height": 31779.077468330754,
+          "success": 39,
+          "failed": 17,
+          "levels": {
+            "imagery": 11,
+            "labels": 11
+          },
+          "spaceOpacity": 0
+        }
+      }
+    },
+    {
+      "name": "streets",
+      "diagnostic": {
+        "e26351a1-9f7d-41d3-b24d-adf1bd068343": {
+          "mode": "streets",
+          "labels": true,
+          "status": "部分图块未加载 · 保留已有画面",
+          "level": 11,
+          "source": "Esri",
+          "credit": "Esri, Vantor, Earthstar Geographics, HERE, Garmin, OpenStreetMap contributors and GIS User Community",
+          "sourceUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+          "height": 31779.077468330754,
+          "success": 28,
+          "failed": 13,
+          "levels": {
+            "streets": 11
+          },
+          "spaceOpacity": 0
+        }
+      }
+    },
+    {
+      "name": "beijing-high-detail-and-wgs84-pick",
+      "picked": {
+        "lat": 39.908654,
+        "lng": 116.3975
+      },
+      "diagnostic": {
+        "2295113c-7589-416a-8f2c-1e722eb84ca2": {
+          "mode": "imagery",
+          "labels": true,
+          "status": "在线地图",
+          "level": 3,
+          "source": "Esri",
+          "credit": "Esri, Vantor, Earthstar Geographics, HERE, Garmin, OpenStreetMap contributors and GIS User Community",
+          "sourceUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+          "height": 9500000,
+          "success": 30,
+          "failed": 6,
+          "levels": {
+            "imagery": 3
+          },
+          "spaceOpacity": null
+        },
+        "e39911f8-2f47-4ed7-ab53-9218dbf9af35": {
+          "mode": "imagery",
+          "labels": false,
+          "status": "部分图块未加载 · 保留已有画面",
+          "level": 19,
+          "source": "Esri",
+          "credit": "Esri, Vantor, Earthstar Geographics, HERE, Garmin, OpenStreetMap contributors and GIS User Community",
+          "sourceUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+          "height": 150.0220931017473,
+          "success": 39,
+          "failed": 17,
+          "levels": {
+            "imagery": 19,
+            "labels": 18
+          },
+          "spaceOpacity": null
+        }
+      }
+    },
+    {
+      "name": "offline-fallback",
+      "passed": true
+    },
+    {
+      "name": "dialog-map-disposed",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "tiles": [
+    {
+      "tile": "esri/imagery/5/26/13",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/5/25/12",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/5/25/14",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/5/26/12",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/5/26/14",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/6/52/26",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/6/52/27",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/6/52/26",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/6/52/27",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/5/25/13",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/6/51/26",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/6/51/27",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/6/51/26",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/6/51/27",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/6/52/28",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/6/51/28",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/6/51/28",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/8/209/109",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/5/25/14",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/6/52/28",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/5/26/13",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/5/25/12",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1674/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/11/1674/882",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/11/1674/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1674/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/11/1674/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1674/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/6/51/27",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/6/51/26",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/11/1673/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/6/51/28",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/6/51/27",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/8/209/109",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/11/1673/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1673/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/6/51/26",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1673/882",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/11/1673/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1673/881",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/11/1675/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/11/1674/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/11/1675/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1675/882",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/11/1675/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1675/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1675/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/9/418/219",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/9/418/219",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/9/418/220",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/3/6/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/9/418/220",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1673/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/3/6/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/1/1/0",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/11/1673/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/1/1/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/1/1/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/10/837/440",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/10/837/439",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/11/1675/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/1/1/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/10/837/439",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/9/418/219",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/10/837/440",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/2/3/1",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/10/837/441",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/10/837/441",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/3/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/2/3/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/2/3/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/3/6/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/1/1/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1674/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/10/836/440",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1674/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/10/836/439",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1674/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1675/880",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/11/1673/880",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1673/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1675/881",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1673/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1675/882",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/9/418/220",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/9/418/219",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/3/6/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/1/1/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/3/6/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/1/1/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/10/837/441",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/2/3/1",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/10/837/440",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/10/837/439",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/2/3/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/8/209/109",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/11/1675/880",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/10/836/441",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/10/836/439",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/10/836/440",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/8/209/110",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/7/104/54",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/3/6/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/7/104/55",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/4/13/5",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/6/52/26",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/6/52/27",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/9/418/220",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/2/3/1",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/4/13/6",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/10/837/441",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/5/26/13",
+      "status": 502
+    },
+    {
+      "tile": "esri/streets/5/26/12",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/1/0/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/1/0/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/streets/10/837/440",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/1/1/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/5/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/1/1/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/5/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/3/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/1/0/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/1/0/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/1",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/7/2",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/7/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/2/3/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/7/5",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/5/4",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/5/5",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/7/4",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/4/4",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/5/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/0/2",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/4/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/4/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/4/5",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/0/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/3/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/7/5",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/7/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/7/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/3/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/2",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/0/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/0/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/2/0/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/0/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/0/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/3",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/2/1/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/5/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/7/2",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/7/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/5/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/1/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/0",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/6/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/1/1/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/3/6/2",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/1/1/1",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/1/1/0",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/6/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/16/53957/24831",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/16/53957/24832",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/17/107915/49663",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/2/3",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/18/215830/99328",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/18/215830/99329",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/19/431660/198657",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/16/53957/24831",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/19/431659/198658",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431659/198657",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431660/198658",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/18/215829/99329",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/18/215829/99328",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431660/198659",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/3/6/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/1/1/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/1/1/0",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/19/431659/198659",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431661/198657",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431661/198658",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431661/198659",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431658/198657",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/18/215830/99329",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431658/198658",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431658/198659",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/18/215830/99328",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/16/53957/24831",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/18/215829/99328",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/1/1/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/19/431660/198659",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/18/215830/99329",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/18/215829/99329",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/2/3/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/2/3/0",
+      "status": 502
+    },
+    {
+      "tile": "esri/labels/0/0/0",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/17/107915/49663",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/2/3/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/2/3/1",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/17/107915/49664",
+      "status": 200
+    },
+    {
+      "tile": "esri/labels/17/107915/49664",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/17/107914/49664",
+      "status": 502
+    },
+    {
+      "tile": "esri/imagery/19/431658/198657",
+      "status": 200
+    },
+    {
+      "tile": "esri/imagery/18/215830/99328",
+      "status": 502
+    }
+  ],
+  "picked": {
+    "lat": 39.908654,
+    "lng": 116.3975
+  },
+  "allPassed": true
+}

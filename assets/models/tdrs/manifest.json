@@ -1,0 +1,18 @@
+{
+  "id": "tdrs",
+  "name": "Tracking and Data Relay Satellites (TDRS) (B)",
+  "sourcePage": "https://science.nasa.gov/3d-resources/tracking-and-data-relay-satellites-tdrs-b/",
+  "downloadUrl": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Tracking%20and%20Data%20Relay%20Satellites%20(TDRS)%20(B)/Tracking%20and%20Data%20Relay%20Satellites%20(TDRS)%20(B).glb",
+  "downloaded": "2026-11-15",
+  "bytes": 975956,
+  "sha256": "ece0a822767ff7f4cde2a2c5cc5042fa4740528bdbb59095a32b049377f70f30",
+  "gitBlobSha": "62eeb2c94d08cb4e42185ac5aefb30cc0995acdc",
+  "textures": 4,
+  "materials": 5,
+  "extensionsRequired": [
+    "KHR_draco_mesh_compression"
+  ],
+  "externalDependencies": [],
+  "modified": false,
+  "credit": "NASA/JPL/Eyes on the Solar System"
+}

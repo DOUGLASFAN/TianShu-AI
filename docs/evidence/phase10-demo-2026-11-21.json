@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-21",
+  "runs": [
+    {
+      "mode": "normal",
+      "blocked": 0,
+      "checks": [
+        "全球总览、画面时间、根数历元与点位覆盖",
+        "观测规划读取本地历史并整组回放",
+        "保存的观测计划可回放，采用此前保存的根数快照"
+      ],
+      "errors": [],
+      "points": 16932,
+      "video": "phase10-demo-normal-2026-11-21.webm"
+    },
+    {
+      "mode": "local-only",
+      "blocked": 93,
+      "checks": [
+        "全球总览、画面时间、根数历元与点位覆盖",
+        "观测规划读取本地历史并整组回放",
+        "保存的观测计划可回放，采用此前保存的根数快照"
+      ],
+      "errors": [],
+      "points": 16932,
+      "video": "phase10-demo-local-only-2026-11-21.webm"
+    }
+  ],
+  "allPassed": true
+}

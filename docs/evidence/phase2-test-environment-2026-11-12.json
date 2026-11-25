@@ -1,0 +1,7 @@
+{
+  "test_database": "xingxu_phase2_test_9dfdb041ca",
+  "isolated_from_application": true,
+  "redis_database": 15,
+  "exit_code": 0,
+  "note": "Test database retained for evidence; no application data was dropped."
+}

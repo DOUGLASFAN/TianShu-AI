@@ -1,0 +1,71 @@
+{
+  "task": "S01-02",
+  "checked_at": "2026-11-12T03:36:46.104526+00:00",
+  "transport": "curl-direct",
+  "policy": {
+    "sequential": true,
+    "retry_count": 0,
+    "stop_on_first_error": true,
+    "gp_ttl_seconds": 7200,
+    "metadata_ttl_seconds": 86400
+  },
+  "sources": [
+    {
+      "key": "gp_iss",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=JSON",
+      "request": {
+        "url": "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=JSON",
+        "attempted_at": "2026-11-12T03:36:46.105525+00:00",
+        "ttl_seconds": 7200,
+        "delivery": "network",
+        "transport": "curl-direct",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "http_status": null,
+        "status": "transport_error",
+        "curl_exit_code": 35,
+        "error": "curl: (35) schannel: failed to receive handshake, SSL/TLS connection failed\r\n",
+        "elapsed_ms": 8281.0
+      },
+      "status": "transport_error"
+    },
+    {
+      "key": "satcat_iss",
+      "kind": "satcat",
+      "url": "https://celestrak.org/satcat/records.php?CATNR=25544&FORMAT=JSON",
+      "status": "not_attempted",
+      "reason": "Stopped after gp_iss: transport_error; review before further upstream requests."
+    },
+    {
+      "key": "gp_stations",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=STATIONS&FORMAT=JSON",
+      "status": "not_attempted",
+      "reason": "Stopped after gp_iss: transport_error; review before further upstream requests."
+    },
+    {
+      "key": "gp_beidou",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=BEIDOU&FORMAT=JSON",
+      "status": "not_attempted",
+      "reason": "Stopped after gp_iss: transport_error; review before further upstream requests."
+    },
+    {
+      "key": "gp_active",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=ACTIVE&FORMAT=JSON",
+      "status": "not_attempted",
+      "reason": "Stopped after gp_iss: transport_error; review before further upstream requests."
+    },
+    {
+      "key": "satcat_active",
+      "kind": "satcat",
+      "url": "https://celestrak.org/satcat/records.php?GROUP=ACTIVE&FORMAT=JSON",
+      "status": "not_attempted",
+      "reason": "Stopped after gp_iss: transport_error; review before further upstream requests."
+    }
+  ],
+  "all_sources_passed": false,
+  "stop_reason": "Stopped after gp_iss: transport_error; review before further upstream requests."
+}

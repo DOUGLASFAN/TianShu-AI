@@ -1,0 +1,18 @@
+{
+  "id": "cubesat",
+  "name": "CubeSat - 1 RU Generic",
+  "sourcePage": "https://science.nasa.gov/3d-resources/cubesat-1-ru-generic/",
+  "downloadUrl": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/CubeSat%20-%201%20RU%20Generic/CubeSat%20-%201%20RU%20Generic.glb",
+  "downloaded": "2026-11-15",
+  "bytes": 149424,
+  "sha256": "bae308ea2e33778c93675909f7dc2e0d5d6916cd685668a463566c61224b1e85",
+  "gitBlobSha": "1b0be1d6712918960d9629a5b0e0817a9634c88d",
+  "textures": 0,
+  "materials": 18,
+  "extensionsRequired": [
+    "KHR_draco_mesh_compression"
+  ],
+  "externalDependencies": [],
+  "modified": false,
+  "credit": "NASA/Christopher R. Meaney "
+}

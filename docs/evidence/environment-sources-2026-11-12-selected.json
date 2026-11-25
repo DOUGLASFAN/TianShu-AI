@@ -1,0 +1,176 @@
+{
+  "task": "S01-03",
+  "checked_at": "2026-11-12T04:02:05.865961+00:00",
+  "api_key_required": false,
+  "sources": [
+    {
+      "key": "iss_position",
+      "url": "https://api.wheretheiss.at/v1/satellites/25544?units=kilometers",
+      "request": {
+        "url": "https://api.wheretheiss.at/v1/satellites/25544?units=kilometers",
+        "attempted_at": "2026-11-12T03:51:51.159376+00:00",
+        "ttl_seconds": 10,
+        "delivery": "local_snapshot",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json",
+          "Content-Length": "313",
+          "Date": "Thu, 12 Nov 2026 03:51:55 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 313,
+        "sha256": "80460c1db9e137057220d65d3e20db806bb90fe1821c583fb52e3e727262917f",
+        "body_path": ".local/data/source-validation/environment/iss_position.json",
+        "elapsed_ms": 2141.0
+      },
+      "validation": {
+        "source_time": "2026-11-12T03:51:55+00:00",
+        "age_seconds": 610.867521,
+        "position": {
+          "lat": -49.574015114791,
+          "lng": 111.00568758287,
+          "alt_km": 435.73733568289,
+          "velocity_km_s": 7.650053366298056
+        },
+        "note": "Provider km/h converted to km/s; external calculated position, not spacecraft telemetry."
+      },
+      "status": "passed"
+    },
+    {
+      "key": "gfz_kp_nowcast",
+      "url": "https://www-app3.gfz-potsdam.de/kp_index/Kp_ap_Ap_SN_F107_nowcast.txt",
+      "request": {
+        "url": "https://www-app3.gfz-potsdam.de/kp_index/Kp_ap_Ap_SN_F107_nowcast.txt",
+        "attempted_at": "2026-11-12T04:01:09.058158+00:00",
+        "ttl_seconds": 10800,
+        "delivery": "local_snapshot",
+        "transport": "urllib",
+        "accept": "text/plain",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "Certificate issuer failure reviewed: augment system trust with certifi while verifying certificates; request documented plaintext format.",
+        "trust_store": "system + certifi 2026.10.23",
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "text/plain",
+          "Content-Length": "8362",
+          "Date": "Thu, 12 Nov 2026 04:01:15 GMT",
+          "Last-Modified": "Thu, 12 Nov 2026 03:54:22 GMT",
+          "ETag": "\"20aa-6600c4457a38d\"",
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 8362,
+        "sha256": "c62eccc98055ea36a340e0f94d616bbce8cfab73266a9094f2b38d1a2946aa0a",
+        "body_path": ".local/data/source-validation/environment/gfz_kp_nowcast.json",
+        "elapsed_ms": 4141.0
+      },
+      "validation": {
+        "day_count": 30,
+        "valid_intervals": 234,
+        "missing_intervals": 6,
+        "latest": {
+          "interval_start": "2026-11-12T03:00:00+00:00",
+          "kp": 0.333,
+          "quality": "preliminary_nowcast"
+        },
+        "recent": [
+          {
+            "interval_start": "2026-11-10T06:00:00+00:00",
+            "kp": 2.333,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-10T09:00:00+00:00",
+            "kp": 2.333,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-10T12:00:00+00:00",
+            "kp": 1.0,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-10T15:00:00+00:00",
+            "kp": 2.667,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-10T18:00:00+00:00",
+            "kp": 2.0,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-10T21:00:00+00:00",
+            "kp": 2.0,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T00:00:00+00:00",
+            "kp": 1.0,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T03:00:00+00:00",
+            "kp": 0.667,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T06:00:00+00:00",
+            "kp": 1.333,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T09:00:00+00:00",
+            "kp": 2.333,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T12:00:00+00:00",
+            "kp": 0.333,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T15:00:00+00:00",
+            "kp": 1.333,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T18:00:00+00:00",
+            "kp": 2.667,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-11T21:00:00+00:00",
+            "kp": 1.333,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-12T00:00:00+00:00",
+            "kp": 1.0,
+            "quality": "preliminary_nowcast"
+          },
+          {
+            "interval_start": "2026-11-12T03:00:00+00:00",
+            "kp": 0.333,
+            "quality": "preliminary_nowcast"
+          }
+        ],
+        "source_time": "2026-11-12T03:00:00+00:00",
+        "note": "Kp already on 0..9 scale; -1 means unavailable, not quiet. Current interval may be partial preliminary nowcast.",
+        "license": "Kp CC BY 4.0; sunspot numbers in raw file CC BY-NC 4.0, not used by this validator.",
+        "attribution": "GFZ Helmholtz Centre for Geosciences; Matzka et al. 2021, doi:10.5880/Kp.0001"
+      },
+      "status": "passed"
+    }
+  ],
+  "all_sources_passed": true,
+  "selected_weather_source": "GFZ Kp nowcast",
+  "optional_sources_note": "NOAA JSON endpoints failed TLS, CelesTrak SW CSV returned 406; historical evidence retained. No claims of official alerts ingestion."
+}

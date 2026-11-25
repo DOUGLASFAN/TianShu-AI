@@ -1,0 +1,40 @@
+[
+  {
+    "view": "环境趋势与图表",
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "view": "通报与筛选",
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "view": "来源与采集记录",
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "view": "目录",
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "view": "目录档案",
+    "viewport": 320,
+    "scroll": 320
+  },
+  {
+    "mapPosition": {
+      "x": 14,
+      "y": 291.5,
+      "width": 292,
+      "height": 225
+    }
+  },
+  {
+    "view": "观测首屏地图",
+    "viewport": 320,
+    "scroll": 320
+  }
+]

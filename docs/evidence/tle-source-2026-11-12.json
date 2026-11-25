@@ -1,0 +1,23 @@
+{
+  "url": "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE",
+  "attempted_at": "2026-11-12T03:53:35.480619+00:00",
+  "ttl_seconds": 7200,
+  "delivery": "network",
+  "transport": "urllib",
+  "redirects_followed": false,
+  "automatic_retries": 0,
+  "http_status": 200,
+  "response_headers": {
+    "Content-Type": "text/plain; charset=UTF-8",
+    "Content-Length": "168",
+    "Date": "Thu, 12 Nov 2026 03:53:38 GMT",
+    "Last-Modified": null,
+    "ETag": null,
+    "Retry-After": null
+  },
+  "status": "http_200",
+  "size_bytes": 168,
+  "sha256": "825de7860364813adb6e1fd22035a93f14b88c08f18b6c995c40a2900e672085",
+  "body_path": ".local/data/source-validation/celestrak/gp_iss_tle.json",
+  "elapsed_ms": 1610.0
+}

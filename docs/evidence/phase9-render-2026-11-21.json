@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-21",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "scenarios": [
+    {
+      "fps": 60.08219143860559,
+      "p95FrameIntervalMs": 16.800000000000182,
+      "over50ms": 0,
+      "totalMs": 8005.699999999255,
+      "width": 1185,
+      "height": 814,
+      "pointCount": 2000,
+      "movements": 124,
+      "target": 60,
+      "targetMet": true
+    },
+    {
+      "fps": 60.07018595532138,
+      "p95FrameIntervalMs": 16.80000000000109,
+      "over50ms": 0,
+      "totalMs": 8007.2999999992535,
+      "width": 1185,
+      "height": 814,
+      "pointCount": 10000,
+      "movements": 124,
+      "target": 30,
+      "targetMet": true
+    }
+  ],
+  "errors": [],
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU (0x000028E0) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

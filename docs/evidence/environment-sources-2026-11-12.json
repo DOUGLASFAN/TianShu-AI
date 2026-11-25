@@ -1,0 +1,98 @@
+{
+  "task": "S01-03",
+  "checked_at": "2026-11-12T03:51:51.158849+00:00",
+  "api_key_required": false,
+  "sources": [
+    {
+      "key": "iss_position",
+      "url": "https://api.wheretheiss.at/v1/satellites/25544?units=kilometers",
+      "request": {
+        "url": "https://api.wheretheiss.at/v1/satellites/25544?units=kilometers",
+        "attempted_at": "2026-11-12T03:51:51.159376+00:00",
+        "ttl_seconds": 10,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json",
+          "Content-Length": "313",
+          "Date": "Thu, 12 Nov 2026 03:51:55 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 313,
+        "sha256": "80460c1db9e137057220d65d3e20db806bb90fe1821c583fb52e3e727262917f",
+        "body_path": ".local/data/source-validation/environment/iss_position.json",
+        "elapsed_ms": 2141.0
+      },
+      "validation": {
+        "source_time": "2026-11-12T03:51:55+00:00",
+        "age_seconds": -1.695287,
+        "position": {
+          "lat": -49.574015114791,
+          "lng": 111.00568758287,
+          "alt_km": 435.73733568289,
+          "velocity_km_s": 7.650053366298056
+        },
+        "note": "Provider km/h converted to km/s; external calculated position, not spacecraft telemetry."
+      },
+      "status": "passed"
+    },
+    {
+      "key": "noaa_kp",
+      "url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json",
+      "request": {
+        "url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json",
+        "attempted_at": "2026-11-12T04:00:11.809348+00:00",
+        "ttl_seconds": 900,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "Added certifi trust roots while keeping verification enabled; recheck TLS failure.",
+        "trust_store": "system + certifi 2026.10.23",
+        "status": "transport_error",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+        "elapsed_ms": 1078.0
+      },
+      "status": "transport_error"
+    },
+    {
+      "key": "noaa_alerts",
+      "url": "https://services.swpc.noaa.gov/products/alerts.json",
+      "status": "not_attempted",
+      "reason": "Earlier failure on same host"
+    },
+    {
+      "key": "celestrak_space_weather",
+      "url": "https://celestrak.org/SpaceData/SW-Last5Years.csv",
+      "request": {
+        "url": "https://celestrak.org/SpaceData/SW-Last5Years.csv",
+        "attempted_at": "2026-11-12T04:00:47.129159+00:00",
+        "ttl_seconds": 10800,
+        "delivery": "network",
+        "transport": "urllib",
+        "accept": "text/csv",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "Reviewed HTTP 406: CSV URL was incorrectly sent Accept application/json. Correcting content negotiation to text/csv, not retrying unchanged request.",
+        "trust_store": "system + certifi 2026.10.23",
+        "status": "http_error",
+        "http_status": 406,
+        "error": "HTTP Error 406: Not Acceptable",
+        "retry_after": null,
+        "elapsed_ms": 5437.0
+      },
+      "role": "candidate alternative",
+      "status": "http_error"
+    }
+  ],
+  "all_sources_passed": false,
+  "reviewed_at": "2026-11-12T03:53:08.765291+00:00",
+  "essential_sources_validated": false,
+  "selected_weather_source": null
+}

@@ -1,0 +1,36 @@
+{
+  "stage": 2,
+  "checked_at": "2026-11-12T05:14:09.532330+00:00",
+  "backend": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0
+  },
+  "browser": {
+    "checks": 6,
+    "passed": true
+  },
+  "service_restart_and_persistence": true,
+  "postgres_version": "17.11",
+  "business_tables": 10,
+  "foreign_keys": 9,
+  "indexes": 15,
+  "satellite_count": 16899,
+  "frontend_build_known_secret_scan": {
+    "files": 3,
+    "passed": true
+  },
+  "compose": {
+    "yaml_parsed": true,
+    "container_execution_verified": false,
+    "reason": "Docker unavailable"
+  },
+  "live_readiness": {
+    "ok": true,
+    "database": "ready",
+    "cache": "ready"
+  },
+  "web_http_status": 200,
+  "application_stop_keep_services_then_start": "passed on 2026-11-12; process UTC identity retained",
+  "visual_scope": "Foundation workbench only; phase 3 formal A-style 3D not accepted"
+}

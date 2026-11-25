@@ -1,0 +1,58 @@
+{
+  "checked_at": "2026-11-12T04:05:16.412Z",
+  "browser": "installed Edge, isolated D-drive profile",
+  "mode": "headless software WebGL; all non-local HTTP blocked before cold page load",
+  "checks": [
+    {
+      "name": "cold_start_external_network_blocked",
+      "passed": true,
+      "diagnostics": {
+        "activeViewers": 1,
+        "created": 1,
+        "destroyed": 0,
+        "frames": 26,
+        "errors": [],
+        "sampleCount": 6321,
+        "selected": 25544,
+        "webgl": true,
+        "entityCount": 21
+      },
+      "external_requests": []
+    },
+    {
+      "name": "simulation_clock_advances",
+      "passed": true
+    },
+    {
+      "name": "select_locate_track_exit",
+      "passed": true
+    },
+    {
+      "name": "pause_resume",
+      "passed": true
+    },
+    {
+      "name": "three_rebuilds_release_viewer",
+      "passed": true,
+      "diagnostics": {
+        "activeViewers": 1,
+        "created": 4,
+        "destroyed": 3,
+        "frames": 139,
+        "errors": [],
+        "sampleCount": 6321,
+        "selected": 43001,
+        "webgl": true,
+        "entityCount": 21
+      }
+    },
+    {
+      "name": "desktop_layout",
+      "passed": true
+    }
+  ],
+  "local_resource_requests": 55,
+  "external_requests": [],
+  "page_errors": [],
+  "all_passed": true
+}

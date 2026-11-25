@@ -1,0 +1,155 @@
+{
+  "date": "2026-11-21",
+  "checks": [
+    "主动中断浏览器 WebSocket 后完成重连和新握手"
+  ],
+  "samples": [
+    {
+      "seconds": 3,
+      "scene": 1,
+      "models": 1,
+      "heap": 98008250
+    },
+    {
+      "seconds": 75,
+      "scene": 1,
+      "models": 0,
+      "heap": 93856197
+    },
+    {
+      "seconds": 150,
+      "scene": 1,
+      "models": 0,
+      "heap": 100360169
+    },
+    {
+      "seconds": 225,
+      "scene": 1,
+      "models": 0,
+      "heap": 94546115
+    },
+    {
+      "seconds": 300,
+      "scene": 1,
+      "models": 0,
+      "heap": 100607898
+    },
+    {
+      "seconds": 376,
+      "scene": 1,
+      "models": 0,
+      "heap": 106917456
+    },
+    {
+      "seconds": 450,
+      "scene": 1,
+      "models": 0,
+      "heap": 111038532
+    },
+    {
+      "seconds": 525,
+      "scene": 1,
+      "models": 0,
+      "heap": 108564623
+    },
+    {
+      "seconds": 600,
+      "scene": 1,
+      "models": 0,
+      "heap": 103822952
+    },
+    {
+      "seconds": 676,
+      "scene": 1,
+      "models": 0,
+      "heap": 104150413
+    },
+    {
+      "seconds": 750,
+      "scene": 1,
+      "models": 0,
+      "heap": 108460768
+    },
+    {
+      "seconds": 825,
+      "scene": 1,
+      "models": 0,
+      "heap": 108822306
+    },
+    {
+      "seconds": 900,
+      "scene": 1,
+      "models": 0,
+      "heap": 107635145
+    },
+    {
+      "seconds": 976,
+      "scene": 1,
+      "models": 0,
+      "heap": 99505138
+    },
+    {
+      "seconds": 1050,
+      "scene": 1,
+      "models": 0,
+      "heap": 97398328
+    },
+    {
+      "seconds": 1125,
+      "scene": 1,
+      "models": 0,
+      "heap": 99002966
+    },
+    {
+      "seconds": 1200,
+      "scene": 1,
+      "models": 0,
+      "heap": 103316022
+    },
+    {
+      "seconds": 1275,
+      "scene": 1,
+      "models": 0,
+      "heap": 98583214
+    },
+    {
+      "seconds": 1350,
+      "scene": 1,
+      "models": 0,
+      "heap": 103595447
+    },
+    {
+      "seconds": 1425,
+      "scene": 1,
+      "models": 0,
+      "heap": 105060062
+    },
+    {
+      "seconds": 1500,
+      "scene": 1,
+      "models": 0,
+      "heap": 112974654
+    },
+    {
+      "seconds": 1576,
+      "scene": 1,
+      "models": 0,
+      "heap": 101681626
+    },
+    {
+      "seconds": 1650,
+      "scene": 1,
+      "models": 0,
+      "heap": 105288362
+    },
+    {
+      "seconds": 1725,
+      "scene": 1,
+      "models": 0,
+      "heap": 102715243
+    }
+  ],
+  "errors": [],
+  "elapsedSeconds": 1800,
+  "allPassed": true
+}

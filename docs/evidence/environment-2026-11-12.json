@@ -1,0 +1,275 @@
+{
+  "task": "S01-01",
+  "checked_at": "2026-11-12T11:25:38.566550+08:00",
+  "result_meaning": "Inventory complete; missing tools are findings, not installed by this script.",
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "version": "10.0.22631",
+    "machine": "AMD64"
+  },
+  "inventory_python": "3.12.2 | packaged by Anaconda, Inc. | (main, Feb 27 2024, 17:28:07) [MSC v.1916 64 bit (AMD64)]",
+  "checks": {
+    "node": {
+      "command": [
+        "node",
+        "--version"
+      ],
+      "executable": "D:\\software\\Nodejs\\node.EXE",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "v24.11.0",
+      "stderr": ""
+    },
+    "npm": {
+      "command": [
+        "npm.cmd",
+        "--version"
+      ],
+      "executable": "D:\\software\\Nodejs\\npm.cmd",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "11.6.1",
+      "stderr": ""
+    },
+    "pnpm": {
+      "command": [
+        "pnpm.cmd",
+        "--version"
+      ],
+      "executable": "D:\\Develop\\nodejs\\node_global\\pnpm.cmd",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "10.12.1",
+      "stderr": ""
+    },
+    "git": {
+      "command": [
+        "git",
+        "--version"
+      ],
+      "executable": "D:\\Program Files\\Git\\cmd\\git.EXE",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "git version 2.43.0.windows.1",
+      "stderr": ""
+    },
+    "python_default": {
+      "command": [
+        "python",
+        "--version"
+      ],
+      "executable": "D:\\python\\python38\\python.EXE",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "Python 3.8.9",
+      "stderr": ""
+    },
+    "python_launcher": {
+      "command": [
+        "py",
+        "-0p"
+      ],
+      "executable": "C:\\Windows\\py.EXE",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "-3.8-64        D:\\python\\python38\\python.exe\r\n -3.12-64       D:\\tool\\Miniconda\\python.exe",
+      "stderr": "Installed Pythons found by C:\\Windows\\py.EXE Launcher for Windows *"
+    },
+    "python312": {
+      "command": [
+        "py",
+        "-3.12",
+        "--version"
+      ],
+      "executable": "C:\\Windows\\py.EXE",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "Python 3.12.2",
+      "stderr": ""
+    },
+    "pip312": {
+      "command": [
+        "py",
+        "-3.12",
+        "-m",
+        "pip",
+        "--version"
+      ],
+      "executable": "C:\\Windows\\py.EXE",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "pip 23.3.1 from D:\\tool\\Miniconda\\Lib\\site-packages\\pip (python 3.12)",
+      "stderr": ""
+    },
+    "python312_modules": {
+      "command": [
+        "py",
+        "-3.12",
+        "-c",
+        "import sys,ssl,venv,ensurepip; print(sys.executable); print(ssl.OPENSSL_VERSION); print('venv and ensurepip import OK')"
+      ],
+      "executable": "C:\\Windows\\py.EXE",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "D:\\tool\\Miniconda\\python.exe\r\nOpenSSL 3.0.13 30 Jan 2024\r\nvenv and ensurepip import OK",
+      "stderr": ""
+    },
+    "docker_client": {
+      "command": [
+        "docker",
+        "--version"
+      ],
+      "executable": null,
+      "status": "not_on_path"
+    },
+    "docker_server": {
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "{{.ServerVersion}}"
+      ],
+      "executable": null,
+      "status": "not_on_path"
+    },
+    "compose": {
+      "command": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "executable": null,
+      "status": "not_on_path"
+    },
+    "postgres_client": {
+      "command": [
+        "psql",
+        "--version"
+      ],
+      "executable": null,
+      "status": "not_on_path"
+    },
+    "redis_client": {
+      "command": [
+        "redis-cli",
+        "--version"
+      ],
+      "executable": null,
+      "status": "not_on_path"
+    },
+    "wsl_status": {
+      "command": [
+        "wsl",
+        "--status"
+      ],
+      "executable": "C:\\Windows\\system32\\wsl.EXE",
+      "status": "failed",
+      "exit_code": 50,
+      "stdout": "",
+      "stderr": ""
+    },
+    "wsl_distributions": {
+      "command": [
+        "wsl",
+        "--list",
+        "--quiet"
+      ],
+      "executable": "C:\\Windows\\system32\\wsl.EXE",
+      "status": "failed",
+      "exit_code": 1,
+      "stdout": "版权所有 (c) Microsoft Corporation。保留所有权利。\r\r\n\r\r\n用法: wsl.exe [参数]\r\r\n\r\r\n参数:\r\r\n\r\r\n   --install <选项>\r\r\n       安装适用于 Linux 的 Windows 子系统功能。如果未指定任何选项，\r\r\n       建议的功能将与默认分发版一起安装。\r\r\n\r\r\n       若要查看默认分发版以及其他有效分发版的列表，\r\r\n       使用“wsl --list --online”。\r\r\n\r\r\n       选项:\r\r\n           --distribution, -d [Argument]\r\r\n               指定要按名称下载和安装的分发版。\r\r\n\r\r\n               参数:\r\r\n                   有效的分发版名称(不区分大小写)。\r\r\n\r\r\n               示例:\r\r\n                   wsl --install -d Ubuntu\r\r\n                   wsl --install --distribution Debian\r\r\n\r\r\n           --inbox\r\r\n               安装可选的 Windows 功能，而不是通过 Microsoft Store 提供的版本。\r\r\n\r\r\n           --enable-wsl1\r\r\n               使用 Microsoft Store 版本启用 WSL1 支持。\r\r\n\r\r\n           --no-distribution\r\r\n               请勿安装分发版(不能与 --distribution 一起使用)。\r\r\n\r\r\n           --no-launch, -n\r\r\n               安装后不要启动分发版。\r\r\n\r\r\n           --web-download\r\r\n               从 Internet 而不是 Microsoft Store 下载最新版本的 WSL。\r\r\n\r\r\n   --list, -l [选项]\r\r\n       列出分发版。\r\r\n\r\r\n       选项:\r\r\n           --online, -o\r\r\n               显示适合通过“wsl --install”安装的可用分发版列表。\r\r\n\r\r\n   --status\r\r\n       显示适用于 Linux 的 Windows 子系统状态。\r\r\n\r\r\n   --help\r\r\n       显示使用情况信息。",
+      "stderr": ""
+    },
+    "services": {
+      "command": [
+        "powershell.exe",
+        "-NoProfile",
+        "-Command",
+        "$v=@(Get-Service -ErrorAction Stop | Where-Object {$_.Name -match 'docker|postgres|redis|memurai'} | Select-Object Name,Status); ConvertTo-Json -InputObject $v"
+      ],
+      "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "status": "ok",
+      "exit_code": 0,
+      "stdout": "[\r\n\r\n]",
+      "stderr": ""
+    }
+  },
+  "installed_apps": {
+    "matches": [
+      {
+        "name": "Microsoft Edge",
+        "registry_hive": "HKLM",
+        "DisplayVersion": "157.0.4341.46",
+        "InstallLocation": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application"
+      },
+      {
+        "name": "Microsoft Edge WebView2 Runtime",
+        "registry_hive": "HKLM",
+        "DisplayVersion": "157.0.4341.46",
+        "InstallLocation": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application"
+      },
+      {
+        "name": "Google Chrome",
+        "registry_hive": "HKCU",
+        "DisplayVersion": "157.0.8103.39",
+        "InstallLocation": "C:\\Users\\34782\\AppData\\Local\\Google\\Chrome\\Application"
+      }
+    ],
+    "errors": [],
+    "scope": "Uninstall registry only; portable/custom installations can be absent."
+  },
+  "browsers": [
+    {
+      "name": "Microsoft Edge",
+      "registered_version": "157.0.4341.46",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      "file_exists": true,
+      "webgl_verified": false,
+      "browser_launch_verified": false
+    },
+    {
+      "name": "Google Chrome",
+      "registered_version": "157.0.8103.39",
+      "path": "C:\\Users\\34782\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe",
+      "file_exists": true,
+      "webgl_verified": false,
+      "browser_launch_verified": false
+    }
+  ],
+  "localhost_ports": [
+    {
+      "port": 5173,
+      "tcp_open": false,
+      "protocol_verified": false
+    },
+    {
+      "port": 8000,
+      "tcp_open": false,
+      "protocol_verified": false
+    },
+    {
+      "port": 5432,
+      "tcp_open": false,
+      "protocol_verified": false
+    },
+    {
+      "port": 6379,
+      "tcp_open": false,
+      "protocol_verified": false
+    }
+  ],
+  "disk": {
+    "C:/": {
+      "free_gib": 9.28
+    },
+    "D:/": {
+      "free_gib": 54.14
+    }
+  },
+  "limits": [
+    "No packages installed, no services started, no environment variables exported.",
+    "Closed default ports and registry/PATH absence do not prove no custom installation exists.",
+    "No browser launch/WebGL, project build, DB authentication or container startup verified."
+  ]
+}

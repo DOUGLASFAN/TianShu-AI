@@ -1,0 +1,25 @@
+{
+  "stage": 1,
+  "accepted_tasks": [
+    "S01-01",
+    "S01-02",
+    "S01-03",
+    "S01-04",
+    "S01-05",
+    "S01-06",
+    "S01-07"
+  ],
+  "required_completed": 15,
+  "required_total": 85,
+  "unit_tests": 14,
+  "algorithm_groups": 7,
+  "browser_groups": 6,
+  "production_build": "passed",
+  "formal_visual_acceptance": false,
+  "production_auth_and_database": false,
+  "evidence": [
+    "phase1-calculations-2026-11-12.json",
+    "phase1-browser-2026-11-12.json",
+    "environment-sources-2026-11-12-selected.json"
+  ]
+}

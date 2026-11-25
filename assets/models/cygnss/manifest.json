@@ -1,0 +1,18 @@
+{
+  "id": "cygnss",
+  "name": "Cyclone Global Navigation Satellite System (CYGNSS)",
+  "sourcePage": "https://science.nasa.gov/3d-resources/cyclone-global-navigation-satellite-system-cygnss/",
+  "downloadUrl": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Cyclone%20Global%20Navigation%20Satellite%20System%20(CYGNSS)/Cyclone%20Global%20Navigation%20Satellite%20System%20(CYGNSS).glb",
+  "downloaded": "2026-11-15",
+  "bytes": 1622924,
+  "sha256": "830321f2d30099b4355f835d7ae5a2ab1f9f91c292dd01dfc008b8d4bf64c962",
+  "gitBlobSha": "405371d859a6baf955d5ce0b577f9aaa00249f36",
+  "textures": 1,
+  "materials": 6,
+  "extensionsRequired": [
+    "KHR_draco_mesh_compression"
+  ],
+  "externalDependencies": [],
+  "modified": false,
+  "credit": "NASA"
+}

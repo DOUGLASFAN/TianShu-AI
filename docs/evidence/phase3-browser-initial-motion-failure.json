@@ -1,0 +1,78 @@
+{
+  "stage": 3,
+  "checkedAt": "2026-11-12T08:16:25.799Z",
+  "checks": [
+    {
+      "name": "register_and_authenticated_explorer",
+      "passed": true
+    },
+    {
+      "name": "three_desktop_sizes_and_local_8k_globe",
+      "passed": true
+    },
+    {
+      "name": "catalog_filters_pagination_and_empty_state",
+      "passed": true
+    },
+    {
+      "name": "locate_follow_drag_exit_and_home",
+      "passed": true
+    },
+    {
+      "name": "favorite_saved_and_restored_after_reload",
+      "passed": true
+    },
+    {
+      "name": "rapid_selection_late_response_cannot_replace_latest",
+      "passed": true
+    },
+    {
+      "name": "pause_speed_exact_time_and_no_extrapolation",
+      "passed": true
+    },
+    {
+      "name": "failure_and_recovery_are_visible",
+      "passed": true
+    },
+    {
+      "name": "pure_view_and_route_resource_release",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "phase3-explore-1440x900.png",
+    "phase3-explore-1920x1080.png",
+    "phase3-explore-2560x1440.png"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "api5xx": [],
+  "testUsername": "phase3_e5a2d5ba",
+  "resourceDiagnostics": {
+    "created": 4,
+    "destroyed": 3,
+    "active": 1,
+    "frames": 118,
+    "selected": 20580,
+    "tracking": false,
+    "errors": [],
+    "sampleCount": 4820,
+    "textureDimensions": [
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ],
+      [
+        8192,
+        4096
+      ]
+    ],
+    "entityCount": 22
+  },
+  "allPassed": false,
+  "failure": "locator.isChecked: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('checkbox', { name: '减少动态效果（系统）' })\u001b[22m\n"
+}

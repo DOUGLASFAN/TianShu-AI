@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-15",
+  "taskId": "249ead0f-59af-4cc6-89cd-b9a5fd3ce0a8",
+  "mathChildren": [
+    {
+      "ProcessId": 45712,
+      "CreationDate": "2026-11-15T17:21:55.580553+08:00"
+    },
+    {
+      "ProcessId": 49932,
+      "CreationDate": "2026-11-15T17:21:55.583332+08:00"
+    },
+    {
+      "ProcessId": 38184,
+      "CreationDate": "2026-11-15T17:21:55.585323+08:00"
+    },
+    {
+      "ProcessId": 38556,
+      "CreationDate": "2026-11-15T17:21:55.58736+08:00"
+    }
+  ],
+  "recoveredStatus": "failed",
+  "errorCode": "WORKER_INTERRUPTED",
+  "noOrphanMathProcesses": true,
+  "allPassed": true
+}

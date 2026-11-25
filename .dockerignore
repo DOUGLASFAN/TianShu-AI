@@ -1,0 +1,14 @@
+.local
+.env
+.env.*
+!.env.example
+**/.venv
+**/__pycache__
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+**/public/cesium
+docs
+tests
+prototypes
+.git

@@ -1,0 +1,1018 @@
+{
+  "task": "S01-02",
+  "checked_at": "2026-11-12T03:45:19.358773+00:00",
+  "transport": "urllib",
+  "policy": {
+    "sequential": true,
+    "retry_count": 0,
+    "stop_on_first_error": true,
+    "gp_ttl_seconds": 7200,
+    "metadata_ttl_seconds": 86400
+  },
+  "sources": [
+    {
+      "key": "gp_iss",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=JSON",
+      "request": {
+        "url": "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=JSON",
+        "attempted_at": "2026-11-12T03:45:19.359824+00:00",
+        "ttl_seconds": 7200,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "User confirmed the same ISS JSON endpoint works in their local browser; recheck current script connectivity.",
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json; charset=UTF-8",
+          "Content-Length": "424",
+          "Date": "Thu, 12 Nov 2026 03:45:24 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 424,
+        "sha256": "66bba8d41886784f30406fa26b034cad7e50b7c46c2524a776c4472ecd305003",
+        "body_path": ".local/data/source-validation/celestrak/gp_iss.json",
+        "elapsed_ms": 3719.0
+      },
+      "status": "passed",
+      "validation": {
+        "record_count": 1,
+        "unique_catalog_count": 1,
+        "fields": [
+          "ARG_OF_PERICENTER",
+          "BSTAR",
+          "CLASSIFICATION_TYPE",
+          "ECCENTRICITY",
+          "ELEMENT_SET_NO",
+          "EPHEMERIS_TYPE",
+          "EPOCH",
+          "INCLINATION",
+          "MEAN_ANOMALY",
+          "MEAN_MOTION",
+          "MEAN_MOTION_DDOT",
+          "MEAN_MOTION_DOT",
+          "NORAD_CAT_ID",
+          "OBJECT_ID",
+          "OBJECT_NAME",
+          "RA_OF_ASC_NODE",
+          "REV_AT_EPOCH"
+        ],
+        "missing_or_invalid_count": 0,
+        "invalid_examples": [],
+        "duplicate_count": 0,
+        "six_or_more_digit_catalog_count": 0,
+        "coverage": {
+          "NORAD_CAT_ID": {
+            "present": 1,
+            "total": 1
+          },
+          "OBJECT_NAME": {
+            "present": 1,
+            "total": 1
+          },
+          "OBJECT_ID": {
+            "present": 1,
+            "total": 1
+          },
+          "EPOCH": {
+            "present": 1,
+            "total": 1
+          },
+          "MEAN_MOTION": {
+            "present": 1,
+            "total": 1
+          },
+          "ECCENTRICITY": {
+            "present": 1,
+            "total": 1
+          },
+          "INCLINATION": {
+            "present": 1,
+            "total": 1
+          },
+          "RA_OF_ASC_NODE": {
+            "present": 1,
+            "total": 1
+          },
+          "ARG_OF_PERICENTER": {
+            "present": 1,
+            "total": 1
+          },
+          "MEAN_ANOMALY": {
+            "present": 1,
+            "total": 1
+          },
+          "BSTAR": {
+            "present": 1,
+            "total": 1
+          },
+          "MEAN_MOTION_DOT": {
+            "present": 1,
+            "total": 1
+          },
+          "MEAN_MOTION_DDOT": {
+            "present": 1,
+            "total": 1
+          }
+        },
+        "samples": [
+          {
+            "OBJECT_NAME": "ISS (ZARYA)",
+            "OBJECT_ID": "1998-067A",
+            "EPOCH": "2026-11-11T08:03:57.286080",
+            "MEAN_MOTION": 15.49313022,
+            "ECCENTRICITY": 0.00073257,
+            "INCLINATION": 51.6323,
+            "RA_OF_ASC_NODE": 291.9174,
+            "ARG_OF_PERICENTER": 13.1877,
+            "MEAN_ANOMALY": 346.9302,
+            "EPHEMERIS_TYPE": 0,
+            "CLASSIFICATION_TYPE": "U",
+            "NORAD_CAT_ID": 25544,
+            "ELEMENT_SET_NO": 999,
+            "REV_AT_EPOCH": 59456,
+            "BSTAR": 0.00017017107,
+            "MEAN_MOTION_DOT": 9.043e-05,
+            "MEAN_MOTION_DDOT": 0
+          }
+        ],
+        "epoch_age_hours_at_validation": {
+          "min": 19.691,
+          "median": 19.691,
+          "max": 19.691,
+          "older_than_3_days": 0,
+          "older_than_7_days": 0,
+          "future_epoch_count": 0
+        },
+        "schema_passed": true
+      }
+    },
+    {
+      "key": "satcat_iss",
+      "kind": "satcat",
+      "url": "https://celestrak.org/satcat/records.php?CATNR=25544&FORMAT=JSON",
+      "request": {
+        "url": "https://celestrak.org/satcat/records.php?CATNR=25544&FORMAT=JSON",
+        "attempted_at": "2026-11-12T03:45:23.087958+00:00",
+        "ttl_seconds": 86400,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "User confirmed the same ISS JSON endpoint works in their local browser; recheck current script connectivity.",
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json; charset=UTF-8",
+          "Content-Length": "337",
+          "Date": "Thu, 12 Nov 2026 03:45:26 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 337,
+        "sha256": "4022d3aed9267d055116ebb5f1b1672307531f40ca13ac3a9e6fd004592bcbf1",
+        "body_path": ".local/data/source-validation/celestrak/satcat_iss.json",
+        "elapsed_ms": 1609.0
+      },
+      "status": "passed",
+      "validation": {
+        "record_count": 1,
+        "unique_catalog_count": 1,
+        "fields": [
+          "APOGEE",
+          "DATA_STATUS_CODE",
+          "DECAY_DATE",
+          "INCLINATION",
+          "LAUNCH_DATE",
+          "LAUNCH_SITE",
+          "NORAD_CAT_ID",
+          "OBJECT_ID",
+          "OBJECT_NAME",
+          "OBJECT_TYPE",
+          "OPS_STATUS_CODE",
+          "ORBIT_CENTER",
+          "ORBIT_TYPE",
+          "OWNER",
+          "PERIGEE",
+          "PERIOD",
+          "RCS"
+        ],
+        "missing_or_invalid_count": 0,
+        "invalid_examples": [],
+        "duplicate_count": 0,
+        "six_or_more_digit_catalog_count": 0,
+        "coverage": {
+          "NORAD_CAT_ID": {
+            "present": 1,
+            "total": 1
+          },
+          "OBJECT_NAME": {
+            "present": 1,
+            "total": 1
+          },
+          "OBJECT_ID": {
+            "present": 1,
+            "total": 1
+          },
+          "OBJECT_TYPE": {
+            "present": 1,
+            "total": 1
+          },
+          "OWNER": {
+            "present": 1,
+            "total": 1
+          },
+          "LAUNCH_DATE": {
+            "present": 1,
+            "total": 1
+          },
+          "DECAY_DATE": {
+            "present": 0,
+            "total": 1
+          },
+          "OPS_STATUS_CODE": {
+            "present": 1,
+            "total": 1
+          },
+          "ORBIT_CENTER": {
+            "present": 1,
+            "total": 1
+          },
+          "ORBIT_TYPE": {
+            "present": 1,
+            "total": 1
+          }
+        },
+        "samples": [
+          {
+            "OBJECT_NAME": "ISS (ZARYA)",
+            "OBJECT_ID": "1998-067A",
+            "NORAD_CAT_ID": 25544,
+            "OBJECT_TYPE": "PAY",
+            "OPS_STATUS_CODE": "+",
+            "OWNER": "ISS",
+            "LAUNCH_DATE": "1998-11-20",
+            "LAUNCH_SITE": "TYMSC",
+            "DECAY_DATE": "",
+            "PERIOD": 92.94,
+            "INCLINATION": 51.63,
+            "APOGEE": 424,
+            "PERIGEE": 414,
+            "RCS": 399.0524,
+            "DATA_STATUS_CODE": "",
+            "ORBIT_CENTER": "EA",
+            "ORBIT_TYPE": "ORB"
+          }
+        ],
+        "owners": [
+          "ISS"
+        ],
+        "object_types": [
+          "PAY"
+        ],
+        "dedicated_purpose_field_present": false,
+        "schema_passed": true
+      }
+    },
+    {
+      "key": "gp_stations",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=STATIONS&FORMAT=JSON",
+      "request": {
+        "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=STATIONS&FORMAT=JSON",
+        "attempted_at": "2026-11-12T03:45:24.689650+00:00",
+        "ttl_seconds": 7200,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "User confirmed the same ISS JSON endpoint works in their local browser; recheck current script connectivity.",
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json; charset=UTF-8",
+          "Content-Length": "8004",
+          "Date": "Thu, 12 Nov 2026 03:45:27 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 8004,
+        "sha256": "6fab332d0a2c77cda572ea09dacd4fd258d57e3b375321945c238cec9ec6a3d4",
+        "body_path": ".local/data/source-validation/celestrak/gp_stations.json",
+        "elapsed_ms": 1547.0
+      },
+      "status": "passed",
+      "validation": {
+        "record_count": 19,
+        "unique_catalog_count": 19,
+        "fields": [
+          "ARG_OF_PERICENTER",
+          "BSTAR",
+          "CLASSIFICATION_TYPE",
+          "ECCENTRICITY",
+          "ELEMENT_SET_NO",
+          "EPHEMERIS_TYPE",
+          "EPOCH",
+          "INCLINATION",
+          "MEAN_ANOMALY",
+          "MEAN_MOTION",
+          "MEAN_MOTION_DDOT",
+          "MEAN_MOTION_DOT",
+          "NORAD_CAT_ID",
+          "OBJECT_ID",
+          "OBJECT_NAME",
+          "RA_OF_ASC_NODE",
+          "REV_AT_EPOCH"
+        ],
+        "missing_or_invalid_count": 0,
+        "invalid_examples": [],
+        "duplicate_count": 0,
+        "six_or_more_digit_catalog_count": 4,
+        "coverage": {
+          "NORAD_CAT_ID": {
+            "present": 19,
+            "total": 19
+          },
+          "OBJECT_NAME": {
+            "present": 19,
+            "total": 19
+          },
+          "OBJECT_ID": {
+            "present": 19,
+            "total": 19
+          },
+          "EPOCH": {
+            "present": 19,
+            "total": 19
+          },
+          "MEAN_MOTION": {
+            "present": 19,
+            "total": 19
+          },
+          "ECCENTRICITY": {
+            "present": 19,
+            "total": 19
+          },
+          "INCLINATION": {
+            "present": 19,
+            "total": 19
+          },
+          "RA_OF_ASC_NODE": {
+            "present": 19,
+            "total": 19
+          },
+          "ARG_OF_PERICENTER": {
+            "present": 19,
+            "total": 19
+          },
+          "MEAN_ANOMALY": {
+            "present": 19,
+            "total": 19
+          },
+          "BSTAR": {
+            "present": 19,
+            "total": 19
+          },
+          "MEAN_MOTION_DOT": {
+            "present": 19,
+            "total": 19
+          },
+          "MEAN_MOTION_DDOT": {
+            "present": 19,
+            "total": 19
+          }
+        },
+        "samples": [
+          {
+            "OBJECT_NAME": "ISS (ZARYA)",
+            "OBJECT_ID": "1998-067A",
+            "EPOCH": "2026-11-11T08:03:57.286080",
+            "MEAN_MOTION": 15.49313022,
+            "ECCENTRICITY": 0.00073257,
+            "INCLINATION": 51.6323,
+            "RA_OF_ASC_NODE": 291.9174,
+            "ARG_OF_PERICENTER": 13.1877,
+            "MEAN_ANOMALY": 346.9302,
+            "EPHEMERIS_TYPE": 0,
+            "CLASSIFICATION_TYPE": "U",
+            "NORAD_CAT_ID": 25544,
+            "ELEMENT_SET_NO": 999,
+            "REV_AT_EPOCH": 59456,
+            "BSTAR": 0.00017017107,
+            "MEAN_MOTION_DOT": 9.043e-05,
+            "MEAN_MOTION_DDOT": 0
+          },
+          {
+            "OBJECT_NAME": "POISK",
+            "OBJECT_ID": "2009-060A",
+            "EPOCH": "2026-11-11T08:03:57.286080",
+            "MEAN_MOTION": 15.49313022,
+            "ECCENTRICITY": 0.00073257,
+            "INCLINATION": 51.6323,
+            "RA_OF_ASC_NODE": 291.9174,
+            "ARG_OF_PERICENTER": 13.1877,
+            "MEAN_ANOMALY": 346.9302,
+            "EPHEMERIS_TYPE": 0,
+            "CLASSIFICATION_TYPE": "U",
+            "NORAD_CAT_ID": 36086,
+            "ELEMENT_SET_NO": 999,
+            "REV_AT_EPOCH": 58676,
+            "BSTAR": 0.00017017107,
+            "MEAN_MOTION_DOT": 9.043e-05,
+            "MEAN_MOTION_DDOT": 0
+          }
+        ],
+        "epoch_age_hours_at_validation": {
+          "min": 12.812,
+          "median": 19.691,
+          "max": 53.992,
+          "older_than_3_days": 0,
+          "older_than_7_days": 0,
+          "future_epoch_count": 0
+        },
+        "schema_passed": true
+      }
+    },
+    {
+      "key": "gp_beidou",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=BEIDOU&FORMAT=JSON",
+      "request": {
+        "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=BEIDOU&FORMAT=JSON",
+        "attempted_at": "2026-11-12T03:45:26.240034+00:00",
+        "ttl_seconds": 7200,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "User confirmed the same ISS JSON endpoint works in their local browser; recheck current script connectivity.",
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json; charset=UTF-8",
+          "Content-Length": "22247",
+          "Date": "Thu, 12 Nov 2026 03:45:37 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 22247,
+        "sha256": "c7dade0a8849f90329948b3d4c28cf10edccf9b78feb3a83f030d2b6e27517f6",
+        "body_path": ".local/data/source-validation/celestrak/gp_beidou.json",
+        "elapsed_ms": 10469.0
+      },
+      "status": "passed",
+      "validation": {
+        "record_count": 54,
+        "unique_catalog_count": 54,
+        "fields": [
+          "ARG_OF_PERICENTER",
+          "BSTAR",
+          "CLASSIFICATION_TYPE",
+          "ECCENTRICITY",
+          "ELEMENT_SET_NO",
+          "EPHEMERIS_TYPE",
+          "EPOCH",
+          "INCLINATION",
+          "MEAN_ANOMALY",
+          "MEAN_MOTION",
+          "MEAN_MOTION_DDOT",
+          "MEAN_MOTION_DOT",
+          "NORAD_CAT_ID",
+          "OBJECT_ID",
+          "OBJECT_NAME",
+          "RA_OF_ASC_NODE",
+          "REV_AT_EPOCH"
+        ],
+        "missing_or_invalid_count": 0,
+        "invalid_examples": [],
+        "duplicate_count": 0,
+        "six_or_more_digit_catalog_count": 0,
+        "coverage": {
+          "NORAD_CAT_ID": {
+            "present": 54,
+            "total": 54
+          },
+          "OBJECT_NAME": {
+            "present": 54,
+            "total": 54
+          },
+          "OBJECT_ID": {
+            "present": 54,
+            "total": 54
+          },
+          "EPOCH": {
+            "present": 54,
+            "total": 54
+          },
+          "MEAN_MOTION": {
+            "present": 54,
+            "total": 54
+          },
+          "ECCENTRICITY": {
+            "present": 54,
+            "total": 54
+          },
+          "INCLINATION": {
+            "present": 54,
+            "total": 54
+          },
+          "RA_OF_ASC_NODE": {
+            "present": 54,
+            "total": 54
+          },
+          "ARG_OF_PERICENTER": {
+            "present": 54,
+            "total": 54
+          },
+          "MEAN_ANOMALY": {
+            "present": 54,
+            "total": 54
+          },
+          "BSTAR": {
+            "present": 54,
+            "total": 54
+          },
+          "MEAN_MOTION_DOT": {
+            "present": 54,
+            "total": 54
+          },
+          "MEAN_MOTION_DDOT": {
+            "present": 54,
+            "total": 54
+          }
+        },
+        "samples": [
+          {
+            "OBJECT_NAME": "BEIDOU-2 IGSO-1 (C06)",
+            "OBJECT_ID": "2010-036A",
+            "EPOCH": "2026-11-09T12:11:38.729760",
+            "MEAN_MOTION": 1.00280194,
+            "ECCENTRICITY": 0.0055591,
+            "INCLINATION": 54.308,
+            "RA_OF_ASC_NODE": 161.6472,
+            "ARG_OF_PERICENTER": 219.7571,
+            "MEAN_ANOMALY": 318.383,
+            "EPHEMERIS_TYPE": 0,
+            "CLASSIFICATION_TYPE": "U",
+            "NORAD_CAT_ID": 36828,
+            "ELEMENT_SET_NO": 999,
+            "REV_AT_EPOCH": 5955,
+            "BSTAR": 0,
+            "MEAN_MOTION_DOT": -4.4e-07,
+            "MEAN_MOTION_DDOT": 0
+          },
+          {
+            "OBJECT_NAME": "BEIDOU-2 G4 (C04)",
+            "OBJECT_ID": "2010-057A",
+            "EPOCH": "2026-11-11T15:12:25.003872",
+            "MEAN_MOTION": 1.0027219,
+            "ECCENTRICITY": 0.00098816,
+            "INCLINATION": 4.0098,
+            "RA_OF_ASC_NODE": 67.8878,
+            "ARG_OF_PERICENTER": 190.6462,
+            "MEAN_ANOMALY": 180.4607,
+            "EPHEMERIS_TYPE": 0,
+            "CLASSIFICATION_TYPE": "U",
+            "NORAD_CAT_ID": 37210,
+            "ELEMENT_SET_NO": 999,
+            "REV_AT_EPOCH": 5877,
+            "BSTAR": 0,
+            "MEAN_MOTION_DOT": -1.01e-06,
+            "MEAN_MOTION_DDOT": 0
+          }
+        ],
+        "epoch_age_hours_at_validation": {
+          "min": 11.775,
+          "median": 20.838,
+          "max": 331.384,
+          "older_than_3_days": 4,
+          "older_than_7_days": 2,
+          "future_epoch_count": 0
+        },
+        "schema_passed": true
+      }
+    },
+    {
+      "key": "gp_active",
+      "kind": "gp",
+      "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=ACTIVE&FORMAT=JSON",
+      "request": {
+        "url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=ACTIVE&FORMAT=JSON",
+        "attempted_at": "2026-11-12T03:45:36.701830+00:00",
+        "ttl_seconds": 7200,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "User confirmed the same ISS JSON endpoint works in their local browser; recheck current script connectivity.",
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json; charset=UTF-8",
+          "Content-Length": null,
+          "Date": "Thu, 12 Nov 2026 03:45:43 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 7103170,
+        "sha256": "fd9ada9f7ef9c28c38adf57244c058b60800ceae21b8ba272b86c8b4463808d2",
+        "body_path": ".local/data/source-validation/celestrak/gp_active.json",
+        "elapsed_ms": 37437.0
+      },
+      "status": "passed",
+      "validation": {
+        "record_count": 16899,
+        "unique_catalog_count": 16899,
+        "fields": [
+          "ARG_OF_PERICENTER",
+          "BSTAR",
+          "CLASSIFICATION_TYPE",
+          "ECCENTRICITY",
+          "ELEMENT_SET_NO",
+          "EPHEMERIS_TYPE",
+          "EPOCH",
+          "INCLINATION",
+          "MEAN_ANOMALY",
+          "MEAN_MOTION",
+          "MEAN_MOTION_DDOT",
+          "MEAN_MOTION_DOT",
+          "NORAD_CAT_ID",
+          "OBJECT_ID",
+          "OBJECT_NAME",
+          "RA_OF_ASC_NODE",
+          "REV_AT_EPOCH"
+        ],
+        "missing_or_invalid_count": 0,
+        "invalid_examples": [],
+        "duplicate_count": 0,
+        "six_or_more_digit_catalog_count": 1019,
+        "coverage": {
+          "NORAD_CAT_ID": {
+            "present": 16899,
+            "total": 16899
+          },
+          "OBJECT_NAME": {
+            "present": 16899,
+            "total": 16899
+          },
+          "OBJECT_ID": {
+            "present": 16899,
+            "total": 16899
+          },
+          "EPOCH": {
+            "present": 16899,
+            "total": 16899
+          },
+          "MEAN_MOTION": {
+            "present": 16899,
+            "total": 16899
+          },
+          "ECCENTRICITY": {
+            "present": 16899,
+            "total": 16899
+          },
+          "INCLINATION": {
+            "present": 16899,
+            "total": 16899
+          },
+          "RA_OF_ASC_NODE": {
+            "present": 16899,
+            "total": 16899
+          },
+          "ARG_OF_PERICENTER": {
+            "present": 16899,
+            "total": 16899
+          },
+          "MEAN_ANOMALY": {
+            "present": 16899,
+            "total": 16899
+          },
+          "BSTAR": {
+            "present": 16899,
+            "total": 16899
+          },
+          "MEAN_MOTION_DOT": {
+            "present": 16899,
+            "total": 16899
+          },
+          "MEAN_MOTION_DDOT": {
+            "present": 16899,
+            "total": 16899
+          }
+        },
+        "samples": [
+          {
+            "OBJECT_NAME": "CALSPHERE 1",
+            "OBJECT_ID": "1964-063C",
+            "EPOCH": "2026-11-11T15:05:29.725728",
+            "MEAN_MOTION": 13.76761483,
+            "ECCENTRICITY": 0.00263223,
+            "INCLINATION": 90.2237,
+            "RA_OF_ASC_NODE": 75.1924,
+            "ARG_OF_PERICENTER": 202.5762,
+            "MEAN_ANOMALY": 169.726,
+            "EPHEMERIS_TYPE": 0,
+            "CLASSIFICATION_TYPE": "U",
+            "NORAD_CAT_ID": 900,
+            "ELEMENT_SET_NO": 999,
+            "REV_AT_EPOCH": 9171,
+            "BSTAR": 0.00068390591,
+            "MEAN_MOTION_DOT": 6.83e-06,
+            "MEAN_MOTION_DDOT": 0
+          },
+          {
+            "OBJECT_NAME": "CALSPHERE 2",
+            "OBJECT_ID": "1964-063E",
+            "EPOCH": "2026-11-11T15:26:48.211584",
+            "MEAN_MOTION": 13.52910055,
+            "ECCENTRICITY": 0.00194873,
+            "INCLINATION": 90.2358,
+            "RA_OF_ASC_NODE": 79.2631,
+            "ARG_OF_PERICENTER": 154.1465,
+            "MEAN_ANOMALY": 218.5313,
+            "EPHEMERIS_TYPE": 0,
+            "CLASSIFICATION_TYPE": "U",
+            "NORAD_CAT_ID": 902,
+            "ELEMENT_SET_NO": 999,
+            "REV_AT_EPOCH": 87620,
+            "BSTAR": 8.7064791e-05,
+            "MEAN_MOTION_DOT": 6.7e-07,
+            "MEAN_MOTION_DDOT": 0
+          }
+        ],
+        "epoch_age_hours_at_validation": {
+          "min": -31.418,
+          "median": 19.667,
+          "max": 663.741,
+          "older_than_3_days": 80,
+          "older_than_7_days": 24,
+          "future_epoch_count": 2
+        },
+        "schema_passed": true
+      }
+    },
+    {
+      "key": "satcat_active",
+      "kind": "satcat",
+      "url": "https://celestrak.org/satcat/records.php?GROUP=ACTIVE&FORMAT=JSON",
+      "request": {
+        "url": "https://celestrak.org/satcat/records.php?GROUP=ACTIVE&FORMAT=JSON",
+        "attempted_at": "2026-11-12T03:46:14.365304+00:00",
+        "ttl_seconds": 86400,
+        "delivery": "network",
+        "transport": "urllib",
+        "redirects_followed": false,
+        "automatic_retries": 0,
+        "manual_network_review": "User confirmed the same ISS JSON endpoint works in their local browser; recheck current script connectivity.",
+        "http_status": 200,
+        "response_headers": {
+          "Content-Type": "application/json; charset=UTF-8",
+          "Content-Length": null,
+          "Date": "Thu, 12 Nov 2026 03:46:28 GMT",
+          "Last-Modified": null,
+          "ETag": null,
+          "Retry-After": null
+        },
+        "status": "http_200",
+        "size_bytes": 5772477,
+        "sha256": "4fb7ef85b4cd461043e413e2ebc1b02a29511bc4ed2db53a4a0333ef05f1c63e",
+        "body_path": ".local/data/source-validation/celestrak/satcat_active.json",
+        "elapsed_ms": 44110.0
+      },
+      "status": "passed",
+      "validation": {
+        "record_count": 17421,
+        "unique_catalog_count": 17421,
+        "fields": [
+          "APOGEE",
+          "DATA_STATUS_CODE",
+          "DECAY_DATE",
+          "INCLINATION",
+          "LAUNCH_DATE",
+          "LAUNCH_SITE",
+          "NORAD_CAT_ID",
+          "OBJECT_ID",
+          "OBJECT_NAME",
+          "OBJECT_TYPE",
+          "OPS_STATUS_CODE",
+          "ORBIT_CENTER",
+          "ORBIT_TYPE",
+          "OWNER",
+          "PERIGEE",
+          "PERIOD",
+          "RCS"
+        ],
+        "missing_or_invalid_count": 0,
+        "invalid_examples": [],
+        "duplicate_count": 0,
+        "six_or_more_digit_catalog_count": 1127,
+        "coverage": {
+          "NORAD_CAT_ID": {
+            "present": 17421,
+            "total": 17421
+          },
+          "OBJECT_NAME": {
+            "present": 17421,
+            "total": 17421
+          },
+          "OBJECT_ID": {
+            "present": 17421,
+            "total": 17421
+          },
+          "OBJECT_TYPE": {
+            "present": 17421,
+            "total": 17421
+          },
+          "OWNER": {
+            "present": 17421,
+            "total": 17421
+          },
+          "LAUNCH_DATE": {
+            "present": 17421,
+            "total": 17421
+          },
+          "DECAY_DATE": {
+            "present": 0,
+            "total": 17421
+          },
+          "OPS_STATUS_CODE": {
+            "present": 17421,
+            "total": 17421
+          },
+          "ORBIT_CENTER": {
+            "present": 17421,
+            "total": 17421
+          },
+          "ORBIT_TYPE": {
+            "present": 17421,
+            "total": 17421
+          }
+        },
+        "samples": [
+          {
+            "OBJECT_NAME": "CALSPHERE 1",
+            "OBJECT_ID": "1964-063C",
+            "NORAD_CAT_ID": 900,
+            "OBJECT_TYPE": "PAY",
+            "OPS_STATUS_CODE": "+",
+            "OWNER": "US",
+            "LAUNCH_DATE": "1964-10-06",
+            "LAUNCH_SITE": "AFWTR",
+            "DECAY_DATE": "",
+            "PERIOD": 104.59,
+            "INCLINATION": 90.22,
+            "APOGEE": 995,
+            "PERIGEE": 956,
+            "RCS": 0.051,
+            "DATA_STATUS_CODE": "",
+            "ORBIT_CENTER": "EA",
+            "ORBIT_TYPE": "ORB"
+          },
+          {
+            "OBJECT_NAME": "CALSPHERE 2",
+            "OBJECT_ID": "1964-063E",
+            "NORAD_CAT_ID": 902,
+            "OBJECT_TYPE": "PAY",
+            "OPS_STATUS_CODE": "+",
+            "OWNER": "US",
+            "LAUNCH_DATE": "1964-10-06",
+            "LAUNCH_SITE": "AFWTR",
+            "DECAY_DATE": "",
+            "PERIOD": 106.44,
+            "INCLINATION": 90.24,
+            "APOGEE": 1076,
+            "PERIGEE": 1047,
+            "RCS": 0.0457,
+            "DATA_STATUS_CODE": "",
+            "ORBIT_CENTER": "EA",
+            "ORBIT_TYPE": "ORB"
+          }
+        ],
+        "owners": [
+          "AB",
+          "ABS",
+          "AC",
+          "ALG",
+          "ANG",
+          "ARGN",
+          "ASRA",
+          "AUS",
+          "AZER",
+          "BEL",
+          "BELA",
+          "BGD",
+          "BHR",
+          "BOL",
+          "BRAZ",
+          "BUL",
+          "BWA",
+          "CA",
+          "CHBZ",
+          "CHLE",
+          "CIS",
+          "CZCH",
+          "DEN",
+          "DJI",
+          "ECU",
+          "EGYP",
+          "ESA",
+          "ETH",
+          "EUME",
+          "EUTE",
+          "FIN",
+          "FR",
+          "FRIT",
+          "GER",
+          "GLOB",
+          "GREC",
+          "GRSA",
+          "HRV",
+          "HUN",
+          "IM",
+          "IND",
+          "INDO",
+          "IRAN",
+          "IRAQ",
+          "ISRA",
+          "ISS",
+          "IT",
+          "ITSO",
+          "JOR",
+          "JPN",
+          "KAZ",
+          "KWT",
+          "LAOS",
+          "LTU",
+          "LUXE",
+          "MA",
+          "MALA",
+          "MEX",
+          "MNE",
+          "NETH",
+          "NICO",
+          "NIG",
+          "NKOR",
+          "NOR",
+          "NZ",
+          "O3B",
+          "ORB",
+          "PAKI",
+          "PERU",
+          "POL",
+          "POR",
+          "PRC",
+          "RASC",
+          "ROC",
+          "ROM",
+          "RP",
+          "RWA",
+          "SAFR",
+          "SAUD",
+          "SES",
+          "SING",
+          "SKOR",
+          "SLB",
+          "SPN",
+          "STCT",
+          "SVK",
+          "SVN",
+          "SWED",
+          "SWTZ",
+          "TBD",
+          "THAI",
+          "TMMC",
+          "TURK",
+          "UAE",
+          "UK",
+          "UKR",
+          "US",
+          "VENZ",
+          "VTNM"
+        ],
+        "object_types": [
+          "PAY",
+          "R/B"
+        ],
+        "dedicated_purpose_field_present": false,
+        "schema_passed": true
+      }
+    }
+  ],
+  "active_join": {
+    "orbit_count": 16899,
+    "metadata_count": 17421,
+    "matched": 16899,
+    "orbit_without_metadata": 0,
+    "metadata_without_orbit": 522
+  },
+  "all_sources_passed": true,
+  "stop_reason": null
+}

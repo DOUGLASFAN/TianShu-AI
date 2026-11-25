@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-11-12T05:03:48.669786+00:00",
+  "postgres_restart": true,
+  "redis_restart": true,
+  "catalog_count_before_and_after": 16899,
+  "session_valid_after_restart": true,
+  "favorite_preserved": true,
+  "station_preserved": true,
+  "redis_aof_value_preserved": true,
+  "test_username": "restart_ff8c301e",
+  "all_passed": true
+}

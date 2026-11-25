@@ -1,0 +1,228 @@
+{
+  "date": "2026-11-15",
+  "checks": [
+    {
+      "name": "real_aggregate_dashboard_globe_and_honest_unknown_coverage",
+      "passed": true
+    },
+    {
+      "name": "letterbox_scale_no_scrollbars_and_fullscreen_rejection_and_exit",
+      "passed": true
+    },
+    {
+      "name": "ticker_pause_on_hover_focus_and_selection_and_empty_station",
+      "passed": true
+    },
+    {
+      "name": "admin_sources_manual_task_dedup_and_persistent_detail",
+      "passed": true
+    },
+    {
+      "name": "admin_task_filters_pagination_details_and_user_management",
+      "passed": true
+    },
+    {
+      "name": "global_fault_demo_failure_logs_and_real_recovery",
+      "passed": true
+    },
+    {
+      "name": "admin_mobile_layout_audit_and_ordinary_user_denial",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "phase8-dashboard-1920.png",
+    "phase8-dashboard-1920.png",
+    "phase8-dashboard-2560.png",
+    "phase8-dashboard-1440.png",
+    "phase8-dashboard-390.png",
+    "phase8-admin-sources-1920.png",
+    "phase8-admin-users-1920.png",
+    "phase8-dashboard-recovery-1920.png",
+    "phase8-admin-sources-1440.png",
+    "phase8-admin-sources-390.png"
+  ],
+  "statistics": {
+    "activeCount": 16894,
+    "catalogCount": 16914,
+    "coverage": {
+      "total": 16894,
+      "ownerKnown": 16894,
+      "purposeKnown": 0,
+      "launchDateKnown": 16894,
+      "launchDateUnknown": 0
+    },
+    "orbits": [
+      {
+        "key": "LEO",
+        "count": 16083,
+        "percent": 95.199
+      },
+      {
+        "key": "MEO",
+        "count": 183,
+        "percent": 1.083
+      },
+      {
+        "key": "GEO",
+        "count": 582,
+        "percent": 3.445
+      },
+      {
+        "key": "HEO",
+        "count": 46,
+        "percent": 0.272
+      },
+      {
+        "key": "unknown",
+        "count": 0,
+        "percent": 0
+      }
+    ]
+  },
+  "scales": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "d": {
+        "scale": 1,
+        "canvas": {
+          "width": 1920,
+          "height": 1080
+        },
+        "tickerPaused": true,
+        "selected": 25544,
+        "rows": 30,
+        "statsTotal": 16894,
+        "representatives": 20,
+        "full": false
+      },
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1920,
+        "h": 1080
+      },
+      "overflow": false
+    },
+    {
+      "width": 2560,
+      "height": 1440,
+      "d": {
+        "scale": 1.3333333333333333,
+        "canvas": {
+          "width": 1920,
+          "height": 1080
+        },
+        "tickerPaused": true,
+        "selected": 25544,
+        "rows": 30,
+        "statsTotal": 16894,
+        "representatives": 20,
+        "full": false
+      },
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 2560,
+        "h": 1440
+      },
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "d": {
+        "scale": 0.75,
+        "canvas": {
+          "width": 1920,
+          "height": 1080
+        },
+        "tickerPaused": true,
+        "selected": 25544,
+        "rows": 30,
+        "statsTotal": 16894,
+        "representatives": 20,
+        "full": false
+      },
+      "box": {
+        "x": 0,
+        "y": 45,
+        "w": 1440,
+        "h": 810
+      },
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "d": {
+        "scale": 0.203125,
+        "canvas": {
+          "width": 1920,
+          "height": 1080
+        },
+        "tickerPaused": true,
+        "selected": 25544,
+        "rows": 30,
+        "statsTotal": 16894,
+        "representatives": 20,
+        "full": false
+      },
+      "box": {
+        "x": 0,
+        "y": 312.3125,
+        "w": 390,
+        "h": 219.375
+      },
+      "overflow": false
+    }
+  ],
+  "fullscreenNative": true,
+  "manualTask": "23c8fbb0-4b86-4bb7-b3fa-613545afb8aa",
+  "demoFailures": [
+    {
+      "id": "67aaf18d-d099-43e6-a5d6-e6292ebfea97",
+      "job": "environment",
+      "error": "DEMO_SOURCE_FAILURE"
+    }
+  ],
+  "recovery": {
+    "phase": "degraded",
+    "checks": [
+      {
+        "source": "orbit",
+        "status": "failed",
+        "errorCode": "RECOVERY_CHECK_FAILED",
+        "checkedAt": "2026-11-15T13:25:03.700818+00:00"
+      },
+      {
+        "source": "metadata",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:05.082920+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "iss",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:10.672666+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "noaa-kp",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:04.164999+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      },
+      {
+        "source": "gfz-kp",
+        "status": "success",
+        "checkedAt": "2026-11-15T13:25:05.375566+00:00",
+        "scope": "实际连通性与格式检查；非全量采集"
+      }
+    ],
+    "taskId": "564f3917-b2c8-450d-9d94-392a6310207a"
+  },
+  "allPassed": true
+}

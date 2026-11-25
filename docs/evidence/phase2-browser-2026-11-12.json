@@ -1,0 +1,35 @@
+{
+  "stage": 2,
+  "checked_at": "2026-11-12T05:07:02.422Z",
+  "checks": [
+    {
+      "name": "protected_route_and_login_design",
+      "passed": true
+    },
+    {
+      "name": "register_login_memory_token_httponly_cookie",
+      "passed": true
+    },
+    {
+      "name": "favorites_station_save_and_page_reload",
+      "passed": true
+    },
+    {
+      "name": "logout_remains_logged_out_after_reload",
+      "passed": true
+    },
+    {
+      "name": "admin_only_navigation_and_real_logs",
+      "passed": true
+    },
+    {
+      "name": "local_assets_no_runtime_errors_and_desktop_layout",
+      "passed": true
+    }
+  ],
+  "all_passed": true,
+  "test_username": "browser_17f922da",
+  "page_errors": [],
+  "external_requests": [],
+  "api_5xx": []
+}

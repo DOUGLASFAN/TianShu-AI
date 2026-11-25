@@ -1,0 +1,31 @@
+{
+  "version": "StarNexus-2026.11.21-rc1",
+  "date": "2026-11-21",
+  "archive": "StarNexus-2026.11.21-rc1.zip",
+  "sha256": "01c7215536aed277f111615bb67ebec708085048cb00bebcb80776e5434b3dfb",
+  "bytes": 322497859,
+  "entryCount": 523,
+  "requiredEntries": [
+    ".env.example",
+    "README.md",
+    "alembic.ini",
+    "backend/requirements.lock.txt",
+    "compose.yaml",
+    "docs/evidence/phase10-backup-2026-11-21.json",
+    "docs/evidence/phase10-compose-2026-11-21.json",
+    "docs/evidence/phase10-demo-2026-11-21.json",
+    "docs/evidence/phase10-demo-local-only-2026-11-21.webm",
+    "docs/evidence/phase10-demo-normal-2026-11-21.webm",
+    "docs/evidence/phase10-fresh-config-2026-11-21.json",
+    "docs/evidence/phase10-presentation-2026-11-21.json",
+    "docs/交付/openapi.json",
+    "docs/交付/星枢-课程答辩.pptx",
+    "docs/阶段10-部署与答辩交付.md",
+    "docs/阶段验收清单.md",
+    "frontend/package-lock.json",
+    "scripts/backup_restore.py",
+    "scripts/prepare.ps1",
+    "scripts/start.ps1"
+  ],
+  "zipCrcVerified": true
+}

@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-15",
+  "checks": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "viewBox": "0 0 1000 265",
+      "renderedFontPixels": 14.327830188679245,
+      "hover": true,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "viewBox": "0 0 774 265",
+      "renderedFontPixels": 12,
+      "hover": true,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "viewBox": "0 0 320 265",
+      "renderedFontPixels": 12,
+      "hover": true,
+      "passed": true
+    }
+  ],
+  "taskId": "de88ee8a-2271-4ccd-b132-19f58ef59b89",
+  "allPassed": true,
+  "errors": []
+}

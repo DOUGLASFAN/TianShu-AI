@@ -1,0 +1,57 @@
+{
+  "source": "https://svs.gsfc.nasa.gov/4851/",
+  "sourceFile": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/starmap_2020_8k.exr",
+  "sourceSize": [
+    8192,
+    4096
+  ],
+  "sourceBytes": 130530278,
+  "sourceSHA256": "dc6c4f413e85707a29a25a9451148154554ecca2c996f84fa8f47b65ef9ff7c4",
+  "credit": "NASA/Goddard Space Flight Center Scientific Visualization Studio; ESA/Gaia/DPAC; Ernie Wright",
+  "processing": "Bilinear projection to 2048px cubemap faces; Reinhard linear HDR tone mapping; IEC sRGB encoding; lossless WebP. No invented stars or AI modification. Display background, not an astrometric reference.",
+  "outputs": [
+    {
+      "file": "positiveX.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 3177454,
+      "sha256": "2ce7006fa379d7566a772f965c2f7f0057df2000cf44c9d6615faae87c46a83c"
+    },
+    {
+      "file": "negativeX.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 3080636,
+      "sha256": "8c1ac1fd63e67be77fc10445a0c88d4ddc286261816aefbe5bec2a93ea5dc137"
+    },
+    {
+      "file": "positiveY.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 4167272,
+      "sha256": "9d3d8739fa3bb30773d09b5bce50ec58530cbb38a40ad41327ce07c851137387"
+    },
+    {
+      "file": "negativeY.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 4395600,
+      "sha256": "d4f46f65b7d6ba8d94012cd95a713659ca9f29e6621178c89f8ba28393c5241c"
+    },
+    {
+      "file": "positiveZ.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 3979978,
+      "sha256": "e092c7e2c1fd1b7faf65bbf3dd052a5c4cb9e0c9cf58b08bedda283bfb1e3b9d"
+    },
+    {
+      "file": "negativeZ.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 4292254,
+      "sha256": "02ac993da2194c0ae8c2462b16c89b0a02976a86ce326933cd60739c711816f6"
+    }
+  ],
+  "seconds": 21.34997659999999
+}

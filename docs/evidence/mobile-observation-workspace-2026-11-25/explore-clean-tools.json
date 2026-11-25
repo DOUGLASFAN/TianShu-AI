@@ -1,0 +1,41 @@
+[
+  {
+    "width": 320,
+    "height": 568,
+    "button": {
+      "x": 101,
+      "y": 133,
+      "width": 44,
+      "height": 44
+    },
+    "mobileClosedAfterSceneChoice": true,
+    "replayExactTime": true,
+    "assetCredits": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "button": {
+      "x": 171,
+      "y": 133,
+      "width": 44,
+      "height": 44
+    },
+    "mobileClosedAfterSceneChoice": true,
+    "replayExactTime": true,
+    "assetCredits": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "button": {
+      "x": 308,
+      "y": 96,
+      "width": 58,
+      "height": 41.5
+    },
+    "mobileClosedAfterSceneChoice": false,
+    "replayExactTime": true,
+    "assetCredits": true
+  }
+]

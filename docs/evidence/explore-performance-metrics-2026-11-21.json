@@ -1,0 +1,153 @@
+{
+  "test": "Headless Edge, SwiftShader, local Vite, browser cold cache per run",
+  "viewport": [
+    1440,
+    900
+  ],
+  "before": [
+    {
+      "shellMs": 2287,
+      "readyMs": 2424,
+      "replayMs": 3098,
+      "early": [
+        {
+          "name": "day-8k.jpg",
+          "bytes": 4565076
+        },
+        {
+          "name": "night-8k.jpg",
+          "bytes": 3144468
+        },
+        {
+          "name": "clouds-8k.jpg",
+          "bytes": 11619184
+        },
+        {
+          "name": "day-8k.jpg",
+          "bytes": 4565076
+        }
+      ],
+      "errors": []
+    },
+    {
+      "shellMs": 1584,
+      "readyMs": 2548,
+      "replayMs": 3431,
+      "early": [
+        {
+          "name": "day-8k.jpg",
+          "bytes": 4565076
+        },
+        {
+          "name": "night-8k.jpg",
+          "bytes": 3144468
+        },
+        {
+          "name": "clouds-8k.jpg",
+          "bytes": 11619184
+        }
+      ],
+      "errors": []
+    },
+    {
+      "shellMs": 1606,
+      "readyMs": 2311,
+      "replayMs": 2832,
+      "early": [
+        {
+          "name": "night-8k.jpg",
+          "bytes": 3144468
+        },
+        {
+          "name": "day-8k.jpg",
+          "bytes": 4565076
+        },
+        {
+          "name": "clouds-8k.jpg",
+          "bytes": 11619184
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "after": [
+    {
+      "shellMs": 2151,
+      "readyMs": 2261,
+      "replayMs": 984,
+      "early": [
+        {
+          "name": "day-preview.webp",
+          "bytes": 147114
+        },
+        {
+          "name": "night-preview.webp",
+          "bytes": 73754
+        },
+        {
+          "name": "clouds-preview.webp",
+          "bytes": 141330
+        }
+      ],
+      "errors": []
+    },
+    {
+      "shellMs": 2002,
+      "readyMs": 2209,
+      "replayMs": 1618,
+      "early": [
+        {
+          "name": "day-preview.webp",
+          "bytes": 147114
+        },
+        {
+          "name": "night-preview.webp",
+          "bytes": 73754
+        },
+        {
+          "name": "clouds-preview.webp",
+          "bytes": 141330
+        }
+      ],
+      "errors": []
+    },
+    {
+      "shellMs": 2021,
+      "readyMs": 2259,
+      "replayMs": 1734,
+      "early": [
+        {
+          "name": "day-preview.webp",
+          "bytes": 147114
+        },
+        {
+          "name": "night-preview.webp",
+          "bytes": 73754
+        },
+        {
+          "name": "clouds-preview.webp",
+          "bytes": 141330
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "summary": {
+    "shellMs": {
+      "before": 1606,
+      "after": 2021
+    },
+    "readyMs": {
+      "before": 2424,
+      "after": 2259
+    },
+    "replayMs": {
+      "before": 3098,
+      "after": 1618
+    }
+  },
+  "textureAssetBytes": {
+    "before": 19328728,
+    "after": 362198
+  }
+}

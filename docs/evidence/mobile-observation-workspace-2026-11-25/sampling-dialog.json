@@ -1,0 +1,58 @@
+{
+  "browser": "158.0.4370.33",
+  "layouts": [
+    {
+      "width": 320,
+      "height": 568,
+      "x": 0,
+      "y": 16,
+      "right": 320,
+      "bottom": 568,
+      "footerBottom": 567,
+      "scrollWidth": 318,
+      "clientWidth": 318,
+      "documentWidth": 320
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "x": 0,
+      "y": 153.5,
+      "right": 390,
+      "bottom": 844,
+      "footerBottom": 843,
+      "scrollWidth": 388,
+      "clientWidth": 388,
+      "documentWidth": 390
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "x": 77,
+      "y": 18,
+      "right": 767,
+      "bottom": 372,
+      "footerBottom": 371,
+      "scrollWidth": 688,
+      "clientWidth": 688,
+      "documentWidth": 844
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "x": 367.5,
+      "y": 198.75,
+      "right": 1057.5,
+      "bottom": 701.25,
+      "footerBottom": 700.25,
+      "scrollWidth": 688,
+      "clientWidth": 688,
+      "documentWidth": 1425
+    }
+  ],
+  "interactions": [
+    "选星应用、真实试算、创建成功关闭、JSON 导出、编辑回填、保存更新并进入探索回放",
+    "四种视口均验证单一新建入口、弹窗与底部按钮适配、Escape 逐层关闭与焦点恢复"
+  ],
+  "errors": []
+}

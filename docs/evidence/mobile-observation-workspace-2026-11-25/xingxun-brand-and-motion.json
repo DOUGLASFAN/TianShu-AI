@@ -1,0 +1,35 @@
+[
+  {
+    "width": 390,
+    "height": 844,
+    "reducedMotion": "no-preference",
+    "catalogFont": "24px",
+    "samplingFont": "24px",
+    "fieldFont": "16px",
+    "selectAnimation": "select-enter",
+    "pickerAnimation": "sampling-picker-enter",
+    "replayKeptCanvas": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "reducedMotion": "no-preference",
+    "catalogFont": "30px",
+    "samplingFont": "30px",
+    "fieldFont": "14px",
+    "selectAnimation": "select-enter",
+    "pickerAnimation": "sampling-picker-enter",
+    "replayKeptCanvas": true
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "reducedMotion": "reduce",
+    "catalogFont": "24px",
+    "samplingFont": "24px",
+    "fieldFont": "16px",
+    "selectAnimation": "none",
+    "pickerAnimation": "none",
+    "replayKeptCanvas": true
+  }
+]

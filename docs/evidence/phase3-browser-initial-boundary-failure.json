@@ -1,0 +1,41 @@
+{
+  "stage": 3,
+  "checkedAt": "2026-11-12T05:52:06.968Z",
+  "checks": [
+    {
+      "name": "register_and_authenticated_explorer",
+      "passed": true
+    },
+    {
+      "name": "three_desktop_sizes_and_local_8k_globe",
+      "passed": true
+    },
+    {
+      "name": "catalog_filters_pagination_and_empty_state",
+      "passed": true
+    },
+    {
+      "name": "locate_follow_drag_exit_and_home",
+      "passed": true
+    },
+    {
+      "name": "favorite_saved_and_restored_after_reload",
+      "passed": true
+    },
+    {
+      "name": "rapid_selection_late_response_cannot_replace_latest",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "phase3-explore-1440x900.png",
+    "phase3-explore-1920x1080.png",
+    "phase3-explore-2560x1440.png"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "api5xx": [],
+  "testUsername": "phase3_b055f49c",
+  "allPassed": false,
+  "failure": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('采样范围已结束', { exact: true }) to be visible\u001b[22m\n"
+}

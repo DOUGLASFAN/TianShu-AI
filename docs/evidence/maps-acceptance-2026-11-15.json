@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-15",
+  "allPassed": true,
+  "backendTests": 15,
+  "browserChecks": 6,
+  "realImageryLevel": 19,
+  "pickedWGS84": {
+    "lat": 39.908654,
+    "lng": 116.3975
+  },
+  "publicMapConfig": {
+    "preferred": "esri",
+    "providers": [
+      {
+        "id": "esri",
+        "name": "全球地图",
+        "configured": true,
+        "maximumLevel": 19,
+        "coordinateSystem": "Web Mercator / WGS84",
+        "credit": "Esri, Vantor, Earthstar Geographics, HERE, Garmin, OpenStreetMap contributors and GIS User Community",
+        "sourceUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+      },
+      {
+        "id": "tianditu",
+        "name": "天地图",
+        "configured": false,
+        "maximumLevel": 18,
+        "coordinateSystem": "官方 WMTS Web Mercator 网格；站点始终存 WGS84",
+        "credit": "天地图 · 国家地理信息公共服务平台",
+        "sourceUrl": "https://lbs.tianditu.gov.cn/server/MapService.html"
+      }
+    ],
+    "tileUrl": "/api/maps/tiles/{provider}/{layer}/{z}/{x}/{y}",
+    "localFallback": "/earth/day-8k.jpg",
+    "localCredit": "Solar System Scope / INOVE · CC BY 4.0",
+    "coverageNote": "影像精度与年代因地区而异，非实时卫星画面；没有道路或建筑三维几何。",
+    "cachePolicy": "按需在线请求，不批量预取，不将供应商瓦片保存为离线包"
+  },
+  "sourceMetadata": [
+    {
+      "sha256": "3c41ca79d7ddc2267fa1ac60c43263acbfed04915e3b2433e6b8e5d30378e2dc",
+      "copyright": "Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857,
+        "xyTolerance": 0.001,
+        "zTolerance": 0.001,
+        "mTolerance": 0.001,
+        "falseX": -22041259.214859996,
+        "falseY": -32754895.973320004,
+        "xyUnits": 142980504.00783738,
+        "falseZ": -100000,
+        "zUnits": 10000,
+        "falseM": -100000,
+        "mUnits": 10000
+      },
+      "lodCount": 24,
+      "exportTilesAllowed": false
+    },
+    {
+      "sha256": "93164e33f8d3e1df3d89107faf43e01f7deb8eb23c02457d12c8e49de8ecaf74",
+      "copyright": "Esri, HERE, Garmin, (c) OpenStreetMap contributors, and the GIS user community",
+      "spatialReference": {
+        "wkid": 102100,
+        "latestWkid": 3857,
+        "xyTolerance": 0.001,
+        "zTolerance": 0.001,
+        "mTolerance": 0.001,
+        "falseX": -22041257.773920003,
+        "falseY": -33265069.154240005,
+        "xyUnits": 135385247.7049927,
+        "falseZ": -100000,
+        "zUnits": 10000,
+        "falseM": -100000,
+        "mUnits": 10000
+      },
+      "lodCount": 24,
+      "exportTilesAllowed": false
+    }
+  ],
+  "knownSecretScanPassed": true,
+  "requiredCompleted": 69,
+  "requiredTotal": 85,
+  "limits": [
+    "Some upstream tile requests failed; retained parents/local image may remain blurry in those areas",
+    "Resolution and imagery date vary; no live imagery, offline streets or 3D buildings",
+    "Tianditu adapter needs a private key and remains unverified",
+    "Software WebGL does not establish hardware performance"
+  ]
+}

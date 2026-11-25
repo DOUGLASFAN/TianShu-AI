@@ -1,0 +1,57 @@
+[
+  {
+    "width": 320,
+    "height": 568,
+    "entry": {
+      "x": 216,
+      "y": 8,
+      "width": 44,
+      "height": 44
+    },
+    "settingsOpened": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "entry": {
+      "x": 286,
+      "y": 8,
+      "width": 44,
+      "height": 44
+    },
+    "settingsOpened": true
+  },
+  {
+    "width": 844,
+    "height": 390,
+    "entry": {
+      "x": 740,
+      "y": 8,
+      "width": 44,
+      "height": 44
+    },
+    "settingsOpened": true
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "entry": {
+      "x": 895,
+      "y": 10.5,
+      "width": 42,
+      "height": 42
+    },
+    "settingsOpened": true
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "entry": {
+      "x": 1297,
+      "y": 10.5,
+      "width": 42,
+      "height": 42
+    },
+    "settingsOpened": true
+  }
+]

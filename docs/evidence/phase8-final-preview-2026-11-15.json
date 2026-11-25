@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "name": "status_row_does_not_cover_dashboard",
+      "layout": [
+        {
+          "name": "dashboard-metrics",
+          "x": 28,
+          "y": 152,
+          "width": 1864,
+          "height": 100,
+          "scrollHeight": 100,
+          "clientHeight": 100
+        },
+        {
+          "name": "dashboard-main",
+          "x": 28,
+          "y": 272,
+          "width": 1864,
+          "height": 512,
+          "scrollHeight": 512,
+          "clientHeight": 512
+        },
+        {
+          "name": "dashboard-panel dashboard-ranking",
+          "x": 28,
+          "y": 804,
+          "width": 1864,
+          "height": 196,
+          "scrollHeight": 194,
+          "clientHeight": 194
+        },
+        {
+          "name": "dashboard-footer",
+          "x": 28,
+          "y": 1020,
+          "width": 1864,
+          "height": 40,
+          "scrollHeight": 40,
+          "clientHeight": 40
+        },
+        {
+          "name": "dashboard-global-status",
+          "x": 28,
+          "y": 84,
+          "width": 1864,
+          "height": 48,
+          "scrollHeight": 48,
+          "clientHeight": 48
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "final_live_admin_sources",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "allPassed": true
+}
