@@ -2,16 +2,18 @@
 
 星巡 · 全球卫星态势与观测平台
 
-## 分支开发
+## 按版本开发
 
-`main` 保存稳定版本，`develop` 汇集已验证的开发改动。每项功能或修复从最新的 `develop` 创建独立分支，验收后通过 Pull Request 合入 `develop`，发布时再将 `develop` 合入 `main`。
+`main` 保存已完成阶段的稳定基线。第一阶段以 `0.2.0` 为基线，第二阶段在 `version/v0.3.0` 开发，目标版本为 `0.3.0`。以后每个版本从当时的 `main` 创建一个 `version/vX.Y.Z` 分支。
+
+每个功能或修复从当前版本分支创建独立任务分支，通过 Pull Request 合回当前版本。完成整个版本的验收后，将版本分支合入 `main`，并在发布提交上创建版本标签。
 
 ```powershell
-git switch develop
+git switch version/v0.3.0
 git pull --ff-only
-git switch -c feat/short-name
+git switch -c feat/v0.3.0-short-name
 # 完成修改、验证并提交后
-git push -u origin feat/short-name
+git push -u origin feat/v0.3.0-short-name
 ```
 
 本机环境与运行数据由启动脚本准备。交付 ZIP 及历史电影视角的 4K 原片保留在本机，历史原片的来源和校验信息见 [素材说明](frontend/public/space/cinema/README.md)。
