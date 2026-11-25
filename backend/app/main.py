@@ -48,7 +48,7 @@ MESSAGES={'AUTH_REQUIRED':'请先登录','SESSION_INVALID':'登录已失效，�
           'PREDICTION_QUEUE_FULL':'预测队列已满，请等待或取消已有任务',
           'USERNAME_TAKEN':'该用户名已被使用','ADMIN_REQUIRED':'需要管理员权限','STATION_NOT_FOUND':'观测站不存在或无权访问',
           'LAST_ADMIN_REQUIRED':'必须保留至少一个可用管理员','ORIGIN_REJECTED':'请求来源不被允许',
-          'LOGIN_RATE_LIMIT':'登录尝试过多，请稍后重试','COLLECTION_RUNNING':'采集任务正在运行',
+          'LOGIN_RATE_LIMIT':'登录尝试过多，请稍后重试','GUEST_SIGN_OUT_REQUIRED':'请退出当前账号后再使用游客体验。','COLLECTION_RUNNING':'采集任务正在运行',
           'SATELLITE_NOT_FOUND':'未找到该卫星，请更换目标','ORBIT_PROPAGATION_FAILED':'该卫星当前无法传播，请更换时间或目标',
           'EXPLICIT_TIMEZONE_REQUIRED':'请选择带有时区的时间','TIME_RANGE_EXCEEDED':'探索采样时间须在当前前后 7 天以内'}
 
