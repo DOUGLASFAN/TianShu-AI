@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter,Link,Navigate,NavLink,Route,Routes,useLocation,useNavigate } from 'react-router-dom';
 import { QueryClient,QueryClientProvider,useMutation,useQuery,useQueryClient } from '@tanstack/react-query';
 import { motion,MotionConfig,useReducedMotion } from 'motion/react';
-import { ArrowRight,SignOut,MagnifyingGlass,Star,Plus,CheckCircle,WarningCircle,CaretDown,GlobeHemisphereEast,ListBullets,Crosshair,X,GearSix,MapPin } from '@phosphor-icons/react';
+import { ArrowRight,SignOut,MagnifyingGlass,Star,Plus,CheckCircle,WarningCircle,CaretDown,GlobeHemisphereEast,ListBullets,Crosshair,X,GearSix,MapPin,Eye,EyeSlash } from '@phosphor-icons/react';
 import { AuthProvider,useAuth } from './auth';
 import { api,ApiError } from './api';
 import {Plans} from './Plans';
@@ -37,22 +37,38 @@ function Notice({error}:{error:unknown}){if(!error)return null;return <div class
 function AccessPage({register=false}:{register?:boolean}){
  const auth=useAuth(),navigate=useNavigate(),reduced=useReducedMotion();
  const [username,setUsername]=useState(''),[password,setPassword]=useState(''),[confirm,setConfirm]=useState(''),[visible,setVisible]=useState(false);
- const [busy,setBusy]=useState(false),[error,setError]=useState<unknown>(null),[created,setCreated]=useState(false);
+ const [busy,setBusy]=useState<'account'|'guest'|null>(null),[error,setError]=useState<unknown>(null),[created,setCreated]=useState(false);
  if(auth.user)return <Navigate to="/explore" replace/>;
- async function submit(event:FormEvent){event.preventDefault();setError(null);setBusy(true);
+ async function submit(event:FormEvent){event.preventDefault();if(busy)return;setError(null);setBusy('account');
   try{if(register){if(password!==confirm)throw Error('两次输入的密码不一致。');await api('/auth/register',{method:'POST',body:JSON.stringify({username,password})});setCreated(true);setPassword('');setConfirm('');}
    else{await auth.login(username,password);navigate('/explore',{replace:true});}}
-  catch(error){setError(error);}finally{setBusy(false);}
+  catch(error){setError(error);}finally{setBusy(null);}
+ }
+ async function enterAsGuest(){
+  if(busy)return;
+  setError(null);setBusy('guest');
+  try{await auth.loginAsGuest();navigate('/explore',{replace:true});}
+  catch(error){setError(error);}finally{setBusy(null);}
  }
  return <main className="access-page"><div className="access-image" aria-hidden="true"/><header className="access-header"><Brand/></header>
   <div className="access-story"><h1>全球卫星态势<br/>与观测平台</h1></div>
   <motion.section className="access-card" initial={reduced?false:{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:.35}}>
    <h2>{register?'创建账号':'欢迎回来'}</h2>
-   {created?<><div className="notice success"><CheckCircle size={20}/>账号已创建，请使用新账号登录。</div><Link className="button primary" to="/login">前往登录 <ArrowRight/></Link></>:<form onSubmit={submit}>
+   {created?<><div className="notice success"><CheckCircle size={20}/>账号已创建，请使用新账号登录。</div><div className="access-actions"><Link className="button primary access-action" to="/login">前往登录</Link></div></>:<form onSubmit={submit}>
     <label htmlFor="username">用户名</label><input id="username" autoComplete="username" value={username} onChange={e=>setUsername(e.target.value)} required minLength={3} maxLength={32} pattern="[A-Za-z0-9_]+" placeholder="输入用户名"/>
-    <label htmlFor="password">密码</label><div className="password-field"><input id="password" type={visible?'text':'password'} autoComplete={register?'new-password':'current-password'} value={password} onChange={e=>setPassword(e.target.value)} required minLength={10} maxLength={128} placeholder={register?'至少 10 个字符':'输入密码'}/><button type="button" onClick={()=>setVisible(!visible)} aria-label={visible?'隐藏密码':'显示密码'}>{visible?'隐藏':'显示'}</button></div>
+    <label htmlFor="password">密码</label>
+    <div className="password-field">
+     <input id="password" type={visible?'text':'password'} autoComplete={register?'new-password':'current-password'} value={password} onChange={e=>setPassword(e.target.value)} required minLength={10} maxLength={128} placeholder={register?'至少 10 个字符':'输入密码'}/>
+     <button type="button" onClick={()=>setVisible(value=>!value)} aria-label={visible?'隐藏密码':'显示密码'} aria-controls="password">
+      {visible?<EyeSlash size={20} aria-hidden="true"/>:<Eye size={20} aria-hidden="true"/>}
+     </button>
+    </div>
     {register&&<><label htmlFor="confirm">确认密码</label><input id="confirm" type="password" autoComplete="new-password" value={confirm} onChange={e=>setConfirm(e.target.value)} required minLength={10} maxLength={128}/><small className="field-hint">用户名为 3–32 位字母、数字或下划线。</small></>}
-    <Notice error={error}/><button className="primary access-submit" disabled={busy}>{busy?'正在处理…':register?'创建账号':`进入${projectName}`}<ArrowRight size={19}/></button>
+    <Notice error={error}/>
+    <div className="access-actions">
+     <button className="primary access-action" type="submit" disabled={busy!==null}>{busy==='account'?'正在处理…':register?'创建账号':`进入${projectName}`}</button>
+     {!register&&<button className="access-action access-guest" type="button" disabled={busy!==null} onClick={enterAsGuest}>{busy==='guest'?'正在进入…':'游客体验'}</button>}
+    </div>
    </form>}
    <div className="access-switch">{register?'已有账号？':'还没有账号？'} <Link to={register?'/login':'/register'}>{register?'立即登录':'创建账号'}</Link></div>
    
@@ -94,7 +110,7 @@ function MainNavigation({admin}:{admin:boolean}){
 function Shell(){const mounted=useRef(false),reduced=useReducedMotion();useEffect(()=>{mounted.current=true;},[]);const auth=useAuth(),[error,setError]=useState<unknown>(null);const location=useLocation(),exploring=location.pathname==='/explore',observing=location.pathname==='/observations';if(auth.user&&navigationOwner!==auth.user.id){navigationOwner=auth.user.id;lastExplorePath='/explore';lastObservationPath='/observations';}if(exploring)lastExplorePath=location.pathname+location.search;if(observing)lastObservationPath=location.pathname+location.search;
  if(auth.loading)return <div className="loading-screen">正在恢复会话…</div>;
  if(!auth.user)return <Navigate to="/login" replace/>;
- return <div className={`app-shell ${exploring?'exploration-shell':observing?'observation-shell':''}`}><header className="app-header"><Brand/><MainNavigation admin={auth.user.role==='admin'}/><div className="account"><NotificationBell/><span>{auth.user.username}</span><NavLink className="button icon-button account-settings" to="/settings" aria-label="设置" title="设置"><GearSix size={20} aria-hidden="true"/></NavLink><button className="icon-button" aria-label="退出登录" onClick={()=>auth.logout().catch(setError)}><SignOut size={21}/></button></div></header><SystemStatus/><Notice error={error}/><motion.div key={location.pathname} className={exploring?'exploration-page':'page-wrap'} initial={!mounted.current||reduced||exploring?false:{opacity:.8,y:observing?0:4}} animate={{opacity:1,y:0}} transition={{duration:.17,ease:[.2,.72,.25,1]}}><Routes><Route path="/explore" element={<Suspense fallback={<div className="loading-screen explore-loading" role="status">正在加载卫星探索…</div>}><Explore/></Suspense>}/><Route path="/observations" element={<Suspense fallback={<div className="loading-screen">正在加载观测规划…</div>}><Observations/></Suspense>}/><Route path="/environment" element={<Suspense fallback={<div className="loading-screen">正在加载空间环境…</div>}><Environment/></Suspense>}/><Route path="/sampling" element={<SamplingPage/>}/><Route path="/settings" element={<DisplaySettings/>}/><Route path="/notifications" element={<Notifications/>}/><Route path="/catalog" element={<Catalog/>}/><Route path="/workspace" element={<Workspace/>}/><Route path="/admin" element={auth.user.role==='admin'?<Suspense fallback={<div className="loading-screen">正在加载管理中心…</div>}><Admin/></Suspense>:<Navigate to="/explore" replace/>}/><Route path="*" element={<Navigate to="/explore" replace/>}/></Routes></motion.div></div>;
+ return <div className={`app-shell ${exploring?'exploration-shell':observing?'observation-shell':''}`}><header className="app-header"><Brand/><MainNavigation admin={auth.user.role==='admin'}/><div className="account"><NotificationBell/><span>{auth.user.isGuest ? '游客' : auth.user.username}</span><NavLink className="button icon-button account-settings" to="/settings" aria-label="设置" title="设置"><GearSix size={20} aria-hidden="true"/></NavLink><button className="icon-button" aria-label="退出登录" onClick={()=>auth.logout().catch(setError)}><SignOut size={21}/></button></div></header><SystemStatus/><Notice error={error}/><motion.div key={location.pathname} className={exploring?'exploration-page':'page-wrap'} initial={!mounted.current||reduced||exploring?false:{opacity:.8,y:observing?0:4}} animate={{opacity:1,y:0}} transition={{duration:.17,ease:[.2,.72,.25,1]}}><Routes><Route path="/explore" element={<Suspense fallback={<div className="loading-screen explore-loading" role="status">正在加载卫星探索…</div>}><Explore/></Suspense>}/><Route path="/observations" element={<Suspense fallback={<div className="loading-screen">正在加载观测规划…</div>}><Observations/></Suspense>}/><Route path="/environment" element={<Suspense fallback={<div className="loading-screen">正在加载空间环境…</div>}><Environment/></Suspense>}/><Route path="/sampling" element={<SamplingPage/>}/><Route path="/settings" element={<DisplaySettings/>}/><Route path="/notifications" element={<Notifications/>}/><Route path="/catalog" element={<Catalog/>}/><Route path="/workspace" element={<Workspace/>}/><Route path="/admin" element={auth.user.role==='admin'?<Suspense fallback={<div className="loading-screen">正在加载管理中心…</div>}><Admin/></Suspense>:<Navigate to="/explore" replace/>}/><Route path="*" element={<Navigate to="/explore" replace/>}/></Routes></motion.div></div>;
 }
 
 function Catalog(){

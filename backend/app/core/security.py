@@ -15,8 +15,8 @@ bearer=HTTPBearer(auto_error=False)
 DUMMY=passwords.hash(secrets.token_urlsafe(32))
 
 
-def issue(user,db):
-    expiry=now()+timedelta(hours=settings().token_hours)
+def issue(user,db,*,lifetime=None):
+    expiry=now()+(lifetime if lifetime is not None else timedelta(hours=settings().token_hours))
     record=AuthSession(id=uid(),user_id=user.id,expires_at=expiry,revoked=False)
     db.add(record)
     token=jwt.encode({'sub':user.id,'jti':record.id,'ver':user.token_version,'iat':now(),

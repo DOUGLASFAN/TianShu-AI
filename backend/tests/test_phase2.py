@@ -85,6 +85,55 @@ def test_logout_persistently_revokes_session(client):
     with TestClient(app) as second:assert second.get('/api/auth/me',headers=header).status_code==401
 
 
+def test_guest_session_is_temporary_and_isolated(client):
+    response=client.post('/api/auth/guest')
+    assert response.status_code==200
+    assert 'Max-Age=7200' in response.headers['set-cookie']
+    assert 'HttpOnly' in response.headers['set-cookie']
+    guest=response.json()
+    assert guest['user']['role']=='user' and guest['user']['isGuest']
+    header=authorization(guest)
+    stations=client.get('/api/stations',headers=header).json()['list']
+    assert len(stations)==1 and stations[0]['is_default']
+    assert client.get('/api/satellites?keyword=25544',headers=header).status_code==200
+    assert client.get('/api/admin/users',headers=header).status_code==403
+    assert client.post('/api/favorites',json={'noradId':25544},headers=header).status_code==201
+    assert client.post('/api/auth/session').json()['user']==guest['user']
+    assert client.post('/api/auth/guest').json()['accessToken']==guest['accessToken']
+    with TestClient(app,headers={'Origin':'http://testserver'}) as second:
+        other=second.post('/api/auth/guest').json()
+        assert other['user']['id']!=guest['user']['id']
+        assert second.get('/api/favorites',headers=authorization(other)).json()['total']==0
+        assert second.get('/api/stations/'+stations[0]['id'],headers=authorization(other)).status_code==404
+    assert client.post('/api/auth/logout',headers=header).status_code==200
+    assert client.get('/api/auth/me',headers=header).status_code==401
+    assert client.post('/api/auth/session').status_code==401
+
+
+def test_guest_entry_enforces_origin_and_rate_limit_and_preserves_existing_account(client):
+    assert client.post('/api/auth/guest',headers={'Origin':'https://untrusted.example'}).status_code==403
+    with patch('backend.app.api.auth.allow_login',return_value=False):
+        assert client.post('/api/auth/guest').status_code==429
+    account,_=register(client)
+    assert not account['user']['isGuest']
+    assert client.post('/api/auth/guest').status_code==409
+    assert client.post('/api/auth/session').json()['user']==account['user']
+
+
+def test_expired_guest_cannot_restore_and_old_guest_rows_are_cleaned(client):
+    guest=client.post('/api/auth/guest').json()
+    user_id=guest['user']['id']
+    with SessionLocal() as db,db.begin():
+        db.get(User,user_id).created_at=now()-timedelta(days=2)
+        session=db.scalar(select(AuthSession).where(AuthSession.user_id==user_id))
+        session.expires_at=now()-timedelta(seconds=1)
+    assert client.post('/api/auth/session').status_code==401
+    response=client.post('/api/auth/guest')
+    assert response.status_code==200 and response.json()['user']['id']!=user_id
+    with SessionLocal() as db:
+        assert db.get(User,user_id) is None
+
+
 def test_expired_tampered_and_missing_claims_rejected(client):
     result,_=register(client)
     claims=jwt.decode(result['accessToken'],settings().jwt_secret.get_secret_value(),algorithms=['HS256'],audience='star-nexus-web')

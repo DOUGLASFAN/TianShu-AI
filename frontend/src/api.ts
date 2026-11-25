@@ -1,4 +1,4 @@
-export type User={id:string;username:string;role:'user'|'admin';enabled:boolean};
+export type User={id:string;username:string;role:'user'|'admin';enabled:boolean;isGuest:boolean};
 export type AuthResult={accessToken:string;expiresAt:string;user:User};
 let accessToken:string|null=null;
 export function setToken(value:string|null){accessToken=value;}

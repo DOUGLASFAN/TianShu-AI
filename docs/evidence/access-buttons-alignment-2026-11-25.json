@@ -1,0 +1,129 @@
+{
+  "browser": "158.0.4370.33",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 680,
+      "primary": {
+        "x": 39,
+        "y": 407.5,
+        "width": 242,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "secondary": {
+        "x": 39,
+        "y": 465.5,
+        "width": 242,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "registration": {
+        "x": 39,
+        "y": 517.5,
+        "width": 242,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "primary": {
+        "x": 39,
+        "y": 489.5,
+        "width": 312,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "secondary": {
+        "x": 39,
+        "y": 547.5,
+        "width": 312,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "registration": {
+        "x": 39,
+        "y": 581.75,
+        "width": 312,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "primary": {
+        "x": 926.8125,
+        "y": 527.75,
+        "width": 346,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "secondary": {
+        "x": 926.8125,
+        "y": 585.75,
+        "width": 346,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "registration": {
+        "x": 926.8125,
+        "y": 620,
+        "width": 346,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      }
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "primary": {
+        "x": 1259.609375,
+        "y": 617.75,
+        "width": 370,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "secondary": {
+        "x": 1259.609375,
+        "y": 675.75,
+        "width": 370,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      },
+      "registration": {
+        "x": 1259.609375,
+        "y": 710,
+        "width": 370,
+        "height": 48,
+        "font": "15px",
+        "weight": "600",
+        "textCenterOffset": 0
+      }
+    }
+  ]
+}

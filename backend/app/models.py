@@ -25,6 +25,7 @@ class User(Base):
     password_hash:Mapped[str]=mapped_column(Text)
     role:Mapped[str]=mapped_column(String(12),default='user')
     enabled:Mapped[bool]=mapped_column(Boolean,default=True)
+    is_guest:Mapped[bool]=mapped_column(Boolean,default=False,server_default=text('false'))
     token_version:Mapped[int]=mapped_column(Integer,default=0)
     created_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=now)
 

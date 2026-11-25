@@ -2,7 +2,7 @@ import { createContext,useContext,useEffect,useState,type ReactNode } from 'reac
 import { useQueryClient } from '@tanstack/react-query';
 import { api,setToken,type User,type AuthResult } from './api';
 
-type Auth={user:User|null;loading:boolean;login:(username:string,password:string)=>Promise<void>;logout:()=>Promise<void>};
+type Auth={user:User|null;loading:boolean;login:(username:string,password:string)=>Promise<void>;loginAsGuest:()=>Promise<void>;logout:()=>Promise<void>};
 const Context=createContext<Auth|null>(null);
 export function AuthProvider({children}:{children:ReactNode}){
   const [user,setUser]=useState<User|null>(null),[loading,setLoading]=useState(true);
@@ -15,11 +15,16 @@ export function AuthProvider({children}:{children:ReactNode}){
     const expired=()=>clear();window.addEventListener('auth:expired',expired);
     return()=>{mounted=false;window.removeEventListener('auth:expired',expired);};
   },[]);
-  async function login(username:string,password:string){
-    const result=await api<AuthResult>('/auth/login',{method:'POST',body:JSON.stringify({username,password})});
+  function signedIn(result:AuthResult){
     cache.clear();setToken(result.accessToken);setUser(result.user);
   }
+  async function login(username:string,password:string){
+    signedIn(await api<AuthResult>('/auth/login',{method:'POST',body:JSON.stringify({username,password})}));
+  }
+  async function loginAsGuest(){
+    signedIn(await api<AuthResult>('/auth/guest',{method:'POST'}));
+  }
   async function logout(){await api('/auth/logout',{method:'POST'});clear();}
-  return <Context.Provider value={{user,loading,login,logout}}>{children}</Context.Provider>;
+  return <Context.Provider value={{user,loading,login,loginAsGuest,logout}}>{children}</Context.Provider>;
 }
 export function useAuth(){return useContext(Context)!;}

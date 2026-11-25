@@ -1,0 +1,26 @@
+{
+  "browser": "158.0.4370.33",
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "guestLogin": true,
+      "station": true,
+      "predictionStatus": 202,
+      "predictionState": "completed",
+      "adminDenied": true,
+      "restoreAndLogout": true
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "guestLogin": true,
+      "station": true,
+      "predictionStatus": 202,
+      "predictionState": "completed",
+      "adminDenied": true,
+      "restoreAndLogout": true
+    }
+  ],
+  "pageErrors": []
+}
