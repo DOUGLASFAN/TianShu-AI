@@ -87,3 +87,21 @@ def test_observations_and_corrupt_archives(client):
     assert failures[0]['parameters']['asset']==key
     with api.database() as db:db.execute('UPDATE assets SET content=? WHERE id=?',('broken',key))
     assert c.post('/api/telemetry/runs',json=window).status_code==409
+
+def test_first_batch_import_quality_and_event_archive(client):
+    c,user=client
+    raw='timestamp,channel,segment,value,quality\n'+''.join(
+        f'2022-01-01T00:00:0{t}Z,a,b,{v},{q}\n' for t,v,q in
+        [(1,0,'good'),(3,90,'interpolated'),(2,60,'bad'),(4,2,'good'),(4,2,'good')])
+    body=dict(mission='fixture',norad=1,version='1',source='test',unit='V',sha256=digest(raw.encode()),content=raw)
+    result=c.post('/api/telemetry/assets',json=body).json()
+    assert result['quality'][0]['flagged']==[2,3] and result['quality'][0]['outOfOrder']==[3]
+    report=c.post('/api/telemetry/runs',json=dict(asset=result['id'],channel='a',segment='b')).json()
+    assert report['used']==[1] and report['stats']['mean']==0 and report['stats']['verified']
+    report=c.post('/api/telemetry/runs',json=dict(asset='opssat-v2',channel='CADC0872',segment='8')).json()
+    url='/api/telemetry/runs/'+report['id']
+    assert c.put(url+'/events/716/review',json={'note':'待复查原始测量'}).status_code==200
+    assert c.get(url).json()['eventReviews']['716']=='待复查原始测量'
+    assert c.put(url+'/events/1/review',json={'note':'wrong'}).status_code==404
+    user.id='other'
+    assert c.put(url+'/events/716/review',json={'note':'private'}).status_code==404

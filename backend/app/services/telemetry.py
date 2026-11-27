@@ -8,39 +8,31 @@ from collections import Counter
 from datetime import datetime, timezone
 from decimal import Decimal, localcontext
 
-VERSION = 'median-mad/1'
+from .telemetry_v1 import digest, instant, parse
+
+VERSION = 'median-mad/2'
 
 
-def digest(data):
-    return hashlib.sha256(data).hexdigest()
+def quality(point):
+    flag = point['raw'].get('quality', '').strip().lower()
+    if flag in ('interpolated', 'imputed'):
+        return '补点'
+    if flag not in ('', 'good', 'valid', 'measured'):
+        return '质量待核验'
+    return '缺值' if point['value'] is None else '实测'
 
 
-def instant(value):
-    dt = datetime.fromisoformat(value.replace('Z', '+00:00'))
-    if dt.tzinfo is None:
-        raise ValueError('时间戳需要明确时区')
-    return dt.astimezone(timezone.utc)
-
-
-def parse(content):
-    reader = csv.DictReader(io.StringIO(content, newline=''), strict=True)
-    fields = reader.fieldnames or []
-    if len(fields) != len(set(fields)) or not {'timestamp', 'channel', 'segment', 'value'} <= set(fields):
-        raise ValueError('CSV 需要唯一列名及 timestamp、channel、segment、value 列')
-    groups = {}
-    for n, row in enumerate(reader, 1):
-        if n > 10000 or None in row or None in row.values():
-            raise ValueError(f'记录 {n} 超过容量或字段数量不一致')
-        if not row['channel'].strip() or not row['segment'].strip():
-            raise ValueError(f'记录 {n} 缺少通道或片段')
-        value = float(row['value']) if row['value'].strip() else None
-        if value is not None and not math.isfinite(value):
-            raise ValueError(f'记录 {n} 含非有限数值')
-        point = dict(record=n, utc=instant(row['timestamp']).isoformat(), value=value, raw=row)
-        groups.setdefault((row['channel'], row['segment']), []).append(point)
-    if not groups:
-        raise ValueError('文件没有测量记录')
-    return groups
+def inventory(groups):
+    result = []
+    for (channel, segment), points in groups.items():
+        counts = Counter(p['utc'] for p in points)
+        result.append(dict(channel=channel,segment=segment,count=len(points),
+            start=min(counts),end=max(counts),
+            duplicateTimes=[t for t,n in counts.items() if n>1],
+            outOfOrder=[b['record'] for a,b in zip(points,points[1:]) if b['utc']<a['utc']],
+            missing=[p['record'] for p in points if p['value'] is None],
+            flagged=[p['record'] for p in points if quality(p) in ('补点','质量待核验')]))
+    return result
 
 
 def analyze(content, meta, channel, segment, start=None, end=None):
@@ -57,6 +49,7 @@ def analyze(content, meta, channel, segment, start=None, end=None):
     scales = {'V':('voltage',1),'mV':('voltage',.001),'A':('current',1),'mA':('current',.001),'m':('length',1),'km':('length',1000)}
     conversions = {}
     for point in window:
+        point['quality'] = quality(point)
         row = point['raw']
         if row.get('norad') and int(row['norad']) != meta['norad']:
             raise ValueError('记录的 NORAD 编号与档案冲突')
@@ -76,7 +69,7 @@ def analyze(content, meta, channel, segment, start=None, end=None):
     counts = Counter(p['utc'] for p in window)
     disorder = [b['record'] for a,b in zip(window,window[1:]) if b['utc'] < a['utc']]
     ordered = sorted(window,key=lambda p:p['utc'])
-    valid = [p for p in ordered if counts[p['utc']] == 1 and p['value'] is not None]
+    valid = [p for p in ordered if counts[p['utc']] == 1 and p['quality']=='实测']
     if not valid:
         raise ValueError('窗口内没有非重复的有效测量')
     values = [p['value'] for p in valid]
@@ -84,7 +77,7 @@ def analyze(content, meta, channel, segment, start=None, end=None):
     with localcontext() as ctx:
         ctx.prec = 80
         reference = [Decimal(p['raw']['value'])*Decimal(str(p['factor'])) for p in window
-                     if counts[p['utc']]==1 and p['raw']['value'].strip()]
+                     if counts[p['utc']]==1 and quality(p)=='实测']
         independent = float(sum(reference)/len(reference))
         reference_span = float(max(reference)-min(reference))
     median = statistics.median(values)
@@ -99,7 +92,7 @@ def analyze(content, meta, channel, segment, start=None, end=None):
             elapsed = (instant(b['utc'])-instant(a['utc'])).total_seconds()
             if seconds>0 and elapsed>1.5*seconds:
                 gaps.append([a['utc'],b['utc']])
-    return dict(conversions=conversions,steps=[dict(step='校验原件',sha256=meta['sha256']),dict(step='选择窗口',count=len(window)),dict(step='质量筛选',count=len(valid)),dict(step='Decimal 复算',mean=independent),dict(step='检测候选',count=len(candidates))],asset=meta,algorithm=VERSION,channel=channel,segment=segment,start=lo,end=hi,
+    return dict(requiredEvidence=["匹配对象与时间窗的原始测量","单位来源","独立统计复算"], excludedQuality=[p["record"] for p in window if p["quality"] in ("补点","质量待核验")], conversions=conversions,steps=[dict(step='校验原件',sha256=meta['sha256']),dict(step='选择窗口',count=len(window)),dict(step='质量筛选',count=len(valid)),dict(step='Decimal 复算',mean=independent),dict(step='检测候选',count=len(candidates))],asset=meta,algorithm=VERSION,channel=channel,segment=segment,start=lo,end=hi,
                 objective='历史片段异常候选复核',points=ordered,used=[p['record'] for p in valid],
                 stats=dict(count=len(valid),mean=mean,stdev=statistics.pstdev(values),span=max(values)-min(values),
                            independentMean=independent,independentCount=len(reference),independentSpan=reference_span,

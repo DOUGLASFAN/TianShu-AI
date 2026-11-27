@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 from ..core.config import ROOT
 from ..core.security import current_user
-from ..services.telemetry import VERSION, analyze, digest, instant, parse
+from ..services.telemetry import VERSION, analyze, digest, instant, parse, inventory
 
 router = APIRouter(prefix='/api/telemetry', tags=['历史遥测'])
 SAMPLE = ROOT/'assets/data/telemetry/opssat-v2'
@@ -26,6 +26,7 @@ def database():
             conn.execute('CREATE TABLE IF NOT EXISTS assets(owner TEXT,id TEXT,meta TEXT,content TEXT, PRIMARY KEY(owner,id))')
             conn.execute('CREATE TABLE IF NOT EXISTS runs(owner TEXT,id TEXT,report TEXT,review TEXT, PRIMARY KEY(owner,id))')
             conn.execute('CREATE TABLE IF NOT EXISTS failures(owner TEXT, created TEXT DEFAULT CURRENT_TIMESTAMP, parameters TEXT, reason TEXT)')
+            conn.execute('CREATE TABLE IF NOT EXISTS event_reviews(owner TEXT,run TEXT,record INTEGER,note TEXT, PRIMARY KEY(owner,run,record))')
             yield conn
     finally:
         conn.close()
@@ -85,7 +86,7 @@ def upload(body:Upload,user=Depends(current_user)):
         if not db.execute('SELECT 1 FROM assets WHERE owner=? AND id=?',(user.id,key)).fetchone() and db.execute('SELECT COUNT(*) FROM assets WHERE owner=?',(user.id,)).fetchone()[0]>=100:
             raise HTTPException(409,'个人档案数量已达 100 份')
         db.execute('INSERT OR IGNORE INTO assets VALUES(?,?,?,?)',(user.id,key,encode(meta),body.content))
-    return {'id':key}
+    return {'id':key,'quality':inventory(groups)}
 
 
 @router.get('/assets')
@@ -100,7 +101,7 @@ def assets(user=Depends(current_user)):
 @router.get('/assets/{key}')
 def details(key:str,user=Depends(current_user)):
     meta,content=read_asset(user.id,key)
-    return dict(meta=meta,segments=[dict(channel=c,segment=s,start=min(p['utc'] for p in pts),end=max(p['utc'] for p in pts)) for (c,s),pts in parse(content).items()])
+    return dict(meta=meta,segments=inventory(parse(content)))
 
 
 class Window(BaseModel):
@@ -118,6 +119,11 @@ def calculate(body,user):
     try:
         report=analyze(content,meta,body.channel,body.segment,body.start,body.end)
         report['objective']=body.objective
+        report['assessments']=[
+            dict(subject='统计复算',status='已核验' if report['stats']['verified'] else '来源冲突',basis='有效样本与独立十进制复算'),
+            dict(subject='单位',status='证据不足' if meta['unit']=='未提供' else '来源已登记',basis=meta['unit']),
+            dict(subject='候选事件',status='待人工确认' if report['candidates'] else '当前规则未检出',basis=report['rule']['formula'])]
+
         encode(report)
     except (ValueError,OverflowError,csv.Error) as exc:
         with database() as db:
@@ -158,12 +164,22 @@ def report(key:str,user=Depends(current_user)):
     with database() as db:
         row=db.execute('SELECT report,review FROM runs WHERE owner=? AND id=?',(user.id,key)).fetchone()
     if not row: raise HTTPException(404,'报告不存在')
-    return dict(id=key,review=row[1],**json.loads(row[0]))
+    with database() as db:
+        notes=dict(db.execute('SELECT record,note FROM event_reviews WHERE owner=? AND run=?',(user.id,key)))
+    return dict(id=key,review=row[1],eventReviews=notes,**json.loads(row[0]))
 
 
 @router.post('/runs/{key}/replay')
 def replay(key:str,user=Depends(current_user)):
     saved=report(key,user)
+    if saved['algorithm']=='median-mad/1':
+        from ..services.telemetry_v1 import analyze as historical_analyze
+        args=Window(**saved['input'])
+        meta,content=read_asset(user.id,args.asset)
+        rebuilt=historical_analyze(content,meta,args.channel,args.segment,args.start,args.end)
+        rebuilt.update(input=saved['input'],objective=args.objective)
+        if digest(encode(rebuilt).encode())!=key: raise HTTPException(409,'历史版本复跑不一致')
+        return saved
     if saved['algorithm']!=VERSION: raise HTTPException(409,'当前环境缺少归档算法版本')
     result=calculate(Window(**saved['input']),user)
     if result['id']!=key: raise HTTPException(409,'复跑摘要不一致')
@@ -196,3 +212,14 @@ def position(key:str,time:str,user=Depends(current_user)):
             return {'reason':'卫星身份不符或超出根数历元前后 24 小时'}
         return dict(**state_at(sat,t),epoch=sat.epoch.utc_iso(),source=meta['orbitSource'])
     except ValueError as exc: raise HTTPException(422,str(exc)) from exc
+
+
+@router.put('/runs/{key}/events/{record}/review')
+def review_event(key:str,record:int,body:Review,user=Depends(current_user)):
+    saved=report(key,user)
+    if record not in saved['candidates']:
+        raise HTTPException(404,'候选事件不存在')
+    with database() as db:
+        db.execute('INSERT INTO event_reviews VALUES(?,?,?,?) ON CONFLICT(owner,run,record) DO UPDATE SET note=excluded.note',
+                   (user.id,key,record,body.note))
+    return {'record':record,'note':body.note}
