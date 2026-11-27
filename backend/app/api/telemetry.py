@@ -7,6 +7,7 @@ from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
+from fastapi.responses import Response
 
 from ..core.config import ROOT
 from ..core.security import current_user
@@ -148,8 +149,8 @@ def run(body:Window,user=Depends(current_user)):
 @router.get('/runs')
 def history(user=Depends(current_user)):
     with database() as db:
-        return [dict(id=k,channel=c,start=s,review=r) for k,c,s,r in db.execute(
-            "SELECT id,json_extract(report,'$.channel'),json_extract(report,'$.start'),review FROM runs WHERE owner=? ORDER BY rowid DESC",(user.id,))]
+        return [dict(id=k,channel=c,start=s,review=r,mission=m,norad=n,end=e) for k,c,s,r,m,n,e in db.execute(
+            "SELECT id,json_extract(report,'$.channel'),json_extract(report,'$.start'),review,json_extract(report,'$.asset.mission'),json_extract(report,'$.asset.norad'),json_extract(report,'$.end') FROM runs WHERE owner=? ORDER BY rowid DESC",(user.id,))]
 
 
 @router.get('/failures')
@@ -223,3 +224,37 @@ def review_event(key:str,record:int,body:Review,user=Depends(current_user)):
         db.execute('INSERT INTO event_reviews VALUES(?,?,?,?) ON CONFLICT(owner,run,record) DO UPDATE SET note=excluded.note',
                    (user.id,key,record,body.note))
     return {'record':record,'note':body.note}
+
+
+@router.get('/assets/{key}/original')
+def original(key:str,user=Depends(current_user)):
+    meta,content=read_asset(user.id,key)
+    return Response(content.encode(),media_type='text/csv',headers={
+        'Content-Disposition':f'attachment; filename="telemetry-{meta["sha256"][:12]}.csv"',
+        'Cache-Control':'private, no-store'})
+
+@router.get('/runs/{key}/scene')
+def historical_scene(key:str,user=Depends(current_user)):
+    from datetime import timedelta
+    from backend.phase1.orbits import from_tle,state_at
+    r=report(key,user)
+    meta=r['asset']
+    if not meta.get('tle') or not meta.get('orbitSource'):raise HTTPException(422,'缺少同期根数来源')
+    sat=from_tle(meta['tle'])
+    start,end=instant(r['start']),instant(r['end'])
+    epoch=sat.epoch.utc_datetime()
+    if sat.model.satnum!=meta['norad'] or max(abs((t-epoch).total_seconds()) for t in (start,end))>86400:
+        raise HTTPException(422,'整段无法使用同一历史根数')
+    if end<=start:raise HTTPException(422,'回放需要两个不同时刻')
+    duration=(end-start).total_seconds()
+    import math
+    intervals=min(180,max(1,math.ceil(duration/5)))
+    step=duration/intervals
+    samples=[]
+    for i in range(intervals+1):
+        t=start+timedelta(seconds=i*step)
+        state=state_at(sat,t)
+        samples.append([i*step,*state['ecef_m'],state['velocity']])
+    track=dict(start=r['start'],end=r['end'],noradId=meta['norad'],name=meta['mission'],samples=samples,
+               version=meta['sha256'],stepSeconds=step,dataQuality=dict(state='available',epoch=sat.epoch.utc_iso(),source=meta['orbitSource']))
+    return dict(start=r['start'],end=r['end'],generatedAt=r['start'],stepSeconds=step,profileName='历史遥测 · '+meta['mission'],satellites=[track],failed=[])

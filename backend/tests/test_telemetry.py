@@ -105,3 +105,12 @@ def test_first_batch_import_quality_and_event_archive(client):
     assert c.put(url+'/events/1/review',json={'note':'wrong'}).status_code==404
     user.id='other'
     assert c.put(url+'/events/716/review',json={'note':'private'}).status_code==404
+
+def test_reuse_explore_playback_contract(client):
+    c,user=client
+    r=c.post('/api/telemetry/runs',json=dict(asset='opssat-v2',channel='CADC0872',segment='8')).json()
+    scene=c.get('/api/telemetry/runs/'+r['id']+'/scene').json()
+    t=scene['satellites'][0]
+    assert t['noradId']==44878 and t['dataQuality']['source']==r['asset']['orbitSource']
+    assert t['samples'][0][0]==0 and len(t['samples'][0])==5 and t['samples'][-1][0]==399
+    assert scene['start']==r['start'] and scene['end']==r['end']

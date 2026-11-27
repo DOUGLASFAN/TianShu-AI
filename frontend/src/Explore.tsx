@@ -29,7 +29,8 @@ export function Explore(){
  useEffect(()=>{const media=window.matchMedia('(prefers-reduced-motion: reduce)');const changed=()=>setSystemReduced(media.matches);media.addEventListener('change',changed);return()=>media.removeEventListener('change',changed);},[]);
  const {timeZone,setTimeZone,lessMotion,setLessMotion}=useDisplaySettings(),reduced=!!systemReduced||lessMotion;
  const selected=Number(params.get('sat')||25544),page=Math.max(1,Number(params.get('page'))||1),group=params.get('group')||'',search=params.get('q')||'';
- const samplingId=params.get('sampling');
+ const historicalId=params.get('historical');
+ const samplingId=params.get('sampling')||historicalId;
  const replaying=!!samplingId||params.get('mode')==='replay';
  const [globalView,setGlobalView]=useState(false);
  const [keyword,setKeyword]=useState(search),[clean,setClean]=useState(false),[clouds,setClouds]=useState(true),[rate,setRate]=useState(1),[playing,setPlaying]=useState(true),[tracking,setTracking]=useState(false);
@@ -65,8 +66,8 @@ export function Explore(){
  mapSelect.current=id=>{choose(id);if(mobile)openSheet('detail',stagePanel.current);};
  const scene=useQuery<SceneData>({
   refetchInterval:query=>!replaying?Math.max(10000,Date.parse(query.state.data?.end||new Date(Date.now()+600000).toISOString())-Date.now()-60000):false,
-  queryKey:samplingId?['explore-scene',samplingId]:replaying?replaySceneKey:liveSceneKey,
-  queryFn:({signal})=>api(samplingId?`/sampling/profiles/${encodeURIComponent(samplingId)}/scene`:'/explore/scene',{signal}),
+  queryKey:historicalId?['historical-scene',historicalId]:samplingId?['explore-scene',samplingId]:replaying?replaySceneKey:liveSceneKey,
+  queryFn:({signal})=>api(historicalId?`/telemetry/runs/${encodeURIComponent(historicalId)}/scene`:samplingId?`/sampling/profiles/${encodeURIComponent(samplingId)}/scene`:'/explore/scene',{signal}),
   refetchOnMount:samplingId?'always':!replaying,refetchOnWindowFocus:!replaying,refetchOnReconnect:!replaying,
   staleTime:replaying?Infinity:300000,retry:samplingId?false:undefined,
  });
@@ -77,7 +78,7 @@ export function Explore(){
  const country=params.get('country')||'',purpose=params.get('use')||'',orbitFilter=params.get('orbit')||'';
  const directory=useQuery({queryKey:['explore-catalog',search,group,page,country,purpose,orbitFilter],enabled:!samplingId,queryFn:({signal})=>api(`/satellites?page=${page}&size=8&keyword=${encodeURIComponent(search)}${group?'&group='+encodeURIComponent(group):''}&country=${encodeURIComponent(country)}&use=${encodeURIComponent(purpose)}${orbitFilter?'&orbit='+orbitFilter:''}`,{signal})});
  const groups=useQuery({queryKey:['groups'],queryFn:({signal})=>api('/groups',{signal})});
- const details=useQuery({queryKey:['detail',selected],queryFn:({signal})=>api(`/satellites/${selected}`,{signal}),enabled:Number.isInteger(selected)&&selected>0});
+ const details=useQuery({queryKey:['detail',selected],queryFn:({signal})=>api(`/satellites/${selected}`,{signal}),enabled:!historicalId&&Number.isInteger(selected)&&selected>0});
  const trackTime=scene.data&&(replaying?new Date((Date.parse(scene.data.start)+Date.parse(scene.data.end))/2).toISOString():scene.data.generatedAt);
  const trackKey=['explore-trajectory',selected,trackTime,replaying?'replay':'live'];
  const trajectory=useQuery({queryKey:trackKey,queryFn:({signal})=>api(`/explore/satellites/${selected}/trajectory?at=${encodeURIComponent(trackTime!)}`,{signal}),enabled:!samplingId&&!!trackTime&&selected>0,staleTime:replaying?Infinity:300000,refetchOnWindowFocus:!replaying,refetchOnReconnect:!replaying,
@@ -106,7 +107,7 @@ export function Explore(){
   if(!engine||!scene.data)return;
   if(replaying){
    const previous=replayClock.current;
-   const clock=previous?.scene===scene.data?previous:{scene:scene.data,rate:1,playing:false};
+   const clock=previous?.scene===scene.data?previous:{scene:scene.data,time:historicalId?params.get('at')||undefined:undefined,rate:1,playing:false};
    replayClock.current=clock;
    engine.overview(scene.data,{...clock,live:false});
    setRate(clock.rate);setPlaying(clock.playing);
@@ -212,7 +213,7 @@ export function Explore(){
    </div>;
  const timeDescription=<div className="timebar-description">
     <strong>{replaying?(scene.data?.profileName||'默认轨迹回放'):showGlobal?'全球点位':'代表卫星'}</strong>
-    <span>{replaying?(samplingId?'方案内卫星 · 按最新可用根数推算':'代表卫星与所选卫星 · 按公开根数推算'):showGlobal?`${globalCount?`${globalCount} / ${globalCatalogCount??'—'} 颗 · `:''}${globalStatus} · 按公开根数推算`:'代表卫星与所选卫星的位置 · 按公开根数推算'}</span>
+    <span>{replaying?(historicalId?'历史遥测 · 按同期归档根数推算':samplingId?'方案内卫星 · 按最新可用根数推算':'代表卫星与所选卫星 · 按公开根数推算'):showGlobal?`${globalCount?`${globalCount} / ${globalCatalogCount??'—'} 颗 · `:''}${globalStatus} · 按公开根数推算`:'代表卫星与所选卫星的位置 · 按公开根数推算'}</span>
    </div>;
  const clock=<div className="clock-display"><span className={replaying?'simulation-mode':'current-mode'}>{mode}</span><time dateTime={displayTime}>{formatTime(displayTime)}</time></div>;
  const replayControls=<div className="timebar-replay">
