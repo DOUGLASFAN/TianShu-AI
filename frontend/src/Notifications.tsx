@@ -3,6 +3,7 @@ import {Link,useSearchParams} from 'react-router-dom';
 import {useMutation,useQuery,useQueryClient} from '@tanstack/react-query';
 import {Bell,Check,CheckCircle,ArrowRight} from '@phosphor-icons/react';
 import {api,ApiError} from './api';
+import {REALTIME_URL} from './config';
 import './environment.css';
 
 export function NotificationBell(){
@@ -10,7 +11,7 @@ export function NotificationBell(){
  const summary=useQuery({queryKey:['notification-summary'],queryFn:()=>api('/notifications?size=1'),refetchInterval:30000});
  useEffect(()=>{let stopped=false,ws:WebSocket|undefined,timer:ReturnType<typeof setTimeout>,attempt=0;
   async function connect(){try{const ticket=await api('/realtime/ticket',{method:'POST'});if(stopped)return;
-   let stream='',seq=0;ws=new WebSocket(`${location.protocol==='https:'?'wss:':'ws:'}//${location.host}/api/realtime/ws`);
+   let stream='',seq=0;ws=new WebSocket(REALTIME_URL);
    ws.onopen=()=>ws?.send(JSON.stringify({type:'auth',ticket:ticket.ticket}));
    ws.onmessage=e=>{if(stopped)return;let m;try{m=JSON.parse(e.data);}catch{return;}
     if(m.streamId!==stream){if(m.type!=='snapshot')return;stream=m.streamId;seq=0;}if(m.seq<=seq)return;seq=m.seq;

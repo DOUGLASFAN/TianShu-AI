@@ -1,4 +1,5 @@
 import {api,authHeaders} from './api';
+import {API_BASE_URL} from './config';
 
 export type BasemapPreferences={mode:'imagery'|'streets';labels:boolean};
 
@@ -24,7 +25,7 @@ export function createBasemap(viewer:any,C:any,space=false,onlyNear?:()=>boolean
   if(!config||provider==='local'){publish({status:'本地地球 · 无街道细节'});return;}
   publish({status:'等待分级影像'});
   for(const name of [mode,...(mode==='imagery'?['labels']:provider==='tianditu'?['street-labels']:[])]){
-   const relayResource=new C.Resource({url:`/api/maps/tiles/${provider}/${name}/{z}/{x}/{y}`,headers:authHeaders()}),direct=provider==='esri'?config.directTemplates?.[name]:undefined;
+   const relayResource=new C.Resource({url:`${API_BASE_URL}/maps/tiles/${provider}/${name}/{z}/{x}/{y}`,headers:authHeaders()}),direct=provider==='esri'?config.directTemplates?.[name]:undefined;
    const resource=direct?new C.Resource({url:direct}):relayResource;
    const p=new C.UrlTemplateImageryProvider({url:resource,tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:name==='labels'||provider==='tianditu'?18:19,credit:config.providers.find((x:any)=>x.id===provider)?.credit});
    const original=p.requestImage.bind(p),fallback=direct?new C.UrlTemplateImageryProvider({url:relayResource,tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:p.maximumLevel}):null;

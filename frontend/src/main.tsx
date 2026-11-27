@@ -72,7 +72,7 @@ function AccessPage({register=false}:{register?:boolean}){
    </form>}
    <div className="access-switch">{register?'已有账号？':'还没有账号？'} <Link to={register?'/login':'/register'}>{register?'立即登录':'创建账号'}</Link></div>
    
-  </motion.section><footer className="access-bottom"><details><summary>背景来源</summary><span>AI 生成装饰图</span></details></footer>
+  </motion.section>
  </main>;
 }
 

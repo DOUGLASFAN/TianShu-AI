@@ -1,5 +1,6 @@
 import {useEffect,useRef,useState} from 'react';
 import {api,ApiError} from './api';
+import {REALTIME_URL} from './config';
 
 export function useRealtime(selected:number,onTrack:(value:any)=>void){
  const diagnostics=((window as any).liveDiagnostics??={connections:0,ignoredFrames:0,seq:0,streamId:''});
@@ -12,7 +13,7 @@ export function useRealtime(selected:number,onTrack:(value:any)=>void){
    try{
     setConnection(attempt?'正在重连':'连接中');
     const ticket=await api('/realtime/ticket',{method:'POST'});if(stopped)return;
-    const ws=new WebSocket(`${location.protocol==='https:'?'wss:':'ws:'}//${location.host}/api/realtime/ws`);socket.current=ws;
+    const ws=new WebSocket(REALTIME_URL);socket.current=ws;
     ws.onopen=()=>ws.send(JSON.stringify({type:'auth',ticket:ticket.ticket}));
     ws.onmessage=event=>{
      if(stopped)return;

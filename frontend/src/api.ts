@@ -1,10 +1,12 @@
+import {API_BASE_URL} from './config';
+
 export type User={id:string;username:string;role:'user'|'admin';enabled:boolean;isGuest:boolean};
 export type AuthResult={accessToken:string;expiresAt:string;user:User};
 let accessToken:string|null=null;
 export function setToken(value:string|null){accessToken=value;}
 export function authHeaders():Record<string,string>{return accessToken?{Authorization:`Bearer ${accessToken}`}:{}};
 export async function saveDownload(path:string,filename:string){
-  const response=await fetch(`/api${path}`,{credentials:'same-origin',headers:accessToken?{Authorization:`Bearer ${accessToken}`}:{}});
+  const response=await fetch(`${API_BASE_URL}${path}`,{credentials:'same-origin',headers:accessToken?{Authorization:`Bearer ${accessToken}`}:{}});
   if(!response.ok)throw Error('原始数据暂不可用，请稍后重试。');
   const url=URL.createObjectURL(await response.blob()),link=document.createElement('a');link.href=url;link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
@@ -16,7 +18,7 @@ export async function api<T=any>(path:string,options:RequestInit={}):Promise<T>{
   if(options.body)headers.set('Content-Type','application/json');
   if(accessToken)headers.set('Authorization',`Bearer ${accessToken}`);
   let response:Response;
-  try{response=await fetch(`/api${path}`,{...options,headers,credentials:'same-origin'});}
+  try{response=await fetch(`${API_BASE_URL}${path}`,{...options,headers,credentials:'same-origin'});}
   catch{throw new ApiError('NETWORK_UNAVAILABLE','暂时无法连接服务，请检查网络后重试。','');}
   const data=await response.json();
   if(!response.ok){
