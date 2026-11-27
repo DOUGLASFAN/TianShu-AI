@@ -1,0 +1,133 @@
+[
+  {
+    "segment": "5",
+    "channel": "CADC0872",
+    "stats": {
+      "count": 257,
+      "mean": 1.0584846070038911e-05,
+      "stdev": 2.2976124092528443e-05,
+      "span": 6.71953e-05,
+      "independentMean": 1.0584846070038911e-05,
+      "verified": true
+    },
+    "candidateRecords": [],
+    "start": {
+      "noradId": 44878,
+      "time": "2022-06-02T00:09:58+00:00",
+      "lat": 71.57554245402576,
+      "lng": -72.77907595023868,
+      "alt": 515.0626364843981,
+      "velocity": 7.614687783259387,
+      "ecef_m": [
+        646802.7852321363,
+        -2086784.1029302513,
+        6517544.855487021
+      ],
+      "epoch": "2022-06-01T07:53:50Z",
+      "source": "https://github.com/OndroNR/tle-archive/blob/ae2301b6bc9326d0a8332ebd4d39b97c68b1224b/TLEs/satnogs.txt"
+    },
+    "end": {
+      "noradId": 44878,
+      "time": "2022-06-02T00:14:14+00:00",
+      "lat": 56.1840083516615,
+      "lng": -85.68046216993129,
+      "alt": 514.5988385254361,
+      "velocity": 7.612460811042473,
+      "ecef_m": [
+        289542.42601399636,
+        -3833307.600165409,
+        5703415.487048759
+      ],
+      "epoch": "2022-06-01T07:53:50Z",
+      "source": "https://github.com/OndroNR/tle-archive/blob/ae2301b6bc9326d0a8332ebd4d39b97c68b1224b/TLEs/satnogs.txt"
+    }
+  },
+  {
+    "segment": "1",
+    "channel": "CADC0872",
+    "stats": {
+      "count": 280,
+      "mean": 8.533143499999999e-07,
+      "stdev": 1.869300178062774e-05,
+      "span": 9.17086e-05,
+      "independentMean": 8.5331435e-07,
+      "verified": true
+    },
+    "candidateRecords": [],
+    "start": {
+      "noradId": 44878,
+      "time": "2022-06-01T23:42:54+00:00",
+      "lat": 3.831193957700496,
+      "lng": 90.41207567289587,
+      "alt": 501.5743244228005,
+      "velocity": 7.617932825768227,
+      "ecef_m": [
+        -49369.099036372856,
+        6864254.377591165,
+        456835.96251978696
+      ],
+      "epoch": "2022-06-01T07:53:50Z",
+      "source": "https://github.com/OndroNR/tle-archive/blob/ae2301b6bc9326d0a8332ebd4d39b97c68b1224b/TLEs/satnogs.txt"
+    },
+    "end": {
+      "noradId": 44878,
+      "time": "2022-06-01T23:47:33+00:00",
+      "lat": 21.479393631857498,
+      "lng": 86.80567827968852,
+      "alt": 500.41458047547906,
+      "velocity": 7.6209048873569545,
+      "ecef_m": [
+        356819.20538969233,
+        6393547.731019429,
+        2504103.0473542903
+      ],
+      "epoch": "2022-06-01T07:53:50Z",
+      "source": "https://github.com/OndroNR/tle-archive/blob/ae2301b6bc9326d0a8332ebd4d39b97c68b1224b/TLEs/satnogs.txt"
+    }
+  },
+  {
+    "segment": "8",
+    "channel": "CADC0872",
+    "stats": {
+      "count": 400,
+      "mean": 1.520437315e-06,
+      "stdev": 1.2854177816387117e-05,
+      "span": 8.08002e-05,
+      "independentMean": 1.520437315e-06,
+      "verified": true
+    },
+    "candidateRecords": [
+      716
+    ],
+    "start": {
+      "noradId": 44878,
+      "time": "2022-06-02T00:24:48+00:00",
+      "lat": 16.554987775573494,
+      "lng": -97.33755889033274,
+      "alt": 513.6958230883662,
+      "velocity": 7.605529227642414,
+      "ecef_m": [
+        -843914.5625445877,
+        -6553694.089757009,
+        1952051.899580668
+      ],
+      "epoch": "2022-06-01T07:53:50Z",
+      "source": "https://github.com/OndroNR/tle-archive/blob/ae2301b6bc9326d0a8332ebd4d39b97c68b1224b/TLEs/satnogs.txt"
+    },
+    "end": {
+      "noradId": 44878,
+      "time": "2022-06-02T00:31:27+00:00",
+      "lat": -8.588311560518093,
+      "lng": -102.35414808406233,
+      "alt": 518.6242966977734,
+      "velocity": 7.599317320370818,
+      "ecef_m": [
+        -1459142.0934120666,
+        -6661974.950982249,
+        -1023612.8466259331
+      ],
+      "epoch": "2022-06-01T07:53:50Z",
+      "source": "https://github.com/OndroNR/tle-archive/blob/ae2301b6bc9326d0a8332ebd4d39b97c68b1224b/TLEs/satnogs.txt"
+    }
+  }
+]

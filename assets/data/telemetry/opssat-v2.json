@@ -1,0 +1,23 @@
+{
+  "mission": "OPS-SAT",
+  "norad": 44878,
+  "source": "https://zenodo.org/records/15108715",
+  "version": "OPSSAT-AD v2",
+  "creator": "Bogdan Ruszczak et al.",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "originalFile": "segments.csv",
+  "originalSha256": "d5201e9e751eb2a53a0ff7c11567dc4239f594ea4b479b2aa66fe67ddcbcb9ba",
+  "sha256": "bbd274091cff3f6aeef7f097f1b6bb8e6fad5ed31f0c53dca642d10e176b6060",
+  "unit": "未提供",
+  "processing": "抽取 CADC0872 的完整片段 5、1、8；按此顺序重新排列，保留字段原值。片段 8 用于展示候选回查。",
+  "labelScope": "片段",
+  "tle": "OPS-SAT\n1 44878U 19092F   22152.32904834  .00006223  00000+0  29271-3 0  9993\n2 44878  97.4793 336.4212 0013208  42.2844 317.9407 15.19851952135748",
+  "orbitSource": "https://github.com/OndroNR/tle-archive/blob/ae2301b6bc9326d0a8332ebd4d39b97c68b1224b/TLEs/satnogs.txt",
+  "kind": "telemetry",
+  "identitySource": "https://live.opssat.esa.int/ops-sat-1/docs/tm_analysis.html",
+  "observationStatus": "未绑定地面观测记录",
+  "cadenceSeconds": false,
+  "coverageStart": "2022-06-01T23:42:54.000Z",
+  "coverageEnd": "2022-06-02T00:31:27.000Z"
+}

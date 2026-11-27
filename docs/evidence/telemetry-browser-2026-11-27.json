@@ -1,0 +1,21 @@
+{
+  "browser": "Edge",
+  "realApi": true,
+  "guest": true,
+  "segment": "8",
+  "sourceSha256": "bbd274091cff3f6aeef7f097f1b6bb8e6fad5ed31f0c53dca642d10e176b6060",
+  "candidate": 716,
+  "samples": 400,
+  "utc": "2022-06-02T00:27:46+00:00",
+  "orbitEpoch": "2022-06-01T07:53:50Z",
+  "coordinates": [
+    -1145180.7889800863,
+    -6767425.28721649,
+    637247.3362064963
+  ],
+  "orbitCanvas": true,
+  "zoom": 4,
+  "rerun": true,
+  "reportExport": true,
+  "observationsRoute": "http://127.0.0.1:5178/observations"
+}

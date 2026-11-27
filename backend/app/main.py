@@ -110,3 +110,6 @@ app.include_router(environment.router)
 app.include_router(dashboard.router)
 app.include_router(maps.router)
 app.include_router(sampling.router)
+
+from .api import telemetry
+app.include_router(telemetry.router)
