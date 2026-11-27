@@ -1,3 +1,4 @@
+import {useInteractiveGuide} from './InteractiveGuide';
 import {useRef,useState} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {Link} from 'react-router-dom';
@@ -67,7 +68,7 @@ export function ExploreAssistant({apply,locate,diagnose,bookmarks,selected}:{
  apply:(query:string,group:string)=>void;locate:(norad:number,station:Station)=>void;
  diagnose:()=>void;bookmarks:()=>void;selected:number
 }){
- const dialog=useRef<HTMLDialogElement>(null);
+ const dialog=useRef<HTMLDialogElement>(null),guide=useInteractiveGuide();
  const [text,setText]=useState(''),[action,setAction]=useState<Action|null>(null);
  const [busy,setBusy]=useState(false),[issue,setIssue]=useState('');
  const [task,setTask]=useState<ObservationTask|null>(null),[answer,showAnswer]=useState<ObservationResult|null>(null);
@@ -80,7 +81,7 @@ export function ExploreAssistant({apply,locate,diagnose,bookmarks,selected}:{
   try{
    const result=await runObservation(next);
    setTask({...next,station:result.scenarios[0].station.id});setPrior(previous);showAnswer(result);
-   setAnsweredQuestion(question);askStation(null);
+   setAnsweredQuestion(question);askStation(null);guide?.signal(previous?'comparison':'observation');
   }catch(e){
    if((e as {code?:string}).code==='AI_OBSERVATION_STATION'){
     setStationId('');askStation(next);
@@ -122,14 +123,14 @@ export function ExploreAssistant({apply,locate,diagnose,bookmarks,selected}:{
   finally{setBusy(false)}
  }
  return <>
-  <button className="investigation-launch" onClick={()=>dialog.current?.showModal()} aria-haspopup="dialog">AI 探索任务</button>
+  <button className="investigation-launch" data-guide-target="assistant" onClick={()=>{dialog.current?.showModal();guide?.signal('assistant')}} aria-haspopup="dialog">AI 探索任务</button>
   <dialog ref={dialog} className="investigation-dialog task-drawer" aria-label="AI 探索任务">
    <header><h2>AI 探索任务</h2><button type="button" onClick={close}>关闭</button></header>
    <form className="task-composer" onSubmit={event=>{event.preventDefault();void submit(text)}}>
     <label>你想问什么？<textarea rows={2} value={text} maxLength={400} onChange={e=>setText(e.target.value)} placeholder={answer?'最低仰角改成 30° 呢？':'今晚从北京能看到 ISS 吗？'}/></label>
     <div className="investigation-actions"><button type="submit" disabled={busy||text.trim().length<2}>发送</button>
-     {!answer&&<button type="button" disabled={busy} onClick={()=>submit('今晚从北京能看到 ISS 吗？')}>试问：今晚从北京能看到 ISS 吗？</button>}
-     {answer&&<button type="button" disabled={busy} onClick={()=>submit('最低仰角改成 30° 呢？')}>追问：最低仰角改成 30°</button>}
+     {!answer&&<button type="button" data-guide-target="observe-example" disabled={busy} onClick={()=>submit('今晚从北京能看到 ISS 吗？')}>试问：今晚从北京能看到 ISS 吗？</button>}
+     {answer&&<button type="button" data-guide-target="observe-compare" disabled={busy} onClick={()=>submit('最低仰角改成 30° 呢？')}>追问：最低仰角改成 30°</button>}
     </div>
    </form>
    {lastQuestion&&<p>当前问题：{lastQuestion}</p>}

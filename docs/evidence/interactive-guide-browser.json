@@ -1,0 +1,30 @@
+{
+  "browser": "Edge",
+  "evidence": [
+    {
+      "viewport": 1440,
+      "lesson": "anomaly",
+      "record": 716,
+      "allSteps": true,
+      "resumedSameReportAfterReload": true,
+      "focusReturned": true,
+      "replayAvailable": true
+    },
+    {
+      "viewport": 390,
+      "lesson": "observation",
+      "allSteps": true,
+      "skipPersisted": true,
+      "keyboard": true,
+      "systemReducedMotion": true,
+      "sameWindowComparison": true,
+      "completionInDialog": true
+    },
+    {
+      "viewport": 320,
+      "platformReducedMotion": true,
+      "realControlsWorkAfterPause": true,
+      "noHorizontalOverflow": true
+    }
+  ]
+}

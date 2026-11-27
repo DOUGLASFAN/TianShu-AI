@@ -1,3 +1,4 @@
+import {InteractiveGuideProvider} from './InteractiveGuide';
 import {CatalogSuggestions} from './ExplorationAssistant';
 import {DossierGuide} from './InvestigationEvidence';
 import {TrustedPage} from './TrustedPage';
@@ -213,5 +214,5 @@ function Workspace(){
  </main>;
 }
 
-function App(){const auth=useAuth();if(auth.loading)return <div className="loading-screen"><BrandMark size={40}/><span>正在连接{projectName}…</span></div>;return <Routes><Route path="/login" element={<AccessPage/>}/><Route path="/register" element={<AccessPage key="register" register/>}/><Route path="/dashboard" element={auth.user?<Suspense fallback={<div className="loading-screen">正在加载态势大屏…</div>}><Dashboard/></Suspense>:<Navigate to="/login" replace/>}/><Route path="/*" element={<Shell/>}/></Routes>;}
+function App(){const auth=useAuth();if(auth.loading)return <div className="loading-screen"><BrandMark size={40}/><span>正在连接{projectName}…</span></div>;return <Routes><Route path="/login" element={<AccessPage/>}/><Route path="/register" element={<AccessPage key="register" register/>}/><Route path="/dashboard" element={auth.user?<Suspense fallback={<div className="loading-screen">正在加载态势大屏…</div>}><Dashboard/></Suspense>:<Navigate to="/login" replace/>}/><Route path="/*" element={auth.user?<InteractiveGuideProvider key={auth.user.id}><Shell/></InteractiveGuideProvider>:<Shell/>}/></Routes>;}
 createRoot(document.getElementById('root')!).render(<QueryClientProvider client={queryClient}><BrowserRouter><AuthProvider><MotionConfig reducedMotion="user"><App/></MotionConfig></AuthProvider></BrowserRouter></QueryClientProvider>);

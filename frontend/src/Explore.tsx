@@ -1,3 +1,4 @@
+import {GuideEntry} from './InteractiveGuide';
 import {ExploreAssistant} from './ExplorationAssistant';
 import {InvestigationShelf,type SavedInvestigation} from './InvestigationShelf';
 import {findRegionTracks,regionFrom,type GeoPoint,type RegionHit} from './exploreRegion';
@@ -312,7 +313,7 @@ export function Explore(){
   setRegionIssue('');setRegionHits(findRegionTracks(scene.data,regionFrom(regionPoints[0],regionPoints[1]),begin,finish,engine.groundPoint));
  }
  const assistantActions=<div className="ai-home-actions">
-  <ExploreAssistant selected={selected} apply={applyAssistant} locate={(norad,station)=>{choose(norad);engine?.locateGround(station.lng,station.lat)}}
+  <GuideEntry className="explore-guide-entry"/><ExploreAssistant selected={selected} apply={applyAssistant} locate={(norad,station)=>{choose(norad);engine?.locateGround(station.lng,station.lat)}}
    bookmarks={()=>openBookmarks(n=>n+1)} diagnose={()=>setShowDiagnosis(true)}/>
   <SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime} requestOpen={bookmarkRequest}/>
   <button type="button" disabled={!engine||!scene.data} aria-expanded={regionPoints!==null} onClick={()=>{setRegionPoints(regionPoints===null?[]:null);setRegionHits(null);setRegionIssue('')}}>圈选地图</button>

@@ -1,3 +1,4 @@
+import {useInteractiveGuide} from './InteractiveGuide';
 import {useState,type FormEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {api} from './api';
@@ -69,17 +70,17 @@ const contextNames:Record<string,string>={orbit:'同期轨道',weather:'空间�
 
 export function InvestigationTask({run,record,start,end,onEvidence}:{run:string;record:number;start?:string;end?:string;onEvidence?:(record:number)=>void}){
  const [result,setResult]=useState<Findings|null>(null),[error,fail]=useState(''),[busy,pending]=useState(false);
- const [request,setRequest]=useState('');
+ const [request,setRequest]=useState(''),guide=useInteractiveGuide();
  const taskScope=[run,record,start,end].join('|'), stale=!!result&&request!==taskScope;
  async function execute(e:FormEvent){
   e.preventDefault();pending(true);fail('');setResult(null);setRequest(taskScope);
-  try{setResult(await api<Findings>('/task-workflows/investigate',{method:'POST',body:JSON.stringify({run,record,start,end})}))}
+  try{setResult(await api<Findings>('/task-workflows/investigate',{method:'POST',body:JSON.stringify({run,record,start,end})}));guide?.signal('investigated')}
   catch(err){fail(String(err))}
   finally{pending(false)}
  }
  return <section className="workflow-result workflow-investigation" aria-label="异常调查任务">
   <form onSubmit={execute}>
-   <button type="submit" disabled={busy}>{busy?'正在核对质量、复算规则并查同期证据…':'一键调查当前记录'}</button>
+   <button type="submit" data-guide-target="investigate" disabled={busy}>{busy?'正在核对质量、复算规则并查同期证据…':'一键调查当前记录'}</button>
    <p>本次目标 #{record} · {start&&end?'使用曲线框选范围':'使用整份归档报告'}</p>
   </form>
   {error&&<p role="alert">{error}</p>}
@@ -87,7 +88,7 @@ export function InvestigationTask({run,record,start,end,onEvidence}:{run:string;
   {result&&!stale&&<div aria-live="polite">
    <h3>{result.verdict}</h3>
    <p>{result.mission} · {result.channel} · #{result.point.record} · {result.point.utc} · 测量 {result.point.value??'缺测'}</p>
-   {onEvidence?<button type="button" onClick={()=>onEvidence(result.point.record)}>回到曲线证据</button>:<Link to={'/telemetry?run='+encodeURIComponent(run)+'&record='+record}>打开曲线原始证据</Link>}
+   {onEvidence?<button type="button" data-guide-target="evidence" onClick={()=>{onEvidence(result.point.record);guide?.signal('evidence')}}>回到曲线证据</button>:<Link to={'/telemetry?run='+encodeURIComponent(run)+'&record='+record}>打开曲线原始证据</Link>}
    <h4>下一步查什么</h4><ol>{result.nextSteps.map(step=><li key={step}>{step}</li>)}</ol>
    {result.window&&<p>选区有效 {result.window.included} 条，排除 {result.window.excluded.length} 条。{result.window.rules.map(r=>r.name+' '+(r.targetHit?'标记':'未标记')+'目标点').join('；')}。</p>}
    <details open><summary>规则与反证</summary>

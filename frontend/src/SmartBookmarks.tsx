@@ -1,3 +1,4 @@
+import {useInteractiveGuide} from './InteractiveGuide';
 import {useEffect, useRef, useState} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {Link, useNavigate} from 'react-router-dom';
@@ -14,7 +15,7 @@ export function SmartBookmarks({start,end,formatTime,requestOpen=0}:{
  start?:string; end?:string; requestOpen?:number; formatTime:(time:string)=>string
 }){
  const dialog=useRef<HTMLDialogElement>(null);
- const navigate=useNavigate();
+ const navigate=useNavigate(),guide=useInteractiveGuide();
  const [open,setOpen]=useState(false),[all,setAll]=useState(false);
  const [busy,setBusy]=useState(false),[issue,setIssue]=useState('');
  const handled=useRef(0);
@@ -33,20 +34,20 @@ export function SmartBookmarks({start,end,formatTime,requestOpen=0}:{
    const r=await api<{id:string;candidates:number[]}>('/telemetry/runs',{
     method:'POST',body:JSON.stringify({asset:'opssat-v2',channel:'CADC0872',segment:'8'}),
    });
-   dialog.current?.close();
+   dialog.current?.close();guide?.signal('example');
    navigate('/telemetry?run='+encodeURIComponent(r.id)+(r.candidates.length?'&record='+r.candidates[0]:''));
   }catch(error){setIssue(String(error))}
   finally{setBusy(false)}
  }
  return <>
-  <button className="investigation-launch" type="button" aria-haspopup="dialog"
-   onClick={()=>{setIssue('');dialog.current?.showModal();setOpen(true)}}>智能书签 · 异常调查</button>
+  <button className="investigation-launch" type="button" aria-haspopup="dialog" data-guide-target="bookmarks"
+   onClick={()=>{setIssue('');dialog.current?.showModal();setOpen(true);guide?.signal('bookmarks')}}>智能书签 · 异常调查</button>
   <dialog className="investigation-dialog" ref={dialog} aria-labelledby="bookmark-title" onClose={()=>setOpen(false)}>
    <div className="investigation-heading"><h2 id="bookmark-title">智能书签</h2><button type="button" onClick={()=>dialog.current?.close()}>关闭</button></div>
    <div className="investigation-example">
     <strong>试用公开案例</strong>
     <p>打开 OPS-SAT 片段 8，定位异常候选，然后在曲线上框选范围、复算并比较解释。</p>
-    <button type="button" disabled={busy} onClick={openExample}>{busy?'正在打开…':'打开公开示例 · OPS-SAT 片段 8'}</button>
+    <button type="button" disabled={busy} onClick={openExample} data-guide-target="example">{busy?'正在打开…':'打开公开示例 · OPS-SAT 片段 8'}</button>
     {issue&&<p role="alert">{issue}</p>}
    </div>
    <h3>{all?'归档遥测候选':'当前时段的书签'}</h3>

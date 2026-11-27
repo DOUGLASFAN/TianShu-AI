@@ -1,3 +1,4 @@
+import {GuideEntry} from './InteractiveGuide';
 import {useState} from 'react';
 import {Select} from './components/Select';
 import type {BasemapPreferences} from './basemaps';
@@ -28,7 +29,11 @@ export function useDisplaySettings(){
  const [timeZone,setZone]=useState(readTimeZone);
  const [lessMotion,setMotion]=useState(()=>localStorage.getItem(motionKey)==='1');
  function setTimeZone(value:TimeZone){setZone(value);localStorage.setItem(timeZoneKey,value);}
- function setLessMotion(value:boolean){setMotion(value);localStorage.setItem(motionKey,value?'1':'0');}
+ function setLessMotion(value:boolean){
+  setMotion(value);
+  localStorage.setItem(motionKey,value?'1':'0');
+  window.dispatchEvent(new Event('star-nexus:motion-changed'));
+ }
  return {timeZone,setTimeZone,lessMotion,setLessMotion};
 }
 
@@ -42,6 +47,11 @@ export function DisplaySettings(){
  }
  return <main className="display-settings">
   <div className="page-heading"><h1>设置</h1></div>
+  <section className="panel">
+   <h2>互动练习</h2>
+   <p>用真实的页面控件完成一次观测查询或异常调查。</p>
+   <GuideEntry/>
+  </section>
   <section className="panel">
    <h2>时间显示</h2>
    <label htmlFor="settings-time-zone">默认显示时区</label>
