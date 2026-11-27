@@ -1,3 +1,5 @@
+import {VerificationBrief} from './InvestigationEvidence';
+import {ObservationComparison} from './ExplorationAssistant';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {useLocation,useSearchParams} from 'react-router-dom';
 import {useMutation,useQuery,useQueryClient} from '@tanstack/react-query';
@@ -147,7 +149,10 @@ export function Observations(){
  const groupReplayAction=completed&&basis.kind==='group'?<button className="primary" onClick={startGroup} disabled={groupActive}>整组回放</button>:null;
  const eventActions=completed?<div className="event-actions">{!mobile&&groupReplayAction}<button onClick={()=>replay.mutate()} disabled={!event.data?.data||replay.isPending}>{replay.isPending?'正在准备回放…':basis.kind==='group'?'单星回放':'回放过境'}</button><button className="primary" disabled={!event.data?.data||Date.parse(event.data.data.start)<=Date.now()||!!savedPlanId} onClick={()=>setPlanOpen(true)}>{replanId?'更新计划':'保存观测计划'}</button></div>:null;
  const eventDetails=!completed?null:groupActive?<div className="event-expanded">{groupChart?<ElevationCurve event={groupChart} minimum={basis.minElevation} zone={zone} cursor={clock.time} sampled/>:<p className="muted">{groupWindow.isError?'当前窗口加载失败，可重新进入整组回放重试。':'正在准备所选卫星的当前窗口曲线…'}</p>}<div className="optical-windows"><h3>当前窗口仰角</h3><p>{groupSatellite?.name||'请选择卫星'}</p><small>蓝色点仅表示达到站点仰角要求，不保证肉眼可见。曲线与点位使用同一采样窗口（最多 20 分钟），随回放时间更新。</small></div></div>:<> {event.data?.data&&<div className="event-expanded"><ElevationCurve event={clock.track?{...event.data.data,start:clock.track.start,end:clock.track.end,curve:clock.track.samples.map((r:any)=>[r[0],r[7],r[8],r[9],r[10],r[11],r[4],r[5]])}:event.data.data} minimum={basis.minElevation} zone={zone} cursor={clock.track?clock.time:undefined}/><div className="optical-windows"><h3>潜在目视窗口</h3>{event.data.data.visible_windows.length?event.data.data.visible_windows.map((w:any,i:number)=><p key={i}>{time(w.start,zone)} — {time(w.end,zone)}</p>):<p>本次过境无符合条件的子窗口。</p>}<small>仰角 ≥ {basis.minElevation}°、太阳高度 &lt; −6°、卫星受光。不保证肉眼可见。</small></div></div>}</>;
- return <div className="observations"><div className="page-heading"><h1>观测规划</h1><Select className="timezone-select" label="显示时区" value={zone} onChange={switchZone} options={[{value:"sh",label:"UTC+8 · 北京时间"},{value:"utc",label:"UTC"}]}/></div>{mobile&&<div className="observation-view-nav animated-segments" ref={viewNavigation} role="group" aria-label="观测工作区">
+ return <div className="observations"><div className="page-heading"><h1>观测规划</h1><Select className="timezone-select" label="显示时区" value={zone} onChange={switchZone} options={[{value:"sh",label:"UTC+8 · 北京时间"},{value:"utc",label:"UTC"}]}/></div>
+ {params.get('evidenceRun')&&<VerificationBrief run={params.get('evidenceRun')!}/>}
+ <details className="ai-result"><summary>比较观测方案</summary><ObservationComparison compare defaultQuery={String(norad)}/></details>
+{mobile&&<div className="observation-view-nav animated-segments" ref={viewNavigation} role="group" aria-label="观测工作区">
   <button type="button" aria-pressed={view==='map'} onClick={()=>showView('map')}>地图</button>
   <button type="button" aria-pressed={view==='conditions'} onClick={showConditions}>条件</button>
   <button type="button" aria-pressed={view==='results'} onClick={showResults}>结果{active(data?.status)&&<span className="obs-running-dot" aria-label="计算中"/>}</button>

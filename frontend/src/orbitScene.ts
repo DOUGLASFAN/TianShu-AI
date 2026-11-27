@@ -1,3 +1,4 @@
+import type {GeoPoint,Region} from './exploreRegion';
 import {createBasemap,type BasemapPreferences} from './basemaps';
 import {createSpaceScene} from './spaceScene';
 // Cesium owns continuous motion; React receives telemetry at most once per second.
@@ -161,8 +162,16 @@ export async function createOrbitScene(container:HTMLElement, callbacks:{telemet
     pixelOffset:new C.Cartesian2(15,-18),horizontalOrigin:C.HorizontalOrigin.LEFT,distanceDisplayCondition:new C.DistanceDisplayCondition(0,120000000)}});
   entities.set(track.noradId,entity);
  };
+ let regionPicker:((point:GeoPoint)=>void)|null=null, regionEntity:any=null;
+ let assistantEntities:any[]=[];
  const handler=new C.ScreenSpaceEventHandler(viewer.scene.canvas);
- handler.setInputAction((event:any)=>{const picks=viewer.scene.drillPick(event.position,8);for(const p of picks){const id=typeof p?.id==='string'?p.id:p?.id?.id;if(typeof id==='string'&&/^sat-\d+$/.test(id)){callbacks.select(Number(id.slice(4)));return;}}},C.ScreenSpaceEventType.LEFT_CLICK);
+ handler.setInputAction((event:any)=>{
+  if(regionPicker){
+   const hit=viewer.camera.pickEllipsoid(event.position,C.Ellipsoid.WGS84);
+   if(hit){const g=C.Cartographic.fromCartesian(hit);regionPicker({lng:C.Math.toDegrees(g.longitude),lat:C.Math.toDegrees(g.latitude)});}
+   return;
+  }
+  const picks=viewer.scene.drillPick(event.position,8);for(const p of picks){const id=typeof p?.id==='string'?p.id:p?.id?.id;if(typeof id==='string'&&/^(sat|assist)-\d+$/.test(id)){callbacks.select(Number(id.split('-')[1]));return;}}},C.ScreenSpaceEventType.LEFT_CLICK);
  let down:{x:number;y:number}|null=null;
  const pointerDown=(event:PointerEvent)=>{down={x:event.clientX,y:event.clientY};};
  const pointerMove=(event:PointerEvent)=>{if(down&&Math.hypot(event.clientX-down.x,event.clientY-down.y)>5){down=null;if(tracking){detach();callbacks.drag();}}};
@@ -187,6 +196,37 @@ export async function createOrbitScene(container:HTMLElement, callbacks:{telemet
    alt:geo?geo.height/1000:null,speed,valid:!!p,tracking,playing:viewer.clock.shouldAnimate,atEnd:end,globalStatus:diagnostic.globalStatus,globalStart:diagnostic.globalActiveStart,globalEnd:diagnostic.globalActiveEnd});
  });
  return {
+  highlightMatches(tracks:Track[]){
+   for(const entity of assistantEntities)viewer.entities.remove(entity);
+   assistantEntities=tracks.map(track=>viewer.entities.add({id:'assist-'+track.noradId,position:property(track),
+    point:{pixelSize:10,color:C.Color.CYAN,outlineColor:C.Color.BLACK,outlineWidth:2}}));
+   viewer.scene.requestRender();
+  },
+  pickRegion(callback:((point:GeoPoint)=>void)|null){regionPicker=callback;},
+  drawRegion(r:Region|null){
+   if(regionEntity)viewer.entities.remove(regionEntity);
+   regionEntity=r?viewer.entities.add({rectangle:{coordinates:C.Rectangle.fromDegrees(r.west,r.south,r.east,r.north),
+    material:C.Color.CYAN.withAlpha(.2),outline:true,outlineColor:C.Color.CYAN}}):null;
+   viewer.scene.requestRender();
+  },
+  groundPoint(sample:number[]){
+   const g=C.Cartographic.fromCartesian(new C.Cartesian3(sample[1],sample[2],sample[3]));
+   return {lng:C.Math.toDegrees(g.longitude),lat:C.Math.toDegrees(g.latitude)};
+  },
+  locateGround(lng:number,lat:number){
+   detach();
+   viewer.camera.setView({destination:C.Cartesian3.fromDegrees(lng,lat,7000000),orientation:{heading:0,pitch:-Math.PI/2,roll:0}});
+  },
+  cameraState(){
+   const g=viewer.camera.positionCartographic;
+   return [C.Math.toDegrees(g.longitude),C.Math.toDegrees(g.latitude),g.height,viewer.camera.heading,viewer.camera.pitch,viewer.camera.roll];
+  },
+  restoreCamera(values:number[]){
+   const [lng,lat,height,heading,pitch,roll]=values;
+   if(values.length!==6||!values.every(Number.isFinite)||Math.abs(lat)>90||height<0)return;
+   detach();
+   viewer.camera.setView({destination:C.Cartesian3.fromDegrees(lng,lat,height),orientation:{heading,pitch,roll}});
+  },
   basemap,
   space,
   suspend(value:boolean){if(destroyed||viewer.isDestroyed()||cinemaPaused===value)return;cinemaPaused=value;if(value){previousRenderLoop=viewer.useDefaultRenderLoop;viewer.useDefaultRenderLoop=false;}else{viewer.useDefaultRenderLoop=previousRenderLoop;viewer.resize();viewer.scene.requestRender();}},

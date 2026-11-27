@@ -67,6 +67,10 @@ class Upload(BaseModel):
 
 @router.post('/assets')
 def upload(body:Upload,user=Depends(current_user)):
+    return store_asset(body,user)
+
+
+def store_asset(body,user,source_archive=None):
     if user.is_guest: raise HTTPException(403,'请使用正式账号导入私有档案')
     meta=body.model_dump(exclude={'content'})
     if digest(body.content.encode())!=meta['sha256']: raise HTTPException(422,'文件摘要不符')
@@ -81,12 +85,17 @@ def upload(body:Upload,user=Depends(current_user)):
             if not body.orbitSource or from_tle(body.tle).model.satnum!=body.norad:
                 raise ValueError('根数身份或来源不匹配')
     except (ValueError,OverflowError,csv.Error) as exc: raise HTTPException(422,str(exc)) from exc
+    if source_archive:
+        meta['importProvenance']=source_archive[1]
     key=digest(encode(meta).encode())
     with database() as db:
         db.execute('BEGIN IMMEDIATE')
         if not db.execute('SELECT 1 FROM assets WHERE owner=? AND id=?',(user.id,key)).fetchone() and db.execute('SELECT COUNT(*) FROM assets WHERE owner=?',(user.id,)).fetchone()[0]>=100:
             raise HTTPException(409,'个人档案数量已达 100 份')
         db.execute('INSERT OR IGNORE INTO assets VALUES(?,?,?,?)',(user.id,key,encode(meta),body.content))
+        if source_archive:
+            db.execute('CREATE TABLE IF NOT EXISTS import_originals(owner TEXT,id TEXT,content TEXT,PRIMARY KEY(owner,id))')
+            db.execute('INSERT OR IGNORE INTO import_originals VALUES(?,?,?)',(user.id,key,source_archive[0]))
     return {'id':key,'quality':inventory(groups)}
 
 

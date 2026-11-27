@@ -1,3 +1,5 @@
+import {CatalogSuggestions} from './ExplorationAssistant';
+import {DossierGuide} from './InvestigationEvidence';
 import {TrustedPage} from './TrustedPage';
 import {TelemetryPage} from './TelemetryPage';
 import {SamplingPage} from './SamplingPage';
@@ -138,9 +140,9 @@ function Catalog(){
   {mobile&&<><div><span>发射日期</span><b>{satellite.launchDate||'未知'}</b></div><div><span>归属</span><b>{satellite.owner||'未知'}</b></div></>}
   <div><span>轨道历元 UTC</span><b>{satellite.dataQuality.epoch}</b></div><div><span>原始采集时间 UTC</span><b>{satellite.dataQuality.fetchedAt}</b></div>
   <div><span>倾角</span><b>{satellite.orbitElements.INCLINATION}°</b></div><div><span>国际编号</span><b>{satellite.orbitElements.OBJECT_ID||'未知'}</b></div>
- </div></>:<p>正在读取档案…</p>}</>;
+ </div><DossierGuide norad={satellite.noradId}/></>:<p>正在读取档案…</p>}</>;
  return <><div className="page-heading"><div><h1>卫星目录</h1></div></div>
-  <section className="panel catalog-panel"><div className="catalog-toolbar"><div className="search-field"><MagnifyingGlass size={20}/><input aria-label="搜索卫星" placeholder="搜索卫星名称或 NORAD 编号" value={keyword} onChange={e=>setKeyword(e.target.value)}/></div><Select className="catalog-group-select" label="卫星分组" value={group} onChange={value=>{setGroup(value);setPage(1);}} options={[{value:'',label:'全部已导入记录'},...(groups.data?.list||[]).map((row:any)=>({value:row.slug,label:row.name,description:`${row.count.toLocaleString()} 颗`}))]}/></div>
+  <CatalogSuggestions/><section className="panel catalog-panel"><div className="catalog-toolbar"><div className="search-field"><MagnifyingGlass size={20}/><input aria-label="搜索卫星" placeholder="搜索卫星名称或 NORAD 编号" value={keyword} onChange={e=>setKeyword(e.target.value)}/></div><Select className="catalog-group-select" label="卫星分组" value={group} onChange={value=>{setGroup(value);setPage(1);}} options={[{value:'',label:'全部已导入记录'},...(groups.data?.list||[]).map((row:any)=>({value:row.slug,label:row.name,description:`${row.count.toLocaleString()} 颗`}))]}/></div>
    <Notice error={data.error||change.error}/>{data.isPending?<div className="empty">正在读取目录…</div>:<>{mobile?<ul className="catalog-mobile-list" aria-label="卫星列表">{data.data?.list.map((item:any)=>{
     const followed=favoriteIds.has(item.noradId);
     const quality=item.dataQuality.state;

@@ -1,3 +1,6 @@
+import {ExploreAssistant} from './ExplorationAssistant';
+import {InvestigationShelf,type SavedInvestigation} from './InvestigationShelf';
+import {findRegionTracks,regionFrom,type GeoPoint,type RegionHit} from './exploreRegion';
 import {SmartBookmarks} from './SmartBookmarks';
 import {BasemapControls} from './BasemapControls';
 import {SpaceControls} from './SpaceControls';
@@ -34,6 +37,16 @@ export function Explore(){
  const samplingId=params.get('sampling')||historicalId;
  const replaying=!!samplingId||params.get('mode')==='replay';
  const [globalView,setGlobalView]=useState(false);
+ const [showDiagnosis,setShowDiagnosis]=useState(false),[bookmarkRequest,openBookmarks]=useState(0);
+ const [undoFilter,setUndoFilter]=useState<Record<string,string>|null>(null);
+ const [regionPoints,setRegionPoints]=useState<GeoPoint[]|null>(null),[regionHits,setRegionHits]=useState<RegionHit[]|null>(null);
+ const [regionStart,setRegionStart]=useState(''),[regionEnd,setRegionEnd]=useState(''),[regionIssue,setRegionIssue]=useState('');
+ const [bounds,setBounds]=useState({south:'',north:'',west:'',east:''});
+ const sessionId=params.get('session');
+ const savedScene=useQuery({queryKey:['investigation-session',sessionId],enabled:!!sessionId,
+  queryFn:()=>api<SavedInvestigation>('/investigation-tools/sessions/'+encodeURIComponent(sessionId!))});
+ const restoredView=useRef<string|null>(null);
+
  const [keyword,setKeyword]=useState(search),[clean,setClean]=useState(false),[clouds,setClouds]=useState(true),[rate,setRate]=useState(1),[playing,setPlaying]=useState(true),[tracking,setTracking]=useState(false);
  const [engine,setEngine]=useState<OrbitScene|null>(null),[engineError,setEngineError]=useState(''),[rebuild,setRebuild]=useState(0),[message,setMessage]=useState('');
  const [timeInput,setTimeInput]=useState<number|null>(null);
@@ -84,6 +97,14 @@ export function Explore(){
  const trackKey=['explore-trajectory',selected,trackTime,replaying?'replay':'live'];
  const trajectory=useQuery({queryKey:trackKey,queryFn:({signal})=>api(`/explore/satellites/${selected}/trajectory?at=${encodeURIComponent(trackTime!)}`,{signal}),enabled:!samplingId&&!!trackTime&&selected>0,staleTime:replaying?Infinity:300000,refetchOnWindowFocus:!replaying,refetchOnReconnect:!replaying,
   placeholderData:previous=>!replaying&&previous?.data?.noradId===selected?previous:undefined});
+ const highlightIds:number[]=undoFilter?(directory.data?.list||[]).slice(0,6).map((item:{noradId:number})=>item.noradId):[];
+ const filterTracks=useQuery({
+  queryKey:['explore-assistant-highlight',highlightIds,trackTime],
+  enabled:!!undoFilter&&!replaying&&!!trackTime&&highlightIds.length>0,
+  queryFn:async({signal})=>(await Promise.allSettled(highlightIds.map(id=>api<{data:SceneData['satellites'][number]}>(`/explore/satellites/${id}/trajectory?at=${encodeURIComponent(trackTime!)}`,{signal})))).flatMap(r=>r.status==='fulfilled'?[r.value.data]:[]),
+  staleTime:60000,
+ });
+ useEffect(()=>{engine?.highlightMatches(undoFilter&&!replaying?filterTracks.data||[]:[]);},[engine,undoFilter,replaying,filterTracks.data]);
  const selectedTrack=samplingId?scene.data?.satellites.find(track=>track.noradId===selected):trajectory.data?.data;
  const favorites=useQuery({queryKey:['favorites'],queryFn:()=>api('/favorites')});
  useRealtime(selected,value=>{if(!replaying&&trackTime)cache.setQueryData(trackKey,value);});
@@ -124,6 +145,19 @@ export function Explore(){
  }},[engine,scene.data,historicalAt]);
  useEffect(()=>{engine?.select(selected);setTracking(false);setTelemetry(null);},[engine,selected]);
  useEffect(()=>{engine?.track(selectedTrack?.noradId===selected?selectedTrack:null);},[engine,selectedTrack,selected,scene.data]);
+ useEffect(()=>{
+  if(!engine||regionPoints===null)return;
+  engine.pickRegion(regionPoints.length<2?p=>setRegionPoints(old=>old&&old.length<2?[...old,p]:old):null);
+  engine.drawRegion(regionPoints.length===2?regionFrom(regionPoints[0],regionPoints[1]):null);
+  return ()=>{engine.pickRegion(null);engine.drawRegion(null)};
+ },[engine,regionPoints]);
+ useEffect(()=>{
+  const saved=savedScene.data;if(!engine||!scene.data||!saved||restoredView.current===saved.id)return;
+  restoredView.current=saved.id;
+  const at=new URLSearchParams(saved.query).get('at');
+  if(at&&replaying&&engine.seek(at))engine.play(false);
+  if(saved.camera)engine.restoreCamera(saved.camera);
+ },[engine,scene.data,replaying,savedScene.data]);
  useEffect(()=>{engine?.clouds(clouds);},[engine,clouds]);
  useEffect(()=>{if(!message)return;const timer=setTimeout(()=>setMessage(''),4500);return()=>clearTimeout(timer);},[message]);
  const detail=details.data?.data,orbit=detail?.orbitElements,q=selectedTrack?.dataQuality||detail?.dataQuality;
@@ -168,7 +202,7 @@ export function Explore(){
  }
  function seek(value:string){if(engine?.seek(value)){engine.play(false);setPlaying(false);if(replayClock.current){replayClock.current.time=value;replayClock.current.playing=false;}}else setMessage('请选择回放范围内的时间。');}
  function enterReplay(){if(replaying)return;if(scene.data)cache.setQueryData(replaySceneKey,scene.data);update({mode:'replay'});}
- function enterLive(){if(!replaying)return;update({sampling:'',mode:''});}
+ function enterLive(){if(!replaying)return;update({sampling:'',historical:'',at:'',mode:''});}
  const selectedName=detail?.name||directory.data?.list.find((row:any)=>row.noradId===selected)?.name||scene.data?.satellites.find(row=>row.noradId===selected)?.name||`NORAD ${selected}`;
  const metadata=[['国家 / 组织',detail?.owner||'未知'],['发射日期',detail?.launchDate||'未知'],['轨道周期',period?numeric(period)+' min':'未知'],['轨道倾角',orbit?numeric(orbit.INCLINATION)+'°':'未知'],['偏心率',orbit?numeric(orbit.ECCENTRICITY,5):'未知'],['对象类型',detail?.objectType||'未知']];
  const directoryTotal=(samplingId?scene.data?.satellites.length:directory.data?.total)?.toLocaleString()??'—';
@@ -252,6 +286,7 @@ export function Explore(){
      <button disabled={!controlsReady}>定位时间</button>
     </form></details>;
  const timeTools=<div className="timebar-tools" role="group" aria-label="时间工具">
+  {undoFilter&&<button onClick={()=>{setKeyword(undoFilter.q);update(undoFilter);setUndoFilter(null)}}>撤销 AI 筛选</button>}
   <Link to="/sampling">{samplingId?'管理本方案':'自定义采样'}</Link>
   <label className="timebar-zone"><span>时区</span><select aria-label="显示时区" value={timeZone} onChange={event=>setTimeZone(event.target.value as TimeZone)}>
    {timeZoneOptions.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}
@@ -259,15 +294,81 @@ export function Explore(){
   {replaying&&exactTimeTool}
   <label><input type="checkbox" checked={reduced} disabled={!!systemReduced} onChange={event=>setLessMotion(event.target.checked)}/>减少动态效果{systemReduced?'（系统）':''}</label>
  </div>;
+ function applyAssistant(q:string,newGroup:string){
+  setUndoFilter({q:search,group,page:String(page),country,use:purpose,orbit:orbitFilter,mode:params.get('mode')||'',sampling:params.get('sampling')||'',historical:historicalId||'',at:historicalAt||''});
+  const keyword=q==='北斗三号'?'BEIDOU-3':q||({galileo:'GALILEO','gps-ops':'NAVSTAR'} as Record<string,string>)[newGroup]||'';
+  setKeyword(keyword);
+  update({q:keyword,group:['stations','beidou'].includes(newGroup)?newGroup:'',page:'1',country:'',use:'',orbit:'',sampling:'',historical:'',mode:'',at:''});
+  if(mobile)openSheet('search',stagePanel.current);
+ }
+ function runRegion(lastTwoHours=false){
+  if(!scene.data||!engine||!regionPoints||regionPoints.length!==2)return;
+  const finish=lastTwoHours?Date.parse(displayTime||scene.data.end):regionEnd?Date.parse(regionEnd):Date.parse(scene.data.end);
+  const begin=lastTwoHours?finish-7200000:regionStart?Date.parse(regionStart):Date.parse(scene.data.start);
+  if(lastTwoHours&&Number.isFinite(finish)){setRegionStart(new Date(begin).toISOString());setRegionEnd(new Date(finish).toISOString())}
+  if(!Number.isFinite(begin)||!Number.isFinite(finish)||begin>=finish||begin<Date.parse(scene.data.start)||finish>Date.parse(scene.data.end)){
+   setRegionIssue('所选时段超出当前场景可用轨迹。请使用覆盖该时段的历史回放。');setRegionHits(null);return;
+  }
+  setRegionIssue('');setRegionHits(findRegionTracks(scene.data,regionFrom(regionPoints[0],regionPoints[1]),begin,finish,engine.groundPoint));
+ }
+ const assistantActions=<div className="ai-home-actions">
+  <ExploreAssistant apply={applyAssistant} locate={(norad,station)=>{choose(norad);engine?.locateGround(station.lng,station.lat)}}
+   bookmarks={()=>openBookmarks(n=>n+1)} diagnose={()=>setShowDiagnosis(true)}/>
+  <SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime} requestOpen={bookmarkRequest}/>
+  <button type="button" disabled={!engine||!scene.data} aria-expanded={regionPoints!==null} onClick={()=>{setRegionPoints(regionPoints===null?[]:null);setRegionHits(null);setRegionIssue('')}}>圈选地图</button>
+  <button type="button" aria-expanded={showDiagnosis} onClick={()=>setShowDiagnosis(!showDiagnosis)}>画面诊断</button>
+ </div>;
+ const regionPanel=regionPoints!==null&&<div className="ai-home-notice ai-region-panel">
+  <strong>区域轨迹调查</strong><p aria-live="polite">{regionPoints.length<2?'点击地球上区域的两个对角点（'+regionPoints.length+'/2）':'已选矩形区域，检测地面投影是否进入。'}</p>
+  <details><summary>手动输入经纬度</summary><form onSubmit={event=>{
+   event.preventDefault();
+   setRegionPoints([{lat:Number(bounds.south),lng:Number(bounds.west)},{lat:Number(bounds.north),lng:Number(bounds.east)}]);
+   setRegionHits(null);setRegionIssue('');
+  }}><div className="ai-field-grid">{([['south','南纬界'],['north','北纬界'],['west','西经界'],['east','东经界']] as const).map(([key,label])=>
+   <label key={key}>{label}<input type="number" value={bounds[key]} step="any" required min={key==='south'||key==='north'?-90:-180}
+    max={key==='south'||key==='north'?90:180} onChange={e=>setBounds({...bounds,[key]:e.target.value})}/></label>)}</div>
+   <button>应用坐标区域</button></form></details>
+  <div className="ai-field-grid"><label>起点（带时区）<input value={regionStart} onChange={e=>{setRegionStart(e.target.value);setRegionHits(null)}} placeholder={scene.data?.start}/></label>
+   <label>终点（带时区）<input value={regionEnd} onChange={e=>{setRegionEnd(e.target.value);setRegionHits(null)}} placeholder={scene.data?.end}/></label></div>
+  <div className="investigation-actions"><button disabled={regionPoints.length!==2} onClick={()=>runRegion()}>查找经过区域的卫星</button>
+   <button disabled={regionPoints.length!==2} onClick={()=>runRegion(true)}>查过去两小时</button><button onClick={()=>{setRegionPoints([]);setRegionHits(null)}}>重选区域</button><button onClick={()=>setRegionPoints(null)}>关闭</button></div>
+  {regionIssue&&<p role="alert">{regionIssue}</p>}
+  {regionHits&&<><p>仅检查当前场景中 {scene.data?.satellites.length??0} 条可用轨迹。时间为采样边界，可能漏掉采样间经过。</p>
+   {!regionHits.length&&<p>可用轨迹没有发现进入区域的采样点。</p>}<ul>{regionHits.slice(0,12).map(hit=><li key={hit.norad+hit.entry}>
+    <strong>{hit.name}</strong> {formatTime(hit.entry)}{hit.entryClipped?'（起点已在区域）':''} 至 {formatTime(hit.exit)}{hit.exitClipped?'（终点仍在区域）':''}
+    <button onClick={()=>{choose(hit.norad);if(replaying)seek(hit.entry)}}>定位卫星</button>
+   </li>)}</ul></>}
+ </div>;
+ const diagnosisPanel=showDiagnosis&&regionPoints===null&&<div className="ai-home-notice">
+  <strong>当前画面诊断 · NORAD {selected}</strong>
+  {scene.error?<p>轨迹加载失败。可以重试或返回实时态势。</p>:scene.isPending?<p>场景正在载入，待轨迹返回后才能判断覆盖。</p>
+   :replaying&&!selectedTrack?<p>当前回放数据没有这颗卫星的轨迹。</p>
+   :telemetry?.valid===false?<p>当前时刻没有所选卫星的有效轨迹点。</p>
+   :<p>若找不到标记，请检查相机视野和目录筛选。当前场景{showGlobal?'显示全球总览':'使用代表卫星或所选轨迹'}。</p>}
+  {undoFilter&&<p>已定位当前结果页中最多 6 颗具有可用轨迹的匹配卫星。</p>}{(search||group||country||purpose||orbitFilter)&&<p>筛选生效：{[search,group,country,purpose,orbitFilter].filter(Boolean).join(' / ')}</p>}
+  <div className="investigation-actions">
+   <button onClick={()=>{setKeyword('');update({q:'',group:'',page:'1',country:'',use:'',orbit:''})}}>清除筛选</button>
+   {replaying&&selectedTrack&&<button onClick={()=>seek(selectedTrack.start)}>回到轨迹起点</button>}
+   {replaying&&<button onClick={enterLive}>返回实时态势</button>}
+   {scene.error&&<button onClick={()=>scene.refetch()}>重试轨迹</button>}
+   <button onClick={()=>setShowDiagnosis(false)}>关闭</button>
+  </div>
+ </div>;
+ const shelf=<InvestigationShelf capture={()=>{const snapshot=new URLSearchParams(params);
+  snapshot.delete('session');
+  if(replaying&&displayTime)snapshot.set('at',displayTime);
+  return {path:'/explore',query:snapshot.toString(),camera:engine?.cameraState(),report:historicalId||undefined};
+ }}/>;
  const toast=<motion.div className="orbit-toast" role="status" aria-live="polite" initial={false} animate={{opacity:message?1:0,y:message||reduced?0:8}} transition={{duration:reduced?0:.16}}>{message}</motion.div>;
  return <main className={`explorer ${clean?'clean-view':''} ${mobile?'mobile-explorer':''} ${reduced?'explorer-reduced':''}`} aria-label="卫星探索工作台">
   {!mobile&&directoryPanel}
   <section className="orbital-stage" ref={stagePanel} tabIndex={-1} aria-label="地球与轨道">
    <div className="orbit-globe" ref={host} aria-label="可旋转的三维地球"><div className="globe-credits"/></div>
-   {!mobile&&!clean&&<div className="investigation-globe-entry"><SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime}/></div>}
+   {!mobile&&!clean&&<div className="investigation-globe-entry">{assistantActions}</div>}
    {engine&&scene.isPending&&<div className="scene-status" role="status">正在加载卫星轨迹</div>}
    <BasemapControls map={engine?.basemap} showControls={false}/><SpaceControls engine={engine}/><div className="globe-tools"><button aria-label="全球视角" title="全球视角" disabled={!controlsReady} onClick={()=>{engine?.home();setTracking(false);setMessage('已恢复全球视角。');}}><GlobeHemisphereEast size={21}/></button><button aria-label="切换云层" title="历史合成云层" aria-pressed={clouds} disabled={!engine} onClick={()=>setClouds(!clouds)}><Cloud size={21}/></button><button aria-label="纯净视图" title="纯净视图" aria-pressed={clean} onClick={()=>setClean(!clean)}><ArrowsOutSimple size={21}/></button></div>
    {tracking&&<div className="tracking-pill"><Target size={16}/>正在跟踪 {detail?.name||selected}<button onClick={()=>{engine?.follow();setTracking(false);}}>退出跟踪</button></div>}
+   {regionPanel}{diagnosisPanel}
    <div className="stage-legend"><span><i className="legend-line amber"/>空间轨迹（地固系）</span><span><i className="legend-line dashed"/>地面投影</span><span><i className="legend-point"/>公开卫星</span></div>
    <div className="stage-messages">{showGlobal&&globalFeed.data&&telemetry?.globalStatus==='outside'&&<p className="scene-warning">当前时刻的全球点位暂不可用，正在等待下一批推算。</p>}{showGlobal&&<ErrorMessage error={globalFeed.error} retry={()=>globalFeed.refetch()}/>}{showGlobal&&globalFeed.data?.delivery==='snapshot'&&<p className="scene-warning">数据库暂不可用，显示 {formatTime(globalFeed.data.generatedAt)} 的历史快照，区间外不绘制点位。</p>}<ErrorMessage error={engineError} retry={()=>setRebuild(v=>v+1)}/><ErrorMessage error={scene.error} retry={()=>scene.refetch()}/>{samplingId&&scene.error&&<Link className="button" to="/sampling">返回采样管理</Link>}{scene.data?.failed.length!>0&&<p className="scene-warning">{scene.data?.failed.length} 颗卫星暂无法推算，未绘制。</p>}</div>
    {mobile&&!sheet&&toast}
@@ -282,8 +383,9 @@ export function Explore(){
     <div className="mobile-map-modes">
      {modeButtons}
      {!replaying&&liveActions}
-     <SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime}/>
+     {assistantActions}
     </div>
+    {shelf}
     {replaying?replayControls:<div className="mobile-live-time"><span>实时 <time dateTime={displayTime}>{formatTime(displayTime)}</time></span></div>}
    </section>}
    <dialog className="mobile-explore-sheet" ref={dialog} data-sheet={sheet||undefined} aria-labelledby="mobile-explore-sheet-title"
@@ -308,7 +410,7 @@ export function Explore(){
    {replaying?replayControls:liveActions}
    <div className="timebar-secondary">
     <span className="timebar-use">{replaying?'拖动时间轴或选择倍率播放。全球总览在实时态势中查看。':'查看当前点位。拖动时间或倍速播放请切到轨迹回放。'}</span>
-    {timeTools}
+    {timeTools}{shelf}
    </div>
   </section>
   </>}

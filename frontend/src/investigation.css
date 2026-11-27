@@ -20,3 +20,17 @@
 .hypothesis-grid article { border:1px solid #354b63; border-radius:8px; padding:.8rem; }
 .hypothesis-grid strong { display:block; margin-top:.45rem; }
 .telemetry-chart-select { touch-action:none; cursor:crosshair; }
+.ai-tool-form { display:grid; gap:.7rem; margin:.75rem 0; }
+.ai-field-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr)); gap:.65rem; }
+.ai-field-grid label { min-width:0; }
+.ai-field-grid input,.ai-field-grid select,.investigation-dialog textarea { width:100%; }
+.ai-result { min-width:0; overflow-wrap:anywhere; border:1px solid #354b63; border-radius:8px; padding:.7rem; }
+.ai-result article+article { border-top:1px solid #354b63; margin-top:.6rem; padding-top:.6rem; }
+.ai-home-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:.4rem; }
+.ai-home-actions button { min-height:44px; }
+.ai-home-notice { position:absolute; z-index:4; top:4.2rem; right:1rem; max-width:min(27rem,calc(100% - 2rem)); max-height:calc(100% - 5rem); overflow:auto; padding:.7rem; border:1px solid #55718d; border-radius:8px; background:#101c2b; color:#e2edf7; }
+.ai-shelf { position:relative; }
+.ai-shelf ul { position:absolute; bottom:100%; right:0; width:max-content; max-width:min(19rem,80vw); max-height:12rem; overflow:auto; z-index:6; padding:.7rem 1.5rem; background:#121f2f; border:1px solid #55718d; border-radius:8px; }
+.ai-spark { display:block; width:100%; max-width:25rem; height:4rem; background:#122439; }
+.ai-context-track { position:relative; min-height:1.1rem; background:#14283b; border-radius:.3rem; margin:.25rem 0; }
+.ai-context-track > span { position:absolute; top:.3rem; height:.5rem; border-radius:.2rem; background:#76c8ff; min-width:4px; }

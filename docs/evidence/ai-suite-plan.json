@@ -1,0 +1,21 @@
+{
+  "station": "Beijing",
+  "norad": 25544,
+  "compared": [
+    [
+      15.0,
+      4
+    ],
+    [
+      30.0,
+      2
+    ]
+  ],
+  "selectedMinimum": 30.0,
+  "prediction": "completed",
+  "planSaved": true,
+  "publicCaseVerification": {
+    "channel": "CADC0872",
+    "catalogAvailable": false
+  }
+}

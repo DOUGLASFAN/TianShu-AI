@@ -1,0 +1,18 @@
+{
+  "browser": "Edge",
+  "result": {
+    "search": true,
+    "diagnose": true,
+    "region": true,
+    "mapSession": true,
+    "bookmark": true,
+    "investigation": true,
+    "reportSession": true,
+    "similar": true,
+    "context": true,
+    "challenge": true,
+    "followup": true,
+    "compare": true,
+    "recommend": true
+  }
+}

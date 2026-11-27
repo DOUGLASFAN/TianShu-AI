@@ -60,6 +60,11 @@ def compare_window(report, start, end, target, instant):
              against='结论仅适用于当前范围和两种阈值。可移动窗口边界继续复算。',
              records=list(dict.fromkeys(([target] if changed else [])+disagreement))[:12]),
     ]
-    return dict(start=start.isoformat(),end=end.isoformat(),included=len(valid),excluded=excluded,gaps=gaps,
+    quality=dict(missing=sum(p['value'] is None for p in points),
+                 interpolated=sum(p.get('quality')=='补点' for p in points),
+                 flagged=sum(p.get('quality')=='质量待核验' for p in points),
+                 duplicateTimes=len(points)-len(observed),unit=report['asset'].get('unit','未提供'),
+                 conversions=report.get('conversions',{}))
+    return dict(start=start.isoformat(),end=end.isoformat(),included=len(valid),excluded=excluded,gaps=gaps,quality=quality,
                 rules=rules,hypotheses=hypotheses,target=target if in_window else None,
                 baselineHit=baseline if in_window else None,windowChanged=changed)

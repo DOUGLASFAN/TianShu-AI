@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {Link, useNavigate} from 'react-router-dom';
 import {api} from './api';
@@ -10,13 +10,17 @@ type Bookmark = {id:string;time:string}&(
  | {kind:'weather';category:string;source:string}
 );
 
-export function SmartBookmarks({start,end,formatTime}:{
- start?:string; end?:string; formatTime:(time:string)=>string
+export function SmartBookmarks({start,end,formatTime,requestOpen=0}:{
+ start?:string; end?:string; requestOpen?:number; formatTime:(time:string)=>string
 }){
  const dialog=useRef<HTMLDialogElement>(null);
  const navigate=useNavigate();
  const [open,setOpen]=useState(false),[all,setAll]=useState(false);
  const [busy,setBusy]=useState(false),[issue,setIssue]=useState('');
+ const handled=useRef(0);
+ useEffect(()=>{if(requestOpen>handled.current&&dialog.current){
+  handled.current=requestOpen;if(!dialog.current.open)dialog.current.showModal();setOpen(true);
+ }},[requestOpen]);
  const inRange=!all&&!!start&&!!end;
  const query=new URLSearchParams(inRange?{start:start!,end:end!}:{});
  const bookmarks=useQuery({

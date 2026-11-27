@@ -134,3 +134,29 @@ def test_investigation_uses_frozen_report_and_owner(client):
     user.id='other'
     assert c.post(path,json=window).status_code==404
     assert c.get('/api/investigation/bookmarks').json()==[]
+
+def test_ai_tools_use_frozen_evidence_and_keep_original(client):
+    c,user=client
+    saved=c.post('/api/telemetry/runs',json=dict(asset='opssat-v2',channel='CADC0872',segment='8')).json()
+    run=saved['id'];prefix='/api/investigation-tools/runs/'+run
+    comparisons=c.get(prefix+'/similar').json()
+    assert {'1','5'} <= {m['segment'] for m in comparisons['matches']}
+    assert all(-1<=m['correlation']<=1 and len(m['curve'])==32 for m in comparisons['matches'])
+    challenge=c.get(prefix+'/challenge').json()
+    assert challenge['target']==716 and len(challenge['results'])==3
+    assert challenge['results'][-1]['included']==399
+    data={'raw':'采集时间,测点,读数\n2022-06-02T00:25:00Z,X,2\n','mapping':{'timestamp':'采集时间','channel':'测点','value':'读数'},
+          'metadata':{'mission':'test','norad':44878,'source':'fixture','version':'1','unit':'V'}}
+    preview=c.post('/api/investigation-tools/import/preview',json=data).json()
+    assert preview['rows'][0]['value']=='2'
+    asset=c.post('/api/investigation-tools/import/commit',json=data).json()['id']
+    original='/api/investigation-tools/imports/'+asset+'/original'
+    assert c.get(original).text==data['raw']
+    assert c.get('/api/telemetry/assets/'+asset).json()['meta']['importProvenance']['mapping']==data['mapping']
+    session={'path':'/telemetry','report':run,'query':'run='+run,'selection':[saved['start'],saved['end']]}
+    key=c.post('/api/investigation-tools/sessions',json=session).json()['id']
+    url='/api/investigation-tools/sessions/'+key
+    assert c.get(url).json()['selection']==session['selection']
+    user.id='another-owner'
+    assert c.get(original).status_code==404 and c.get(url).status_code==404
+    assert c.get(prefix+'/similar').status_code==404

@@ -1,3 +1,4 @@
+import {ReportEvidencePicker} from './InvestigationEvidence';
 import {useEffect,useRef,useState} from 'react';
 import {useSearchParams} from 'react-router-dom';
 import {useQuery} from '@tanstack/react-query';
@@ -62,7 +63,7 @@ export function Environment(){
  function change(key:string,value:string){setParams(p=>{const n=new URLSearchParams(p);value?n.set(key,value):n.delete(key);if(!['page','event','hours'].includes(key))n.delete('page');return n;});}
  const data=overview.data?.data,observation=data?.observation,forecast=data?.forecast,sources=data?.sources||[],observedSource=sources.find((s:any)=>s.id===observation?.sourceId),forecastSource=sources.find((s:any)=>s.id==='noaa-forecast'),noticeSource=sources.find((s:any)=>s.id==='noaa-alerts');
  const points=(data?.trend||[]).filter((p:any)=>Date.parse(p.time)>=Date.parse(data.asOf)-hours*3600000);
- return <div className="environment-page" data-mobile-view={mobile?view:undefined}><div className="page-heading"><h1>空间环境</h1><button onClick={()=>{overview.refetch();events.refetch();}} disabled={overview.isFetching||events.isFetching}><ArrowClockwise size={17}/>刷新视图</button></div>
+ return <div className="environment-page" data-mobile-view={mobile?view:undefined}><div className="page-heading"><h1>空间环境</h1><ReportEvidencePicker show="context"/><button onClick={()=>{overview.refetch();events.refetch();}} disabled={overview.isFetching||events.isFetching}><ArrowClockwise size={17}/>刷新视图</button></div>
  {(overview.error||events.error)&&<p className="notice error" role="alert">{String(overview.error||events.error)}{data?'；保留上次读取结果。':''}</p>}
  <div className="weather-metrics">
   <section className="panel weather-metric">

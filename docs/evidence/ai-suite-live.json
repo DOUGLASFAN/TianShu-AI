@@ -1,0 +1,65 @@
+{
+  "search": {
+    "action": {
+      "intent": "search",
+      "query": "25544",
+      "group": "",
+      "station": "北京",
+      "window": "tonight"
+    },
+    "model": "qwen2.5-0.5b-instruct-q4_k_m"
+  },
+  "observe": {
+    "action": {
+      "intent": "observe",
+      "query": "25544",
+      "group": "",
+      "station": "北京",
+      "window": "tonight"
+    },
+    "model": "qwen2.5-0.5b-instruct-q4_k_m"
+  },
+  "bookmarks": {
+    "action": {
+      "intent": "bookmarks",
+      "query": "",
+      "group": "",
+      "station": "",
+      "window": "next-day"
+    },
+    "model": "qwen2.5-0.5b-instruct-q4_k_m"
+  },
+  "diagnose": {
+    "action": {
+      "intent": "diagnose",
+      "query": "",
+      "group": "",
+      "station": "",
+      "window": "next-day"
+    },
+    "model": "qwen2.5-0.5b-instruct-q4_k_m"
+  },
+  "scenarios": [
+    {
+      "minimum": 15.0,
+      "windows": 5,
+      "optical": 1
+    },
+    {
+      "minimum": 30.0,
+      "windows": 3,
+      "optical": 1
+    }
+  ],
+  "context": {
+    "available": [
+      "telemetry",
+      "orbit"
+    ],
+    "missing": [
+      "weather",
+      "observation"
+    ]
+  },
+  "dossierArchives": 1
+}
