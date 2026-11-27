@@ -8,6 +8,8 @@
       "stdev": 2.2976124092528443e-05,
       "span": 6.71953e-05,
       "independentMean": 1.0584846070038911e-05,
+      "independentCount": 257,
+      "independentSpan": 6.71953e-05,
       "verified": true
     },
     "candidateRecords": [],
@@ -51,6 +53,8 @@
       "stdev": 1.869300178062774e-05,
       "span": 9.17086e-05,
       "independentMean": 8.5331435e-07,
+      "independentCount": 280,
+      "independentSpan": 9.17086e-05,
       "verified": true
     },
     "candidateRecords": [],
@@ -94,6 +98,8 @@
       "stdev": 1.2854177816387117e-05,
       "span": 8.08002e-05,
       "independentMean": 1.520437315e-06,
+      "independentCount": 400,
+      "independentSpan": 8.08002e-05,
       "verified": true
     },
     "candidateRecords": [
