@@ -3,7 +3,7 @@ import {useRef,useState} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {Link} from 'react-router-dom';
 import {api} from './api';
-import {ObservationAnswer,runObservation,type ObservationTask,type ObservationResult} from './TaskResults';
+import {ObservationAnswer,nextObservationPlan,runObservation,type ObservationTask,type ObservationResult} from './TaskResults';
 import './investigation.css';
 
 type Action={intent:'search'|'observe'|'bookmarks'|'diagnose'|'unsupported';query:string;group:string;station:string;window:'now'|'tonight'|'next-day'};
@@ -81,7 +81,9 @@ export function ExploreAssistant({apply,locate,diagnose,bookmarks,selected}:{
   try{
    const result=await runObservation(next);
    setTask({...next,station:result.scenarios[0].station.id});setPrior(previous);showAnswer(result);
-   setAnsweredQuestion(question);askStation(null);guide?.signal(previous?'comparison':'observation');
+   setAnsweredQuestion(question);askStation(null);
+   if(previous)guide?.signal('comparison',{planning:nextObservationPlan(result,previous)});
+   else guide?.signal('observation');
   }catch(e){
    if((e as {code?:string}).code==='AI_OBSERVATION_STATION'){
     setStationId('');askStation(next);
@@ -129,7 +131,7 @@ export function ExploreAssistant({apply,locate,diagnose,bookmarks,selected}:{
    <form className="task-composer" onSubmit={event=>{event.preventDefault();void submit(text)}}>
     <label>你想问什么？<textarea rows={2} value={text} maxLength={400} onChange={e=>setText(e.target.value)} placeholder={answer?'最低仰角改成 30° 呢？':'今晚从北京能看到 ISS 吗？'}/></label>
     <div className="investigation-actions"><button type="submit" disabled={busy||text.trim().length<2}>发送</button>
-     {!answer&&<button type="button" data-guide-target="observe-example" disabled={busy} onClick={()=>submit('今晚从北京能看到 ISS 吗？')}>试问：今晚从北京能看到 ISS 吗？</button>}
+     {!answer&&<button type="button" data-guide-target="observe-example" disabled={busy} onClick={()=>submit('未来 24 小时从北京能看到 ISS 吗？')}>试问：未来 24 小时从北京能看到 ISS 吗？</button>}
      {answer&&<button type="button" data-guide-target="observe-compare" disabled={busy} onClick={()=>submit('最低仰角改成 30° 呢？')}>追问：最低仰角改成 30°</button>}
     </div>
    </form>

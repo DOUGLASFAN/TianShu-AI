@@ -28,7 +28,7 @@ const lessons:Record<LessonId,Lesson>={
   title:'用 AI 找观测窗口',summary:'提出一次真实问题，再追问改仰角，看看窗口如何变化。',
   steps:[
    {target:'assistant',event:'assistant',path:'/explore',title:'打开 AI 探索任务',instruction:'点击高亮按钮。从这里可以用一句话查卫星、问过境，或者诊断当前画面。'},
-   {target:'observe-example',event:'observation',path:'/explore',title:'实际计算一次',instruction:'用高亮示例查询今晚的 ISS，也可以输入自己的问题。若缺少观测站，选一个已有站点继续。'},
+   {target:'observe-example',event:'observation',path:'/explore',title:'实际计算一次',instruction:'用高亮示例查询未来 24 小时的 ISS，也可以输入自己的问题。若缺少观测站，选一个已有站点继续。'},
    {target:'observe-compare',event:'comparison',path:'/explore',title:'改条件，比较两次计算',instruction:'点击「追问：最低仰角改成 30°」。系统保留同一站点与时段，算出哪些窗口仍然满足条件。'},
   ],
   outcome:'你已经用自然语言触发过境计算，并在同一时段对照了两套条件。有可用窗口时，可从结果直接定位或带条件去观测规划。',
@@ -49,7 +49,8 @@ const lessons:Record<LessonId,Lesson>={
 const storageKey='xingxun.interactive-guide.v1';
 type Progress={lesson:LessonId;index:number};
 type Stored={seen:boolean;progress:Progress|null;completed:LessonId[]};
-type GuideContextValue={openGuide:()=>void;signal:(event:GuideEvent,key?:string)=>void;stepTarget?:string};
+type PlanningHandoff={href:string;minimum:number};
+type GuideContextValue={openGuide:()=>void;signal:(event:GuideEvent,detail?:{planId?:string;planning?:PlanningHandoff})=>void;stepTarget?:string};
 const GuideContext=createContext<GuideContextValue|null>(null);
 export const useInteractiveGuide=()=>useContext(GuideContext);
 
@@ -174,6 +175,7 @@ export function InteractiveGuideProvider({children}:{children:ReactNode}){
  const navigate=useNavigate(), {pathname,search}=useLocation();
  const [stored,setStored]=useState(load),[running,setRunning]=useState<Progress|null>(null);
  const [complete,setComplete]=useState<LessonId|null>(null),[pickerOpen,setPickerOpen]=useState(false);
+ const [planning,setPlanning]=useState<PlanningHandoff>();
  const picker=useRef<HTMLDialogElement>(null);
  const current=useRef<Progress|null>(null);
  const lessonPlan=useRef<string|null>(null);
@@ -189,15 +191,16 @@ export function InteractiveGuideProvider({children}:{children:ReactNode}){
  function setRun(progress:Progress){
   current.current=progress;setRunning(progress);setStored(s=>({...s,seen:true,progress}));
  }
- const signal=useCallback((event:GuideEvent,key?:string)=>{
+ const signal=useCallback<GuideContextValue['signal']>((event,detail)=>{
   const active=current.current;if(!active)return;
   const lesson=lessons[active.lesson];
   if(lesson.steps[active.index].event!==event)return;
   if(event==='plan-saved'){
-   if(!key)return;
-   lessonPlan.current=key;
+   if(!detail?.planId)return;
+   lessonPlan.current=detail.planId;
   }
-  if(event==='plan-viewed'&&(!key||key!==lessonPlan.current))return;
+  if(event==='plan-viewed'&&(!detail?.planId||detail.planId!==lessonPlan.current))return;
+  if(event==='comparison')setPlanning(detail?.planning);
   if(active.index+1===lesson.steps.length){
    current.current=null;setRunning(null);setComplete(active.lesson);
    setStored(s=>({...s,seen:true,progress:null,completed:Array.from(new Set([...s.completed,active.lesson]))}));
@@ -214,19 +217,22 @@ export function InteractiveGuideProvider({children}:{children:ReactNode}){
   const path=lesson==='plan'?'/observations':'/explore';
   if(reset||location.current.pathname!==path)navigate(path+(lesson==='plan'?'?sat=25544&min=10':''));
  }
- function start(lesson:LessonId,resume=false){
+ function start(lesson:LessonId,resume=false,planningHref?:string){
   picker.current?.close();setComplete(null);
   lessonPlan.current=null;
   const saved=resume&&stored.progress?.lesson===lesson?stored.progress:null;
   const canResumeTelemetry=saved&&lessons[lesson].steps[saved.index].path==='/telemetry'&&
    location.current.pathname==='/telemetry'&&new URLSearchParams(location.current.search).has('run');
-  const canResumePlan=saved&&lesson==='plan'&&location.current.pathname==='/observations'&&
-   new URLSearchParams(location.current.search).has('task');
+  const onPlanner=saved&&lesson==='plan'&&location.current.pathname==='/observations';
+  const plannerParams=new URLSearchParams(location.current.search);
+  const canResumePlan=onPlanner&&plannerParams.has('task')&&saved.index>0;
+  const canResumeDraft=onPlanner&&plannerParams.has('draft');
   const index=canResumeTelemetry
    ?(saved.index===3&&!visibleTarget('evidence',undefined)?2:saved.index)
    :canResumePlan?1:0;
   setRun({lesson,index});
-  if(!canResumeTelemetry&&!canResumePlan)routeFor(lesson,lesson==='plan');
+  if(planningHref)navigate(planningHref);
+  else if(!canResumeTelemetry&&!canResumePlan&&!canResumeDraft)routeFor(lesson,lesson==='plan');
  }
  function recover(){
   if(!running)return;
@@ -261,7 +267,8 @@ export function InteractiveGuideProvider({children}:{children:ReactNode}){
   </dialog>
   {complete&&<GuideCompletion reduced={lessMotion}>
    <CheckCircle size={25} aria-hidden="true"/><div><div role="status"><strong>练习完成</strong><p>{lessons[complete].outcome}</p></div>
-    <div className="guide-actions"><button type="button" className="guide-jump" onClick={openGuide}>选择其他练习</button>
+    <div className="guide-actions">{complete==='observation'&&planning&&<button type="button" className="guide-jump" onClick={()=>start('plan',false,planning.href)}>继续做计划 · {planning.minimum}°</button>}
+     <button type="button" className={complete==='observation'&&planning?'guide-pause':'guide-jump'} onClick={openGuide}>选择其他练习</button>
      <button type="button" className="guide-pause" onClick={()=>setComplete(null)}>完成</button></div></div>
   </GuideCompletion>}
  </GuideContext.Provider>;

@@ -21,6 +21,17 @@
       "completionInDialog": true
     },
     {
+      "viewport": 390,
+      "lesson": "plan",
+      "allSteps": true,
+      "fromAIComparison": true,
+      "thresholdUsed": 30,
+      "resumedSameDraftAfterReload": true,
+      "matchingPredictionConditions": true,
+      "workerCompleted": true,
+      "planSavedAndOpened": true
+    },
+    {
       "viewport": 320,
       "platformReducedMotion": true,
       "realControlsWorkAfterPause": true,
@@ -28,10 +39,8 @@
     },
     {
       "viewport": 390,
-      "lesson": "plan",
-      "allSteps": true,
-      "workerCompleted": true,
-      "planSavedAndOpened": true
+      "standalonePlanEntry": true,
+      "adjustedConditionsAfterNoFuturePass": true
     }
   ]
 }

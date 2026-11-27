@@ -61,14 +61,57 @@ try{
  await button(mobile,'聚焦这一步').click();
  assert.ok(await assistant.evaluate(e=>document.activeElement===e));
  await mobile.keyboard.press('Enter');
- await (await step(mobile,'实际计算一次','observe-example')).click();
- await (await step(mobile,'改条件，比较两次计算','observe-compare')).click();
+ const requestObservation=response=>response.request().method()==='POST'&&new URL(response.url()).pathname==='/api/exploration-assistant/observation';
+ const example=await step(mobile,'实际计算一次','observe-example');
+ const [exampleResponse]=await Promise.all([mobile.waitForResponse(requestObservation),example.click()]);
+ const compare=await step(mobile,'改条件，比较两次计算','observe-compare');
+ const [comparisonResponse]=await Promise.all([mobile.waitForResponse(requestObservation),compare.click()]);
  const drawer=mobile.getByRole('dialog',{name:'AI 探索任务'});
  await drawer.getByLabel('追问对照').waitFor();
- await drawer.getByRole('complementary',{name:'练习完成'}).waitFor();
+ const observationComplete=drawer.getByRole('complementary',{name:'练习完成'});
+ await observationComplete.waitFor();
  assert.ok(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  evidence.push({viewport:390,lesson:'observation',allSteps:true,skipPersisted:true,keyboard:true,systemReducedMotion:true,
   sameWindowComparison:true,completionInDialog:true});
+ const original=await exampleResponse.json(),comparison=await comparisonResponse.json();
+ const current=comparison.scenarios[0],previous=original.scenarios[0];
+ const expected=current.windows.some(w=>Date.parse(w.start)>Date.now())?current:previous;
+ const handoff=observationComplete.getByRole('button',{name:`继续做计划 · ${expected.minimum}°`});
+ await handoff.click();
+ await mobile.waitForURL(url=>url.pathname==='/observations');
+ assert.equal(new URL(mobile.url()).searchParams.get('station'),expected.station.id);
+ assert.equal(new URL(mobile.url()).searchParams.get('min'),String(expected.minimum));
+ assert.equal(new URL(mobile.url()).searchParams.get('sat'),'25544');
+ await step(mobile,'计算未来的过境','plan-calculate');
+ await button(mobile,'稍后继续').click();
+ await mobile.reload();
+ await button(mobile,'新手引导').click();
+ await button(mobile,'继续上次练习 · 把过境保存为观测计划').click();
+ const calculation=await step(mobile,'计算未来的过境','plan-calculate');
+ const [predictionResponse]=await Promise.all([mobile.waitForResponse(response=>
+  response.request().method()==='POST'&&new URL(response.url()).pathname==='/api/predictions'),calculation.click()]);
+ assert.equal(predictionResponse.status(),202);
+ const prediction=predictionResponse.request().postDataJSON();
+ assert.equal(prediction.stationId,expected.station.id);
+ assert.equal(prediction.noradId,25544);
+ assert.equal(prediction.minElevation,expected.minimum);
+ assert.equal(Math.floor(Date.parse(prediction.start)/1000),Math.floor(Date.parse(comparison.start)/1000));
+ await (await step(mobile,'选择一个未来窗口','plan-pass')).click();
+ await (await step(mobile,'打开保存选项','plan-open')).click();
+ const confirmation=await step(mobile,'确认保存计划','plan-confirm');
+ const [savedResponse]=await Promise.all([mobile.waitForResponse(response=>
+  response.request().method()==='POST'&&new URL(response.url()).pathname==='/api/plans'),confirmation.click()]);
+ assert.equal(savedResponse.status(),201);
+ const saved=(await savedResponse.json()).data;
+ assert.equal(saved.snapshot.basis.satellite.noradId,prediction.noradId);
+ assert.equal(saved.snapshot.basis.minElevation,prediction.minElevation);
+ assert.equal(saved.snapshot.basis.station.id,prediction.stationId);
+ await (await step(mobile,'查看你保存的计划','plan-view')).click();
+ await mobile.getByRole('complementary',{name:'练习完成'}).waitFor();
+ assert.equal(new URL(mobile.url()).searchParams.get('plan'),saved.id);
+ await mobile.getByRole('heading',{name:/计划快照 v1/}).waitFor();
+ evidence.push({viewport:390,lesson:'plan',allSteps:true,fromAIComparison:true,thresholdUsed:expected.minimum,
+  resumedSameDraftAfterReload:true,matchingPredictionConditions:true,workerCompleted:true,planSavedAndOpened:true});
  await mobile.close();
 
  const settings=await browser.newPage({viewport:{width:320,height:800}});
@@ -92,21 +135,15 @@ try{
  await enter(planner);
  await button(planner,'开始新手引导').click();
  await planner.getByRole('button',{name:/开始练习.*把过境保存为观测计划/}).click();
- await (await step(planner,'计算未来的过境','plan-calculate')).click();
- await (await step(planner,'选择一个未来窗口','plan-pass')).click();
- await (await step(planner,'打开保存选项','plan-open')).click();
- const confirmation=await step(planner,'确认保存计划','plan-confirm');
- const [savedResponse]=await Promise.all([planner.waitForResponse(response=>{
-  const request=response.request();
-  return request.method()==='POST'&&new URL(request.url()).pathname==='/api/plans';
- }),confirmation.click()]);
- assert.equal(savedResponse.status(),201);
- const planId=(await savedResponse.json()).data.id;
- await (await step(planner,'查看你保存的计划','plan-view')).click();
- await planner.getByRole('complementary',{name:'练习完成'}).waitFor();
- assert.equal(new URL(planner.url()).searchParams.get('plan'),planId);
- await planner.getByRole('heading',{name:/计划快照 v1/}).waitFor();
- evidence.push({viewport:390,lesson:'plan',allSteps:true,workerCompleted:true,planSavedAndOpened:true});
+ const calculateAgain=await step(planner,'计算未来的过境','plan-calculate');
+ assert.equal(new URL(planner.url()).searchParams.get('sat'),'25544');
+ await planner.getByLabel('最低仰角 °').fill('90');
+ await calculateAgain.click();
+ await planner.getByRole('status').filter({hasText:'没有可保存的未来过境'}).waitFor();
+ await planner.getByLabel('最低仰角 °').fill('10');
+ await calculateAgain.click();
+ await step(planner,'选择一个未来窗口','plan-pass');
+ evidence.push({viewport:390,standalonePlanEntry:true,adjustedConditionsAfterNoFuturePass:true});
  await planner.close();
 
  const result={browser:'Edge',evidence};

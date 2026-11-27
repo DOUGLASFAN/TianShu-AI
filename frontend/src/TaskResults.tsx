@@ -11,6 +11,19 @@ export type ObservationResult={start:string;end:string;targets:number;scope:stri
  scenarios:{station:TaskStation;minimum:number;windows:Pass[];skipped:{norad:number;reason:string}[];total:number;opticalWindows:number;truncated:boolean}[]};
 export type ObservationTask={query:string;group:string;station:string;window:'now'|'tonight'|'next-day';minimum:number;fixed?:{start:string;end:string}};
 
+function planningHref(result:ObservationResult,scenario:ObservationResult['scenarios'][number],pass:Pass){
+ return '/observations?'+new URLSearchParams({station:scenario.station.id,sat:String(pass.norad),min:String(scenario.minimum),
+  draft:'1',tz:'utc',from:new Date(result.start).toISOString().slice(0,19),now:'0'});
+}
+
+export function nextObservationPlan(current:ObservationResult,previous:ObservationResult){
+ for(const result of [current,previous]){
+  const scenario=result.scenarios[0];
+  const pass=scenario.windows.find(w=>Date.parse(w.start)>Date.now());
+  if(pass)return {href:planningHref(result,scenario,pass),minimum:scenario.minimum};
+ }
+}
+
 export async function runObservation(task:ObservationTask){
  return api<ObservationResult>('/exploration-assistant/observation',{method:'POST',body:JSON.stringify({
   query:task.query,group:task.group,window:task.window,...task.fixed,
@@ -51,8 +64,7 @@ export function ObservationAnswer({task,result,previous,locate}:{
    <p>过境 {local(w.start)}–{local(w.end)}。{w.optical?(w.opticalPeriods||[]).map(p=>'潜在目视 '+local(p.start)+'–'+local(p.end)).join('；'):'这次未满足潜在目视条件。'}</p>
    <small>根数 {w.orbitSource} · {w.orbitEpoch}</small>
    <div className="investigation-actions"><button type="button" onClick={()=>locate(w.norad,scenario.station)}>在地球定位</button>
-    <Link to={'/observations?'+new URLSearchParams({station:scenario.station.id,sat:String(w.norad),min:String(scenario.minimum),draft:'1',tz:'utc',
-     from:new Date(result.start).toISOString().slice(0,19),now:'0'})}>带条件去观测规划</Link></div>
+    <Link to={planningHref(result,scenario,w)}>带条件去观测规划</Link></div>
   </li>)}</ul>
   <details><summary>计算依据与限制</summary><p>{result.scope} 本次匹配 {result.targets} 颗。根数变化时，同一时段的重算也可能受资料更新影响。</p></details>
  </section>;

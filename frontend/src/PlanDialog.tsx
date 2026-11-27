@@ -9,7 +9,7 @@ export function PlanDialog({taskId,event,basis,replanId,onClose}:{taskId:string;
  const guide=useInteractiveGuide();
  const dialog=useRef<HTMLDialogElement>(null),cache=useQueryClient(),[minutes,setMinutes]=useState(10),[accept,setAccept]=useState(false),[proposal,setProposal]=useState<any>(null),[saved,setSaved]=useState<any>(null);
  useEffect(()=>{const old=document.body.style.overflow;document.body.style.overflow='hidden';dialog.current?.showModal();return()=>{dialog.current?.close();document.body.style.overflow=old;};},[]);
- const mutation=useMutation({mutationFn:()=>api(replanId?`/plans/${replanId}/preview`:'/plans',{method:'POST',body:JSON.stringify({predictionId:taskId,eventId:event.id,reminderMinutes:minutes,acceptStale:accept})}),onSuccess:r=>{if(replanId)setProposal(r.data);else{setSaved(r.data);guide?.signal('plan-saved',r.data.id);cache.invalidateQueries({queryKey:['plans']});}}});
+ const mutation=useMutation({mutationFn:()=>api(replanId?`/plans/${replanId}/preview`:'/plans',{method:'POST',body:JSON.stringify({predictionId:taskId,eventId:event.id,reminderMinutes:minutes,acceptStale:accept})}),onSuccess:r=>{if(replanId)setProposal(r.data);else{setSaved(r.data);guide?.signal('plan-saved',{planId:r.data.id});cache.invalidateQueries({queryKey:['plans']});}}});
  const confirm=useMutation({mutationFn:()=>api(`/plans/${replanId}/changes/${proposal.id}/confirm`,{method:'POST'}),onSuccess:r=>{setSaved(r.data);cache.invalidateQueries({queryKey:['plans']});cache.invalidateQueries({queryKey:['plan',replanId]});}});
  const fmt=(value:string)=>new Date(value).toLocaleString('zh-CN',{hour12:false,timeZone:'Asia/Shanghai'});
  const old=proposal?.old,next=proposal?.new,error=mutation.error||confirm.error;
