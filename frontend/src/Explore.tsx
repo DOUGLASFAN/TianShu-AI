@@ -1,3 +1,4 @@
+import {SmartBookmarks} from './SmartBookmarks';
 import {BasemapControls} from './BasemapControls';
 import {SpaceControls} from './SpaceControls';
 import {lazy,Suspense,useEffect,useLayoutEffect,useRef,useState} from 'react';
@@ -29,7 +30,7 @@ export function Explore(){
  useEffect(()=>{const media=window.matchMedia('(prefers-reduced-motion: reduce)');const changed=()=>setSystemReduced(media.matches);media.addEventListener('change',changed);return()=>media.removeEventListener('change',changed);},[]);
  const {timeZone,setTimeZone,lessMotion,setLessMotion}=useDisplaySettings(),reduced=!!systemReduced||lessMotion;
  const selected=Number(params.get('sat')||25544),page=Math.max(1,Number(params.get('page'))||1),group=params.get('group')||'',search=params.get('q')||'';
- const historicalId=params.get('historical');
+ const historicalId=params.get('historical'),historicalAt=historicalId?params.get('at'):null;
  const samplingId=params.get('sampling')||historicalId;
  const replaying=!!samplingId||params.get('mode')==='replay';
  const [globalView,setGlobalView]=useState(false);
@@ -117,6 +118,10 @@ export function Explore(){
    setRate(1);setPlaying(true);
   }
  },[engine,scene.data,replaying]);
+ useEffect(()=>{if(engine&&scene.data&&historicalAt&&engine.seek(historicalAt)){
+  engine.play(false);setPlaying(false);
+  if(replayClock.current){replayClock.current.time=historicalAt;replayClock.current.playing=false;}
+ }},[engine,scene.data,historicalAt]);
  useEffect(()=>{engine?.select(selected);setTracking(false);setTelemetry(null);},[engine,selected]);
  useEffect(()=>{engine?.track(selectedTrack?.noradId===selected?selectedTrack:null);},[engine,selectedTrack,selected,scene.data]);
  useEffect(()=>{engine?.clouds(clouds);},[engine,clouds]);
@@ -247,6 +252,7 @@ export function Explore(){
      <button disabled={!controlsReady}>定位时间</button>
     </form></details>;
  const timeTools=<div className="timebar-tools" role="group" aria-label="时间工具">
+  <SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime}/>
   <Link to="/sampling">{samplingId?'管理本方案':'自定义采样'}</Link>
   <label className="timebar-zone"><span>时区</span><select aria-label="显示时区" value={timeZone} onChange={event=>setTimeZone(event.target.value as TimeZone)}>
    {timeZoneOptions.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}
@@ -276,6 +282,7 @@ export function Explore(){
     <div className="mobile-map-modes">
      {modeButtons}
      {!replaying&&liveActions}
+     <SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime}/>
     </div>
     {replaying?replayControls:<div className="mobile-live-time"><span>实时 <time dateTime={displayTime}>{formatTime(displayTime)}</time></span></div>}
    </section>}

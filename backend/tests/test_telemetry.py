@@ -114,3 +114,23 @@ def test_reuse_explore_playback_contract(client):
     assert t['noradId']==44878 and t['dataQuality']['source']==r['asset']['orbitSource']
     assert t['samples'][0][0]==0 and len(t['samples'][0])==5 and t['samples'][-1][0]==399
     assert scene['start']==r['start'] and scene['end']==r['end']
+
+def test_investigation_uses_frozen_report_and_owner(client):
+    c,user=client
+    saved=c.post('/api/telemetry/runs',json=dict(asset='opssat-v2',channel='CADC0872',segment='8')).json()
+    path='/api/investigation/runs/'+saved['id']
+    window=dict(start=saved['start'],end=saved['end'],target=716)
+    result=c.post(path,json=window).json()
+    assert result['included']==400 and result['rules'][0]['targetHit']
+    assert result['source']==saved['asset']['sha256']
+    assert {h['id'] for h in result['hypotheses']}=={'quality','signal','sensitivity'}
+    target=next(i for i,p in enumerate(saved['points']) if p['record']==716)
+    smaller=dict(start=saved['points'][target-1]['utc'],end=saved['points'][target+1]['utc'],target=716)
+    changed=c.post(path,json=smaller).json()
+    assert changed['included']==3 and changed['rules'][0]['threshold']!=result['rules'][0]['threshold']
+    assert changed['windowChanged']==(result['baselineHit']!=changed['rules'][0]['targetHit'])
+    assert c.get('/api/investigation/bookmarks').json()[0]['record']==716
+    assert c.post(path,json=dict(window,start='2020-01-01T00:00:00Z')).status_code==422
+    user.id='other'
+    assert c.post(path,json=window).status_code==404
+    assert c.get('/api/investigation/bookmarks').json()==[]

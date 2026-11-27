@@ -1,0 +1,27 @@
+{
+  "browser": "Edge",
+  "viewport": [
+    390,
+    844
+  ],
+  "publicBookmark": 716,
+  "fullCount": 400,
+  "selectedCount": 87,
+  "rules": [
+    {
+      "name": "MAD",
+      "targetHit": true
+    },
+    {
+      "name": "三倍标准差",
+      "targetHit": true
+    }
+  ],
+  "aiModel": "qwen2.5-0.5b-instruct-q4_k_m",
+  "hypotheses": [
+    "quality",
+    "signal",
+    "sensitivity"
+  ],
+  "archivedOrbitBookmark": true
+}

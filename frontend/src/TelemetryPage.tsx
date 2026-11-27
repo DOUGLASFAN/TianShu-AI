@@ -1,3 +1,4 @@
+import {InvestigationPanel,useInvestigationRange} from './InvestigationPanel';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {useQuery,useQueryClient} from '@tanstack/react-query';
 import {api,saveDownload} from './api';
@@ -38,6 +39,7 @@ function Result({r,replace}:{r:Report;replace:(r:Report)=>void}){
  const p=r.points[cursor],values=r.points.flatMap(x=>x.value===null?[]:[x.value]);
  const min=Math.min(...values),max=Math.max(...values),begin=Date.parse(r.start),duration=Date.parse(r.end)-begin;
  const width=(duration||1)/zoom, left=Math.max(begin,Math.min(begin+duration-width,Date.parse(p.utc)-width/2));
+ const selection=useInvestigationRange(r.points,left,width);
  const x=(q:Point)=>10+780*(Date.parse(q.utc)-left)/width;
  const y=(q:Point)=>150-140*((q.value??min)-min)/(max-min||1);
  const pos=useQuery({queryKey:['historical-position',r.input.asset,p.utc],queryFn:()=>api('/telemetry/assets/'+r.input.asset+'/position?time='+encodeURIComponent(p.utc)),enabled:!!r.asset.tle,retry:false});
@@ -45,7 +47,10 @@ function Result({r,replace}:{r:Report;replace:(r:Report)=>void}){
   const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([JSON.stringify({...r,review:r.review||''},null,2)],{type:'application/json'}));link.download='telemetry-'+r.id.slice(0,12)+'.json';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
  }
  return <section><h2>{r.asset.mission} · {r.channel} · 片段 {r.segment}</h2><p>{r.objective}</p><p>{r.start} 至 {r.end} · 单位 {r.asset.unit}</p>
- <label>曲线缩放<select value={zoom} onChange={e=>setZoom(+e.target.value)}>{[1,2,4,8].map(z=><option key={z} value={z}>{z}×</option>)}</select></label><svg viewBox="0 0 800 165" role="img" aria-label="遥测时间序列，橙色为候选点"><path fill="none" stroke="#6abbe8" d={r.points.map((q,i)=>q.value===null?'':((!i||r.points[i-1].value===null||r.gaps.some(g=>g[1]===q.utc))?'M':'L')+x(q)+' '+y(q)).join(' ')}/>{r.points.map((q,i)=>q.value===null?null:<circle key={q.record} cx={x(q)} cy={y(q)} r={i===cursor?6:3} fill={r.candidates.includes(q.record)?'#ffb55c':'#90d4f2'} onClick={()=>seek(i)}/>)}<line x1={x(p)} x2={x(p)} y1="0" y2="160" stroke="white"/></svg>
+ <label>曲线缩放<select value={zoom} onChange={e=>setZoom(+e.target.value)}>{[1,2,4,8].map(z=><option key={z} value={z}>{z}×</option>)}</select></label><button type="button" aria-pressed={selection.enabled} onClick={()=>{selection.setEnabled(!selection.enabled);play(false)}}>{selection.enabled?'结束框选':'框选调查'}</button>
+ <svg className={selection.enabled?'telemetry-chart-select':undefined} {...selection.handlers} viewBox="0 0 800 165" role="img" aria-label="遥测时间序列，橙色为候选点">
+ {selection.enabled&&<rect x={x(r.points[selection.range[0]])} y="0" width={Math.max(2,x(r.points[selection.range[1]])-x(r.points[selection.range[0]]))} height="165" fill="#6abbe8" opacity=".22" pointerEvents="none"/>}<path fill="none" stroke="#6abbe8" d={r.points.map((q,i)=>q.value===null?'':((!i||r.points[i-1].value===null||r.gaps.some(g=>g[1]===q.utc))?'M':'L')+x(q)+' '+y(q)).join(' ')}/>{r.points.map((q,i)=>q.value===null?null:<circle key={q.record} cx={x(q)} cy={y(q)} r={i===cursor?6:3} fill={r.candidates.includes(q.record)?'#ffb55c':'#90d4f2'} onClick={()=>{if(!selection.enabled)seek(i)}}/>)}<line x1={x(p)} x2={x(p)} y1="0" y2="160" stroke="white"/></svg>
+ {selection.enabled&&<InvestigationPanel run={r.id} points={r.points} range={selection.range} update={selection.update} target={p.record} seek={seek}/>}
  <button onClick={()=>{if(cursor===r.points.length-1)seek(0);play(!playing)}}>{playing?'暂停':'播放历史片段'}</button><label>片段时间轴<input type="range" min="0" max={r.points.length-1} value={cursor} onChange={e=>seek(+e.target.value)}/></label>
  <p>{p.utc} · 原始记录 #{p.record} · {("quality" in p)?String(p.quality):"原始测量"} · {p.value??'缺测'}</p><details><summary>原始字段</summary><pre>{JSON.stringify(p.raw,null,2)}</pre></details>
  <p>有效样本 {r.stats.count} · 均值 {r.stats.mean} · 标准差 {r.stats.stdev} · 极差 {r.stats.span}</p>

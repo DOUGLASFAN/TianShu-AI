@@ -119,3 +119,6 @@ app.include_router(trusted.router)
 
 from .api import research
 app.include_router(research.router)
+
+from .api import investigation
+app.include_router(investigation.router)
