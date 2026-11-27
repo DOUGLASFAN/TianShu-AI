@@ -38,3 +38,4 @@
  .guide-step,.guide-offer,[data-guide-spotlight]{animation:none!important}
  .guide-progress span{transition:none}
 }
+.station-dialog.plan-dialog{inset:0;margin:auto;transform:none}

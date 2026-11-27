@@ -88,6 +88,27 @@ try{
  evidence.push({viewport:320,platformReducedMotion:true,realControlsWorkAfterPause:true,noHorizontalOverflow:true});
  await settings.close();
 
+ const planner=await browser.newPage({viewport:{width:390,height:844}});
+ await enter(planner);
+ await button(planner,'开始新手引导').click();
+ await planner.getByRole('button',{name:/开始练习.*把过境保存为观测计划/}).click();
+ await (await step(planner,'计算未来的过境','plan-calculate')).click();
+ await (await step(planner,'选择一个未来窗口','plan-pass')).click();
+ await (await step(planner,'打开保存选项','plan-open')).click();
+ const confirmation=await step(planner,'确认保存计划','plan-confirm');
+ const [savedResponse]=await Promise.all([planner.waitForResponse(response=>{
+  const request=response.request();
+  return request.method()==='POST'&&new URL(request.url()).pathname==='/api/plans';
+ }),confirmation.click()]);
+ assert.equal(savedResponse.status(),201);
+ const planId=(await savedResponse.json()).data.id;
+ await (await step(planner,'查看你保存的计划','plan-view')).click();
+ await planner.getByRole('complementary',{name:'练习完成'}).waitFor();
+ assert.equal(new URL(planner.url()).searchParams.get('plan'),planId);
+ await planner.getByRole('heading',{name:/计划快照 v1/}).waitFor();
+ evidence.push({viewport:390,lesson:'plan',allSteps:true,workerCompleted:true,planSavedAndOpened:true});
+ await planner.close();
+
  const result={browser:'Edge',evidence};
  if(process.argv[2])writeFileSync(process.argv[2],JSON.stringify(result,null,2)+'\n');
  console.log(JSON.stringify(result,null,2));

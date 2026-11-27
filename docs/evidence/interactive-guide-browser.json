@@ -25,6 +25,13 @@
       "platformReducedMotion": true,
       "realControlsWorkAfterPause": true,
       "noHorizontalOverflow": true
+    },
+    {
+      "viewport": 390,
+      "lesson": "plan",
+      "allSteps": true,
+      "workerCompleted": true,
+      "planSavedAndOpened": true
     }
   ]
 }

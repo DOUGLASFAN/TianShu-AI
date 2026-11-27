@@ -7,8 +7,9 @@ import {useLocation,useNavigate} from 'react-router-dom';
 import {GraduationCap,Crosshair,CheckCircle,ArrowRight} from '@phosphor-icons/react';
 import './interactive-guide.css';
 
-type LessonId='anomaly'|'observation';
-type GuideEvent='bookmarks'|'example'|'investigated'|'evidence'|'assistant'|'observation'|'comparison';
+type LessonId='anomaly'|'observation'|'plan';
+type GuideEvent='bookmarks'|'example'|'investigated'|'evidence'|'assistant'|'observation'|'comparison'|
+ 'prediction-ready'|'future-pass'|'plan-open'|'plan-saved'|'plan-viewed';
 type Step={target:string;event:GuideEvent;title:string;instruction:string;path:string};
 type Lesson={title:string;summary:string;steps:Step[];outcome:string};
 
@@ -32,12 +33,23 @@ const lessons:Record<LessonId,Lesson>={
   ],
   outcome:'你已经用自然语言触发过境计算，并在同一时段对照了两套条件。有可用窗口时，可从结果直接定位或带条件去观测规划。',
  },
+ plan:{
+  title:'把过境保存为观测计划',summary:'预测一个未来过境，选定窗口，再在我的空间打开保存结果。',
+  steps:[
+   {target:'plan-calculate',event:'prediction-ready',path:'/observations',title:'计算未来的过境',instruction:'确认观测站、卫星和时间。点「计算过境」，等到列表出现未来窗口。没有观测站时可先添加一个。'},
+   {target:'plan-pass',event:'future-pass',path:'/observations',title:'选择一个未来窗口',instruction:'点一条还未开始的过境。进入、最高点和离开是不同时间，选中后可以查看仰角曲线。'},
+   {target:'plan-open',event:'plan-open',path:'/observations',title:'打开保存选项',instruction:'点「保存观测计划」，先检查卫星、站点和窗口时间。'},
+   {target:'plan-confirm',event:'plan-saved',path:'/observations',title:'确认保存计划',instruction:'按需要选择提前提醒时间，再点「确认保存计划」。这会创建一条真实计划，供以后查看和提醒。'},
+   {target:'plan-view',event:'plan-viewed',path:'/observations',title:'查看你保存的计划',instruction:'点「查看计划」，打开我的空间里的同一条计划并核对快照。'},
+  ],
+  outcome:'你已完成预测、选择过境、保存并打开计划。以后可在「我的空间」查看、回放或取消。',
+ },
 };
 
 const storageKey='xingxun.interactive-guide.v1';
 type Progress={lesson:LessonId;index:number};
 type Stored={seen:boolean;progress:Progress|null;completed:LessonId[]};
-type GuideContextValue={openGuide:()=>void;signal:(event:GuideEvent)=>void;active:boolean};
+type GuideContextValue={openGuide:()=>void;signal:(event:GuideEvent,key?:string)=>void;stepTarget?:string};
 const GuideContext=createContext<GuideContextValue|null>(null);
 export const useInteractiveGuide=()=>useContext(GuideContext);
 
@@ -47,10 +59,10 @@ function load():Stored{
   const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
   if(!saved)return empty;
   const progress=saved.progress;
-  const valid=progress&&(progress.lesson==='anomaly'||progress.lesson==='observation')&&
+  const valid=progress&&(progress.lesson==='anomaly'||progress.lesson==='observation'||progress.lesson==='plan')&&
     Number.isInteger(progress.index)&&progress.index>=0&&progress.index<lessons[progress.lesson as LessonId].steps.length;
   return {seen:!!saved.seen,progress:valid?progress:null,
-   completed:Array.isArray(saved.completed)?saved.completed.filter((id:unknown)=>id==='anomaly'||id==='observation'):[]};
+   completed:Array.isArray(saved.completed)?saved.completed.filter((id:unknown)=>id==='anomaly'||id==='observation'||id==='plan'):[]};
  }catch{return empty}
 }
 
@@ -164,6 +176,7 @@ export function InteractiveGuideProvider({children}:{children:ReactNode}){
  const [complete,setComplete]=useState<LessonId|null>(null),[pickerOpen,setPickerOpen]=useState(false);
  const picker=useRef<HTMLDialogElement>(null);
  const current=useRef<Progress|null>(null);
+ const lessonPlan=useRef<string|null>(null);
  const location=useRef({pathname,search});location.current={pathname,search};
  const readMotion=()=>{try{return localStorage.getItem('star-nexus:explore-reduced-motion')==='1'}catch{return false}};
  const [lessMotion,setLessMotion]=useState(readMotion);
@@ -176,10 +189,15 @@ export function InteractiveGuideProvider({children}:{children:ReactNode}){
  function setRun(progress:Progress){
   current.current=progress;setRunning(progress);setStored(s=>({...s,seen:true,progress}));
  }
- const signal=useCallback((event:GuideEvent)=>{
+ const signal=useCallback((event:GuideEvent,key?:string)=>{
   const active=current.current;if(!active)return;
   const lesson=lessons[active.lesson];
   if(lesson.steps[active.index].event!==event)return;
+  if(event==='plan-saved'){
+   if(!key)return;
+   lessonPlan.current=key;
+  }
+  if(event==='plan-viewed'&&(!key||key!==lessonPlan.current))return;
   if(active.index+1===lesson.steps.length){
    current.current=null;setRunning(null);setComplete(active.lesson);
    setStored(s=>({...s,seen:true,progress:null,completed:Array.from(new Set([...s.completed,active.lesson]))}));
@@ -189,25 +207,34 @@ export function InteractiveGuideProvider({children}:{children:ReactNode}){
   setComplete(null);if(!picker.current?.open){picker.current?.showModal();setPickerOpen(true)}
   setStored(s=>s.seen?s:{...s,seen:true});
  },[]);
- const context=useMemo(()=>({openGuide,signal,active:!!running}),[openGuide,signal,!!running]);
+ const stepTarget=running?lessons[running.lesson].steps[running.index].target:undefined;
+ const context=useMemo(()=>({openGuide,signal,stepTarget}),[openGuide,signal,stepTarget]);
  function dismissActive(){current.current=null;setRunning(null)}
+ function routeFor(lesson:LessonId,reset=false){
+  const path=lesson==='plan'?'/observations':'/explore';
+  if(reset||location.current.pathname!==path)navigate(path+(lesson==='plan'?'?sat=25544&min=10':''));
+ }
  function start(lesson:LessonId,resume=false){
   picker.current?.close();setComplete(null);
+  lessonPlan.current=null;
   const saved=resume&&stored.progress?.lesson===lesson?stored.progress:null;
   const canResumeTelemetry=saved&&lessons[lesson].steps[saved.index].path==='/telemetry'&&
    location.current.pathname==='/telemetry'&&new URLSearchParams(location.current.search).has('run');
+  const canResumePlan=saved&&lesson==='plan'&&location.current.pathname==='/observations'&&
+   new URLSearchParams(location.current.search).has('task');
   const index=canResumeTelemetry
    ?(saved.index===3&&!visibleTarget('evidence',undefined)?2:saved.index)
-   :0;
+   :canResumePlan?1:0;
   setRun({lesson,index});
-  if(!canResumeTelemetry&&location.current.pathname!=='/explore')navigate('/explore');
+  if(!canResumeTelemetry&&!canResumePlan)routeFor(lesson,lesson==='plan');
  }
  function recover(){
   if(!running)return;
   const {lesson}=running;
   const onReport=lesson==='anomaly'&&pathname==='/telemetry'&&new URLSearchParams(search).has('run');
-  setRun({lesson,index:onReport?2:0});
-  if(!onReport&&pathname!=='/explore')navigate('/explore');
+  const onPlanResults=lesson==='plan'&&pathname==='/observations'&&new URLSearchParams(search).has('task');
+  setRun({lesson,index:onReport?2:onPlanResults?1:0});
+  if(!onReport&&!onPlanResults)routeFor(lesson);
  }
  const activeLesson=running?lessons[running.lesson]:null;
  return <GuideContext.Provider value={context}>

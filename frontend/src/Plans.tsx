@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import {useInteractiveGuide} from './InteractiveGuide';
+import {useEffect,useState} from 'react';
 import {Link,useSearchParams} from 'react-router-dom';
 import {useMutation,useQuery,useQueryClient} from '@tanstack/react-query';
 import {api} from './api';
@@ -7,12 +8,14 @@ import {Select} from './components/Select';
 import './observations.css';
 const names:Record<string,string>={upcoming:'即将开始',ongoing:'正在过境',ended:'已结束',cancelled:'已取消'};
 export function Plans(){
+ const guide=useInteractiveGuide();
  const cache=useQueryClient(),[params]=useSearchParams(),[selected,setSelected]=useState(params.get('plan')||''),[filter,setFilter]=useState('all'),[page,setPage]=useState(1);
  const plans=useQuery({queryKey:['plans',filter,page],queryFn:()=>api(`/plans?status=${filter}&page=${page}&size=6`)}),detail=useQuery({queryKey:['plan',selected],queryFn:()=>api(`/plans/${selected}`),enabled:!!selected,refetchInterval:15000});
  const cancel=useMutation({mutationFn:(p:any)=>api(`/plans/${p.id}/cancel`,{method:'POST',body:JSON.stringify({expectedVersion:p.version})}),onSuccess:()=>{cache.invalidateQueries({queryKey:['plans']});cache.invalidateQueries({queryKey:['plan',selected]});}});
  const cachedTotal=cache.getQueryData<{total:number}>(['plans','all',1])?.total??0;
  const showFilter=filter!=='all'||(plans.data?.total??cachedTotal)>0;
  const fmt=(v:string)=>new Date(v).toLocaleString('zh-CN',{hour12:false,timeZone:'Asia/Shanghai'})+' UTC+8';const p=detail.data?.data;
+ useEffect(()=>{if(p?.id&&p.id===params.get('plan'))guide?.signal('plan-viewed',p.id)},[p,guide,params]);
  return <section className="panel plans-panel" aria-labelledby="workspace-plans"><div className="section-heading"><h2 id="workspace-plans">观测计划</h2>{showFilter&&<Select label="计划状态筛选" value={filter} onChange={value=>{setFilter(value);setPage(1);}} options={[{value:'all',label:'全部计划'},...Object.entries(names).map(([value,label])=>({value,label}))]}/>}</div>
  {(plans.error||detail.error||cancel.error)&&<div className="notice error" role="alert">{String(plans.error||detail.error||cancel.error)}</div>}
  {plans.data?.list.map((item:any)=><article className={`plan-row ${selected===item.id?'selected':''}`} key={item.id}><button className="text-button" onClick={()=>setSelected(selected===item.id?'':item.id)}><strong>{item.snapshot.basis.satellite.name}</strong><span>{item.snapshot.basis.station.name} · {fmt(item.start)}</span></button><span className="plan-state">{names[item.status]} · v{item.version}</span><div className="plan-row-actions"><Link className="button" to={`/observations?plan=${item.id}`}>回放</Link><Link className="button" to={`/observations?replan=${item.id}&sat=${item.snapshot.basis.satellite.noradId}&station=${item.snapshot.basis.station.id}&min=${item.snapshot.basis.minElevation}&days=${item.snapshot.basis.days}&now=1`}>重新计算</Link>{item.status!=='cancelled'&&<button disabled={cancel.isPending} onClick={()=>{if(window.confirm('取消该计划并撤销尚未触发的提醒时间？'))cancel.mutate(item);}}>取消计划</button>}</div></article>)}
