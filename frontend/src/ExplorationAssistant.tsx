@@ -2,13 +2,13 @@ import {useRef,useState} from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {Link} from 'react-router-dom';
 import {api} from './api';
+import {ObservationAnswer,runObservation,type ObservationTask,type ObservationResult} from './TaskResults';
 import './investigation.css';
 
 type Action={intent:'search'|'observe'|'bookmarks'|'diagnose'|'unsupported';query:string;group:string;station:string;window:'now'|'tonight'|'next-day'};
 type Station={id:string;name:string;lat:number;lng:number};
 type Window={norad:number;name:string;start:string;end:string;peak:string;elevation:number;duration:number;optical:boolean;visibleNow:boolean;orbitEpoch:string};
 type Results={start:string;end:string;targets:number;limited:boolean;scope:string;scenarios:{station:Station;minimum:number;windows:Window[];skipped:{norad:number;reason:string}[];total:number;opticalWindows:number}[]};
-const blank:Action={intent:'search',query:'',group:'',station:'',window:'next-day'};
 const groups=[['','全部目录'],['STATIONS','空间站'],['BEIDOU','北斗'],['GPS-OPS','GPS'],['GALILEO','伽利略']];
 
 export function ObservationComparison({initial,defaultQuery='',onLocate,compare=false}:{
@@ -63,39 +63,98 @@ export function ObservationComparison({initial,defaultQuery='',onLocate,compare=
  </form>;
 }
 
-export function ExploreAssistant({apply,locate,diagnose,bookmarks}:{
+export function ExploreAssistant({apply,locate,diagnose,bookmarks,selected}:{
  apply:(query:string,group:string)=>void;locate:(norad:number,station:Station)=>void;
- diagnose:()=>void;bookmarks:()=>void
+ diagnose:()=>void;bookmarks:()=>void;selected:number
 }){
  const dialog=useRef<HTMLDialogElement>(null);
  const [text,setText]=useState(''),[action,setAction]=useState<Action|null>(null);
- const [model,setModel]=useState(''),[busy,setBusy]=useState(false),[issue,setIssue]=useState('');
- async function interpret(){
-  setBusy(true);setIssue('');setAction(null);
-  try{const result=await api<{action:Action;model:string}>('/exploration-assistant/interpret',{method:'POST',body:JSON.stringify({text})});setAction(result.action);setModel(result.model)}
-  catch{setIssue('模型暂时不可用，请手动填写筛选或观测条件。');setAction(blank);setModel('')}
+ const [busy,setBusy]=useState(false),[issue,setIssue]=useState('');
+ const [task,setTask]=useState<ObservationTask|null>(null),[answer,showAnswer]=useState<ObservationResult|null>(null);
+ const [prior,setPrior]=useState<ObservationResult|null>(null),[clarify,askStation]=useState<ObservationTask|null>(null);
+ const [stationId,setStationId]=useState(''),[manual,showManual]=useState(false),[lastQuestion,setLastQuestion]=useState('');
+ const [answeredQuestion,setAnsweredQuestion]=useState('');
+ const stations=useQuery({queryKey:['stations'],enabled:!!clarify,queryFn:()=>api<{list:{id:string;name:string}[]}>('/stations')});
+ function close(){dialog.current?.close()}
+ async function calculate(next:ObservationTask,previous:ObservationResult|null,question:string){
+  try{
+   const result=await runObservation(next);
+   setTask({...next,station:result.scenarios[0].station.id});setPrior(previous);showAnswer(result);
+   setAnsweredQuestion(question);askStation(null);
+  }catch(e){
+   if((e as {code?:string}).code==='AI_OBSERVATION_STATION'){
+    setStationId('');askStation(next);
+   }else setIssue(String(e));
+  }
+ }
+ async function submit(question:string){
+  const q=question.trim();if(q.length<2||busy)return;
+  setBusy(true);setLastQuestion(q);setText('');setIssue('');setAction(null);askStation(null);showManual(false);
+  try{
+   const angle=q.match(/(?:最低仰角|改成|提高到|降到|改为)[^0-9]{0,8}(\d+(?:\.\d+)?)\s*(?:°|度)?/);
+   // A numeric-only change preserves the resolved object, station and exact epoch range.
+   const fromPrevious=task&&answer&&angle&&!/明天|今晚|现在|换(?:成|到)(?!\s*\d)|NORAD|从.{1,20}(?:站|看|观测)/i.test(q);
+   if(fromPrevious){
+    const minimum=Number(angle[1]);
+    if(minimum<0||minimum>85){setIssue('最低仰角需要在 0° 至 85° 之间。');return}
+    await calculate({...task,minimum,fixed:{start:answer.start,end:answer.end}},answer,q);return;
+   }
+   const interpreted=await api<{action:Action}>('/exploration-assistant/interpret',{method:'POST',body:JSON.stringify({text:q})});
+   const result=interpreted.action;
+   if(result.intent==='observe'){
+    const usesSelected=/这颗|当前卫星|所选/.test(q);
+    const query=usesSelected?String(selected):result.query;
+    const next:ObservationTask={query,group:usesSelected?'':result.group,station:result.station&&q.includes(result.station)?result.station:'',
+     window:result.window,minimum:angle?Number(angle[1]):15};
+    if(!Number.isFinite(next.minimum)||next.minimum<0||next.minimum>85){setIssue('最低仰角需要在 0° 至 85° 之间。');return}
+    if(!next.station){setStationId('');askStation(next);return}
+    await calculate(next,null,q);
+   }else if(result.intent==='diagnose'){close();diagnose()}
+   else if(result.intent==='bookmarks'){close();bookmarks()}
+   else setAction(result);
+  }catch{setIssue('暂时无法理解问题。可以重试，或手动填写观测条件。')}
   finally{setBusy(false)}
  }
- function close(){dialog.current?.close()}
+ async function chooseStation(){
+  if(!clarify||!stationId)return;
+  setBusy(true);setIssue('');
+  try{await calculate({...clarify,station:stationId},null,lastQuestion)}
+  finally{setBusy(false)}
+ }
  return <>
-  <button className="investigation-launch" onClick={()=>dialog.current?.showModal()} aria-haspopup="dialog">AI 探索指令</button>
-  <dialog ref={dialog} className="investigation-dialog" aria-label="AI 探索指令">
-   <div className="investigation-heading"><h2>AI 探索指令</h2><button onClick={close}>关闭</button></div>
-   <label>你想找什么？<textarea rows={2} value={text} maxLength={400} onChange={e=>setText(e.target.value)} placeholder="今晚从北京能看到 ISS 吗？"/></label>
-   <div className="investigation-actions">
-    <button disabled={busy||text.trim().length<2} onClick={interpret}>{busy?'正在理解指令…':'生成可编辑动作'}</button>
-    <button onClick={()=>{setAction({...blank,intent:'observe'});setModel('');setIssue('')}}>手动计算观测</button>
-   </div>
-   {issue&&<p role="alert">{issue}</p>}{model&&<p>动作由 {model} 解析，确认条件后执行。</p>}
-   {action?.intent==='observe'&&<ObservationComparison key={JSON.stringify(action)} initial={action} onLocate={(norad,station)=>{locate(norad,station);close()}}/>}
+  <button className="investigation-launch" onClick={()=>dialog.current?.showModal()} aria-haspopup="dialog">AI 探索任务</button>
+  <dialog ref={dialog} className="investigation-dialog task-drawer" aria-label="AI 探索任务">
+   <header><h2>AI 探索任务</h2><button type="button" onClick={close}>关闭</button></header>
+   <form className="task-composer" onSubmit={event=>{event.preventDefault();void submit(text)}}>
+    <label>你想问什么？<textarea rows={2} value={text} maxLength={400} onChange={e=>setText(e.target.value)} placeholder={answer?'最低仰角改成 30° 呢？':'今晚从北京能看到 ISS 吗？'}/></label>
+    <div className="investigation-actions"><button type="submit" disabled={busy||text.trim().length<2}>发送</button>
+     {!answer&&<button type="button" disabled={busy} onClick={()=>submit('今晚从北京能看到 ISS 吗？')}>试问：今晚从北京能看到 ISS 吗？</button>}
+     {answer&&<button type="button" disabled={busy} onClick={()=>submit('最低仰角改成 30° 呢？')}>追问：最低仰角改成 30°</button>}
+    </div>
+   </form>
+   {lastQuestion&&<p>当前问题：{lastQuestion}</p>}
+   {busy&&<p role="status">正在理解问题并计算可见窗口…</p>}
+   {issue&&<p role="alert">{issue}</p>}
+   {clarify&&<div className="workflow-result">
+    <label>请选择观测站<select value={stationId} onChange={e=>setStationId(e.target.value)}>
+     <option value="">选择一个观测站</option>{stations.data?.list.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}
+    </select></label>
+    <button type="button" onClick={chooseStation} disabled={!stationId||busy}>继续计算</button>
+    {stations.data?.list.length===0&&<Link to="/workspace">去我的空间添加观测站</Link>}
+   </div>}
+   {answer&&task&&<>
+    {lastQuestion!==answeredQuestion&&<p>以下是上一轮的结果：{answeredQuestion}</p>}
+    <ObservationAnswer task={task} result={answer} previous={prior} locate={(norad,station)=>{locate(norad,station);close()}}/>
+   </>}
    {action?.intent==='search'&&<div className="ai-field-grid">
     <label>名称或编号<input value={action.query} onChange={e=>setAction({...action,query:e.target.value})}/></label>
     <label>分组<select value={action.group} onChange={e=>setAction({...action,group:e.target.value})}>{groups.map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label>
     <button onClick={()=>{apply(action.query,action.group.toLowerCase());close()}}>应用到地球和目录</button>
    </div>}
-   {action?.intent==='diagnose'&&<button onClick={()=>{close();diagnose()}}>检查当前画面</button>}
-   {action?.intent==='bookmarks'&&<button onClick={()=>{close();bookmarks()}}>打开当前时段的书签</button>}
-   {action?.intent==='unsupported'&&<p>可以试试查找卫星、计算观测窗口、打开书签或检查画面。</p>}
+   {action?.intent==='unsupported'&&<p>可以询问卫星观测窗口、查找卫星、查看书签或诊断地图。遥测证据请在选中记录后启动一键调查。</p>}
+   <details open={manual} onToggle={e=>showManual(e.currentTarget.open)}><summary>手动设置观测条件</summary>
+    {manual&&<ObservationComparison defaultQuery={String(selected)} onLocate={(norad,station)=>{locate(norad,station);close()}}/>}
+   </details>
   </dialog>
  </>;
 }

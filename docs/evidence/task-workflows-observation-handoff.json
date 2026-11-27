@@ -1,0 +1,12 @@
+{
+  "browser": "Edge",
+  "initialWindows": 4,
+  "followupWindows": 2,
+  "sameTime": true,
+  "located": true,
+  "planDraft": {
+    "norad": 25544,
+    "minElevation": 30,
+    "stationMatched": true
+  }
+}

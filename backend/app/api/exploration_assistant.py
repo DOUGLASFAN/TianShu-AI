@@ -62,11 +62,12 @@ query 只写卫星名称（如 ISS）或 NORAD 编号，不附加其他文字。
         action.group=''
         if '今晚' in text:action.window='tonight'
         elif '现在' in text or '当前' in text:action.window='now'
+        elif re.search(r'未来\s*24\s*小时|接下来\s*24\s*小时',text):action.window='next-day'
         if '北京' in text:action.station='北京'
     if action.intent in ('search','observe'):
         identifier=re.search(r'(?i)\b(?:NORAD\s*)?(\d{4,7})\b',text)
         if identifier:action.query=identifier.group(1)
-        elif re.search(r'(?i)\bISS\b|国际空间站',text):action.query='25544'
+        elif re.search(r'(?i)(?<![A-Z0-9])ISS(?![A-Z0-9])|国际空间站',text):action.query='25544'
         elif '北斗' in text:
             action.group='BEIDOU';action.query='北斗三号' if '三号' in text else ''
         if action.intent=='observe' and re.search(r'推荐|哪些卫星|观测的卫星',text) and not identifier and 'ISS' not in text.upper() and '国际空间站' not in text:
@@ -84,6 +85,7 @@ class ObservationRequest(BaseModel):
     group: Literal['','BEIDOU','GPS-OPS','GALILEO','STATIONS'] = ''
     window: Literal['now','tonight','next-day'] = 'next-day'
     start: AwareDatetime|None = None
+    end: AwareDatetime|None = None
     scenarios: list[Scenario] = Field(min_length=1,max_length=2)
 
 
@@ -106,11 +108,17 @@ def observation(body: ObservationRequest,user=Depends(current_user),db=Depends(g
         beijing=timezone(timedelta(hours=8))
         evening=clock.astimezone(beijing).replace(hour=18,minute=0,second=0,microsecond=0)
         start=max(clock,evening)
-    if not clock-timedelta(minutes=2)<=start<=clock+timedelta(days=7):
+    if body.end is not None:
+        if body.start is None or not timedelta(0)<body.end-start<=timedelta(days=1):
+            raise HTTPException(422,'PREDICTION_TIME_RANGE')
+    earliest=clock-timedelta(hours=24) if body.end else clock-timedelta(minutes=2)
+    if not earliest<=start<=clock+timedelta(days=7):
         raise HTTPException(422,'PREDICTION_TIME_RANGE')
     duration={'now':timedelta(minutes=30),'tonight':timedelta(hours=12),'next-day':timedelta(days=1)}[body.window]
     if body.window=='tonight' and body.start is None:
         duration=evening+timedelta(hours=12)-start
+    if body.end is not None:
+        duration=body.end-start
     stations=[match_station(db,user.id,s.station) for s in body.scenarios]
     query=select(Satellite)
     if body.group in ('GPS-OPS','GALILEO'):
@@ -152,12 +160,12 @@ def observation(body: ObservationRequest,user=Depends(current_user),db=Depends(g
                 for event in passes:
                     choices.append(dict(norad=satellite.norad_id,name=satellite.name,start=event['start'],end=event['end'],
                         peak=event['peak'],elevation=event['max_elevation'],duration=event['duration_s'],
-                        optical=bool(event['visible_windows']),visibleNow=event['partial_start'],
-                        orbitEpoch=basis['orbit']['epoch'],orbitSource=basis['orbit']['source']))
+                        optical=bool(event['visible_windows']),opticalPeriods=event['visible_windows'],visibleNow=event['partial_start'],
+                        orbitEpoch=basis['orbit']['epoch'],orbitSource=basis['orbit']['source'],orbitVersion=basis['orbit']['version']))
             choices.sort(key=lambda v:(not v['optical'],-v['elevation'],v['start']))
             output.append(dict(station={'id':station.id,'name':station.name,'lat':station.latitude,'lng':station.longitude},
                 minimum=scenario.minimum,windows=choices[:12],skipped=skipped,total=len(choices),
-                opticalWindows=sum(v['optical'] for v in choices)))
+                opticalWindows=sum(v['optical'] for v in choices),truncated=len(choices)>12))
         return dict(start=start.isoformat(),end=(start+duration).isoformat(),scenarios=output,
                     targets=min(6,len(satellites)),limited=len(satellites)>6,
                     scope='仅评估所列或匹配的最多六颗卫星。目视条件基于受光与太阳高度，不含天气、亮度和遮挡。')

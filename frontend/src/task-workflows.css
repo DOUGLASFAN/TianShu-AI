@@ -1,0 +1,16 @@
+.task-drawer { position:fixed; inset:0 0 0 auto; margin:0; width:min(34rem,100%); height:100dvh; max-height:100dvh; border-radius:12px 0 0 12px; }
+.task-drawer > header { display:flex; justify-content:space-between; gap:.8rem; align-items:center; margin-bottom:1rem; }
+.task-drawer h2 { margin:0; }
+.task-drawer textarea { display:block; width:100%; margin-top:.35rem; }
+.task-drawer button,.workflow-result button { min-height:44px; }
+.task-drawer h3,.workflow-result h3 { margin:.65rem 0; }
+.task-drawer .task-composer { display:grid; gap:.55rem; margin-bottom:.75rem; }
+.workflow-result,.workflow-compare { border:1px solid #476783; border-radius:.65rem; padding:.85rem; background:#17293a; overflow-wrap:anywhere; }
+.workflow-compare { margin:.7rem 0; background:#102232; }
+.workflow-evidence { list-style:none; padding:0; }
+.workflow-evidence li+li { border-top:1px solid #46627b; margin-top:.7rem; padding-top:.7rem; }
+.workflow-result a { color:#aee2ff; text-decoration:underline; }
+.workflow-investigation { margin:.7rem 0; }
+.workflow-investigation details { margin:.55rem 0; }
+.workflow-investigation summary,.task-drawer summary { cursor:pointer; }
+@media(max-width:575px){ .task-drawer { border-radius:0; max-width:100%; } }

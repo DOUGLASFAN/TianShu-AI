@@ -33,7 +33,7 @@ async def request_context(request:Request,call_next):
     return response
 
 
-MESSAGES={'AI_MODEL_UNAVAILABLE':'AI 模型暂不可用，请使用手动条件或重试','AI_OBSERVATION_STATION':'请选择唯一匹配的已有观测站','AI_SESSION_NOT_FOUND':'没有找到此调查现场','AI_SESSION_LIMIT':'已达调查现场保存上限','AI_IMPORT_MAPPING':'请核对字段映射、时间格式和元数据','AUTH_REQUIRED':'请先登录','SESSION_INVALID':'登录已失效，请重新登录','INVALID_CREDENTIALS':'用户名或密码错误',
+MESSAGES={'WORKFLOW_RECORD_NOT_FOUND':'该记录不在报告里','WORKFLOW_WINDOW_INVALID':'选区需要包含目标记录且位于报告范围内','AI_MODEL_UNAVAILABLE':'AI 模型暂不可用，请使用手动条件或重试','AI_OBSERVATION_STATION':'请选择唯一匹配的已有观测站','AI_SESSION_NOT_FOUND':'没有找到此调查现场','AI_SESSION_LIMIT':'已达调查现场保存上限','AI_IMPORT_MAPPING':'请核对字段映射、时间格式和元数据','AUTH_REQUIRED':'请先登录','SESSION_INVALID':'登录已失效，请重新登录','INVALID_CREDENTIALS':'用户名或密码错误',
           'SAMPLING_PROFILE_NOT_FOUND':'采样方案不存在或无权访问','SAMPLING_PRESET_NOT_FOUND':'找不到该卫星组','SAMPLING_TIME_RANGE':'采样区间须在当前时刻前后 7 天内','SAMPLING_BUSY':'采样计算繁忙，请稍后重试','SAMPLING_PROFILE_LIMIT':'最多保存 50 个采样方案',
           'MAP_LAYER_NOT_FOUND':'未找到该底图图层','MAP_PROVIDER_NOT_FOUND':'未找到该地图来源','MAP_KEY_REQUIRED':'天地图尚未配置开发者 Key','MAP_TILE_RANGE':'地图瓦片范围无效','MAP_UPSTREAM_UNAVAILABLE':'在线地图暂不可用，请保留本地底图或稍后重试','MAP_DEMO_FAILURE':'故障演示中，在线地图请求已暂停',
           'SOURCE_NOT_FOUND':'未找到该任务来源','TASK_NOT_FOUND':'未找到该任务','MANUAL_REFRESH_LIMIT':'同类手动刷新间隔至少 60 秒，请稍后重试',
@@ -126,3 +126,6 @@ app.include_router(investigation.router)
 from .api import exploration_assistant, investigation_tools
 app.include_router(exploration_assistant.router)
 app.include_router(investigation_tools.router)
+
+from .api import task_workflows
+app.include_router(task_workflows.router)

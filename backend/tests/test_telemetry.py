@@ -160,3 +160,25 @@ def test_ai_tools_use_frozen_evidence_and_keep_original(client):
     user.id='another-owner'
     assert c.get(original).status_code==404 and c.get(url).status_code==404
     assert c.get(prefix+'/similar').status_code==404
+
+def test_integrated_investigation_scopes_selected_point_and_keeps_archive_read_only(client):
+    c,user=client
+    saved=c.post('/api/telemetry/runs',json=dict(asset='opssat-v2',channel='CADC0872',segment='8')).json()
+    before=c.get('/api/telemetry/runs').json()
+    endpoint='/api/task-workflows/investigate'
+    response=c.post(endpoint,json={'run':saved['id'],'record':716})
+    assert response.status_code==200
+    result=response.json()
+    assert result['point']['record']==716 and result['window']['included']==400
+    assert result['related'] and result['nextSteps']
+    assert len(result['trials'])==3 and result['version']==saved['asset']['sha256']
+    assert any(item['kind']=='orbit' for item in result['context']['entries'])
+    selected=next(i for i,p in enumerate(saved['points']) if p['record']==716)
+    end=saved['points'][selected+1]['utc']
+    narrow=c.post(endpoint,json={'run':saved['id'],'record':716,'start':saved['points'][selected-1]['utc'],'end':end})
+    assert narrow.status_code==200 and narrow.json()['window']['included']==3
+    assert narrow.json()['context']['end']==end
+    assert c.post(endpoint,json={'run':saved['id'],'record':716,'start':end}).status_code==422
+    assert c.get('/api/telemetry/runs').json()==before
+    user.id='different-user'
+    assert c.post(endpoint,json={'run':saved['id'],'record':716}).status_code==404

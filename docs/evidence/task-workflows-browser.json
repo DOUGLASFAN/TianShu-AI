@@ -1,0 +1,47 @@
+{
+  "browser": "Edge",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "firstCount": 0,
+      "followupCount": 0,
+      "sameStationAndWindow": true,
+      "minimum": [
+        15,
+        30
+      ],
+      "record": 716,
+      "verdict": "值得追查：两条规则均标记该记录",
+      "related": 2,
+      "missing": [
+        "weather",
+        "observation"
+      ],
+      "evidenceFocus": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "firstCount": 0,
+      "followupCount": 0,
+      "sameStationAndWindow": true,
+      "minimum": [
+        15,
+        30
+      ],
+      "record": 716,
+      "verdict": "值得追查：两条规则均标记该记录",
+      "related": 2,
+      "missing": [
+        "weather",
+        "observation"
+      ],
+      "evidenceFocus": true
+    }
+  ]
+}

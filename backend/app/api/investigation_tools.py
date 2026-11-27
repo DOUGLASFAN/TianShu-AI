@@ -85,10 +85,15 @@ def similar(key:str,user=Depends(current_user)):
 
 @router.get('/runs/{key}/context')
 def context(key:str,user=Depends(current_user),db=Depends(get_db)):
+    return context_for_window(key,user,db)
+
+
+def context_for_window(key,user,db,window=None):
     from backend.phase1.orbits import from_tle
-    saved=report(key,user);meta=saved['asset'];start,end=instant(saved['start']),instant(saved['end'])
+    saved=report(key,user);meta=saved['asset'];start,end=window or (instant(saved['start']),instant(saved['end']))
+    begin,finish=start.isoformat(),end.isoformat()
     stamp=func.coalesce(WeatherEvent.occurred_at,WeatherEvent.issued_at)
-    entries=[dict(kind='telemetry',start=saved['start'],end=saved['end'],source=meta['source'],
+    entries=[dict(kind='telemetry',start=begin,end=finish,source=meta['source'],
                   label=saved['channel'],state='报告时间窗',link=f'/telemetry?run={key}')]
     for row,time in db.execute(select(WeatherEvent,stamp).where(stamp.between(start,end)).order_by(stamp).limit(30)):
         entries.append(dict(kind='weather',start=time.isoformat(),source=row.source_id,label=row.category,
@@ -96,8 +101,8 @@ def context(key:str,user=Depends(current_user),db=Depends(get_db)):
     if meta.get('tle') and meta.get('orbitSource'):
         sat=from_tle(meta['tle']);epoch=sat.epoch.utc_datetime()
         aligned=sat.model.satnum==meta['norad'] and max(abs((t-epoch).total_seconds()) for t in (start,end))<=86400
-        entries.append(dict(kind='orbit',start=saved['start'] if aligned else epoch.isoformat(),
-            end=saved['end'] if aligned else None,source=meta['orbitSource'],label='归档根数',
+        entries.append(dict(kind='orbit',start=begin if aligned else epoch.isoformat(),
+            end=finish if aligned else None,source=meta['orbitSource'],label='归档根数',
             state='覆盖时段，可推算几何位置' if aligned else '根数超出允许的推算范围',
             link=f"/explore?historical={key}&sat={meta['norad']}" if aligned else None))
     for a in matching_assets(user,meta['norad'],'observation')[:20]:
@@ -110,14 +115,19 @@ def context(key:str,user=Depends(current_user),db=Depends(get_db)):
                     link='/telemetry?asset='+a['id']))
             if len(entries)>=60:break
         if len(entries)>=60:break
-    return dict(entries=sorted(entries,key=lambda e:instant(e['start'])),start=saved['start'],end=saved['end'],
+    return dict(entries=sorted(entries,key=lambda e:instant(e['start'])),start=begin,end=finish,
                 missing=[k for k in ('orbit','weather','observation') if not any(e['kind']==k for e in entries)])
 
 
 @router.get('/runs/{key}/challenge')
 def challenge(key:str,user=Depends(current_user)):
-    saved=report(key,user);points=saved['points']; start,end=instant(saved['start']),instant(saved['end'])
-    used=set(saved['used']);target=saved['candidates'][0] if saved['candidates'] else None
+    saved=report(key,user)
+    return challenge_report(saved,saved['candidates'][0] if saved['candidates'] else None)
+
+
+def challenge_report(saved,target):
+    points=saved['points']; start,end=instant(saved['start']),instant(saved['end'])
+    used=set(saved['used'])
     configs=[('原窗口',start,end,saved)]
     if target is not None:
         index=next(i for i,p in enumerate(points) if p['record']==target)

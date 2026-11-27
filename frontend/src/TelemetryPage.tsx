@@ -1,3 +1,4 @@
+import {InvestigationTask} from './TaskResults';
 import {useSearchParams} from 'react-router-dom';
 import {InvestigationEvidence,ImportMappingAssistant,ImportOriginalButton} from './InvestigationEvidence';
 import type {SavedInvestigation} from './InvestigationShelf';
@@ -55,7 +56,12 @@ function Result({r,replace,saved}:{r:Report;replace:(r:Report)=>void;saved?:Save
  {selection.enabled&&<rect x={x(r.points[selection.range[0]])} y="0" width={Math.max(2,x(r.points[selection.range[1]])-x(r.points[selection.range[0]]))} height="165" fill="#6abbe8" opacity=".22" pointerEvents="none"/>}<path fill="none" stroke="#6abbe8" d={r.points.map((q,i)=>q.value===null?'':((!i||r.points[i-1].value===null||r.gaps.some(g=>g[1]===q.utc))?'M':'L')+x(q)+' '+y(q)).join(' ')}/>{r.points.map((q,i)=>q.value===null?null:<circle key={q.record} cx={x(q)} cy={y(q)} r={i===cursor?6:3} fill={r.candidates.includes(q.record)?'#ffb55c':'#90d4f2'} onClick={()=>{if(!selection.enabled)seek(i)}}/>)}<line x1={x(p)} x2={x(p)} y1="0" y2="160" stroke="white"/></svg>
  {selection.enabled&&<InvestigationPanel run={r.id} points={r.points} range={selection.range} update={selection.update} target={p.record} seek={seek} restored={saved?.investigation as InvestigationResult|undefined}/>}
  <button onClick={()=>{if(cursor===r.points.length-1)seek(0);play(!playing)}}>{playing?'暂停':'播放历史片段'}</button><label>片段时间轴<input type="range" min="0" max={r.points.length-1} value={cursor} onChange={e=>seek(+e.target.value)}/></label>
- <p>{p.utc} · 原始记录 #{p.record} · {("quality" in p)?String(p.quality):"原始测量"} · {p.value??'缺测'}</p><details><summary>原始字段</summary><pre>{JSON.stringify(p.raw,null,2)}</pre></details>
+ <p id="telemetry-selected-record" tabIndex={-1}>{p.utc} · 原始记录 #{p.record} · {("quality" in p)?String(p.quality):"原始测量"} · {p.value??'缺测'}</p><details><summary>原始字段</summary><pre>{JSON.stringify(p.raw,null,2)}</pre></details>
+ <InvestigationTask run={r.id} record={p.record}
+  start={selection.enabled?r.points[selection.range[0]].utc:undefined}
+  end={selection.enabled?r.points[selection.range[1]].utc:undefined}
+  onEvidence={record=>{const i=r.points.findIndex(item=>item.record===record);if(i>=0)seek(i);
+   document.getElementById('telemetry-selected-record')?.focus();}}/>
  <p>有效样本 {r.stats.count} · 均值 {r.stats.mean} · 标准差 {r.stats.stdev} · 极差 {r.stats.span}</p>
  <p>独立复算 {r.stats.independentMean} · {r.stats.verified?'均值已核验':'复算冲突'}</p>
  <p>缺值 {r.missing.length} · 重复时刻 {r.duplicateTimes.length} · 乱序 {r.outOfOrder.length} · 采样间断 {('cadenceSeconds' in r.asset && r.asset.cadenceSeconds)?r.gaps.length:'缺少已核验采样间隔'}</p>
