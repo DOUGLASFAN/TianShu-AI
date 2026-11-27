@@ -35,15 +35,22 @@ export function SmartBookmarks({start,end,formatTime}:{
   finally{setBusy(false)}
  }
  return <>
-  <button type="button" aria-haspopup="dialog" onClick={()=>{dialog.current?.showModal();setOpen(true)}}>智能书签</button>
+  <button className="investigation-launch" type="button" aria-haspopup="dialog"
+   onClick={()=>{setIssue('');dialog.current?.showModal();setOpen(true)}}>智能书签 · 异常调查</button>
   <dialog className="investigation-dialog" ref={dialog} aria-labelledby="bookmark-title" onClose={()=>setOpen(false)}>
    <div className="investigation-heading"><h2 id="bookmark-title">智能书签</h2><button type="button" onClick={()=>dialog.current?.close()}>关闭</button></div>
-   <p>查看当前时段的过境、空间环境记录与遥测候选。</p>
-   {start&&end&&<label><input type="checkbox" checked={all} onChange={e=>setAll(e.target.checked)}/>查看所有时段的遥测候选</label>}
+   <div className="investigation-example">
+    <strong>试用公开案例</strong>
+    <p>打开 OPS-SAT 片段 8，定位异常候选，然后在曲线上框选范围、复算并比较解释。</p>
+    <button type="button" disabled={busy} onClick={openExample}>{busy?'正在打开…':'打开公开示例 · OPS-SAT 片段 8'}</button>
+    {issue&&<p role="alert">{issue}</p>}
+   </div>
+   <h3>{all?'归档遥测候选':'当前时段的书签'}</h3>
+   {start&&end&&<label className="investigation-archive-option"><input type="checkbox" checked={all} onChange={e=>setAll(e.target.checked)}/>查看所有时段的遥测候选</label>}
    {inRange&&<p>{formatTime(start!)} 至 {formatTime(end!)}</p>}
    {bookmarks.isFetching&&<p role="status">正在查找归档候选…</p>}
    {bookmarks.error&&<p role="alert">{bookmarks.error.message}</p>}
-   {bookmarks.data?.length===0&&!bookmarks.isFetching&&<p>这个范围内没有可用书签。</p>}
+   {bookmarks.data?.length===0&&!bookmarks.isFetching&&<p>{inRange?'当前时段没有已收录的过境、空间环境记录或遥测候选。' :'暂无已归档的遥测候选。'}</p>}
    {bookmarks.data?.length?<ul className="bookmark-list">{bookmarks.data.map(item=><li key={item.kind+':'+item.id}>
     <time dateTime={item.time}>{formatTime(item.time)}</time>
     {item.kind==='telemetry'?<><strong>{item.mission} · 遥测候选 #{item.record}</strong><div className="investigation-actions">
@@ -53,8 +60,6 @@ export function SmartBookmarks({start,end,formatTime}:{
      <Link to={'/observations?task='+encodeURIComponent(item.task)+'&event='+encodeURIComponent(item.event)} onClick={()=>dialog.current?.close()}>查看过境结果</Link></>:<>
      <strong>空间环境 · {item.category}</strong><br/><Link to={'/environment?event='+encodeURIComponent(item.id)} onClick={()=>dialog.current?.close()}>查看来源记录</Link></>}
    </li>)}</ul>:null}
-   <button type="button" disabled={busy} onClick={openExample}>{busy?'正在生成报告…':'打开公开示例 · OPS-SAT 片段 8'}</button>
-   {issue&&<p role="alert">{issue}</p>}
   </dialog>
  </>;
 }

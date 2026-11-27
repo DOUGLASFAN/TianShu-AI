@@ -252,7 +252,6 @@ export function Explore(){
      <button disabled={!controlsReady}>定位时间</button>
     </form></details>;
  const timeTools=<div className="timebar-tools" role="group" aria-label="时间工具">
-  <SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime}/>
   <Link to="/sampling">{samplingId?'管理本方案':'自定义采样'}</Link>
   <label className="timebar-zone"><span>时区</span><select aria-label="显示时区" value={timeZone} onChange={event=>setTimeZone(event.target.value as TimeZone)}>
    {timeZoneOptions.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}
@@ -265,6 +264,7 @@ export function Explore(){
   {!mobile&&directoryPanel}
   <section className="orbital-stage" ref={stagePanel} tabIndex={-1} aria-label="地球与轨道">
    <div className="orbit-globe" ref={host} aria-label="可旋转的三维地球"><div className="globe-credits"/></div>
+   {!mobile&&!clean&&<div className="investigation-globe-entry"><SmartBookmarks start={scene.data?.start} end={scene.data?.end} formatTime={formatTime}/></div>}
    {engine&&scene.isPending&&<div className="scene-status" role="status">正在加载卫星轨迹</div>}
    <BasemapControls map={engine?.basemap} showControls={false}/><SpaceControls engine={engine}/><div className="globe-tools"><button aria-label="全球视角" title="全球视角" disabled={!controlsReady} onClick={()=>{engine?.home();setTracking(false);setMessage('已恢复全球视角。');}}><GlobeHemisphereEast size={21}/></button><button aria-label="切换云层" title="历史合成云层" aria-pressed={clouds} disabled={!engine} onClick={()=>setClouds(!clouds)}><Cloud size={21}/></button><button aria-label="纯净视图" title="纯净视图" aria-pressed={clean} onClick={()=>setClean(!clean)}><ArrowsOutSimple size={21}/></button></div>
    {tracking&&<div className="tracking-pill"><Target size={16}/>正在跟踪 {detail?.name||selected}<button onClick={()=>{engine?.follow();setTracking(false);}}>退出跟踪</button></div>}

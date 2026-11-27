@@ -1,5 +1,10 @@
-.investigation-dialog { box-sizing:border-box; width:min(36rem,calc(100% - 2rem)); max-height:80dvh; padding:1rem; border:1px solid #3a526b; border-radius:12px; background:#101c2b; color:#e2edf7; overflow:auto; }
+.investigation-dialog { position:fixed; inset:0; margin:auto; box-sizing:border-box; width:min(36rem,calc(100% - 2rem)); height:fit-content; max-height:calc(100dvh - 2rem); padding:1rem; border:1px solid #3a526b; border-radius:12px; background:#101c2b; color:#e2edf7; overflow:auto; }
 .investigation-dialog::backdrop { background:#060b14bd; }
+.investigation-globe-entry { position:absolute; z-index:3; top:1rem; right:1rem; }
+.investigation-launch,.investigation-example button { min-height:44px; border:1px solid #6cb8e4; background:#172f47; color:#e3f4ff; }
+.investigation-example { margin:.85rem 0 1rem; padding:.8rem; border:1px solid #446684; border-radius:8px; background:#15283a; }
+.investigation-example p { margin:.3rem 0 .65rem; }
+.investigation-archive-option { display:flex; align-items:center; gap:.5rem; min-height:44px; }
 .investigation-heading,.investigation-actions { display:flex; align-items:center; flex-wrap:wrap; gap:.5rem; }
 .investigation-heading { justify-content:space-between; }
 .investigation-heading h2,.hypothesis-grid h4 { margin:0; }

@@ -1,0 +1,33 @@
+{
+  "browser": "Edge",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "dialog": {
+        "x": 424.5,
+        "y": 260.5625,
+        "width": 576,
+        "height": 378.875
+      },
+      "record": 716,
+      "investigation": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dialog": {
+        "x": 17,
+        "y": 201.0625,
+        "width": 356,
+        "height": 441.875
+      },
+      "record": 716,
+      "investigation": true
+    }
+  ]
+}
