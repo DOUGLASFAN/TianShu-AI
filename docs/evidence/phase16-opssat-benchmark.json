@@ -1,0 +1,52 @@
+{
+  "manifest": {
+    "version": "TianShu-Bench/1",
+    "source": "https://zenodo.org/records/15108715",
+    "sha256": "d5201e9e751eb2a53a0ff7c11567dc4239f594ea4b479b2aa66fe67ddcbcb9ba",
+    "split": "original train column, no tuning",
+    "scoring": "one decision per channel/segment; any point over threshold",
+    "python": "3.12.2 | packaged by Anaconda, Inc. | (main, Feb 27 2024, 17:28:07) [MSC v.1916 64 bit (AMD64)]"
+  },
+  "summary": [
+    {
+      "split": "development",
+      "rule": "mad-3",
+      "segments": 1594,
+      "TP": 95,
+      "TN": 964,
+      "FP": 309,
+      "FN": 226,
+      "seconds": 0.052937399930669926
+    },
+    {
+      "split": "development",
+      "rule": "zscore-3",
+      "segments": 1594,
+      "TP": 31,
+      "TN": 1271,
+      "FP": 2,
+      "FN": 290,
+      "seconds": 0.4039244998857612
+    },
+    {
+      "split": "test",
+      "rule": "mad-3",
+      "segments": 529,
+      "TP": 28,
+      "TN": 305,
+      "FP": 111,
+      "FN": 85,
+      "seconds": 0.018343499774346128
+    },
+    {
+      "split": "test",
+      "rule": "zscore-3",
+      "segments": 529,
+      "TP": 12,
+      "TN": 415,
+      "FP": 1,
+      "FN": 101,
+      "seconds": 0.13780100003350526
+    }
+  ]
+}

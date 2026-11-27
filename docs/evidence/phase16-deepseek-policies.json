@@ -1,0 +1,590 @@
+[
+  {
+    "split": "development",
+    "case": "valid",
+    "segment": "5",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 370,
+          "total_tokens": 384,
+          "prompt_tokens_details": {
+            "cached_tokens": 1
+          }
+        }
+      }
+    ],
+    "modelSeconds": 4.057753099987167,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已核验",
+      "agent": "已核验",
+      "agent_with_gate": "已核验"
+    }
+  },
+  {
+    "split": "development",
+    "case": "identity",
+    "segment": "5",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 367,
+          "total_tokens": 381,
+          "prompt_tokens_details": {
+            "cached_tokens": 212
+          }
+        }
+      }
+    ],
+    "modelSeconds": 4.271280700006173,
+    "claim": {
+      "norad": 42,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "development",
+    "case": "time",
+    "segment": "5",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 365,
+          "total_tokens": 379,
+          "prompt_tokens_details": {
+            "cached_tokens": 212
+          }
+        }
+      }
+    ],
+    "modelSeconds": 4.057909999988624,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2000-01-01T00:00:00Z",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "development",
+    "case": "units",
+    "segment": "5",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 370,
+          "total_tokens": 384,
+          "prompt_tokens_details": {
+            "cached_tokens": 234
+          }
+        }
+      }
+    ],
+    "modelSeconds": 2.891090399993118,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "V"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "development",
+    "case": "citation",
+    "segment": "5",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 370,
+          "total_tokens": 384,
+          "prompt_tokens_details": {
+            "cached_tokens": 360
+          }
+        }
+      }
+    ],
+    "modelSeconds": 2.180761399999028,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#unrelated",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "development",
+    "case": "numeric",
+    "segment": "5",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 370,
+          "total_tokens": 384,
+          "prompt_tokens_details": {
+            "cached_tokens": 300
+          }
+        }
+      }
+    ],
+    "modelSeconds": 3.151517699996475,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 258,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已修正",
+      "agent": "已核验",
+      "agent_with_gate": "已修正"
+    }
+  },
+  {
+    "split": "test",
+    "case": "valid",
+    "segment": "8",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 376,
+          "total_tokens": 390,
+          "prompt_tokens_details": {
+            "cached_tokens": 80
+          }
+        }
+      }
+    ],
+    "modelSeconds": 4.302152100004605,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已核验",
+      "agent": "已核验",
+      "agent_with_gate": "已核验"
+    }
+  },
+  {
+    "split": "test",
+    "case": "identity",
+    "segment": "8",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 373,
+          "total_tokens": 387,
+          "prompt_tokens_details": {
+            "cached_tokens": 215
+          }
+        }
+      }
+    ],
+    "modelSeconds": 4.715544899998349,
+    "claim": {
+      "norad": 42,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "test",
+    "case": "time",
+    "segment": "8",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 371,
+          "total_tokens": 385,
+          "prompt_tokens_details": {
+            "cached_tokens": 215
+          }
+        }
+      }
+    ],
+    "modelSeconds": 3.78517329999886,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2000-01-01T00:00:00Z",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "test",
+    "case": "units",
+    "segment": "8",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 376,
+          "total_tokens": 390,
+          "prompt_tokens_details": {
+            "cached_tokens": 237
+          }
+        }
+      }
+    ],
+    "modelSeconds": 2.9866091000003507,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "V"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "test",
+    "case": "citation",
+    "segment": "8",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 376,
+          "total_tokens": 390,
+          "prompt_tokens_details": {
+            "cached_tokens": 366
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.7602691000065533,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#unrelated",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "test",
+    "case": "numeric",
+    "segment": "8",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 376,
+          "total_tokens": 390,
+          "prompt_tokens_details": {
+            "cached_tokens": 303
+          }
+        }
+      }
+    ],
+    "modelSeconds": 2.048809700005222,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 401,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已修正",
+      "agent": "已核验",
+      "agent_with_gate": "已修正"
+    }
+  }
+]

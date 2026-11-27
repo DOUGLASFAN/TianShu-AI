@@ -113,3 +113,9 @@ app.include_router(sampling.router)
 
 from .api import telemetry
 app.include_router(telemetry.router)
+
+from .api import trusted
+app.include_router(trusted.router)
+
+from .api import research
+app.include_router(research.router)

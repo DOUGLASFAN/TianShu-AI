@@ -1,0 +1,609 @@
+[
+  {
+    "case": "dev-archive",
+    "split": "development",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "只查询冻结报告的任务与数据来源。",
+    "expected": [
+      "archive"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "summary",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 34,
+          "prompt_tokens": 114,
+          "total_tokens": 148,
+          "prompt_tokens_details": {
+            "cached_tokens": 100
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "summary",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 1.7572485999990022
+  },
+  {
+    "case": "dev-archive",
+    "split": "development",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "只查询冻结报告的任务与数据来源。",
+    "expected": [
+      "archive"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "summary",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 34,
+          "prompt_tokens": 114,
+          "total_tokens": 148,
+          "prompt_tokens_details": {
+            "cached_tokens": 113
+          }
+        }
+      },
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 34,
+          "prompt_tokens": 150,
+          "total_tokens": 184,
+          "prompt_tokens_details": {
+            "cached_tokens": 112
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "summary",
+        "verify"
+      ],
+      [
+        "archive",
+        "detect",
+        "quality",
+        "summary",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 3.574557600004482
+  },
+  {
+    "case": "dev-quality",
+    "split": "development",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "仅检查质量，列出缺测与排除记录。",
+    "expected": [
+      "quality"
+    ],
+    "actual": [
+      "summary",
+      "quality",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 26,
+          "prompt_tokens": 116,
+          "total_tokens": 142,
+          "prompt_tokens_details": {
+            "cached_tokens": 100
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "summary",
+        "quality",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "quality",
+      "verify",
+      "summary"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 1.6860016999999061
+  },
+  {
+    "case": "dev-quality",
+    "split": "development",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "仅检查质量，列出缺测与排除记录。",
+    "expected": [
+      "quality"
+    ],
+    "actual": [
+      "summary",
+      "quality",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 26,
+          "prompt_tokens": 116,
+          "total_tokens": 142,
+          "prompt_tokens_details": {
+            "cached_tokens": 115
+          }
+        }
+      },
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 26,
+          "prompt_tokens": 146,
+          "total_tokens": 172,
+          "prompt_tokens_details": {
+            "cached_tokens": 114
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "summary",
+        "quality",
+        "verify"
+      ],
+      [
+        "summary",
+        "quality",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "quality",
+      "verify",
+      "summary"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 3.2168751999997767
+  },
+  {
+    "case": "test-detect",
+    "split": "test",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "查档案来源，回查异常候选，不写报告。",
+    "expected": [
+      "archive",
+      "detect"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "summary",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 20,
+          "prompt_tokens": 118,
+          "total_tokens": 138,
+          "prompt_tokens_details": {
+            "cached_tokens": 100
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "summary",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 1.6292740999924717
+  },
+  {
+    "case": "test-detect",
+    "split": "test",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "查档案来源，回查异常候选，不写报告。",
+    "expected": [
+      "archive",
+      "detect"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "summary",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 20,
+          "prompt_tokens": 118,
+          "total_tokens": 138,
+          "prompt_tokens_details": {
+            "cached_tokens": 117
+          }
+        }
+      },
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 34,
+          "prompt_tokens": 154,
+          "total_tokens": 188,
+          "prompt_tokens_details": {
+            "cached_tokens": 116
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "summary",
+        "verify"
+      ],
+      [
+        "archive",
+        "detect",
+        "quality",
+        "summary",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 4.058491999996477
+  },
+  {
+    "case": "test-verify",
+    "split": "test",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "只核验引用的样本数，并输出有引用的总结。",
+    "expected": [
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "summary",
+      "verify",
+      "summary"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 28,
+          "prompt_tokens": 119,
+          "total_tokens": 147,
+          "prompt_tokens_details": {
+            "cached_tokens": 100
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "summary",
+        "verify",
+        "summary"
+      ]
+    ],
+    "effective": [
+      "verify",
+      "summary"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 1.9687865000014426
+  },
+  {
+    "case": "test-verify",
+    "split": "test",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "只核验引用的样本数，并输出有引用的总结。",
+    "expected": [
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "summary",
+      "verify",
+      "summary"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 28,
+          "prompt_tokens": 119,
+          "total_tokens": 147,
+          "prompt_tokens_details": {
+            "cached_tokens": 118
+          }
+        }
+      },
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 26,
+          "prompt_tokens": 149,
+          "total_tokens": 175,
+          "prompt_tokens_details": {
+            "cached_tokens": 117
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "summary",
+        "verify",
+        "summary"
+      ],
+      [
+        "summary",
+        "verify",
+        "summary"
+      ]
+    ],
+    "effective": [
+      "verify",
+      "summary"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 3.7519402999896556
+  },
+  {
+    "case": "test-full",
+    "split": "test",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "查任务档案、检查质量、回查异常，核验证据并总结。",
+    "expected": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "summary",
+      "verify",
+      "quality",
+      "detect",
+      "archive"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 20,
+          "prompt_tokens": 122,
+          "total_tokens": 142,
+          "prompt_tokens_details": {
+            "cached_tokens": 100
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "summary",
+        "verify",
+        "quality",
+        "detect",
+        "archive"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 1.6268319000082556
+  },
+  {
+    "case": "test-full",
+    "split": "test",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "request": "查任务档案、检查质量、回查异常，核验证据并总结。",
+    "expected": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "summary",
+      "verify",
+      "quality",
+      "detect",
+      "archive"
+    ],
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 20,
+          "prompt_tokens": 122,
+          "total_tokens": 142,
+          "prompt_tokens_details": {
+            "cached_tokens": 121
+          }
+        }
+      },
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 34,
+          "prompt_tokens": 158,
+          "total_tokens": 192,
+          "prompt_tokens_details": {
+            "cached_tokens": 120
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "summary",
+        "verify",
+        "quality",
+        "detect",
+        "archive"
+      ],
+      [
+        "summary",
+        "verify",
+        "quality",
+        "detect",
+        "archive"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 3.3053830999997444
+  }
+]

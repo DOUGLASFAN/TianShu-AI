@@ -30,7 +30,7 @@ function Orbit({position}:{position:{lng:number;lat:number;alt:number}}){
 }
 
 function Result({r,replace}:{r:Report;replace:(r:Report)=>void}){
- const [cursor,seek]=useState(0),[note,setNote]=useState(r.review||''),[status,setStatus]=useState('');
+ const [cursor,seek]=useState(()=>Math.max(0,r.points.findIndex(p=>p.record===Number(new URLSearchParams(location.search).get('record'))))),[note,setNote]=useState(r.review||''),[status,setStatus]=useState('');
  const [playing,play]=useState(false),[zoom,setZoom]=useState(1);
  useEffect(()=>{if(!playing)return;if(cursor>=r.points.length-1){play(false);return}
   const timer=setTimeout(()=>seek(cursor+1),750);return ()=>clearTimeout(timer);
@@ -63,6 +63,9 @@ export function TelemetryPage(){
  const {user}=useAuth(),cache=useQueryClient();
  const [day,setDay]=useState(''),[goal,setGoal]=useState('历史片段异常候选复核');
  const [key,pick]=useState('opssat-v2'),[index,select]=useState(0),[start,setStart]=useState(''),[end,setEnd]=useState(''),[filter,search]=useState(''),[r,show]=useState<Report|null>(null),[error,fail]=useState('');
+ useEffect(()=>{const id=new URLSearchParams(location.search).get('run');if(!id)return;
+  let active=true;api<Report>('/telemetry/runs/'+encodeURIComponent(id)).then(value=>{if(active){pick(value.input.asset);show(value)}}).catch(e=>{if(active)fail(String(e))});return()=>{active=false}
+ },[]);
  const failed=useQuery({queryKey:['telemetry-failures'],queryFn:()=>api<unknown[]>('/telemetry/failures')});
  const assets=useQuery({queryKey:['telemetry-assets'],queryFn:()=>api<Asset[]>('/telemetry/assets')});
  const matches=(assets.data||[]).filter(a=>(a.mission+' '+a.norad).toLowerCase().includes(filter.toLowerCase())&&(!day||(!!a.coverageStart&&!!a.coverageEnd&&a.coverageStart.slice(0,10)<=day&&day<=a.coverageEnd.slice(0,10))));

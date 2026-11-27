@@ -1,0 +1,12 @@
+{
+  "browser": "Edge",
+  "publicSegment": 8,
+  "corrected": 400,
+  "sourceLink": "/telemetry?run=85fb7b661472fdccc1c98bfb22e347467a0ba33481ae129163671086305f5ae1&record=538",
+  "qwenJob": "completed",
+  "downloadBytes": {
+    "异常检测": 59582,
+    "证据核验": 3665,
+    "模型对照": 18437
+  }
+}

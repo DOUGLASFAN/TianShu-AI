@@ -1,0 +1,590 @@
+[
+  {
+    "split": "development",
+    "case": "valid",
+    "segment": "5",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 380,
+          "total_tokens": 394,
+          "prompt_tokens_details": {
+            "cached_tokens": 3
+          }
+        }
+      }
+    ],
+    "modelSeconds": 2.5065994000033243,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已核验",
+      "agent": "已核验",
+      "agent_with_gate": "已核验"
+    }
+  },
+  {
+    "split": "development",
+    "case": "identity",
+    "segment": "5",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 377,
+          "total_tokens": 391,
+          "prompt_tokens_details": {
+            "cached_tokens": 218
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.8275971000111895,
+    "claim": {
+      "norad": 42,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "development",
+    "case": "time",
+    "segment": "5",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 375,
+          "total_tokens": 389,
+          "prompt_tokens_details": {
+            "cached_tokens": 218
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.8398872999969171,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2000-01-01T00:00:00Z",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "development",
+    "case": "units",
+    "segment": "5",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 380,
+          "total_tokens": 394,
+          "prompt_tokens_details": {
+            "cached_tokens": 240
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.6803662000020267,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "V"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "development",
+    "case": "citation",
+    "segment": "5",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 380,
+          "total_tokens": 394,
+          "prompt_tokens_details": {
+            "cached_tokens": 366
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.3565518999967026,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#unrelated",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "development",
+    "case": "numeric",
+    "segment": "5",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 380,
+          "total_tokens": 394,
+          "prompt_tokens_details": {
+            "cached_tokens": 306
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.596695100000943,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 258,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:09:58+00:00",
+      "end": "2022-06-02T00:14:14+00:00",
+      "metric": "count",
+      "value": 257,
+      "citation": "ddc7c4c73d1cb13391a924c8fbfbe396264c330ad6fcbee9e5aef8d88c9279de#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已修正",
+      "agent": "已核验",
+      "agent_with_gate": "已修正"
+    }
+  },
+  {
+    "split": "test",
+    "case": "valid",
+    "segment": "8",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 386,
+          "total_tokens": 400,
+          "prompt_tokens_details": {
+            "cached_tokens": 86
+          }
+        }
+      }
+    ],
+    "modelSeconds": 2.306810600013705,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已核验",
+      "agent": "已核验",
+      "agent_with_gate": "已核验"
+    }
+  },
+  {
+    "split": "test",
+    "case": "identity",
+    "segment": "8",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 383,
+          "total_tokens": 397,
+          "prompt_tokens_details": {
+            "cached_tokens": 221
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.956680100003723,
+    "claim": {
+      "norad": 42,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "test",
+    "case": "time",
+    "segment": "8",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 381,
+          "total_tokens": 395,
+          "prompt_tokens_details": {
+            "cached_tokens": 221
+          }
+        }
+      }
+    ],
+    "modelSeconds": 2.094770299998345,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2000-01-01T00:00:00Z",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "来源冲突",
+      "agent": "已核验",
+      "agent_with_gate": "来源冲突"
+    }
+  },
+  {
+    "split": "test",
+    "case": "units",
+    "segment": "8",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 386,
+          "total_tokens": 400,
+          "prompt_tokens_details": {
+            "cached_tokens": 243
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.880203699998674,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "V"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "test",
+    "case": "citation",
+    "segment": "8",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 386,
+          "total_tokens": 400,
+          "prompt_tokens_details": {
+            "cached_tokens": 372
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.3730136999947717,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#unrelated",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "证据不足",
+      "agent": "已核验",
+      "agent_with_gate": "证据不足"
+    }
+  },
+  {
+    "split": "test",
+    "case": "numeric",
+    "segment": "8",
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "modelAction": "accept",
+    "tokenUsage": [
+      {
+        "model": "qwen2.5-0.5b-instruct-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 386,
+          "total_tokens": 400,
+          "prompt_tokens_details": {
+            "cached_tokens": 309
+          }
+        }
+      }
+    ],
+    "modelSeconds": 1.4635688999987906,
+    "claim": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 401,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "expectedEvidence": {
+      "norad": 44878,
+      "channel": "CADC0872",
+      "start": "2022-06-02T00:24:48+00:00",
+      "end": "2022-06-02T00:31:27+00:00",
+      "metric": "count",
+      "value": 400,
+      "citation": "9abe80d2e9fc78f4aee72780a7c79a472a44af8359eaf26c95538dcfd3891b65#stats.count",
+      "unit": "个"
+    },
+    "policies": {
+      "unchecked": "已核验",
+      "rules": "已修正",
+      "agent": "已核验",
+      "agent_with_gate": "已修正"
+    }
+  }
+]

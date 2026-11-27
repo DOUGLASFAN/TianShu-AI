@@ -1,0 +1,11 @@
+{
+  "browser": "Edge",
+  "realApi": true,
+  "segment": 8,
+  "record": 716,
+  "orbitNorad": 44878,
+  "report": "85fb7b661472fdccc1c98bfb22e347467a0ba33481ae129163671086305f5ae1",
+  "claim": "verified",
+  "pipeline": "completed",
+  "provider": "form"
+}

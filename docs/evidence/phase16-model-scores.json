@@ -1,0 +1,42 @@
+[
+  {
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "mode": "planner-reviewer",
+    "testCases": 3,
+    "exact": 0,
+    "validAfterOrdering": 0,
+    "failures": 0,
+    "seconds": 13.689096400004928
+  },
+  {
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "mode": "single",
+    "testCases": 3,
+    "exact": 1,
+    "validAfterOrdering": 1,
+    "failures": 0,
+    "seconds": 6.827028899992001
+  },
+  {
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "mode": "planner-reviewer",
+    "testCases": 3,
+    "exact": 0,
+    "validAfterOrdering": 2,
+    "failures": 0,
+    "seconds": 11.115815399985877
+  },
+  {
+    "provider": "qwen",
+    "model": "qwen2.5-0.5b-instruct-q4_k_m",
+    "mode": "single",
+    "testCases": 3,
+    "exact": 0,
+    "validAfterOrdering": 2,
+    "failures": 0,
+    "seconds": 5.22489250000217
+  }
+]

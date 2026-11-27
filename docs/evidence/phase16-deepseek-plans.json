@@ -1,0 +1,576 @@
+[
+  {
+    "case": "dev-archive",
+    "split": "development",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "只查询冻结报告的任务与数据来源。",
+    "expected": [
+      "archive"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 33,
+          "prompt_tokens": 104,
+          "total_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 94
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 2.4332986999943387
+  },
+  {
+    "case": "dev-archive",
+    "split": "development",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "只查询冻结报告的任务与数据来源。",
+    "expected": [
+      "archive"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 33,
+          "prompt_tokens": 104,
+          "total_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 103
+          }
+        }
+      },
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 33,
+          "prompt_tokens": 133,
+          "total_tokens": 166,
+          "prompt_tokens_details": {
+            "cached_tokens": 103
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "verify"
+      ],
+      [
+        "archive",
+        "detect",
+        "quality",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 5.072126400002162
+  },
+  {
+    "case": "dev-quality",
+    "split": "development",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "仅检查质量，列出缺测与排除记录。",
+    "expected": [
+      "quality"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 106,
+          "total_tokens": 135,
+          "prompt_tokens_details": {
+            "cached_tokens": 94
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 2.1739939999970375
+  },
+  {
+    "case": "dev-quality",
+    "split": "development",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "仅检查质量，列出缺测与排除记录。",
+    "expected": [
+      "quality"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 106,
+          "total_tokens": 135,
+          "prompt_tokens_details": {
+            "cached_tokens": 105
+          }
+        }
+      },
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 132,
+          "total_tokens": 161,
+          "prompt_tokens_details": {
+            "cached_tokens": 105
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality"
+      ],
+      [
+        "archive",
+        "detect",
+        "quality"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 4.319452099996852
+  },
+  {
+    "case": "test-detect",
+    "split": "test",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "查档案来源，回查异常候选，不写报告。",
+    "expected": [
+      "archive",
+      "detect"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 108,
+          "total_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 94
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 2.147133099992061
+  },
+  {
+    "case": "test-detect",
+    "split": "test",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "查档案来源，回查异常候选，不写报告。",
+    "expected": [
+      "archive",
+      "detect"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 108,
+          "total_tokens": 137,
+          "prompt_tokens_details": {
+            "cached_tokens": 107
+          }
+        }
+      },
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 29,
+          "prompt_tokens": 134,
+          "total_tokens": 163,
+          "prompt_tokens_details": {
+            "cached_tokens": 107
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality"
+      ],
+      [
+        "archive",
+        "detect",
+        "quality"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 4.162986499999533
+  },
+  {
+    "case": "test-verify",
+    "split": "test",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "只核验引用的样本数，并输出有引用的总结。",
+    "expected": [
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "verify",
+      "summary"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 25,
+          "prompt_tokens": 109,
+          "total_tokens": 134,
+          "prompt_tokens_details": {
+            "cached_tokens": 94
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "verify",
+        "summary"
+      ]
+    ],
+    "effective": [
+      "verify",
+      "summary"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": true,
+    "error": null,
+    "seconds": 2.1994524000037927
+  },
+  {
+    "case": "test-verify",
+    "split": "test",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "只核验引用的样本数，并输出有引用的总结。",
+    "expected": [
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "verify",
+      "detect"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 25,
+          "prompt_tokens": 109,
+          "total_tokens": 134,
+          "prompt_tokens_details": {
+            "cached_tokens": 108
+          }
+        }
+      },
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 25,
+          "prompt_tokens": 132,
+          "total_tokens": 157,
+          "prompt_tokens_details": {
+            "cached_tokens": 108
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "verify",
+        "summary"
+      ],
+      [
+        "verify",
+        "detect"
+      ]
+    ],
+    "effective": [
+      "detect",
+      "verify"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 4.586827599996468
+  },
+  {
+    "case": "test-full",
+    "split": "test",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "查任务档案、检查质量、回查异常，核验证据并总结。",
+    "expected": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 192,
+        "usage": {
+          "completion_tokens": 33,
+          "prompt_tokens": 112,
+          "total_tokens": 145,
+          "prompt_tokens_details": {
+            "cached_tokens": 94
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify"
+    ],
+    "mode": "single",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 2.4804433999961475
+  },
+  {
+    "case": "test-full",
+    "split": "test",
+    "provider": "deepseek",
+    "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+    "request": "查任务档案、检查质量、回查异常，核验证据并总结。",
+    "expected": [
+      "archive",
+      "quality",
+      "detect",
+      "verify",
+      "summary"
+    ],
+    "actual": [
+      "archive",
+      "detect",
+      "quality",
+      "verify"
+    ],
+    "tokenUsage": [
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 33,
+          "prompt_tokens": 112,
+          "total_tokens": 145,
+          "prompt_tokens_details": {
+            "cached_tokens": 111
+          }
+        }
+      },
+      {
+        "model": "deepseek-r1-distill-qwen-1.5b-q4_k_m",
+        "budget": 96,
+        "usage": {
+          "completion_tokens": 33,
+          "prompt_tokens": 141,
+          "total_tokens": 174,
+          "prompt_tokens_details": {
+            "cached_tokens": 111
+          }
+        }
+      }
+    ],
+    "calls": [
+      [
+        "archive",
+        "detect",
+        "quality",
+        "verify"
+      ],
+      [
+        "archive",
+        "detect",
+        "quality",
+        "verify"
+      ]
+    ],
+    "effective": [
+      "archive",
+      "quality",
+      "detect",
+      "verify"
+    ],
+    "mode": "planner-reviewer",
+    "totalCompletionBudget": 192,
+    "temperature": 0,
+    "ok": false,
+    "error": null,
+    "seconds": 4.9392823000089265
+  }
+]
