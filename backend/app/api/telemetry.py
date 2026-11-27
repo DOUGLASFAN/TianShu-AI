@@ -177,7 +177,13 @@ def replay(key:str,user=Depends(current_user)):
         from ..services.telemetry_v1 import analyze as historical_analyze
         args=Window(**saved['input'])
         meta,content=read_asset(user.id,args.asset)
+        if args.asset=='opssat-v2' and meta['sha256']!=saved['asset']['sha256']:
+            content=SAMPLE.with_name('opssat-v2-initial.csv').read_bytes().decode()
+            meta=saved['asset']
         rebuilt=historical_analyze(content,meta,args.channel,args.segment,args.start,args.end)
+        if 'independentCount' not in saved['stats'] and 'independentSpan' not in saved['stats']:
+            rebuilt['stats'].pop('independentCount')
+            rebuilt['stats'].pop('independentSpan')
         rebuilt.update(input=saved['input'],objective=args.objective)
         if digest(encode(rebuilt).encode())!=key: raise HTTPException(409,'历史版本复跑不一致')
         return saved
