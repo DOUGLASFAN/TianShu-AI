@@ -96,6 +96,29 @@ try{
  assert.equal(await desktop.getByRole('slider',{name:/调查终点/}).getAttribute('aria-valuetext'),selectionEnd);
  evidence.push({viewport:1440,record:716,scopedContext:true,orbitAtRecordTime:true,scopeRestoredFromOrbit:true,
   verificationAtSameRecord:true,catalogAvailable:brief.catalogAvailable,scopeRestoredFromPlanning:true});
+ await button(desktop,'一键调查当前记录').click();
+ const save=button(desktop,'保存本次调查');
+ await save.waitFor();
+ const [capture]=await Promise.all([desktop.waitForResponse(res=>new URL(res.url()).pathname.endsWith('/investigate/save')),save.click()]);
+ assert.equal(capture.status(),201);
+ const {id:investigationId}=await capture.json();
+ await desktop.getByRole('link',{name:'打开已保存的调查'}).click();
+ await desktop.waitForURL(url=>url.searchParams.get('session')===investigationId);
+ await desktop.reload();
+ await desktop.getByText('已恢复保存时的调查结果。',{exact:true}).waitFor();
+ assert.equal(await desktop.getByRole('slider',{name:/调查终点/}).getAttribute('aria-valuetext'),selectionEnd);
+ await button(desktop,'按原选区复跑').click();
+ const comparisonResult=desktop.getByLabel('复跑对照');
+ await comparisonResult.waitFor();
+ assert.match(await comparisonResult.innerText(),/有效样本 \d+ → \d+/);
+ await desktop.getByRole('button',{name:'调查记录',exact:true}).first().click();
+ await desktop.getByRole('link',{name:/OPS-SAT.*记录 #716/}).waitFor();
+ const search=desktop.getByRole('searchbox',{name:'查找近期调查'});
+ await search.fill('不存在的记录');
+ await desktop.getByText('没有找到匹配的调查。',{exact:true}).waitFor();
+ await search.fill('716');
+ await desktop.getByRole('link',{name:/OPS-SAT.*记录 #716/}).waitFor();
+ evidence.push({viewport:1440,record:716,savedExactFinding:true,restoredFindingAfterReload:true,rerunComparedWithSaved:true,shelfFiltersByRecord:true});
  await desktop.close();
 
  const mobile=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});

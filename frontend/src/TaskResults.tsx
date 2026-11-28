@@ -1,5 +1,6 @@
 import {useInteractiveGuide} from './InteractiveGuide';
-import {useState,type FormEvent} from 'react';
+import {useRef,useState,type FormEvent} from 'react';
+import {useQueryClient} from '@tanstack/react-query';
 import {Link} from 'react-router-dom';
 import {api} from './api';
 import {ContextTimeline,type Context} from './InvestigationEvidence';
@@ -71,7 +72,7 @@ export function ObservationAnswer({task,result,previous,locate}:{
  </section>;
 }
 
-type Findings={run:string;mission:string;channel:string;version:string;source:string;start:string;end:string;verdict:string;
+export type Findings={run:string;mission:string;channel:string;version:string;source:string;start:string;end:string;verdict:string;
  point:{record:number;utc:string;value:number|null;quality?:string};usable:boolean;limitation:string;
  window?:{included:number;excluded:number[];quality:{missing:number;interpolated:number;flagged:number;unit:string};
  rules:{name:string;threshold:number;targetHit:boolean}[]}; warnings:string[];
@@ -80,22 +81,43 @@ type Findings={run:string;mission:string;channel:string;version:string;source:st
  context:Context;
  nextSteps:string[]};
 
-export function InvestigationTask({run,norad,record,start,end,onEvidence}:{run:string;norad:number;record:number;start?:string;end?:string;onEvidence?:(record:number)=>void}){
- const [result,setResult]=useState<Findings|null>(null),[error,fail]=useState(''),[busy,pending]=useState(false);
- const [request,setRequest]=useState(''),guide=useInteractiveGuide();
- const taskScope=[run,record,start,end].join('|'), stale=!!result&&request!==taskScope;
+type Snapshot={content:string;signature:string};
+
+export function InvestigationTask({run,norad,record,start,end,onEvidence,restored}:{
+ run:string;norad:number;record:number;start?:string;end?:string;onEvidence?:(record:number)=>void;restored?:Findings;
+}){
+ const taskScope=[run,record,start,end].join('|');
+ const originalScope=useRef(taskScope);
+ const [result,setResult]=useState<Findings|null>(restored||null),[error,fail]=useState(''),[busy,pending]=useState(false);
+ const [request,setRequest]=useState(restored?taskScope:''),guide=useInteractiveGuide();
+ const [snapshot,setSnapshot]=useState<Snapshot|null>(null),[saving,setSaving]=useState(false);
+ const [savedId,setSavedId]=useState(''),[saveError,setSaveError]=useState('');
+ const cache=useQueryClient(),stale=!!result&&request!==taskScope;
+ const baseline=restored&&originalScope.current===taskScope?restored:null;
  const verificationParams=new URLSearchParams({sat:String(norad),evidenceRun:run,evidenceRecord:String(record)});
  if(start)verificationParams.set('evidenceStart',start);
  if(end)verificationParams.set('evidenceEnd',end);
  async function execute(e:FormEvent){
-  e.preventDefault();pending(true);fail('');setResult(null);setRequest(taskScope);
-  try{setResult(await api<Findings>('/task-workflows/investigate',{method:'POST',body:JSON.stringify({run,record,start,end})}));guide?.signal('investigated')}
+  e.preventDefault();pending(true);fail('');setSavedId('');setSaveError('');setSnapshot(null);
+  try{
+   const {snapshot:captured,...findings}=await api<Findings&{snapshot:Snapshot}>('/task-workflows/investigate',{method:'POST',body:JSON.stringify({run,record,start,end})});
+   setRequest(taskScope);setResult(findings);setSnapshot(captured);guide?.signal('investigated');
+  }
   catch(err){fail(String(err))}
   finally{pending(false)}
  }
+ async function saveSnapshot(){
+  if(!snapshot)return;
+  setSaving(true);setSaveError('');
+  try{
+   const {id}=await api<{id:string}>('/task-workflows/investigate/save',{method:'POST',body:JSON.stringify(snapshot)});
+   setSavedId(id);void cache.invalidateQueries({queryKey:['saved-investigations']});
+  }catch(err){setSaveError(String(err))}
+  finally{setSaving(false)}
+ }
  return <section className="workflow-result workflow-investigation" aria-label="异常调查任务">
   <form onSubmit={execute}>
-   <button type="submit" data-guide-target="investigate" disabled={busy}>{busy?'正在核对质量、复算规则并查同期证据…':'一键调查当前记录'}</button>
+   <button type="submit" data-guide-target="investigate" disabled={busy||saving}>{busy?'正在核对质量、复算规则并查同期证据…':baseline?'按原选区复跑':'一键调查当前记录'}</button>
    <p>本次目标 #{record} · {start&&end?'使用曲线框选范围':'使用整份归档报告'}</p>
   </form>
   {error&&<p role="alert">{error}</p>}
@@ -103,6 +125,17 @@ export function InvestigationTask({run,norad,record,start,end,onEvidence}:{run:s
   {result&&!stale&&<div aria-live="polite">
    <h3>{result.verdict}</h3>
    <p>{result.mission} · {result.channel} · #{result.point.record} · {result.point.utc} · 测量 {result.point.value??'缺测'}</p>
+   {baseline===result&&<p role="status">已恢复保存时的调查结果。</p>}
+   {baseline&&baseline!==result&&<section className="workflow-compare" aria-label="复跑对照">
+    <p>保存时：{baseline.verdict}</p><p>本次：{result.verdict}</p>
+    <p>有效样本 {baseline.window?.included??'不足'} → {result.window?.included??'不足'}，同期资料 {baseline.context.entries.length} → {result.context.entries.length} 条。</p>
+    {result.window?.rules.map(rule=>{const old=baseline.window?.rules.find(r=>r.name===rule.name);return old&&<p key={rule.name}>{rule.name} · {old.targetHit?'命中':'未命中'} → {rule.targetHit?'命中':'未命中'}</p>})}
+   </section>}
+   <div className="investigation-actions">
+    {snapshot&&!savedId&&<button type="button" disabled={saving||busy} onClick={saveSnapshot}>{saving?'正在保存…':'保存本次调查'}</button>}
+    {savedId&&<Link to={'/telemetry?'+new URLSearchParams({run,record:String(record),session:savedId})}>打开已保存的调查</Link>}
+   </div>
+   {saveError&&<p role="alert">{saveError}</p>}
    {onEvidence?<button type="button" data-guide-target="evidence" onClick={()=>{onEvidence(result.point.record);guide?.signal('evidence')}}>回到曲线证据</button>:<Link to={'/telemetry?run='+encodeURIComponent(run)+'&record='+record}>打开曲线原始证据</Link>}
    <h4>下一步查什么</h4><ol>{result.nextSteps.map(step=><li key={step}>{step}</li>)}</ol>
    <Link to={'/observations?'+verificationParams}>制定这条记录的验证观测</Link>

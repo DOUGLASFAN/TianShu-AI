@@ -2,7 +2,7 @@ import {GuideEntry} from './InteractiveGuide';
 import {InvestigationTask} from './TaskResults';
 import {useSearchParams} from 'react-router-dom';
 import {InvestigationEvidence,ImportMappingAssistant,ImportOriginalButton} from './InvestigationEvidence';
-import type {SavedInvestigation} from './InvestigationShelf';
+import {InvestigationShelf,type SavedInvestigation} from './InvestigationShelf';
 import {InvestigationPanel,useInvestigationRange,type InvestigationResult} from './InvestigationPanel';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {useQuery,useQueryClient} from '@tanstack/react-query';
@@ -46,8 +46,7 @@ function Result({r,replace,saved}:{r:Report;replace:(r:Report)=>void;saved?:Save
  const min=Math.min(...values),max=Math.max(...values),begin=Date.parse(r.start),duration=Date.parse(r.end)-begin;
  const width=(duration||1)/zoom, left=Math.max(begin,Math.min(begin+duration-width,Date.parse(p.utc)-width/2));
  const [initialRange]=useState(()=>{
-  if(saved?.selection)return saved.selection;
-  const start=Date.parse(params.get('start')||''),end=Date.parse(params.get('end')||'');
+  const start=Date.parse(saved?.selection?.[0]||params.get('start')||''),end=Date.parse(saved?.selection?.[1]||params.get('end')||'');
   if(!(begin<=start&&start<=Date.parse(p.utc)&&Date.parse(p.utc)<=end&&end<=begin+duration))return;
   const selected=r.points.filter(q=>start<=Date.parse(q.utc)&&Date.parse(q.utc)<=end);
   const first=selected[0],last=selected.at(-1);
@@ -68,6 +67,7 @@ function Result({r,replace,saved}:{r:Report;replace:(r:Report)=>void;saved?:Save
  <button onClick={()=>{if(cursor===r.points.length-1)seek(0);play(!playing)}}>{playing?'暂停':'播放历史片段'}</button><label>片段时间轴<input type="range" min="0" max={r.points.length-1} value={cursor} onChange={e=>seek(+e.target.value)}/></label>
  <p id="telemetry-selected-record" tabIndex={-1}>{p.utc} · 原始记录 #{p.record} · {("quality" in p)?String(p.quality):"原始测量"} · {p.value??'缺测'}</p><details><summary>原始字段</summary><pre>{JSON.stringify(p.raw,null,2)}</pre></details>
  <InvestigationTask run={r.id} norad={r.asset.norad} record={p.record}
+  restored={saved?.workflow?.point.record===Number(params.get('record'))?saved.workflow:undefined}
   start={selection.enabled?r.points[selection.range[0]].utc:undefined}
   end={selection.enabled?r.points[selection.range[1]].utc:undefined}
   onEvidence={record=>{const i=r.points.findIndex(item=>item.record===record);if(i>=0)seek(i);
@@ -112,6 +112,7 @@ export function TelemetryPage(){
  return <main className="telemetry"><div className="telemetry-guide-header"><h1>历史遥测复盘</h1><GuideEntry/></div><section><label>查找任务或编号<input value={filter} onChange={e=>search(e.target.value)}/></label><label>覆盖日期（UTC）<input type="date" value={day} onChange={e=>setDay(e.target.value)}/></label>{(filter||day)&&<div>{matches.length?matches.map(a=><button key={a.id} onClick={()=>{pick(a.id);reset()}}>{a.mission} · {a.version}</button>):'无匹配档案'}</div>}<label>数据档案<select value={key} onChange={e=>{pick(e.target.value);reset()}}>{assets.data?.filter(a=>a.id===key||(a.mission+' '+a.norad).includes(filter)).map(a=><option key={a.id} value={a.id}>{a.mission} · {a.norad} · {a.version}</option>)}</select></label>
  {info.data&&<><details><summary>来源、版本与使用限制</summary><pre>{JSON.stringify(info.data.meta,null,2)}</pre></details><button onClick={()=>saveDownload('/telemetry/assets/'+key+'/original','telemetry-original.csv').catch(e=>fail(String(e)))}>下载原始记录</button>{info.data.meta.importProvenance!=null&&<ImportOriginalButton asset={key}/>}<p>来源 {info.data.meta.source} · 单位 {info.data.meta.unit}</p><label>通道及覆盖时间<select value={index} onChange={e=>{select(+e.target.value);setStart('');setEnd('');show(null)}}>{info.data.segments.map((s,i)=><option key={i} value={i}>{s.channel} / {s.segment} · {s.start} 至 {s.end}</option>)}</select></label><div className="time-fields"><label>开始时间<input placeholder="默认片段起点，或填写 ISO 时区时间" value={start} onChange={e=>setStart(e.target.value)}/></label><label>结束时间<input placeholder="默认片段终点" value={end} onChange={e=>setEnd(e.target.value)}/></label></div><details><summary>导入质量与采集时段</summary><pre>{JSON.stringify(info.data.segments[index],null,2)}</pre></details><label>分析目标<input value={goal} maxLength={180} onChange={e=>setGoal(e.target.value)}/></label><button disabled={!goal.trim()} onClick={run}>分析所选时间窗</button></>}</section>
  {!user?.isGuest&&<ImportMappingAssistant saved={id=>{void cache.invalidateQueries({queryKey:['telemetry-assets']});pick(id);reset()}}/>}
+ <InvestigationShelf/>
  {!user?.isGuest&&<details><summary>导入私有档案</summary><form onSubmit={upload}><p>UTF-8 CSV，每行包含 timestamp、channel、segment、value，时间须带时区。</p><label>档案类型<select name="kind"><option value="telemetry">遥测</option><option value="observation">授权地面观测</option></select></label><label>观测站标识（观测档案必填）<input name="station"/></label><label><input type="checkbox" name="cadenceSeconds"/>sampling 列表示采样间隔秒数</label>{[['mission','任务名称'],['norad','NORAD 编号'],['source','档案来源与授权'],['version','版本'],['unit','测量单位'],['sha256','来源 SHA-256（可选）'],['orbitSource','同期 TLE 来源（可选）']].map(([k,label])=><label key={k}>{label}<input name={k} required={!['sha256','orbitSource'].includes(k)}/></label>)}<label>同期 TLE（三行，可选）<textarea name="tle"/></label><input type="file" name="file" accept=".csv" required/><button>导入</button></form></details>}
  <details><summary>分析失败记录</summary><pre>{JSON.stringify(failed.data||[],null,2)}</pre></details><details><summary>历史报告</summary>{history.data?.filter(h=>(h.mission+" "+h.norad+" "+h.channel).toLowerCase().includes(filter.toLowerCase())&&(!day||(h.start.slice(0,10)<=day&&day<=h.end.slice(0,10)))).map(h=><button key={h.id} onClick={async()=>{try{show(await api('/telemetry/runs/'+h.id));fail('')}catch(e){fail(String(e))}}}>{h.mission} · {h.channel} · {h.start}</button>)}</details>
  <p role="alert">{error||info.error?.message||assets.error?.message||history.error?.message}</p>{saved.error&&<p role="alert">{saved.error.message}</p>}{r&&<Result key={[r.id,params.get('record'),params.get('start'),params.get('end'),saved.data?.report===r.id?saved.data.id:''].join(':')} r={r} replace={show} saved={saved.data?.report===r.id?saved.data:undefined}/>}</main>;

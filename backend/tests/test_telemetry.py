@@ -192,8 +192,19 @@ def test_integrated_investigation_scopes_selected_point_and_keeps_archive_read_o
     assert c.get(verify,params=dict(scope,start=end)).status_code==422
     assert c.get(verify,params=dict(scope,record=999999)).status_code==422
     assert c.get(verify).json()['point'] is None
+    snapshot=narrow.json()['snapshot']
+    save_url=endpoint+'/save'
+    assert c.post(save_url,json=dict(snapshot,content=snapshot['content']+' ')).status_code==422
+    created=c.post(save_url,json=snapshot)
+    assert created.status_code==201
+    session_url='/api/investigation-tools/sessions/'+created.json()['id']
+    stored=c.get(session_url).json()
+    assert stored['workflow']=={key:value for key,value in narrow.json().items() if key!='snapshot'}
+    assert stored['selection']==[scope['start'],scope['end']]
     assert c.post(endpoint,json={'run':saved['id'],'record':716,'start':end}).status_code==422
     assert c.get('/api/telemetry/runs').json()==before
     user.id='different-user'
     assert c.post(endpoint,json={'run':saved['id'],'record':716}).status_code==404
     assert c.get(verify,params=scope).status_code==404
+    assert c.post(save_url,json=snapshot).status_code==422
+    assert c.get(session_url).status_code==404

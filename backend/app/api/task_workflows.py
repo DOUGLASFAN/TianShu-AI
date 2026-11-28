@@ -1,10 +1,15 @@
 """Read-only task results assembled from the tools used by the existing pages."""
+import hmac
+import json
+from urllib.parse import urlencode
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import AwareDatetime, BaseModel, Field
 from sqlalchemy.exc import SQLAlchemyError
 
-from .investigation_tools import challenge_report, context_for_window, report_window, similar
-from .telemetry import report
+from .investigation_tools import InvestigationState, challenge_report, context_for_window, report_window, similar, store_session
+from .telemetry import encode, report
+from ..core.config import settings
 from ..core.security import current_user
 from ..db import get_db
 from ..services.investigation import compare_window
@@ -18,6 +23,30 @@ class InvestigationRequest(BaseModel):
     record: int = Field(gt=0)
     start: AwareDatetime | None = None
     end: AwareDatetime | None = None
+
+
+class InvestigationSnapshot(BaseModel):
+    content: str = Field(min_length=1, max_length=140000)
+    signature: str = Field(pattern=r'^[0-9a-f]{64}$')
+
+
+def snapshot_signature(content,user):
+    key=settings().jwt_secret.get_secret_value().encode()
+    return hmac.digest(key,f'telemetry-investigation-v1\0{user.id}\0{content}'.encode(),'sha256').hex()
+
+
+@router.post('/investigate/save',status_code=201)
+def save_investigation(body: InvestigationSnapshot,user=Depends(current_user)):
+    if not hmac.compare_digest(body.signature,snapshot_signature(body.content,user)):
+        raise HTTPException(422,'AI_SESSION_INVALID')
+    captured=json.loads(body.content)
+    result=captured['result']
+    saved=report(result['run'],user)
+    if saved['asset']['sha256']!=result['version']:
+        raise HTTPException(409,'AI_SESSION_INVALID')
+    query=urlencode(dict(run=result['run'],record=result['point']['record']))
+    return store_session(InvestigationState(path='/telemetry',query=query,report=result['run'],
+        selection=captured['selection'],workflow=result),user)
 
 
 @router.post('/investigate')
@@ -78,8 +107,11 @@ def investigate(body: InvestigationRequest,user=Depends(current_user),db=Depends
     if not next_steps:
         next_steps.append('请复核引用的原始记录，再决定是否需要补采独立证据。')
 
-    return dict(run=body.run,mission=saved['asset']['mission'],channel=saved['channel'],
+    result=dict(run=body.run,mission=saved['asset']['mission'],channel=saved['channel'],
                 version=saved['asset']['sha256'],source=saved['asset']['source'],start=start.isoformat(),end=end.isoformat(),
                 point=point,usable=usable,verdict=verdict,window=window,trials=trial['results'],
                 related=related,context=contextual,nextSteps=next_steps,warnings=warnings,
                 limitation='检测结果反映相对偏离，现有资料不足以确定异常根因。')
+    selection=[result['start'],result['end']] if body.start or body.end else None
+    content=encode(dict(result=result,selection=selection))
+    return dict(result,snapshot=dict(content=content,signature=snapshot_signature(content,user)))

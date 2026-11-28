@@ -21,6 +21,14 @@
       "scopeRestoredFromPlanning": true
     },
     {
+      "viewport": 1440,
+      "record": 716,
+      "savedExactFinding": true,
+      "restoredFindingAfterReload": true,
+      "rerunComparedWithSaved": true,
+      "shelfFiltersByRecord": true
+    },
+    {
       "viewport": 390,
       "lesson": "observation",
       "allSteps": true,

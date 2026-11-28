@@ -283,11 +283,17 @@ class InvestigationState(BaseModel):
     report:str|None=Field(default=None,max_length=100)
     selection:list[str]|None=Field(default=None,min_length=2,max_length=2)
     investigation:dict|None=None
+    workflow:dict|None=None
 
 
 @router.post('/sessions')
 def save_session(body:InvestigationState,user=Depends(current_user)):
     if body.report:report(body.report,user)
+    if body.workflow is not None:raise HTTPException(422,'AI_SESSION_INVALID')
+    return store_session(body,user)
+
+
+def store_session(body,user):
     try:
         raw=encode(body.model_dump())
         if len(raw)>160000:raise ValueError
