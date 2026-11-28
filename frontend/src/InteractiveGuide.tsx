@@ -67,7 +67,7 @@ function load():Stored{
  }catch{return empty}
 }
 
-type Placement={target:HTMLElement|null;host:HTMLElement;top:number;left:number;width:number;side:'above'|'below'|'fallback'};
+type Placement={target:HTMLElement|null;host:HTMLElement;top:number;left:number;width:number;measured:boolean;side:'above'|'below'|'fallback'};
 function topDialog(){
  return Array.from(document.querySelectorAll<HTMLDialogElement>('dialog[open]'))
   .filter(d=>d.getBoundingClientRect().width>0).at(-1);
@@ -121,7 +121,8 @@ function GuideStep({step,number,total,lesson,stop,recover,reduced}:{
    const view=window.visualViewport;
    const vw=Math.min(document.documentElement.clientWidth,view?.width||Infinity);
    const vh=Math.min(window.innerHeight,view?.height||Infinity);
-   const width=Math.min(354,vw-24),height=Math.min(card.current?.offsetHeight||166,vh*.58);
+   const measured=card.current?.parentElement===host;
+   const width=Math.min(354,vw-24),height=Math.min(measured?(card.current?.offsetHeight||166):166,vh*.58);
    const rect=target?.getBoundingClientRect();
    let top=vh-height-12,left=vw-width-12,side:Placement['side']='fallback';
    if(rect&&rect.bottom>0&&rect.top<vh){
@@ -131,8 +132,8 @@ function GuideStep({step,number,total,lesson,stop,recover,reduced}:{
     else{side='below';top=Math.min(vh-height-12,rect.bottom+gap)}
     left=Math.min(vw-width-12,Math.max(12,rect.left+rect.width/2-width/2));
    }
-   const next={target,host,top:Math.round(top),left:Math.round(left),width,side};
-   setPlacement(p=>p&&p.target===next.target&&p.host===next.host&&p.top===next.top&&p.left===next.left&&p.width===width&&p.side===side?p:next);
+   const next={target,host,top:Math.round(top),left:Math.round(left),width,side,measured};
+   setPlacement(p=>p&&p.target===next.target&&p.host===next.host&&p.top===next.top&&p.left===next.left&&p.width===width&&p.side===side&&p.measured===measured?p:next);
    if(target&&priorTarget.current!==target){
     priorTarget.current=target;
     if(rect&&(rect.top<60||rect.bottom>vh-34))target.scrollIntoView({block:'center'});
@@ -157,9 +158,9 @@ function GuideStep({step,number,total,lesson,stop,recover,reduced}:{
   return ()=>ro.disconnect();
  },[placement?.host]);
  if(!placement)return null;
- const {target,host,top,left,width,side}=placement;
+ const {target,host,top,left,width,side,measured}=placement;
  return createPortal(<aside ref={card} className="guide-step" aria-labelledby={title} data-guide-side={side} data-guide-reduced={reduced}
-  style={{top,left,width,'--guide-remaining':(total-number)/total} as CSSProperties}>
+  style={{top,left,width,visibility:measured?'visible':'hidden','--guide-remaining':(total-number)/total} as CSSProperties}>
   <div className="guide-step-meta"><span>{lesson}</span><span>第 {number} / {total} 步</span></div>
   <div className="guide-progress" aria-hidden="true"><span/></div>
   <div role="status" aria-live="polite"><h3 id={title}>{step.title}</h3><p id={note}>{step.instruction}</p></div>

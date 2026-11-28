@@ -7,7 +7,7 @@ import './investigation.css';
 type Archive={id:string;mission:string;source:string;coverageStart?:string;coverageEnd?:string};
 type Dossier={name:string;norad:number;purpose:string|null;orbit:{epoch:string;source:string;version:string}|null;archives:Archive[];candidates:{run:string;channel:string;record:number}[]};
 type Match={asset:string;segment:string;channel:string;start:string;source:string;curve:number[];correlation:number;labels:string[];review?:{run:string;note:string}};
-type Context={start:string;end:string;entries:{kind:string;start:string;end?:string;source:string;label:string;state:string;link?:string}[];missing:string[]};
+export type Context={start:string;end:string;entries:{kind:string;start:string;end?:string;source:string;label:string;state:string;link?:string}[];missing:string[]};
 type Challenge={target:number|null;limitations:string;results:{name:string;included?:number;reason?:string;start?:string;end?:string;rules?:{name:string;targetHit:boolean;records:number[];threshold:number}[]}[]};
 const sourceNames:Record<string,string>={telemetry:'遥测报告',orbit:'同期轨道',weather:'空间环境',observation:'地面观测'};
 
@@ -67,7 +67,7 @@ export function InvestigationEvidence({run,norad,channel,show='all'}:{run:string
  </section>;
 }
 
-function ContextTimeline({context}:{context:Context}){
+export function ContextTimeline({context}:{context:Context}){
  const start=Date.parse(context.start),width=Date.parse(context.end)-start||1;
  return <><p>{context.start} 至 {context.end}（UTC）</p>
   {context.missing.length>0&&<p>时段内缺少：{context.missing.map(x=>sourceNames[x]).join('、')}。</p>}
@@ -76,7 +76,7 @@ function ContextTimeline({context}:{context:Context}){
    const right=Math.max(left,Math.min(100,100*(Date.parse(e.end||e.start)-start)/width));
    return <li key={e.kind+i}><strong>{sourceNames[e.kind]} · {e.label}</strong>
     <div className="ai-context-track" aria-hidden="true"><span style={{left:left+'%',width:(right-left)+'%'}}/></div>
-    <p>{e.start}{e.end&&' 至 '+e.end} · {e.state} · {e.source}</p>{e.link&&<Link to={e.link}>查看来源记录</Link>}
+    <p>{e.start}{e.end&&' 至 '+e.end} · {e.state} · {e.source}</p>{e.link&&<Link to={e.link}>{e.kind==='orbit'?'回放同期轨道':e.kind==='telemetry'?'打开原始测量':'查看来源记录'}</Link>}
    </li>;
   })}</ul>
  </>;
@@ -94,20 +94,43 @@ export function ReportEvidencePicker({show}:{show:'context'|'challenge'}){
  </details>;
 }
 
-export function VerificationBrief({run}:{run:string}){
- const evidence=useQuery({queryKey:['verification-brief',run],queryFn:()=>api<{
-  norad:number;channel:string;priorities:{label:string;detail:string}[];source:string;catalogAvailable:boolean;limitation:string
- }>('/investigation-tools/runs/'+encodeURIComponent(run)+'/verification')});
+export function useVerificationBrief(run:string|null,record?:string,start?:string,end?:string){
+ const scope=new URLSearchParams();
+ if(record)scope.set('record',record);
+ if(start)scope.set('start',start);
+ if(end)scope.set('end',end);
+ return useQuery({queryKey:['verification-brief',run,scope.toString()],enabled:!!run,queryFn:()=>api<{
+  norad:number;mission:string;channel:string;priorities:{label:string;detail:string}[];source:string;catalogAvailable:boolean;limitation:string;
+  start:string;end:string;partial:boolean;point:{record:number;utc:string}|null;
+  quality:{total:number;included:number;missing:number;flagged:number;duplicates:number};
+ }>('/investigation-tools/runs/'+encodeURIComponent(run||'')+'/verification?'+scope)});
+}
+
+export function VerificationBrief({run,evidence,norad,onConditions}:{
+ run:string;evidence:ReturnType<typeof useVerificationBrief>;norad:number;onConditions:()=>void;
+}){
+ const brief=evidence.data;
+ const back=new URLSearchParams({run});
+ if(brief?.point)back.set('record',String(brief.point.record));
+ if(brief?.partial){back.set('start',brief.start);back.set('end',brief.end)}
  return <section className="ai-result">
   <h2>验证观测建议</h2>
   {evidence.isPending&&<p role="status">正在检查报告证据…</p>}
   {evidence.error&&<p role="alert">{evidence.error.message}</p>}
-  {evidence.data&&<>
-   <ul>{evidence.data.priorities.map(item=><li key={item.label}><strong>{item.label}</strong> · {item.detail}</li>)}</ul>
-   <p>{evidence.data.limitation}</p>
-   {!evidence.data.catalogAvailable&&<p>当前目录缺少该对象的新根数，无法计算它的未来过境窗口。可以回查历史轨道或改选有可用根数的对象演示。</p>}
+  {brief&&<>
+   <p><strong>{brief.mission} · {brief.channel}</strong>{brief.point&&<> · 记录 #{brief.point.record} · <time>{brief.point.utc}</time></>}</p>
+   <p>调查范围 <time>{brief.start}</time> 至 <time>{brief.end}</time>（UTC）</p>
+   <p>选区有效 {brief.quality.included} / {brief.quality.total} 条 · 缺测 {brief.quality.missing} · 质量排除 {brief.quality.flagged} · 重复时刻 {brief.quality.duplicates}</p>
+   <ul>{brief.priorities.map(item=><li key={item.label}><strong>{item.label}</strong> · {item.detail}</li>)}</ul>
+   <p>{brief.limitation}</p>
+   {!brief.catalogAvailable&&<p>目录暂无这个对象的可用轨道数据，无法计算它的未来过境。可回到原记录查看同期轨道和缺少的资料。</p>}
+   {brief.catalogAvailable&&norad!==brief.norad&&<p>当前预测对象与调查对象不同。要验证这条记录，请选回 NORAD {brief.norad}。</p>}
   </>}
-  <Link to={'/telemetry?run='+encodeURIComponent(run)}>查看提出验证需求的报告</Link>
+  <div className="investigation-actions">
+   {brief?.catalogAvailable&&<button type="button" onClick={onConditions}>设置预测条件</button>}
+   <Link to={'/telemetry?'+back}>{brief?.point?'返回原始记录 #'+brief.point.record:'查看提出验证需求的报告'}</Link>
+   {brief&&!brief.catalogAvailable&&<Link to="/observations">打开常规观测规划</Link>}
+  </div>
  </section>;
 }
 

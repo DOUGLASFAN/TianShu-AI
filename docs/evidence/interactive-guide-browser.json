@@ -11,6 +11,16 @@
       "replayAvailable": true
     },
     {
+      "viewport": 1440,
+      "record": 716,
+      "scopedContext": true,
+      "orbitAtRecordTime": true,
+      "scopeRestoredFromOrbit": true,
+      "verificationAtSameRecord": true,
+      "catalogAvailable": false,
+      "scopeRestoredFromPlanning": true
+    },
+    {
       "viewport": 390,
       "lesson": "observation",
       "allSteps": true,

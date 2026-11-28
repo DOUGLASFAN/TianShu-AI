@@ -2,6 +2,7 @@ import {useInteractiveGuide} from './InteractiveGuide';
 import {useState,type FormEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {api} from './api';
+import {ContextTimeline,type Context} from './InvestigationEvidence';
 import './task-workflows.css';
 
 export type TaskStation={id:string;name:string;lat:number;lng:number};
@@ -76,14 +77,16 @@ type Findings={run:string;mission:string;channel:string;version:string;source:st
  rules:{name:string;threshold:number;targetHit:boolean}[]}; warnings:string[];
  trials:{name:string;included?:number;reason?:string;rules?:{name:string;targetHit:boolean}[]}[];
  related:{asset:string;segment:string;channel:string;correlation:number;labels:string[]}[];
- context:{entries:{kind:string;source:string;label:string;state:string;link?:string}[];missing:string[]};
+ context:Context;
  nextSteps:string[]};
-const contextNames:Record<string,string>={orbit:'同期轨道',weather:'空间环境',observation:'授权地面观测',telemetry:'遥测'};
 
-export function InvestigationTask({run,record,start,end,onEvidence}:{run:string;record:number;start?:string;end?:string;onEvidence?:(record:number)=>void}){
+export function InvestigationTask({run,norad,record,start,end,onEvidence}:{run:string;norad:number;record:number;start?:string;end?:string;onEvidence?:(record:number)=>void}){
  const [result,setResult]=useState<Findings|null>(null),[error,fail]=useState(''),[busy,pending]=useState(false);
  const [request,setRequest]=useState(''),guide=useInteractiveGuide();
  const taskScope=[run,record,start,end].join('|'), stale=!!result&&request!==taskScope;
+ const verificationParams=new URLSearchParams({sat:String(norad),evidenceRun:run,evidenceRecord:String(record)});
+ if(start)verificationParams.set('evidenceStart',start);
+ if(end)verificationParams.set('evidenceEnd',end);
  async function execute(e:FormEvent){
   e.preventDefault();pending(true);fail('');setResult(null);setRequest(taskScope);
   try{setResult(await api<Findings>('/task-workflows/investigate',{method:'POST',body:JSON.stringify({run,record,start,end})}));guide?.signal('investigated')}
@@ -102,14 +105,14 @@ export function InvestigationTask({run,record,start,end,onEvidence}:{run:string;
    <p>{result.mission} · {result.channel} · #{result.point.record} · {result.point.utc} · 测量 {result.point.value??'缺测'}</p>
    {onEvidence?<button type="button" data-guide-target="evidence" onClick={()=>{onEvidence(result.point.record);guide?.signal('evidence')}}>回到曲线证据</button>:<Link to={'/telemetry?run='+encodeURIComponent(run)+'&record='+record}>打开曲线原始证据</Link>}
    <h4>下一步查什么</h4><ol>{result.nextSteps.map(step=><li key={step}>{step}</li>)}</ol>
+   <Link to={'/observations?'+verificationParams}>制定这条记录的验证观测</Link>
    {result.window&&<p>选区有效 {result.window.included} 条，排除 {result.window.excluded.length} 条。{result.window.rules.map(r=>r.name+' '+(r.targetHit?'标记':'未标记')+'目标点').join('；')}。</p>}
    <details open><summary>规则与反证</summary>
     {result.window&&<p>单位 {result.window.quality.unit} · 缺测 {result.window.quality.missing} · 补点 {result.window.quality.interpolated} · 待核验 {result.window.quality.flagged}</p>}
     <ul>{result.trials.map(t=><li key={t.name}>{t.name} · {t.reason||t.included+' 条有效点 · '+(t.rules||[]).map(r=>r.name+(r.targetHit?'命中':'未命中')).join(' / ')}</li>)}</ul>
    </details>
-   <details><summary>同期记录与相似片段</summary>
-    {result.context.missing.length>0&&<p>缺少 {result.context.missing.map(k=>contextNames[k]||k).join('、')}。</p>}
-    <ul>{result.context.entries.map((item,index)=><li key={index}>{contextNames[item.kind]} · {item.state} · {item.source} {item.link&&<Link to={item.link}>打开资料</Link>}</li>)}</ul>
+   {result.context.entries.length>0&&<details><summary>按时间查看同期证据</summary><ContextTimeline context={result.context}/></details>}
+   <details><summary>相似遥测片段</summary>
     <p>相似片段基于整段归档波形，用于找对照。</p>
     <ul>{result.related.map(r=><li key={r.asset+r.segment}><Link to={'/telemetry?'+new URLSearchParams({asset:r.asset,segment:r.segment,channel:r.channel})}>片段 {r.segment}</Link> · 相关系数 {r.correlation.toFixed(3)} · 原始标签 {r.labels.join(' / ')}</li>)}</ul>
    </details>

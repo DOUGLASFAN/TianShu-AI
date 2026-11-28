@@ -1,5 +1,5 @@
 import {GuideEntry,useInteractiveGuide} from './InteractiveGuide';
-import {VerificationBrief} from './InvestigationEvidence';
+import {VerificationBrief,useVerificationBrief} from './InvestigationEvidence';
 import {ObservationComparison} from './ExplorationAssistant';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {useLocation,useSearchParams} from 'react-router-dom';
@@ -52,12 +52,20 @@ function ElevationCurve({event,minimum,zone,cursor,sampled=false}:{event:any;min
 }
 
 export function Observations(){
+ const [params]=useSearchParams();
+ return <ObservationWorkspace key={params.get('evidenceRun')||'planning'}/>;
+}
+
+function ObservationWorkspace(){
  const cache=useQueryClient(),[params,setParams]=useSearchParams(),taskId=params.get('task')||'',savedPlanId=params.get('plan')||'',replanId=params.get('replan')||'';
+ const evidenceRun=params.get('evidenceRun'),evidenceParams=Object.fromEntries([...params].filter(([key])=>['evidenceRun','evidenceRecord','evidenceStart','evidenceEnd'].includes(key)));
+ const verification=useVerificationBrief(evidenceRun,evidenceParams.evidenceRecord,evidenceParams.evidenceStart,evidenceParams.evidenceEnd);
+ const verificationBlocked=!!evidenceRun&&!verification.data?.catalogAvailable;
  const mobile=useMobileLayout(),location=useLocation(),guide=useInteractiveGuide();
  const guidePredictionId=useRef('');
  const quickRequested=useRef(location.state?.quickObservation===true);
  const [quickFeedback,setQuickFeedback]=useState(false);
- const [view,setView]=useState<'map'|'conditions'|'results'>(taskId||savedPlanId?'results':'map');
+ const [view,setView]=useState<'map'|'conditions'|'results'>(taskId||savedPlanId?'results':evidenceRun?'conditions':'map');
  const viewNavigation=useRef<HTMLDivElement>(null);
  const [mapOpened,setMapOpened]=useState(view==='map');
  function showView(value:typeof view){
@@ -76,7 +84,7 @@ export function Observations(){
  const groupActive=clock.track?.kind==='group';
  const [groupSelected,setGroupSelected]=useState<number|null>(null),[groupRequestedEvent,setGroupRequestedEvent]=useState(''),[onlyAbove,setOnlyAbove]=useState(false),[groupState,setGroupState]=useState<any>(null);
  const stations=useQuery({queryKey:['stations'],queryFn:()=>api('/stations')});
- const satellite=useQuery({queryKey:['detail',norad],queryFn:()=>api(`/satellites/${norad}`),enabled:norad>0});
+ const satellite=useQuery({queryKey:['detail',norad],queryFn:()=>api(`/satellites/${norad}`),enabled:norad>0&&!verificationBlocked});
  const options=useQuery({queryKey:['obs-search',search],queryFn:()=>api(`/satellites?size=6&keyword=${encodeURIComponent(search)}`),enabled:!!search});
  const history=useQuery({queryKey:['predictions'],queryFn:()=>api('/predictions?size=30'),refetchInterval:q=>q.state.data?.list.some((t:any)=>active(t.status))?2000:false});
  const task=useQuery({queryKey:['prediction',taskId],queryFn:()=>api(`/predictions/${taskId}`),enabled:!!taskId&&!savedPlanId,refetchInterval:q=>active(q.state.data?.data.status)?700:false});
@@ -126,7 +134,7 @@ export function Observations(){
  const currentStation=stations.data?.list.find((s:any)=>s.id===stationId);
  const dirty=!!basis&&((basis.kind==='group'?'group':'single')!==mode||(mode==='group'&&(basis.group?.slug!==groupSlug||basis.group?.page!==batchPage||basis.group?.size!==batchSize))||basis.station.id!==stationId||basis.satellite.noradId!==norad||basis.days!==days||basis.minElevation!==minimum||localInput(basis.start,zone)!==start||(currentStation&&['name','latitude','longitude','elevation_m'].some(k=>basis.station[k]!==currentStation[k])));
  const showResults=()=>showView('results');
- const create=useMutation({mutationFn:(input:{acceptStale:boolean;start:string;days:number;minimum:number})=>api(mode==='group'?'/predictions/groups':'/predictions',{method:'POST',body:JSON.stringify({stationId,...(mode==='group'?{group:groupSlug,batch:batchPage,size:batchSize,expectedNoradIds:batch.data?.list.map((x:any)=>x.noradId)}:{noradId:norad}),start:input.start,days:input.days,minElevation:input.minimum,acceptStale:input.acceptStale})}),onSuccess:r=>{if(guide?.stepTarget==='plan-calculate')guidePredictionId.current=r.data.id;else showResults();submittedTask.current=r.data.id;setStartIsNow(false);restored.current=r.data.id;cache.setQueryData(['prediction',r.data.id],r);setParams({sat:String(norad),task:r.data.id,...(replanId?{replan:replanId}:{}),...(mode==='group'?{group:groupSlug,batch:String(batchPage),size:String(batchSize)}:{})});setPage(1);setEventId('');cache.invalidateQueries({queryKey:['predictions']});}});
+ const create=useMutation({mutationFn:(input:{acceptStale:boolean;start:string;days:number;minimum:number})=>api(mode==='group'?'/predictions/groups':'/predictions',{method:'POST',body:JSON.stringify({stationId,...(mode==='group'?{group:groupSlug,batch:batchPage,size:batchSize,expectedNoradIds:batch.data?.list.map((x:any)=>x.noradId)}:{noradId:norad}),start:input.start,days:input.days,minElevation:input.minimum,acceptStale:input.acceptStale})}),onSuccess:r=>{if(guide?.stepTarget==='plan-calculate')guidePredictionId.current=r.data.id;else showResults();submittedTask.current=r.data.id;setStartIsNow(false);restored.current=r.data.id;cache.setQueryData(['prediction',r.data.id],r);setParams({...evidenceParams,sat:String(norad),task:r.data.id,...(replanId?{replan:replanId}:{}),...(mode==='group'?{group:groupSlug,batch:String(batchPage),size:String(batchSize)}:{})});setPage(1);setEventId('');cache.invalidateQueries({queryKey:['predictions']});}});
  const cancel=useMutation({mutationFn:()=>api(`/predictions/${taskId}/cancel`,{method:'POST'}),onSuccess:r=>{cache.setQueryData(['prediction',taskId],r);cache.invalidateQueries({queryKey:['predictions']});}});
  const stationAction=useMutation({mutationFn:({s,remove}:{s:any;remove?:boolean})=>api(`/stations/${s.id}`,{method:remove?'DELETE':'PATCH',body:remove?undefined:JSON.stringify({name:s.name,latitude:s.latitude,longitude:s.longitude,elevation_m:s.elevation_m,is_default:true})}),onSuccess:()=>cache.invalidateQueries({queryKey:['stations']})});
  function submitPrediction(quick=false){
@@ -162,8 +170,12 @@ export function Observations(){
  const groupReplayAction=completed&&basis.kind==='group'?<button className="primary" onClick={startGroup} disabled={groupActive}>整组回放</button>:null;
  const eventActions=completed?<div className="event-actions">{!mobile&&groupReplayAction}<button onClick={()=>replay.mutate()} disabled={!event.data?.data||replay.isPending}>{replay.isPending?'正在准备回放…':basis.kind==='group'?'单星回放':'回放过境'}</button><button className="primary" disabled={!event.data?.data||Date.parse(event.data.data.start)<=Date.now()||!!savedPlanId} data-guide-target="plan-open" onClick={()=>{setPlanOpen(true);guide?.signal('plan-open')}}>{replanId?'更新计划':'保存观测计划'}</button></div>:null;
  const eventDetails=!completed?null:groupActive?<div className="event-expanded">{groupChart?<ElevationCurve event={groupChart} minimum={basis.minElevation} zone={zone} cursor={clock.time} sampled/>:<p className="muted">{groupWindow.isError?'当前窗口加载失败，可重新进入整组回放重试。':'正在准备所选卫星的当前窗口曲线…'}</p>}<div className="optical-windows"><h3>当前窗口仰角</h3><p>{groupSatellite?.name||'请选择卫星'}</p><small>蓝色点仅表示达到站点仰角要求，不保证肉眼可见。曲线与点位使用同一采样窗口（最多 20 分钟），随回放时间更新。</small></div></div>:<> {event.data?.data&&<div className="event-expanded"><ElevationCurve event={clock.track?{...event.data.data,start:clock.track.start,end:clock.track.end,curve:clock.track.samples.map((r:any)=>[r[0],r[7],r[8],r[9],r[10],r[11],r[4],r[5]])}:event.data.data} minimum={basis.minElevation} zone={zone} cursor={clock.track?clock.time:undefined}/><div className="optical-windows"><h3>潜在目视窗口</h3>{event.data.data.visible_windows.length?event.data.data.visible_windows.map((w:any,i:number)=><p key={i}>{time(w.start,zone)} — {time(w.end,zone)}</p>):<p>本次过境无符合条件的子窗口。</p>}<small>仰角 ≥ {basis.minElevation}°、太阳高度 &lt; −6°、卫星受光。不保证肉眼可见。</small></div></div>}</>;
+ const brief=evidenceRun&&<VerificationBrief run={evidenceRun} norad={norad} evidence={verification} onConditions={()=>{
+   showConditions();requestAnimationFrame(()=>document.getElementById('observation-form')?.focus());
+  }}/>;
+ if(verificationBlocked)return <div className="observations"><div className="page-heading"><h1>观测规划</h1></div>{brief}</div>;
  return <div className="observations"><div className="page-heading"><h1>观测规划</h1><GuideEntry/><Select className="timezone-select" label="显示时区" value={zone} onChange={switchZone} options={[{value:"sh",label:"UTC+8 · 北京时间"},{value:"utc",label:"UTC"}]}/></div>
- {params.get('evidenceRun')&&<VerificationBrief run={params.get('evidenceRun')!}/>}
+ {brief}
  <details className="ai-result"><summary>比较观测方案</summary><ObservationComparison compare defaultQuery={String(norad)}/></details>
 {mobile&&<div className="observation-view-nav animated-segments" ref={viewNavigation} role="group" aria-label="观测工作区">
   <button type="button" aria-pressed={view==='map'} onClick={()=>showView('map')}>地图</button>
@@ -178,7 +190,7 @@ export function Observations(){
   {mapOpened&&<div className={`observation-visual ${groupActive?'is-group-replay':''}`}>{mapCanvas}</div>}{replayTools}{selectedPassMapDetail}
  </div>}<aside className="panel observation-conditions" hidden={mobile&&view!=='conditions'}>
  {mobile&&quickFeedback&&<ErrorBox error={stations.error||satellite.error||clientError}/>}
- <form id="observation-form" onSubmit={event=>{event.preventDefault();submitPrediction();}}>
+ <form id="observation-form" tabIndex={-1} onSubmit={event=>{event.preventDefault();submitPrediction();}}>
  <div className="section-heading"><h2>观测站</h2>{!!stations.data?.list.length&&<button type="button" aria-label="新建观测站" onClick={()=>setEditor({})}><Plus size={18}/></button>}</div>{stations.data?.list.length?<Select label="选择观测站" value={stationId} onChange={setStationId} placeholder="选择观测站" options={stations.data.list.map((s:any)=>({value:s.id,label:s.name+(s.is_default?' · 默认':''),description:`${s.latitude.toFixed(2)}°, ${s.longitude.toFixed(2)}°`}))}/>:<button className="create-first-station" type="button" disabled={stations.isPending} onClick={()=>setEditor({})}><MapPin size={20}/><span>{stations.isPending?'正在读取…':'新建观测站'}</span><Plus size={16}/></button>}
  {stations.isSuccess&&basis&&!currentStation&&stationId===basis.station.id&&<p className="station-coordinate">该站点已删除，结果保留原站点快照。重新计算前请选择观测站。</p>}
  {currentStation&&<><p className="station-coordinate">{currentStation.latitude.toFixed(4)}°, {currentStation.longitude.toFixed(4)}° · {currentStation.elevation_m} m</p><div className="station-actions"><button type="button" aria-label="编辑观测站" onClick={()=>setEditor(currentStation)}><PencilSimple size={17}/></button><button type="button" aria-label="设为默认观测站" disabled={currentStation.is_default||stationAction.isPending} onClick={()=>stationAction.mutate({s:currentStation})}><Star size={17} weight={currentStation.is_default?'fill':'regular'}/></button><button type="button" aria-label="删除观测站" disabled={stationAction.isPending} onClick={()=>{if(window.confirm('删除观测站？已有预测会保留当时的站点快照。'))stationAction.mutate({s:currentStation,remove:true});}}><Trash size={17}/></button></div></>}

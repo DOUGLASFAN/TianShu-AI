@@ -6,10 +6,11 @@ import math
 import re
 from statistics import mean, pstdev
 from typing import Literal
+from urllib.parse import urlencode
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel, Field, ValidationError
+from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import AwareDatetime, BaseModel, Field, ValidationError
 from sqlalchemy import func, select
 
 from .telemetry import Upload, assets, database, encode, read_asset, report, store_asset
@@ -88,31 +89,49 @@ def context(key:str,user=Depends(current_user),db=Depends(get_db)):
     return context_for_window(key,user,db)
 
 
-def context_for_window(key,user,db,window=None):
+def report_window(saved,record=None,start=None,end=None):
+    point=next((p for p in saved['points'] if p['record']==record),None) if record is not None else None
+    if record is not None and point is None:
+        raise HTTPException(422,'WORKFLOW_RECORD_NOT_FOUND')
+    first,last=instant(saved['start']),instant(saved['end'])
+    start,end=start or first,end or last
+    if not (first<=start<=end<=last) or (point and not start<=instant(point['utc'])<=end):
+        raise HTTPException(422,'WORKFLOW_WINDOW_INVALID')
+    return point,start,end
+
+
+def context_for_window(key,user,db,window=None,point=None):
     from backend.phase1.orbits import from_tle
     saved=report(key,user);meta=saved['asset'];start,end=window or (instant(saved['start']),instant(saved['end']))
     begin,finish=start.isoformat(),end.isoformat()
     stamp=func.coalesce(WeatherEvent.occurred_at,WeatherEvent.issued_at)
+    origin=dict(run=key)
+    if point:
+        origin['record']=point['record']
+    if window and (start!=instant(saved['start']) or end!=instant(saved['end'])):
+        origin.update(start=begin,end=finish)
     entries=[dict(kind='telemetry',start=begin,end=finish,source=meta['source'],
-                  label=saved['channel'],state='报告时间窗',link=f'/telemetry?run={key}')]
+                  label=saved['channel'],state='所选调查时间窗' if window else '报告时间窗',link='/telemetry?'+urlencode(origin))]
     for row,time in db.execute(select(WeatherEvent,stamp).where(stamp.between(start,end)).order_by(stamp).limit(30)):
         entries.append(dict(kind='weather',start=time.isoformat(),source=row.source_id,label=row.category,
                             state='时刻重合，尚无因果证据',link='/environment?event='+row.id))
     if meta.get('tle') and meta.get('orbitSource'):
         sat=from_tle(meta['tle']);epoch=sat.epoch.utc_datetime()
         aligned=sat.model.satnum==meta['norad'] and max(abs((t-epoch).total_seconds()) for t in (start,end))<=86400
+        replay=urlencode(dict(historical=key,sat=meta['norad'],at=point['utc'] if point else begin,
+                              **{k:v for k,v in origin.items() if k!='run'}))
         entries.append(dict(kind='orbit',start=begin if aligned else epoch.isoformat(),
             end=finish if aligned else None,source=meta['orbitSource'],label='归档根数',
             state='覆盖时段，可推算几何位置' if aligned else '根数超出允许的推算范围',
-            link=f"/explore?historical={key}&sat={meta['norad']}" if aligned else None))
+            link='/explore?'+replay if aligned else None))
     for a in matching_assets(user,meta['norad'],'observation')[:20]:
         _,text=read_asset(user.id,a['id'])
-        for (_,seg),points in parse(text).items():
+        for (channel,seg),points in parse(text).items():
             timestamps=[instant(p['utc']) for p in points if start<=instant(p['utc'])<=end]
             if timestamps:
                 entries.append(dict(kind='observation',start=min(timestamps).isoformat(),end=max(timestamps).isoformat(),
                     source=a['source'],label=f"{a.get('station','站点')} · {seg}",state=f'{len(timestamps)} 条同期记录，尚未核对观测条件',
-                    link='/telemetry?asset='+a['id']))
+                    link='/telemetry?'+urlencode(dict(asset=a['id'],channel=channel,segment=seg))))
             if len(entries)>=60:break
         if len(entries)>=60:break
     return dict(entries=sorted(entries,key=lambda e:instant(e['start'])),start=begin,end=finish,
@@ -143,20 +162,31 @@ def challenge_report(saved,target):
 
 
 @router.get('/runs/{key}/verification')
-def verification(key:str,user=Depends(current_user),db=Depends(get_db)):
+def verification(key:str,record:int|None=Query(None,gt=0),start:AwareDatetime|None=None,end:AwareDatetime|None=None,
+                 user=Depends(current_user),db=Depends(get_db)):
     saved=report(key,user)
+    point,begin,finish=report_window(saved,record,start,end)
     meta=saved['asset']
     active=db.get(Satellite,meta['norad'])
     priorities=[
         dict(label='同通道复测',detail=f"主测 {saved['channel']}，保留原始值、时区、单位、采样间隔和质检标记。"),
         dict(label='对照窗口',detail='记录相近仰角和照明条件的正常窗口，同时记录设备状态，供两段对照。'),
     ]
-    if saved.get('missing') or saved.get('duplicateTimes') or saved.get('excludedQuality'):
+    selected_ids={p['record'] for p in saved['points'] if begin<=instant(p['utc'])<=finish}
+    quality=dict(total=len(selected_ids),included=len(selected_ids.intersection(saved['used'])),
+                 missing=len(selected_ids.intersection(saved.get('missing',[]))),
+                 flagged=len(selected_ids.intersection(saved.get('excludedQuality',[]))),
+                 duplicates=sum(begin<=instant(stamp)<=finish for stamp in saved.get('duplicateTimes',[])))
+    if quality['missing'] or quality['flagged'] or quality['duplicates']:
         priorities.insert(0,dict(label='排除采集异常',detail='优先核查设备状态、时间同步和缺测、补点日志。'))
+    if quality['included']<3:
+        priorities.insert(0,dict(label='补采可比较的样本',detail='当前选区少于三个有效点。先扩大选区或找同通道连续数据，再复算规则。'))
     if meta['unit']=='未提供':
         priorities.append(dict(label='补齐单位',detail='确认物理单位、传感器量程和采集配置后再比较数值。'))
-    return dict(norad=meta['norad'],channel=saved['channel'],priorities=priorities,source=meta['source'],
-                catalogAvailable=active is not None,report=key,
+    return dict(norad=meta['norad'],mission=meta['mission'],channel=saved['channel'],priorities=priorities,source=meta['source'],
+                catalogAvailable=active is not None and active.owner in (None,user.id),report=key,
+                start=begin.isoformat(),end=finish.isoformat(),partial=start is not None or end is not None,quality=quality,
+                point=dict(record=record,utc=point['utc']) if point else None,
                 limitation='站点可见窗口只表示观测几何条件。能否采集该遥测通道取决于设备、权限和链路。')
 
 

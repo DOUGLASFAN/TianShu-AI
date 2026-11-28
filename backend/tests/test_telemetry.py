@@ -1,5 +1,6 @@
 from pathlib import Path
 from types import SimpleNamespace
+from urllib.parse import parse_qs, urlsplit
 import pytest
 from fastapi.testclient import TestClient
 from backend.app.main import app
@@ -178,7 +179,21 @@ def test_integrated_investigation_scopes_selected_point_and_keeps_archive_read_o
     narrow=c.post(endpoint,json={'run':saved['id'],'record':716,'start':saved['points'][selected-1]['utc'],'end':end})
     assert narrow.status_code==200 and narrow.json()['window']['included']==3
     assert narrow.json()['context']['end']==end
+    scope={'record':716,'start':saved['points'][selected-1]['utc'],'end':end}
+    entries={item['kind']:item for item in narrow.json()['context']['entries']}
+    orbit=parse_qs(urlsplit(entries['orbit']['link']).query)
+    assert orbit['at']==[saved['points'][selected]['utc']] and orbit['record']==['716']
+    original=parse_qs(urlsplit(entries['telemetry']['link']).query)
+    assert original=={'run':[saved['id']],'record':['716'],'start':[scope['start']],'end':[end]}
+    verify='/api/investigation-tools/runs/'+saved['id']+'/verification'
+    brief=c.get(verify,params=scope).json()
+    assert brief['point']=={'record':716,'utc':saved['points'][selected]['utc']}
+    assert brief['start']==scope['start'] and brief['end']==end and brief['channel']==saved['channel']
+    assert c.get(verify,params=dict(scope,start=end)).status_code==422
+    assert c.get(verify,params=dict(scope,record=999999)).status_code==422
+    assert c.get(verify).json()['point'] is None
     assert c.post(endpoint,json={'run':saved['id'],'record':716,'start':end}).status_code==422
     assert c.get('/api/telemetry/runs').json()==before
     user.id='different-user'
     assert c.post(endpoint,json={'run':saved['id'],'record':716}).status_code==404
+    assert c.get(verify,params=scope).status_code==404

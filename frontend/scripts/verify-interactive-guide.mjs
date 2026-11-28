@@ -46,6 +46,56 @@ try{
  await button(desktop,'选择其他练习').click();
  await desktop.getByRole('button',{name:/重新练习.*追查一条遥测异常/}).waitFor();
  evidence.push({viewport:1440,lesson:'anomaly',record:716,allSteps:true,resumedSameReportAfterReload:true,focusReturned:true,replayAvailable:true});
+ await desktop.getByRole('dialog',{name:'新手引导'}).getByRole('button',{name:'关闭',exact:true}).click();
+ const selectedIndex=Number(await desktop.getByLabel('片段时间轴').inputValue());
+ await button(desktop,'框选调查').click();
+ const endpoint=desktop.getByRole('slider',{name:/调查终点/});
+ await endpoint.evaluate((input,value)=>{
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,String(value));
+  input.dispatchEvent(new Event('input',{bubbles:true}));
+ },selectedIndex+6);
+ const selectionStart=await desktop.getByRole('slider',{name:/调查起点/}).getAttribute('aria-valuetext');
+ const selectionEnd=await endpoint.getAttribute('aria-valuetext');
+ assert.equal(await endpoint.inputValue(),String(selectedIndex+6));
+ const [scopedResponse]=await Promise.all([desktop.waitForResponse(response=>
+  response.request().method()==='POST'&&new URL(response.url()).pathname==='/api/task-workflows/investigate'),
+  button(desktop,'一键调查当前记录').click()]);
+ const scoped=await scopedResponse.json();
+ assert.equal(scoped.point.record,716);
+ assert.equal(Date.parse(scoped.start),Date.parse(selectionStart));
+ assert.equal(Date.parse(scoped.end),Date.parse(selectionEnd));
+ await desktop.getByText('按时间查看同期证据',{exact:true}).click();
+ await desktop.getByRole('link',{name:'回放同期轨道'}).click();
+ await desktop.waitForURL(url=>url.pathname==='/explore'&&url.searchParams.get('at')===scoped.point.utc);
+ const clock=desktop.locator('.clock-display time');
+ await desktop.waitForFunction(utc=>Date.parse(document.querySelector('.clock-display time')?.dateTime)===Date.parse(utc),scoped.point.utc);
+ assert.ok(await clock.isVisible());
+ await desktop.getByRole('link',{name:'返回调查记录 #716'}).click();
+ await desktop.locator('#telemetry-selected-record').filter({hasText:'#716'}).waitFor();
+ assert.equal(await desktop.getByRole('slider',{name:/调查终点/}).getAttribute('aria-valuetext'),selectionEnd);
+ await button(desktop,'一键调查当前记录').click();
+ const [briefResponse]=await Promise.all([desktop.waitForResponse(response=>new URL(response.url()).pathname.endsWith('/verification')),
+  desktop.getByRole('link',{name:'制定这条记录的验证观测'}).click()]);
+ const brief=await briefResponse.json();
+ assert.equal(brief.point.record,716);
+ assert.equal(brief.end,scoped.end);
+ assert.equal(brief.quality.included,scoped.window.included);
+ const next=desktop.getByRole('link',{name:'返回原始记录 #716'});
+ await next.waitFor();
+ if(brief.catalogAvailable){
+  await button(desktop,'设置预测条件').click();
+  await desktop.waitForFunction(()=>document.activeElement?.id==='observation-form');
+ }else{
+  await desktop.getByText(/目录暂无这个对象的可用轨道数据/).waitFor();
+  assert.equal(await button(desktop,'设置预测条件').count(),0);
+  assert.equal(await desktop.locator('#observation-form').count(),0);
+  await desktop.getByRole('link',{name:'打开常规观测规划'}).waitFor();
+ }
+ await next.click();
+ await desktop.locator('#telemetry-selected-record').filter({hasText:'#716'}).waitFor();
+ assert.equal(await desktop.getByRole('slider',{name:/调查终点/}).getAttribute('aria-valuetext'),selectionEnd);
+ evidence.push({viewport:1440,record:716,scopedContext:true,orbitAtRecordTime:true,scopeRestoredFromOrbit:true,
+  verificationAtSameRecord:true,catalogAvailable:brief.catalogAvailable,scopeRestoredFromPlanning:true});
  await desktop.close();
 
  const mobile=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});

@@ -35,6 +35,12 @@ export function Explore(){
  const {timeZone,setTimeZone,lessMotion,setLessMotion}=useDisplaySettings(),reduced=!!systemReduced||lessMotion;
  const selected=Number(params.get('sat')||25544),page=Math.max(1,Number(params.get('page'))||1),group=params.get('group')||'',search=params.get('q')||'';
  const historicalId=params.get('historical'),historicalAt=historicalId?params.get('at'):null;
+ const origin=historicalId?new URLSearchParams({run:historicalId}):null;
+ for(const field of ['record','start','end']){
+  const value=params.get(field);
+  if(value)origin?.set(field,value);
+ }
+ const returnToReport=origin?.has('record')&&<Link className="button" to={'/telemetry?'+origin}>返回调查记录 #{origin.get('record')}</Link>;
  const samplingId=params.get('sampling')||historicalId;
  const replaying=!!samplingId||params.get('mode')==='replay';
  const [globalView,setGlobalView]=useState(false);
@@ -387,6 +393,7 @@ export function Explore(){
      {assistantActions}
     </div>
     {shelf}
+    {returnToReport}
     {replaying?replayControls:<div className="mobile-live-time"><span>实时 <time dateTime={displayTime}>{formatTime(displayTime)}</time></span></div>}
    </section>}
    <dialog className="mobile-explore-sheet" ref={dialog} data-sheet={sheet||undefined} aria-labelledby="mobile-explore-sheet-title"
@@ -411,7 +418,7 @@ export function Explore(){
    {replaying?replayControls:liveActions}
    <div className="timebar-secondary">
     <span className="timebar-use">{replaying?'拖动时间轴或选择倍率播放。全球总览在实时态势中查看。':'查看当前点位。拖动时间或倍速播放请切到轨迹回放。'}</span>
-    {timeTools}{shelf}
+    {returnToReport}{timeTools}{shelf}
    </div>
   </section>
   </>}

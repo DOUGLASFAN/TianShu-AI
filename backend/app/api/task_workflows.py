@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import AwareDatetime, BaseModel, Field
 from sqlalchemy.exc import SQLAlchemyError
 
-from .investigation_tools import challenge_report, context_for_window, similar
+from .investigation_tools import challenge_report, context_for_window, report_window, similar
 from .telemetry import report
 from ..core.security import current_user
 from ..db import get_db
@@ -23,13 +23,7 @@ class InvestigationRequest(BaseModel):
 @router.post('/investigate')
 def investigate(body: InvestigationRequest,user=Depends(current_user),db=Depends(get_db)):
     saved = report(body.run,user)
-    point = next((p for p in saved['points'] if p['record']==body.record),None)
-    if not point:
-        raise HTTPException(422,'WORKFLOW_RECORD_NOT_FOUND')
-    first,last=instant(saved['start']),instant(saved['end'])
-    start,end=body.start or first,body.end or last
-    if not first<=start<=instant(point['utc'])<=end<=last:
-        raise HTTPException(422,'WORKFLOW_WINDOW_INVALID')
+    point,start,end=report_window(saved,body.record,body.start,body.end)
 
     selected= [p for p in saved['points'] if start<=instant(p['utc'])<=end]
     selected_report=dict(saved,start=start.isoformat(),end=end.isoformat(),points=selected)
@@ -51,11 +45,11 @@ def investigate(body: InvestigationRequest,user=Depends(current_user),db=Depends
         warnings.append('相似片段检索暂不可用。')
         related=[]
     try:
-        contextual=context_for_window(body.run,user,db,window=(start,end))
+        contextual=context_for_window(body.run,user,db,window=(start,end),point=point)
     except (SQLAlchemyError,ValueError,HTTPException):
         db.rollback()
         warnings.append('同期资料查询暂不可用。')
-        contextual={'entries':[],'missing':[]}
+        contextual={'entries':[],'missing':[],'start':start.isoformat(),'end':end.isoformat()}
 
     marks = [rule['targetHit'] for rule in window['rules']] if window else []
     near=next((r for r in trial['results'] if r['name']=='候选点附近'),None)

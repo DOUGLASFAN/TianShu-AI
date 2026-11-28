@@ -36,7 +36,8 @@ function Orbit({position}:{position:{lng:number;lat:number;alt:number}}){
 }
 
 function Result({r,replace,saved}:{r:Report;replace:(r:Report)=>void;saved?:SavedInvestigation}){
- const [cursor,seek]=useState(()=>Math.max(0,r.points.findIndex(p=>p.record===Number(new URLSearchParams(location.search).get('record'))))),[note,setNote]=useState(r.review||''),[status,setStatus]=useState('');
+ const [params]=useSearchParams();
+ const [cursor,seek]=useState(()=>Math.max(0,r.points.findIndex(p=>p.record===Number(params.get('record'))))),[note,setNote]=useState(r.review||''),[status,setStatus]=useState('');
  const [playing,play]=useState(false),[zoom,setZoom]=useState(1);
  useEffect(()=>{if(!playing)return;if(cursor>=r.points.length-1){play(false);return}
   const timer=setTimeout(()=>seek(cursor+1),750);return ()=>clearTimeout(timer);
@@ -44,7 +45,15 @@ function Result({r,replace,saved}:{r:Report;replace:(r:Report)=>void;saved?:Save
  const p=r.points[cursor],values=r.points.flatMap(x=>x.value===null?[]:[x.value]);
  const min=Math.min(...values),max=Math.max(...values),begin=Date.parse(r.start),duration=Date.parse(r.end)-begin;
  const width=(duration||1)/zoom, left=Math.max(begin,Math.min(begin+duration-width,Date.parse(p.utc)-width/2));
- const selection=useInvestigationRange(r.points,left,width,saved?.selection);
+ const [initialRange]=useState(()=>{
+  if(saved?.selection)return saved.selection;
+  const start=Date.parse(params.get('start')||''),end=Date.parse(params.get('end')||'');
+  if(!(begin<=start&&start<=Date.parse(p.utc)&&Date.parse(p.utc)<=end&&end<=begin+duration))return;
+  const selected=r.points.filter(q=>start<=Date.parse(q.utc)&&Date.parse(q.utc)<=end);
+  const first=selected[0],last=selected.at(-1);
+  if(first&&last)return [first.utc,last.utc];
+ });
+ const selection=useInvestigationRange(r.points,left,width,initialRange);
  const x=(q:Point)=>10+780*(Date.parse(q.utc)-left)/width;
  const y=(q:Point)=>150-140*((q.value??min)-min)/(max-min||1);
  const pos=useQuery({queryKey:['historical-position',r.input.asset,p.utc],queryFn:()=>api('/telemetry/assets/'+r.input.asset+'/position?time='+encodeURIComponent(p.utc)),enabled:!!r.asset.tle,retry:false});
@@ -58,7 +67,7 @@ function Result({r,replace,saved}:{r:Report;replace:(r:Report)=>void;saved?:Save
  {selection.enabled&&<InvestigationPanel run={r.id} points={r.points} range={selection.range} update={selection.update} target={p.record} seek={seek} restored={saved?.investigation as InvestigationResult|undefined}/>}
  <button onClick={()=>{if(cursor===r.points.length-1)seek(0);play(!playing)}}>{playing?'暂停':'播放历史片段'}</button><label>片段时间轴<input type="range" min="0" max={r.points.length-1} value={cursor} onChange={e=>seek(+e.target.value)}/></label>
  <p id="telemetry-selected-record" tabIndex={-1}>{p.utc} · 原始记录 #{p.record} · {("quality" in p)?String(p.quality):"原始测量"} · {p.value??'缺测'}</p><details><summary>原始字段</summary><pre>{JSON.stringify(p.raw,null,2)}</pre></details>
- <InvestigationTask run={r.id} record={p.record}
+ <InvestigationTask run={r.id} norad={r.asset.norad} record={p.record}
   start={selection.enabled?r.points[selection.range[0]].utc:undefined}
   end={selection.enabled?r.points[selection.range[1]].utc:undefined}
   onEvidence={record=>{const i=r.points.findIndex(item=>item.record===record);if(i>=0)seek(i);
@@ -105,5 +114,5 @@ export function TelemetryPage(){
  {!user?.isGuest&&<ImportMappingAssistant saved={id=>{void cache.invalidateQueries({queryKey:['telemetry-assets']});pick(id);reset()}}/>}
  {!user?.isGuest&&<details><summary>导入私有档案</summary><form onSubmit={upload}><p>UTF-8 CSV，每行包含 timestamp、channel、segment、value，时间须带时区。</p><label>档案类型<select name="kind"><option value="telemetry">遥测</option><option value="observation">授权地面观测</option></select></label><label>观测站标识（观测档案必填）<input name="station"/></label><label><input type="checkbox" name="cadenceSeconds"/>sampling 列表示采样间隔秒数</label>{[['mission','任务名称'],['norad','NORAD 编号'],['source','档案来源与授权'],['version','版本'],['unit','测量单位'],['sha256','来源 SHA-256（可选）'],['orbitSource','同期 TLE 来源（可选）']].map(([k,label])=><label key={k}>{label}<input name={k} required={!['sha256','orbitSource'].includes(k)}/></label>)}<label>同期 TLE（三行，可选）<textarea name="tle"/></label><input type="file" name="file" accept=".csv" required/><button>导入</button></form></details>}
  <details><summary>分析失败记录</summary><pre>{JSON.stringify(failed.data||[],null,2)}</pre></details><details><summary>历史报告</summary>{history.data?.filter(h=>(h.mission+" "+h.norad+" "+h.channel).toLowerCase().includes(filter.toLowerCase())&&(!day||(h.start.slice(0,10)<=day&&day<=h.end.slice(0,10)))).map(h=><button key={h.id} onClick={async()=>{try{show(await api('/telemetry/runs/'+h.id));fail('')}catch(e){fail(String(e))}}}>{h.mission} · {h.channel} · {h.start}</button>)}</details>
- <p role="alert">{error||info.error?.message||assets.error?.message||history.error?.message}</p>{saved.error&&<p role="alert">{saved.error.message}</p>}{r&&<Result key={r.id+':'+(saved.data?.report===r.id?saved.data.id:params.get('record')||'')} r={r} replace={show} saved={saved.data?.report===r.id?saved.data:undefined}/>}</main>;
+ <p role="alert">{error||info.error?.message||assets.error?.message||history.error?.message}</p>{saved.error&&<p role="alert">{saved.error.message}</p>}{r&&<Result key={[r.id,params.get('record'),params.get('start'),params.get('end'),saved.data?.report===r.id?saved.data.id:''].join(':')} r={r} replace={show} saved={saved.data?.report===r.id?saved.data:undefined}/>}</main>;
 }
